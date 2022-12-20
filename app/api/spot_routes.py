@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Spot, Review, Booking, Experience, Wishlist
-from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm
+from app.models import db, Spot, Review, Booking, Experience, Wishlist, Image
+from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm, ImageForm
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -280,3 +280,18 @@ def add_spot_to_wishlist(spotId, wishlistId):
 
 
 
+@spot_routes.route('/<int:spotId>/images', methods=['POST'])
+@login_required
+def add_imgage(spotId):
+
+    spot = Spot.query.get(spotId)
+
+    if spot:
+        if spot.userId == current_user.id:
+
+            form = ImageForm()
+            form['csrf_token'].data = request.cookies['csrf_token']
+
+            if form.validate_on_submit:
+                # not sure yet
+                pass
