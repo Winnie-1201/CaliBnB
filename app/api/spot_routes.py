@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Spot, Review, Booking, Experience
-from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm
+from app.models import db, Spot, Review, Booking, Experience, Wishlist
+from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -252,4 +252,31 @@ def create_experience(spotId):
     
     if form.errors:
         return form.errors
+
+
+@spot_routes.route('/<int:spotId>/wishlists/<int:wishlistId>', methods=['POST'])
+@login_required
+def add_spot_to_wishlist(spotId, wishlistId):
+
+    wishlist = Wishlist.query.get(wishlistId)
+
+    if wishlist:
+
+        form = WishlistForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+
+        if form.validate_on_submit:
+            wishlist.spots.append(spotId)
+
+            db.session.commt()
+
+            return wishlist.to_dict()
+
+        if form.errors:
+            return form.errors
+
+    else:
+        return {'error': 'The wishlist is not found.'} 
+
+
 
