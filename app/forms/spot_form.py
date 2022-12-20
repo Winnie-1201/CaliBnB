@@ -18,4 +18,6 @@ class SpotForm(FlaskForm):
     country = StringField('country', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired(), name_exits])
     price = FloatField('price', validators=[DataRequired()])
+    preview_img = StringField('preview_img', validators=[DataRequired()])
+    tags = StringField('tags')
     
