@@ -18,6 +18,7 @@ class Experience(db.Model):
 
     # Foreign key
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
+    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
     
 
     def to_dict(self):
@@ -30,6 +31,7 @@ class Experience(db.Model):
                 "created": self.created,
                 "updated": self.updated,
                 "userId": self.userId,
+                'spotId': self.spotId
             }
         }
 
