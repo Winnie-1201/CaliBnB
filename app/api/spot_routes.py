@@ -249,4 +249,7 @@ def create_experience(spotId):
         db.session.commit()
 
         return new_exp.to_dict()
-        
+    
+    if form.errors:
+        return form.errors
+
