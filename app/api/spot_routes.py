@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Spot, Review
-from app.forms import SpotForm, ReviewForm
+from app.models import db, Spot, Review, Booking
+from app.forms import SpotForm, ReviewForm, BookingForm
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -122,6 +122,16 @@ def delete_spot(id):
     else:
         return {'error': 'You do not have the access.'}
 
+
+@spot_routes.route('/<int:spotId>/reviews')
+def spot_reviews(spotId):
+
+    '''
+    Query for all reviews of a spot and return them in a list of dictionaries
+    '''
+    reviews = Review.query.filter_by(spotId=spotId).all()
+
+    return {'Reviews', [review.to_dict() for review in reviews]}
         
 
 @spot_routes.route('<int:spotId>/reviews', methods=["POST"])
@@ -134,6 +144,11 @@ def add_review(spotId):
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    review = Review.query.filter_by(userId=current_user.id, spotId=spotId).first()
+
+    if review:
+        return {'error': 'You have posted a review already.'}
 
     if form.validate_on_submit:
         content = form.data["content"]
@@ -164,4 +179,39 @@ def add_review(spotId):
     if form.errors:
         return form.errors
 
+
+@spot_routes.route('/<int:spotId>/bookings')
+@login_required
+def user_bookings(spotId):
+    '''
+    Query for a specific spot's bookings and return them in a list of dictionaries
+    '''
+
+    bookings = Booking.query.filter_by(spotId=spotId).all()
+
+    return {'Bookings', [booking.to_dict() for booking in bookings]}
+
         
+
+@spot_routes.route('/<int:spotId>/bookings', methods=['POST'])
+@login_required
+def create_booking(spotId):
+    '''
+    Query for creating a booking for a spot by the spotId and return 
+    it in a dictionary
+    '''
+
+    form = BookingForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit:
+        start = form.data['start']
+        end = form.data['end']
+
+        new_booking = Booking(start, end, spotId=spotId, userId=current_user.id)
+
+        db.session.add(new_booking)
+        db.session.commit()
+
+        return new_booking.to_dict()
+
