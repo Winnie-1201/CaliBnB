@@ -50,4 +50,15 @@ def add_review(reviewId):
         return form.errors
 
 
+@review_routes.route('/<int:reviewId>', methods=["DELETE"])
+def delete_review(reviewId):
+    '''
+    Query for deleting a review by its id
+    '''
+    review = Review.query.get(reviewId)
+
+    db.session.delete(review)
+    db.session.commit()
+
+    return {'message': 'The review has been deleted.'}
 
