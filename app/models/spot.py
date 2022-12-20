@@ -24,7 +24,7 @@ class Spot(db.Model):
     updated = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("users.id")), nullable=False)
     
     reviews = db.relationship('Review', back_populates='spot', cascade='all, delete')
     images = db.relationship('Image', back_populates='spot', cascade='all, delete')

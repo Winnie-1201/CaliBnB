@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
 
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete')
     bookings = db.relationship('Booking', back_populates='user', cascade='all, delete')
-    experiences = db.relationship('Experience', back_populates='user', cascade='all. delete')
+    experiences = db.relationship('Experience', back_populates='user', cascade='all, delete')
     
     @property
     def password(self):
