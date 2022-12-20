@@ -44,6 +44,17 @@ def edit_booking(bookingId):
         return form.errors
 
 
+@booking_routes.route('/<bookingId>', methods=['DELETE'])
+@login_required
+def cancel_booking(bookingId):
+    '''
+    Query for canceling a booking based on bookingId
+    '''
+    booking = Booking.query.get(bookingId)
 
+    db.session.delete(booking)
+    db.session.commit()
 
+    return {'message': 'The booking has been canceled.'}
+    
 

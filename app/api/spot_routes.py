@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Spot, Review, Booking
-from app.forms import SpotForm, ReviewForm, BookingForm
+from app.models import db, Spot, Review, Booking, Experience
+from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -215,3 +215,38 @@ def create_booking(spotId):
 
         return new_booking.to_dict()
 
+
+@spot_routes.route('/<int:spotId>/experiences')
+def spot_experiences(spotId):
+    '''
+    Query for getting a spot's experiences based on its id and 
+    return them in a list of dictionaries
+    '''
+    experiences = Experience.query.filter_by(spotId=spotId)
+
+    return {'Experiences', [e.to_dict() for e in experiences]}
+
+
+@spot_routes.route('/<int:spotId>/experiences', methods=['POST'])
+@login_required
+def create_experience(spotId):
+    '''
+    Query for create an experience a spot based on its id and
+    return it as a dictionary
+    '''
+    form = ExperienceForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit:
+        duration = form.data['duration']
+        tags = form.data['tags']
+        content = form.data['content']
+        name = form.data['name']
+
+        new_exp = Experience(duration, tags, content, name, userId=current_user.id, spotId=spotId)
+        
+        db.session.add(new_exp)
+        db.session.commit()
+
+        return new_exp.to_dict()
+        
