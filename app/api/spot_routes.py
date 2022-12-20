@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Spot
-from app.forms import SpotForm
+from app.models import db, Spot, Review
+from app.forms import SpotForm, ReviewForm
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -25,10 +25,21 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'spots', [spot.to_dict() for spot in spots]}
+        return {'Spots', [spot.to_dict() for spot in spots]}
 
 
-@spot_routes.route('<int:id')
+@spot_routes.route('/current')
+@login_required
+def user_spots():
+    '''
+    Query for all spots of current user and return them in a list of dictionaries
+    '''
+    spots = Spot.query.filter_by(userId=current_user.id).all()
+
+    return {"Spots": [spot.to_dict() for spot in spots]}
+
+
+@spot_routes.route('<int:id>')
 def spot_by_id(id):
     '''
     Query one spot by its id and return it in a disctionary
@@ -110,6 +121,47 @@ def delete_spot(id):
 
     else:
         return {'error': 'You do not have the access.'}
+
+        
+
+@spot_routes.route('<int:spotId>/reviews', methods=["POST"])
+@login_required
+def add_review(spotId):
+
+    '''
+    Query for creating a review based on the spotId and return it as a dictionary
+    '''
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit:
+        content = form.data["content"]
+        cleanliness = form.data["cleanliness"]
+        check_in = form.data["check_in"]
+        communicatoin =form.data["communicatoin"]
+        value = form.data["value"]
+        location = form.data["location"]
+        accuracy = form.data["accuracy"]
+
+        new_review = Review(
+            content, 
+            cleanliness,
+            check_in,
+            communicatoin,
+            value,
+            location,
+            accuracy,
+            userId=current_user.id,
+            spotId=spotId
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+
+        return new_review.to_dict()
     
+    if form.errors:
+        return form.errors
 
         
