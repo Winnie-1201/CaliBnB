@@ -27,20 +27,52 @@ class Review(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
 
+    spot = db.relationship('Spot', back_populates='reviews')
+    user = db.relationship('User', back_populates='reviews')
+
     def to_dict(self):
         return {
-            self.id: {
-                "id": self.id,
-                "content": self.address,
-                "cleanliness": self.cleanliness,
-                "check_in": self.check_in,
-                "communicatoin": self.communicatoin,
-                "value": self.value,
-                "location": self.location,
-                "accuracy": self.accuracy,
-                "created": self.created,
-                "updated": self.updated,
-                "userId": self.userId,
-                "spotId": self.spotId
-            }
+            "id": self.id,
+            "content": self.address,
+            "cleanliness": self.cleanliness,
+            "check_in": self.check_in,
+            "communication": self.communication,
+            "value": self.value,
+            "location": self.location,
+            "accuracy": self.accuracy,
+            "created": self.created,
+            "updated": self.updated,
+            "spotId": self.spotId,
+            'user': self.user.to_dict(),
+        } 
+
+    def to_dict_user(self):
+        return {
+            "id": self.id,
+            "content": self.address,
+            "cleanliness": self.cleanliness,
+            "check_in": self.check_in,
+            "communication": self.communication,
+            "value": self.value,
+            "location": self.location,
+            "accuracy": self.accuracy,
+            "created": self.created,
+            "updated": self.updated,
+            'user': self.user.to_dict(),
+        } 
+
+    def to_dict_spot(self):
+        return {
+            "id": self.id,
+            "content": self.address,
+            "cleanliness": self.cleanliness,
+            "check_in": self.check_in,
+            "communication": self.communication,
+            "value": self.value,
+            "location": self.location,
+            "accuracy": self.accuracy,
+            "created": self.created,
+            "updated": self.updated,
+            'user': self.user.to_dict(),
+            'spot': self.spot.to_dict_basic()
         } 

@@ -19,19 +19,20 @@ class Experience(db.Model):
     # Foreign key
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
+
+    user = db.relationship('User', back_populates="experiences")
     
 
     def to_dict(self):
         return {
-            self.id: {
-                "id": self.id,
-                "duration": self.duration,
-                "tags": self.tags,
-                "description": self.description,
-                "created": self.created,
-                "updated": self.updated,
-                "userId": self.userId,
-                'spotId': self.spotId
-            }
+            "id": self.id,
+            "duration": self.duration,
+            "tags": self.tags,
+            "description": self.description,
+            "created": self.created,
+            "updated": self.updated,
+            "userId": self.userId,
+            'spotId': self.spotId,
+            'user': self.user.to_dict()
         }
 
