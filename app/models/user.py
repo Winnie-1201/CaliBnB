@@ -10,10 +10,16 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    firstName = db.Column(db.String(40), nullable=False)
+    lastName = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     icon = db.Column(db.String(255))
     hash_password = db.Column(db.String(255), nullable=False)
 
+    reviews = db.relationship('Review', back_populates='user', cascade='all, delete')
+    bookings = db.relationship('Booking', back_populates='user', cascade='all, delete')
+    experiences = db.relationship('Experience', back_populates='user', cascade='all. delete')
+    
     @property
     def password(self):
         return self.hash_password
@@ -30,6 +36,8 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "username": self.username,
+            "firstName": self.firstName,
+            "lastName": self.lastName,
             "email": self.email,
             "icon": self.icon
         }

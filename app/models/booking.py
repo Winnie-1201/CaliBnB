@@ -19,14 +19,37 @@ class Booking(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
 
+    spot = db.relationship('Spot', back_populates='bookings')
+    user = db.relationship('User', back_populates='bookings')
+
     def to_dict(self):
         return {
-            self.id: {
-                "id": self.id,
-                "start": self.start,
-                "end": self.end,
-                "created": self.created,
-                "updated": self.updated,
-                "userId": self.userId,
-            }
+            "id": self.id,
+            "start": self.start,
+            "end": self.end,
+            "created": self.created,
+            "updated": self.updated,
+            "userId": self.userId,
+            'spotId': self.spotId,
         }
+
+    def to_dict_nonowner(self):
+        return {
+            "id": self.id,
+            "start": self.start,
+            "end": self.end,
+            'spotId': self.spotId,
+        }
+
+    def to_dict_owner(self):
+        return {
+            "id": self.id,
+            "start": self.start,
+            "end": self.end,
+            "created": self.created,
+            "updated": self.updated,
+            'spotId': self.spotId,
+            'spot': self.spot.to_dict_basic(),
+            'user': self.user.to_dict()
+        }
+    
