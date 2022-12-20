@@ -8,7 +8,7 @@ spot_routes = Blueprint('spots', __name__)
 @spot_routes.route('')
 def all_spots():
     '''
-    Query for all spots and return then in a list of dictionaries
+    Query for all spots and return them in a list of dictionaries
     '''
     params = request.args # [('name', 'Beach')]
     if len(params) == 0:
