@@ -10,9 +10,11 @@ function Test() {
     dispatch(getAllSpotThunk());
   }, [dispatch]);
 
+  if (!spots.length > 0) return null;
+  console.log("spot", spots);
   return (
     <ul>
-      {spots.map((spot) => (
+      {spots?.map((spot) => (
         <li key={spot.id}>{spot.name}</li>
       ))}
     </ul>

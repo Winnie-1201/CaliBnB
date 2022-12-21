@@ -1,0 +1,14 @@
+.header-container {
+  height: 80px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.main-container {
+  background: #fff;
+  width: 100%;
+  padding: 0 40px;
+  margin: 16px 0 40px 0;
+}

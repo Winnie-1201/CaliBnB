@@ -1,0 +1,41 @@
+.main-inner {
+  color: #222222;
+  margin: 24px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 40px;
+  column-gap: 24px;
+}
+
+.grid-column {
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.one-spot {
+  flex-direction: column;
+  flex: 1 0 100%;
+}
+
+.mb-12 {
+  margin-bottom: 12px;
+}
+
+.one-spot-img {
+  object-fit: cover;
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.start {
+  justify-content: flex-start;
+}
