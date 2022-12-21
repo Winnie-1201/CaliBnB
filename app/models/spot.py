@@ -17,6 +17,12 @@ class Spot(db.Model):
     price = db.Column(db.Float, nullable=False)
     preview_img = db.Column(db.String(255), nullable=False)
     tags = db.Column(db.String(255), nullable=False)
+
+    # house condition
+    guests = db.Column(db.Integer, nullable=False)
+    bedroom = db.Column(db.Integer, nullable=False)
+    beds = db.Column(db.Integer, nullable=False)
+    bath = db.Column(db.Integer, nullable=False)
     # created = db.Column(db.DateTime(
     #     timezone=True), nullable=False, server_default=func.current_timestamp())
     created = db.Column(db.DateTime(
@@ -24,7 +30,7 @@ class Spot(db.Model):
     updated = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("users.id")), nullable=False)
     
     reviews = db.relationship('Review', back_populates='spot', cascade='all, delete')
     images = db.relationship('Image', back_populates='spot', cascade='all, delete')
@@ -40,7 +46,9 @@ class Spot(db.Model):
             "name": self.name,
             "price": self.price,
             'preview_img': self.preview_img,
-            'ownerId': self.userId
+            'tags': self.tags,
+            'ownerId': self.userId,
+            'beds': self.beds
         }
 
 
@@ -57,7 +65,7 @@ class Spot(db.Model):
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
-            "userId": self.userId,
+            "ownerId": self.userId,
         }
 
     def to_dict_details(self):
@@ -75,5 +83,9 @@ class Spot(db.Model):
             "updated": self.updated,
             "owner": User.query.get(self.userId).to_dict(),
             "reviews": [r.to_dict() for r in self.reviews],
-            'images': [i.to_dict_basic() for i in self.images]
+            'images': [i.to_dict_basic() for i in self.images],
+            'beds': self.beds,
+            'guests': self.guests,
+            'bedroom': self.bedroom,
+            'bath': self.bath
         }

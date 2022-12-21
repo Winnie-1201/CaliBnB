@@ -11,8 +11,8 @@ class Wishlist(db.Model):
     title = db.Column(db.String(100), nullable=False)
 
     # may not need
-    start = db.Column(db.DateTime(timezoon=True))
-    end = db.Column(db.DateTime(timezoon=True))
+    start = db.Column(db.DateTime(timezone=True))
+    end = db.Column(db.DateTime(timezone=True))
 
     created = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.now())
@@ -20,8 +20,8 @@ class Wishlist(db.Model):
         timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
     # Foreign keys
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
-    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("users.id")), nullable=False)
+    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spots.id")), nullable=False)
 
     def to_dict(self):
         return {

@@ -15,7 +15,7 @@ class Image(db.Model):
     updated = db.Column(db.DateTime(
         timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
-    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
+    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spots.id")), nullable=False)
 
     spot = db.relationship('Spot', back_populates='images')
 

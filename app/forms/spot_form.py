@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField
+from wtforms import StringField, FloatField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Spot
 
@@ -18,4 +18,10 @@ class SpotForm(FlaskForm):
     country = StringField('country', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired(), name_exits])
     price = FloatField('price', validators=[DataRequired()])
+    preview_img = StringField('preview_img', validators=[DataRequired()])
+    tags = StringField('tags')
+    guests = IntegerField('guests', validators=[DataRequired()])
+    bedroom = IntegerField('bedroom', validators=[DataRequired()])
+    beds = IntegerField('beds', validators=[DataRequired()])
+    bath = IntegerField('bath', validators=[DataRequired()])
     

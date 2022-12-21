@@ -24,8 +24,8 @@ class Review(db.Model):
         timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
     # Foreign keys
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
-    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("users.id")), nullable=False)
+    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spots.id")), nullable=False)
 
     spot = db.relationship('Spot', back_populates='reviews')
     user = db.relationship('User', back_populates='reviews')

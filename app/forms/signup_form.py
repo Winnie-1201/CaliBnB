@@ -27,5 +27,8 @@ def same_password(form, field):
 class SignupForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
+    firstName = StringField('firstNmae', validators=[DataRequired()])
+    lastName = StringField('lastName', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()])
+    icon = StringField('icon')
     confirmed = StringField('confirm', validators=[DataRequired(), same_password])
