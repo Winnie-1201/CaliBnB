@@ -14,11 +14,12 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     icon = db.Column(db.String(255))
+    
     hash_password = db.Column(db.String(255), nullable=False)
 
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete')
     bookings = db.relationship('Booking', back_populates='user', cascade='all, delete')
-    experiences = db.relationship('Experience', back_populates='user', cascade='all. delete')
+    experiences = db.relationship('Experience', back_populates='user', cascade='all, delete')
     
     @property
     def password(self):

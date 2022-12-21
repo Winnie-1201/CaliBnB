@@ -13,7 +13,9 @@ def all_spots():
     params = request.args # [('name', 'Beach')]
     if len(params) == 0:
         spots = Spot.query.all()
-        return {'spots', [spot.to_dict() for spot in spots]}
+        # print('all spots', spots)
+        # print('one spot', spots[0].to_dict_basic())
+        return {"spots": [spot.to_dict_basic() for spot in spots]}
     else:
         # test if it works
         spots = Spot.query.all()
@@ -25,7 +27,7 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'Spots', [spot.to_dict() for spot in spots]}
+        return {'spots', [spot.to_dict() for spot in spots]}
 
 
 @spot_routes.route('/current')
@@ -45,7 +47,7 @@ def spot_by_id(id):
     Query one spot by its id and return it in a disctionary
     '''
     spot = Spot.query.get(id)
-    return {'spot': spot.to_dict()}
+    return {'spot': spot.to_dict_details()}
 
 
 @spot_routes.route("", methods=["POST"])
@@ -62,15 +64,27 @@ def create_spot():
         country = form.data["country"]
         name = form.data["name"]
         price = form.data["price"]
+        tags = form.data["tags"]
+        guests = form.data["guests"]
+        bedroom = form.data["bedroom"]
+        beds = form.data["beds"]
+        bath = form.data["bath"]
+        preview_img = form.data["preview_img"]
 
         new_spot = Spot(
-            address,
-            city,
-            state,
-            country,
-            name,
-            price,
-            userId=current_user.id
+            address=address,
+            city=city,
+            state=state,
+            country=country,
+            name=name,
+            price=price,
+            tags=tags,
+            guests=guests,
+            bedroom=bedroom,
+            beds=beds,
+            bath=bath,
+            preview_img=preview_img,
+            userId=current_user.id,
         )
 
         db.session.add(new_spot)
@@ -91,12 +105,14 @@ def edit_spot(id):
     spot = Spot.query.get(id)
     if spot.userId == current_user.id:
         if form.validate_on_submit:
-            spot["address"] = form.data["address"]
-            spot["city"] = form.data["city"]
-            spot["state"] = form.data["state"]
-            spot["country"] = form.data["country"]
-            spot["name"] = form.data["name"]
-            spot["price"] = form.data["price"]
+            if form.data["address"]: spot.address = form.data["address"] 
+            if form.data["city"]: spot.city = form.data["city"] 
+            if form.data["state"]: spot.state = form.data["state"] 
+            if form.data["country"]: spot.country = form.data["country"] 
+            if form.data["name"]: spot.name = form.data["name"] 
+            if form.data["price"]: spot.price = form.data["price"]
+            if form.data["tags"]: spot.tags = form.data["tags"]
+
 
             db.session.commit()
 

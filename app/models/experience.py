@@ -17,8 +17,8 @@ class Experience(db.Model):
         timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
 
     # Foreign key
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("user.id")), nullable=False)
-    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spot.id")), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix("users.id")), nullable=False)
+    spotId = db.Column(db.Integer, db.ForeignKey(add_prefix("spots.id")), nullable=False)
 
     user = db.relationship('User', back_populates="experiences")
     
