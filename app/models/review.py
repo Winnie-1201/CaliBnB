@@ -13,7 +13,7 @@ class Review(db.Model):
     # rating columns
     cleanliness = db.Column(db.Integer)
     check_in = db.Column(db.Integer)
-    communicatoin = db.Column(db.Integer)
+    communication = db.Column(db.Integer)
     value = db.Column(db.Integer)
     location = db.Column(db.Integer)
     accuracy = db.Column(db.Integer)

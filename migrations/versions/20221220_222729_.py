@@ -92,7 +92,7 @@ def upgrade():
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('cleanliness', sa.Integer(), nullable=True),
     sa.Column('check_in', sa.Integer(), nullable=True),
-    sa.Column('communicatoin', sa.Integer(), nullable=True),
+    sa.Column('communication', sa.Integer(), nullable=True),
     sa.Column('value', sa.Integer(), nullable=True),
     sa.Column('location', sa.Integer(), nullable=True),
     sa.Column('accuracy', sa.Integer(), nullable=True),
