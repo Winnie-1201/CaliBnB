@@ -41,10 +41,10 @@ export default function index() {
           <div className="user-profile">
             <button className="profile-bt z-1 flex">
               <div>
-                <i class="fa-solid fa-grip-lines" />
+                <i className="fa-solid fa-grip-lines" />
               </div>
               <div className="ml-12 z-1 profile-icon">
-                <i class="fa-solid fa-circle-user" />
+                <i className="fa-solid fa-circle-user" />
               </div>
             </button>
           </div>

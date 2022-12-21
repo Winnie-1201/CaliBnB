@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./AllSpots.css";
 
 function AllSpots() {
-  const spots = useSelector((state) => state.spots.allSpots);
+  const spots = Object.values(useSelector((state) => state.spots.allSpots));
 
   return (
     <div className="main-inner">

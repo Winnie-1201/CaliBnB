@@ -43,6 +43,13 @@ def edit_booking(bookingId):
     if form.errors:
         return form.errors
 
+@booking_routes.route("/<int:bookingId>")
+@login_required
+def get_one_booking(bookingId):
+    booking = Booking.query.get(bookingId)
+    return booking.to_dict_owner()
+
+
 
 @booking_routes.route('/<bookingId>', methods=['DELETE'])
 @login_required
