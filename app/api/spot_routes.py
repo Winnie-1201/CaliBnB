@@ -38,7 +38,7 @@ def user_spots():
     '''
     spots = Spot.query.filter_by(userId=current_user.id).all()
 
-    return {"Spots": [spot.to_dict() for spot in spots]}
+    return {"spots": [spot.to_dict() for spot in spots]}
 
 
 @spot_routes.route('<int:id>')
@@ -198,7 +198,7 @@ def add_review(spotId):
 
 @spot_routes.route('/<int:spotId>/bookings')
 @login_required
-def user_bookings(spotId):
+def spot_bookings(spotId):
     '''
     Query for a specific spot's bookings and return them in a list of dictionaries
     '''
