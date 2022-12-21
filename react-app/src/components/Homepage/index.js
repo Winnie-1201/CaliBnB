@@ -3,7 +3,7 @@ import AllSpots from "../Spots/AllSpots";
 import Header from "./Header";
 import "./index.css";
 
-export default function index() {
+function Homepage() {
   return (
     <div className="homepage-container">
       <div className="header-container">
@@ -17,3 +17,5 @@ export default function index() {
     </div>
   );
 }
+
+export default Homepage;

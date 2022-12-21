@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import "./AllSpots.css";
 
 function AllSpots() {
@@ -13,7 +13,11 @@ function AllSpots() {
             <div className="grid-column">
               <div className="flex one-spot">
                 <div className="mb-12">
-                  <img className="one-spot-img" src={spot.preview_img} />
+                  <img
+                    className="one-spot-img"
+                    src={spot.preview_img}
+                    alt="spot"
+                  />
                 </div>
                 <div className="flex start">
                   <div className="flex-column left">

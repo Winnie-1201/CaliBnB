@@ -91,14 +91,14 @@ export const cancelBookingThunk = (bookingId) => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(cancelBooking(reviewId));
+    dispatch(cancelBooking(bookingId));
     return response;
   }
 };
 
 const initialState = { spotBookings: {}, userBookings: {} };
 
-export default function reviewReducer(state = initialState, action) {
+export default function bookingReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case SPOT_BOOKING:
