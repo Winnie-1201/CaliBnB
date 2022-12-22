@@ -25,7 +25,6 @@ function PartOne() {
     reviews = spotDetail.reviews;
   }
 
-  console.log("isloaded", isLoaded, reviews);
   return (
     isLoaded && (
       <>
@@ -98,7 +97,63 @@ function PartOne() {
             </section>
           </div>
         </div>
-        <div className="top-2"></div>
+        <div className="top-2">
+          <div className="flex plrt-40">
+            <div className="m-auto">
+              <div className="pt-24">
+                <div className="brd-12">
+                  <div className="image-container">
+                    <div className="img-1">
+                      {/* maybe change it to a button later for reviews all images */}
+                      <img
+                        className="img-size"
+                        src={images[0].url}
+                        alt="spot pic"
+                      />
+                    </div>
+                    <div className="flex-column img-2-3">
+                      <div className="full-wh">
+                        <div className="h-50">
+                          <img
+                            className="img-size"
+                            src={images[1].url}
+                            alt="spot pic"
+                          />
+                        </div>
+                        <div className="h-50 pt-8">
+                          <img
+                            className="img-size"
+                            src={images[2].url}
+                            alt="spot pic"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    {/* come back to change the image display */}
+                    <div className="flex-column img-4-5">
+                      <div className="full-wh">
+                        <div className="h-50">
+                          <img
+                            className="img-size"
+                            src={images[3].url}
+                            alt="spot pic"
+                          />
+                        </div>
+                        <div className="h-50 pt-8">
+                          <img
+                            className="img-size"
+                            src={images[4].url}
+                            alt="spot pic"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </>
     )
   );

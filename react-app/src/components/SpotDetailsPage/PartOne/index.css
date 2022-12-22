@@ -137,3 +137,86 @@ section {
 .mr-8 {
   margin-right: 8px;
 }
+
+.top-2 {
+  max-width: 1120px;
+}
+
+.top-2::before,
+.top-2::after {
+  display: flex;
+  content: "";
+}
+
+.plrt-40 {
+  padding: 0 40px;
+}
+
+.m-auto {
+  max-width: 1120;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  width: 100%;
+}
+
+.pt-24 {
+  padding-top: 24px;
+}
+
+.brd-12 {
+  border-radius: 12px;
+  overflow-y: hidden;
+}
+
+.image-container {
+  max-height: calc(60vh - 64);
+  position: relative;
+  min-height: 300px;
+}
+
+.img-1 {
+  height: 100%;
+  width: 50%;
+  left: 0px;
+  right: 0px;
+  position: absolute;
+}
+
+.img-2-3 {
+  height: 100%;
+  width: 25%;
+  padding-left: 8px;
+  left: 50%;
+  top: 0px;
+  position: absolute;
+}
+
+.img-4-5 {
+  height: 100%;
+  width: 25%;
+  padding-left: 8px;
+  right: 0px;
+  top: 0px;
+  position: absolute;
+}
+
+.img-size {
+  object-fit: fill;
+  height: 100%;
+  width: 100%;
+}
+
+.h-50 {
+  height: 50%;
+}
+
+.full-wh {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+.pt-8 {
+  padding-top: 8px;
+}
