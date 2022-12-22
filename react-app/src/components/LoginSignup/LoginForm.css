@@ -1,8 +1,7 @@
-.login-form {
-  max-width: 568px;
-  /* width: 100%; */
-  border-radius: 12px;
-}
+/* .login-form {
+
+ 
+} */
 
 .login-header {
   min-height: 64px;
@@ -23,9 +22,21 @@
 
 .h1-inherit {
   /* color: inherit;
-    font-size: inherit; */
+  font-size: inherit; */
+  font-size: 16px;
+  font-weight: 600;
   padding: 0;
   margin: 0;
+}
+
+.header-left {
+  flex: 0 0 16px;
+  text-align: left;
+}
+
+.header-right {
+  flex: 0 0 16px;
+  text-align: right;
 }
 
 .p-24 {
@@ -36,6 +47,7 @@
   flex: 1 1 auto;
   overflow-y: auto;
   outline: none;
+  height: 100%;
 }
 
 .mtb-8-24 {
@@ -47,12 +59,45 @@
   margin-bottom: 8px;
   font-size: 22px;
   color: rgb(34, 34, 34);
-  font-weight: 800;
+  font-weight: 500;
   margin-top: 0;
 }
 
-.mtb-16-24 {
+.mt-16 {
   margin-top: 16px;
+}
+
+.br {
+  border-radius: 8px;
+}
+
+.input-box {
+  cursor: text;
+  min-height: 56px;
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  color: rgb(34, 34, 34);
+
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  box-shadow: rgb(176 176 176) 0px 0px 0px 1px inset;
+}
+
+.input-text {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 12px;
+  min-height: 1px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.mtb-16-24 {
+  margin-top: 20px;
   margin-bottom: 24px;
 }
 
@@ -63,12 +108,43 @@
   text-decoration: none;
   padding: 14px 24px;
   border: none;
-  background-color: linear-gradient(
+  background: linear-gradient(
     to right,
     rgb(230, 30, 77) 0%,
     rgb(227, 28, 95) 50%,
     rgb(215, 4, 102) 100%
   );
   color: rgb(255, 255, 255);
+  font-size: 15px;
   width: 100%;
+  min-height: 47px;
+  height: 100%;
+  min-width: 200px;
+  border-radius: 8px;
+}
+
+.mtb-16 {
+  margin: 10px 0;
+}
+
+.or {
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.or::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: rgb(221, 221, 221);
+  margin-right: 16px;
+}
+
+.or::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: rgb(221, 221, 221);
+  margin-left: 16px;
 }

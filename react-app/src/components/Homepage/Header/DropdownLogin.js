@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { logout } from "../../../store/session";
+import "./DropdownLogin.css";
 
 function DropdownLogin() {
   const dispatch = useDispatch();
@@ -17,19 +18,35 @@ function DropdownLogin() {
   return (
     <div className="flex-column ptb mt login-dropdown">
       <div className="top flex-column">
-        <div className="top-text">Messages</div>
-        <div className="top-text">Notifications</div>
-        <div className="top-text">Trips</div>
-        <div className="top-text">Wishlists</div>
+        <div className="text-hover flex center">
+          <div className="top-text-login">Messages</div>
+        </div>
+        <div className="text-hover flex center">
+          <div className="top-text-login">Notifications</div>
+        </div>
+        <div className="text-hover flex center">
+          <div className="top-text-login">Trips</div>
+        </div>
+        <div className="text-hover flex center">
+          <div className="top-text-login">Wishlists</div>
+        </div>
       </div>
       <div className="mid flex-column">
-        <div className="top-text">Calibnb your home</div>
-        <div className="top-text">Share your experience</div>
-        <div className="top-text">Account</div>
+        <div className="text-hover flex center">
+          <div className="top-text">Calibnb your home</div>
+        </div>
+        <div className="text-hover flex center">
+          <div className="top-text">Share your experience</div>
+        </div>
+        <div className="text-hover flex center">
+          <div className="top-text">Account</div>
+        </div>
       </div>
       <div className="bottom flex-column">
-        <div className="top-text" onClick={handleLogout}>
-          Log out
+        <div className="text-hover flex center" onClick={handleLogout}>
+          <div className="top-text" onClick={handleLogout}>
+            Log out
+          </div>
         </div>
       </div>
     </div>

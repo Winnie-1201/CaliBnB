@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Dropdown from "./Dropdown";
+import { Modal } from "../../../context/Modal";
+import LoginForm from "../../LoginSignup/LoginForm";
+import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
 import "./index.css";
 
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [signupModal, setSignupModal] = useState(false);
 
   const user = useSelector((state) => state.session.user);
-  const isLogin = user.error ? false : true;
+  const isLogin = !user || user?.error ? false : true;
+  console.log("islogin", isLogin);
 
   const openMenu = () => {
     if (showMenu) return;
@@ -73,7 +78,69 @@ function Header() {
                 <i className="fa-solid fa-circle-user" />
               </div>
             </button>
-            {showMenu && !isLogin && <Dropdown />}
+            {showMenu && !isLogin && (
+              <div className="flex-column mt dropdown">
+                <div className="top flex-column">
+                  <div
+                    className="text-hover flex center"
+                    onClick={() => {
+                      setSignupModal(true);
+                    }}
+                  >
+                    <div className="top-text">
+                      <div
+                        className="signup"
+                        onClick={() => {
+                          setSignupModal(true);
+                        }}
+                      >
+                        Sign up
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="text-hover flex center"
+                    onClick={() => {
+                      setLoginModal(true);
+                    }}
+                  >
+                    <div className="top-text">
+                      <div
+                        className="login"
+                        onClick={() => {
+                          setLoginModal(true);
+                        }}
+                      >
+                        Log in
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bottom flex-column">
+                  <div className="text-hover flex center">
+                    <div className="top-text">
+                      <div className="home">Calibnb your home</div>
+                    </div>
+                  </div>
+                  <div className="text-hover flex center">
+                    <div className="top-text">
+                      <div className="experience">Share your experience</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {loginModal && (
+              <Modal onClose={() => setLoginModal(false)}>
+                <LoginForm setLoginModal={setLoginModal} />
+              </Modal>
+            )}
+            {signupModal && (
+              <Modal onClose={() => setSignupModal(false)}>
+                <SignupForm setSignupModal={setSignupModal} />
+              </Modal>
+            )}
             {showMenu && isLogin && <DropdownLogin />}
           </div>
         </div>
