@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
 import { login } from "../../store/session";
 import "./LoginForm.css";
 
 function LoginForm({ setLoginModal }) {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-  const user = useSelector((state) => state.session.user);
-
-  if (user) history.push("/");
 
   const getEmail = (e) => setEmail(e.target.value);
   const getPassword = (e) => setPassword(e.target.value);
@@ -27,9 +21,6 @@ function LoginForm({ setLoginModal }) {
     return dispatch(login(email, password)).catch(async (res) => {
       const data = await res.json();
       if (data && data.errors) setErrors(data.errors);
-      else {
-        history.push("/");
-      }
     });
   };
 

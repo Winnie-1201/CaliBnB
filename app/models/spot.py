@@ -122,10 +122,12 @@ class Spot(db.Model):
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
+            "images": [i.to_dict_basic() for i in self.images],
             "owner": User.query.get(self.userId).to_dict(),
             'beds': self.beds,
             'guests': self.guests,
             'bedroom': self.bedroom,
             'bath': self.bath,
-            'averages': self.avg_rating()
+            'averages': self.avg_rating(),
+            "reviews": len(self.reviews) 
         }

@@ -1,7 +1,7 @@
 import React from "react";
-import AllSpots from "../Spots/AllSpots";
 import Header from "./Header";
 import "./index.css";
+import AllSpots from "./Spots";
 
 function Homepage() {
   return (

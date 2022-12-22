@@ -41,12 +41,15 @@ def user_spots():
     return {"spots": [spot.to_dict() for spot in spots]}
 
 
-@spot_routes.route('<int:id>')
+@spot_routes.route("/<int:id>")
 def spot_by_id(id):
     '''
     Query one spot by its id and return it in a disctionary
     '''
     spot = Spot.query.get(id)
+
+    print("-------")
+    print("spot", spot)
     return {'spot': spot.to_dict_details()}
 
 
@@ -311,3 +314,5 @@ def add_imgage(spotId):
             if form.validate_on_submit:
                 # not sure yet
                 pass
+
+

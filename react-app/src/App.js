@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
-import Test from "./components/auth/Test";
 import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
 import LoginForm from "./components/LoginSignup/LoginForm";
-import SpotDetails from "./components/Spots/SpotDetails";
+import SpotDetalsPage from "./components/SpotDetailsPage";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,7 +30,7 @@ function App() {
           <LoginForm />
         </Route>
         <Route path="/spots/:spotId" exact={true}>
-          <SpotDetails />
+          <SpotDetalsPage />
         </Route>
         <Route path="/" exact={true}>
           <Homepage />
