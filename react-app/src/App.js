@@ -6,6 +6,7 @@ import Test from "./components/auth/Test";
 import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
 import LoginForm from "./components/LoginSignup/LoginForm";
+import SpotDetails from "./components/Spots/SpotDetails";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +29,9 @@ function App() {
       <Switch>
         <Route path="/test" exact={true}>
           <LoginForm />
+        </Route>
+        <Route path="/spots/:spotId" exact={true}>
+          <SpotDetails />
         </Route>
         <Route path="/" exact={true}>
           <Homepage />

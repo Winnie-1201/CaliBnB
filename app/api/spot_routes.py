@@ -27,7 +27,7 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'spots', [spot.to_dict() for spot in spots]}
+        return {'spots': [spot.to_dict() for spot in spots]}
 
 
 @spot_routes.route('/current')
@@ -147,7 +147,7 @@ def spot_reviews(spotId):
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
 
-    return {'Reviews', [review.to_dict() for review in reviews]}
+    return {'Reviews': [review.to_dict() for review in reviews]}
         
 
 @spot_routes.route('<int:spotId>/reviews', methods=["POST"])
@@ -205,7 +205,7 @@ def spot_bookings(spotId):
 
     bookings = Booking.query.filter_by(spotId=spotId).all()
 
-    return {'Bookings', [booking.to_dict() for booking in bookings]}
+    return {'Bookings': [booking.to_dict() for booking in bookings]}
 
         
 
@@ -240,7 +240,7 @@ def spot_experiences(spotId):
     '''
     experiences = Experience.query.filter_by(spotId=spotId)
 
-    return {'Experiences', [e.to_dict() for e in experiences]}
+    return {'Experiences': [e.to_dict() for e in experiences]}
 
 
 @spot_routes.route('/<int:spotId>/experiences', methods=['POST'])

@@ -32,7 +32,7 @@ function Header() {
   }, [showMenu]);
 
   return (
-    <div className="flex center relative s-b z-1 plr-40">
+    <div className="flex center relative s-b z-1 plr-40 header">
       <div className="header-left">
         <div className="inline-flex center relative z-1">
           <div className="logo-container flex center">

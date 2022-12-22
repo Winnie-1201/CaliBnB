@@ -15,7 +15,7 @@ def user_experiences():
     '''
     experiences = Experience.query.filter_by(userId=current_user.id)
 
-    return {'Experiences', [e.to_dict() for e in experiences]}
+    return {'Experiences': [e.to_dict() for e in experiences]}
 
 
 

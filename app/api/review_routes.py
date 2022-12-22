@@ -15,7 +15,7 @@ def spot_reviews():
     userId = current_user.id
     reviews = Review.query.filter_by(userId=userId).all()
 
-    return {'Reviews', [review.to_dict() for review in reviews]}
+    return {'Reviews': [review.to_dict() for review in reviews]}
 
 
 @review_routes.route('/<int:reviewId>')
