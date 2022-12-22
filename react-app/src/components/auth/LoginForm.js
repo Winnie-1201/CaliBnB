@@ -30,7 +30,6 @@ const LoginForm = () => {
     return <Redirect to="/" />;
   }
 
-  console.log("/go in ");
   return (
     <form onSubmit={onLogin}>
       <div>
