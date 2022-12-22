@@ -5,7 +5,6 @@ import { login } from "../../store/session";
 import "./LoginForm.css";
 
 function LoginForm({ setLoginModal }) {
-  console.log("go in login form");
   const dispatch = useDispatch();
   const history = useHistory();
 

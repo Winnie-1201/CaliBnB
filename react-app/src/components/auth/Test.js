@@ -11,7 +11,7 @@ function Test() {
   }, [dispatch]);
 
   if (!spots.length > 0) return null;
-  console.log("spot", spots);
+
   return (
     <ul>
       {spots?.map((spot) => (

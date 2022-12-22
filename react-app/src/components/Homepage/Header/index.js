@@ -13,7 +13,6 @@ function Header() {
 
   const user = useSelector((state) => state.session.user);
   const isLogin = !user || user?.error ? false : true;
-  console.log("islogin", isLogin);
 
   const openMenu = () => {
     if (showMenu) return;

@@ -25,11 +25,11 @@ const deleteSpot = (spotId) => ({
 
 export const getAllSpotThunk = () => async (dispatch) => {
   const response = await fetch("/api/spots");
-  console.log("response", response.ok);
+  // console.log("response", response.ok);
 
   if (response.ok) {
     const spots = await response.json();
-    console.log("spots in thunk", spots);
+    // console.log("spots in thunk", spots);
     dispatch(loadAll(spots.spots));
 
     return spots;

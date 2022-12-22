@@ -31,7 +31,6 @@ export default function LoginSignup() {
         Log in
       </div>
 
-      {console.log("show modal", showModal, login)}
       {/* <Modal onClose={() => setShowModal(false)}>
         <LoginForm />
       </Modal> */}
