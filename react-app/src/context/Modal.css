@@ -1,11 +1,14 @@
 #modal {
   position: fixed;
-  top: 75px;
+  top: -30px;
   right: 0;
   left: 0;
   z-index: 100;
   display: flex;
+  padding: 40px;
+  height: 100vh;
   justify-content: center;
+  align-items: center;
 }
 
 #modal-background {
@@ -14,13 +17,20 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #modal-content {
-  position: absolute;
+  position: relative;
+  /* display: flex;
+  flex-direction: column; */
+  box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
   background-color: white;
-  border-radius: 15px;
-  /* height: 85vh; */
-  overflow-y: auto;
+  width: 100%;
+  max-width: 568px;
+  height: 100%;
+  max-height: 680px;
+  border-radius: 12px;
+  overflow: clip;
+  /* overflow-y: scroll; */
 }

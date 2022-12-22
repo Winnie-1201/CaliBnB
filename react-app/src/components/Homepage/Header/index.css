@@ -47,7 +47,7 @@
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 40px;
-  box-shadow: 0 1px 2px rgba(0 0 0 0.08), 0 4px 12px rgba(0 0 0 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.2s ease;
   text-align: left;
   display: inline-flex;
@@ -141,7 +141,7 @@
   background: transparent;
   cursor: pointer;
   margin: 0;
-  text-align: inherit;
+  text-align: left;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 21px;
@@ -159,6 +159,11 @@
   height: 42px;
   /* transition: box-shadow 0.2s ease; */
   align-items: center;
+}
+
+.profile-bt:hover,
+.profile-bt:focus {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08), 0px 4px 4px rgba(0, 0, 0, 0.08);
 }
 
 .ml-12 {
@@ -195,4 +200,42 @@
   border: 0;
   cursor: pointer;
   padding: 12px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 38px;
+  right: 0px;
+  border-radius: 8px;
+  border: 1px solid #dddddd;
+  width: 220px;
+  height: 230px;
+  background-color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mt {
+  margin-top: 32px;
+}
+
+.top {
+  border-bottom: 1px solid #dddddd;
+}
+
+.top,
+.bottom {
+  padding-bottom: 10px;
+}
+
+.top-text {
+  /* margin: 10px 10px 0px 20px;
+  padding: 10px 0 0 0;
+  font-size: 14px; */
+  margin: 0px 10px 0px 20px;
+  /* padding: 10px 0 0 0; */
+  font-size: 14px;
+}
+
+.signup {
+  font-weight: 500;
 }

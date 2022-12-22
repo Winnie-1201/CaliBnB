@@ -21,16 +21,14 @@ export default function LoginSignup() {
           Sign up
         </div>
       </div>
-      <div className="top-text">
-        <div
-          className="login"
-          onClick={() => {
-            setShowModal(true);
-            setLogin(true);
-          }}
-        >
-          Log in
-        </div>
+      <div
+        className="login"
+        onClick={() => {
+          setShowModal(true);
+          setLogin(true);
+        }}
+      >
+        Log in
       </div>
 
       {console.log("show modal", showModal, login)}
