@@ -33,6 +33,25 @@
   outline: none;
 }
 
+.inline-flex::before {
+  bottom: 8px;
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: -8px;
+  right: -8px;
+}
+
+.logo-text {
+  color: #ff385c;
+  font-weight: 600;
+}
+
+.wh-30-32 {
+  width: 30px;
+  height: 32px;
+}
+
 .header-mid {
   text-align: center;
   flex: 0 1 auto;
