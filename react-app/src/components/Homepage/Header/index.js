@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Dropdown from "./Dropdown";
+import DropdownLogin from "./DropdownLogin";
 import "./index.css";
 
-export default function index() {
+function Header() {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const user = useSelector((state) => state.session.user);
+  const isLogin = user.error ? false : true;
+
+  const openMenu = () => {
+    if (showMenu) return;
+    setShowMenu(true);
+  };
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
   return (
     <div className="flex center relative s-b z-1 plr-40">
       <div className="header-left">
@@ -13,6 +38,7 @@ export default function index() {
       </div>
       <div className="header-mid plr-24">
         <div className="flex mid-box">
+          {/* change the buttons to input later */}
           <span></span>
           <button className="flex anywhere default-button z-1 relative">
             <div className="anywhere-text">Anywhere</div>
@@ -38,8 +64,8 @@ export default function index() {
               <div className="flex relative center z-1">Calibnb your home</div>
             </div>
           </div>
-          <div className="user-profile">
-            <button className="profile-bt z-1 flex">
+          <div className="user-profile relative z-1">
+            <button className="profile-bt z-1 flex" onClick={openMenu}>
               <div>
                 <i className="fa-solid fa-grip-lines" />
               </div>
@@ -47,9 +73,13 @@ export default function index() {
                 <i className="fa-solid fa-circle-user" />
               </div>
             </button>
+            {showMenu && !isLogin && <Dropdown />}
+            {showMenu && isLogin && <DropdownLogin />}
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+export default Header;

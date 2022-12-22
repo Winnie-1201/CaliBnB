@@ -4,6 +4,7 @@
   top: 0;
   width: 100%;
   z-index: 10;
+  border-bottom: 1px solid #dddddd;
 }
 
 .main-container {
@@ -11,4 +12,8 @@
   width: 100%;
   padding: 0 40px;
   margin: 16px 0 40px 0;
+}
+
+.homepage-container {
+  position: relative;
 }
