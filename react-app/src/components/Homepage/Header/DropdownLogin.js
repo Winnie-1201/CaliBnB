@@ -1,6 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import { logout } from "../../../store/session";
 
 function DropdownLogin() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+
+    dispatch(logout());
+
+    history.push("/");
+  };
   return (
     <div className="flex-column ptb mt login-dropdown">
       <div className="top flex-column">
@@ -15,7 +28,9 @@ function DropdownLogin() {
         <div className="top-text">Account</div>
       </div>
       <div className="bottom flex-column">
-        <div className="top-text">Log out</div>
+        <div className="top-text" onClick={handleLogout}>
+          Log out
+        </div>
       </div>
     </div>
   );

@@ -73,9 +73,9 @@ function Header() {
                 <i className="fa-solid fa-circle-user" />
               </div>
             </button>
+            {showMenu && !isLogin && <Dropdown />}
+            {showMenu && isLogin && <DropdownLogin />}
           </div>
-          {showMenu && !isLogin && <Dropdown />}
-          {showMenu && isLogin && <DropdownLogin />}
         </div>
       </div>
     </div>

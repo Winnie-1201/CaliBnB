@@ -21,6 +21,6 @@
   position: absolute;
   background-color: white;
   border-radius: 15px;
-  height: 85vh;
+  /* height: 85vh; */
   overflow-y: auto;
 }
