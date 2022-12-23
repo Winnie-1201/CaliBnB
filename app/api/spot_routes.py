@@ -27,7 +27,7 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'spots', [spot.to_dict() for spot in spots]}
+        return {'spots': [spot.to_dict() for spot in spots]}
 
 
 @spot_routes.route('/current')
@@ -41,12 +41,15 @@ def user_spots():
     return {"spots": [spot.to_dict() for spot in spots]}
 
 
-@spot_routes.route('<int:id>')
+@spot_routes.route("/<int:id>")
 def spot_by_id(id):
     '''
     Query one spot by its id and return it in a disctionary
     '''
     spot = Spot.query.get(id)
+
+    print("-------")
+    print("spot", spot)
     return {'spot': spot.to_dict_details()}
 
 
@@ -147,7 +150,7 @@ def spot_reviews(spotId):
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
 
-    return {'Reviews', [review.to_dict() for review in reviews]}
+    return {'Reviews': [review.to_dict() for review in reviews]}
         
 
 @spot_routes.route('<int:spotId>/reviews', methods=["POST"])
@@ -205,7 +208,7 @@ def spot_bookings(spotId):
 
     bookings = Booking.query.filter_by(spotId=spotId).all()
 
-    return {'Bookings', [booking.to_dict() for booking in bookings]}
+    return {'Bookings': [booking.to_dict() for booking in bookings]}
 
         
 
@@ -240,7 +243,7 @@ def spot_experiences(spotId):
     '''
     experiences = Experience.query.filter_by(spotId=spotId)
 
-    return {'Experiences', [e.to_dict() for e in experiences]}
+    return {'Experiences': [e.to_dict() for e in experiences]}
 
 
 @spot_routes.route('/<int:spotId>/experiences', methods=['POST'])
@@ -311,3 +314,5 @@ def add_imgage(spotId):
             if form.validate_on_submit:
                 # not sure yet
                 pass
+
+

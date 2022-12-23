@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "./AllSpots.css";
+import "./index.css";
 
 function AllSpots() {
   const spots = Object.values(useSelector((state) => state.spots.allSpots));

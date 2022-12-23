@@ -36,6 +36,47 @@ class Spot(db.Model):
     images = db.relationship('Image', back_populates='spot', cascade='all, delete')
     bookings = db.relationship('Booking', back_populates='spot', cascade='all, delete')
 
+
+    def avg_rating(self):
+        reviews = self.reviews
+        count = len(self.reviews)
+
+        review_dict = {
+            "cleanliness": 0,
+            "check_in": 0,
+            "communication": 0,
+            "value": 0,
+            "location": 0,
+            "accuracy": 0
+        }
+
+        for r in reviews:
+            print('r', r.to_dict_rates())
+            review_dict['cleanliness'] = review_dict['cleanliness'] + r.to_dict_rates()['cleanliness']
+            review_dict['check_in'] = review_dict['check_in'] + r.to_dict_rates()['check_in']
+            review_dict['communication'] = review_dict['communication'] + r.to_dict_rates()['communication']
+            review_dict['value'] = review_dict['value'] + r.to_dict_rates()['value']
+            review_dict['location'] = review_dict['location'] + r.to_dict_rates()['location']
+            review_dict['accuracy'] = review_dict['accuracy'] + r.to_dict_rates()['accuracy']
+
+        avg_c = round(review_dict['cleanliness'] / count, 1)
+        avg_ci = round(review_dict["check_in"] / count, 1)
+        avg_cm = round(review_dict["communication"] / count,1)
+        avg_v = round(review_dict["value"] / count, 1)
+        avg_l = round(review_dict["location"] / count, 1)
+        avg_a = round(review_dict["accuracy"] / count, 1)
+
+        avg = round((avg_c + avg_ci + avg_cm + avg_v + avg_l + avg_a) / 6, 1)
+
+        return {
+            "avg_c":avg_c, 
+            "avg_ci":avg_ci ,
+            "avg_cm":avg_cm, 
+            "avg_v":avg_v, 
+            "avg_l":avg_l, 
+            "avg_a":avg_a, 
+            "avg":avg}
+
     def to_dict_basic(self):
         return {
             "id": self.id,
@@ -81,11 +122,12 @@ class Spot(db.Model):
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
+            "images": [i.to_dict_basic() for i in self.images],
             "owner": User.query.get(self.userId).to_dict(),
-            "reviews": [r.to_dict() for r in self.reviews],
-            'images': [i.to_dict_basic() for i in self.images],
             'beds': self.beds,
             'guests': self.guests,
             'bedroom': self.bedroom,
-            'bath': self.bath
+            'bath': self.bath,
+            'averages': self.avg_rating(),
+            "reviews": len(self.reviews) 
         }
