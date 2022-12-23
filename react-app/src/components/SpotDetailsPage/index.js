@@ -8,6 +8,7 @@ import { useParams } from "react-router";
 import { getOneSpotThunk } from "../../store/spots";
 import { getSpotReivewsThunk } from "../../store/reviews";
 import { getSpotBookingsThunk } from "../../store/bookings";
+import PartThree from "./PartThree";
 
 function SpotDetailsPage() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function SpotDetailsPage() {
         <main className="site-content">
           <PartOne spot={spotDetail} />
           <PartTwo spot={spotDetail} bookings={bookings} />
+          <PartThree spot={spotDetail} reviews={reviews} />
         </main>
       </>
     )
