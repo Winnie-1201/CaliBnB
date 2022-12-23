@@ -2,6 +2,9 @@ import React from "react";
 import "./index.css";
 
 function PartTwo({ spot }) {
+  const reviews = spot.reviews;
+  // const images = spot.images;
+  const avgs = spot.averages;
   return (
     <div className="max-width">
       <div className="flex">
@@ -157,12 +160,114 @@ function PartTwo({ spot }) {
                     <div className="ava-date">first few avaliable dates</div>
                   </div>
                 </div>
+                <div className="flex not-sure-yet">calender block</div>
               </div>
             </div>
           </div>
           <div className="block-container"></div>
         </div>
-        <div className="mr-0-right retative"></div>
+        <div className="mr-0-right retative">
+          <div className="sticky z-1 pr-1">
+            <div className="pb-48">
+              <div className="mt-48">
+                <div className="with-shadow">
+                  <div className="default-style-booking">
+                    <div className="flex-column">
+                      <div className="flex s-b bbox-top">
+                        <div>
+                          <span className="bbox-price">${spot.price}</span>
+                          <span className="bbox-night">night</span>
+                        </div>
+
+                        <div className="mt-8">
+                          <span className="flex baseline">
+                            <span className="font-12">
+                              <svg
+                                viewBox="0 0 32 32"
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="bbox-star"
+                              >
+                                <path d="M 15.094 1.579 l -4.124 8.885 l -9.86 1.27 a 1 1 0 0 0 -0.542 1.736 l 7.293 6.565 l -1.965 9.852 a 1 1 0 0 0 1.483 1.061 L 16 25.951 l 8.625 4.997 a 1 1 0 0 0 1.482 -1.06 l -1.965 -9.853 l 7.293 -6.565 a 1 1 0 0 0 -0.541 -1.735 l -9.86 -1.271 l -4.127 -8.885 a 1 1 0 0 0 -1.814 0 Z"></path>
+                              </svg>
+                            </span>
+                            <span className="bbox-avg">{avgs?.avg} · </span>
+                            <span className="review-count">
+                              <button className="show-review bbox-color">
+                                {" "}
+                                {reviews} {reviews > 1 ? "reviews" : "review"}
+                              </button>
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="bbox-mid">
+                        <div className="flex bb">
+                          {/* buttons for calender */}
+                          <button className="bbox-calender-button">
+                            <div className="bbox-calender-left">
+                              <div className="bbox-calender-text">Check-in</div>
+                              <div className="bbox-calender-date">
+                                date from cal
+                              </div>
+                            </div>
+                            <div className="bbox-calender-right">
+                              <div className="bbox-calender-text">
+                                Check-out
+                              </div>
+                              <div className="bbox-calender-date">
+                                date from cal
+                              </div>
+                            </div>
+                          </button>
+                        </div>
+                        <div className="flex holder">
+                          guests dropdown holder
+                        </div>
+                      </div>
+                      <button className="bbox-bottom">
+                        <span>Reserve</span>
+                      </button>
+                    </div>
+                    <ul className="flex-column other-text">
+                      <li className="mt-8">You won't be charged yet</li>
+                    </ul>
+                    <div className="mt-24">
+                      <section>
+                        <div className="price-detail">
+                          <div className="price-block">
+                            <span>${spot.price} x ? nights</span>
+                            <span>$ total</span>
+                          </div>
+                          <div className="price-block pt-16">
+                            <span>Cleaning fee</span>
+                            <span>$ ?</span>
+                          </div>
+                          <div className="price-block pt-16">
+                            <span>Service fee</span>
+                            <span>$ ?</span>
+                          </div>
+                        </div>
+                        <div className="mt-24 pt-24 border-top">
+                          <div className="price-block">
+                            <span className="fw-600">Total before taxes</span>
+                            <span>$ ?</span>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-24">
+                <div className="rare-fine-box">
+                  <div className="flex">
+                    <div className="pr-16">block placeholder</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
