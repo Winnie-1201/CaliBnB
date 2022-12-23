@@ -200,7 +200,6 @@ def add_review(spotId):
 
 
 @spot_routes.route('/<int:spotId>/bookings')
-@login_required
 def spot_bookings(spotId):
     '''
     Query for a specific spot's bookings and return them in a list of dictionaries

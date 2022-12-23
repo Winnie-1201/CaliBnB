@@ -2,7 +2,7 @@ from app.models import db, User, environment, SCHEMA
 
 def seed_users():
     for i in range(1, 16):
-        demo = User(firstName=f"Demo{i}", lastName=f"User{i}", username=f"demouser{i}", email=f"demo{i}@aa.io", password="password", icon="'https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png'")
+        demo = User(firstName=f"Demo{i}", lastName=f"User{i}", username=f"demouser{i}", email=f"demo{i}@aa.io", password="password", icon="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png")
         db.session.add(demo)
     # demo = User(firstName="Winnie", lastName="", username="Demo", email="demo@aa.io", password="password")
     # marnie = User(

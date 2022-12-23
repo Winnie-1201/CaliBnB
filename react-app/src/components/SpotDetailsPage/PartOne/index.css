@@ -1,6 +1,7 @@
 .top-1 {
-  max-width: 1120px;
-  padding: 24px 40px 0 40px;
+  /* max-width: 1120px; */
+  width: 100%;
+  padding: 24px 0px 0 0;
 }
 
 .flex-full-width {
@@ -148,12 +149,8 @@ section {
   content: "";
 }
 
-.plrt-40 {
-  padding: 0 40px;
-}
-
 .m-auto {
-  max-width: 1120;
+  max-width: 1120px;
   margin-left: auto;
   margin-right: auto;
   height: 100%;
@@ -170,9 +167,9 @@ section {
 }
 
 .image-container {
-  max-height: calc(60vh - 64);
+  max-height: calc(60vh - 64px);
   position: relative;
-  min-height: 300px;
+  min-height: 350px;
 }
 
 .img-1 {
@@ -190,6 +187,7 @@ section {
   left: 50%;
   top: 0px;
   position: absolute;
+  /* box-sizing: border-box; */
 }
 
 .img-4-5 {
@@ -199,6 +197,7 @@ section {
   right: 0px;
   top: 0px;
   position: absolute;
+  /* box-sizing: border-box; */
 }
 
 .img-size {

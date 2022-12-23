@@ -78,7 +78,7 @@ function PartOne({ spot }) {
         </div>
       </div>
       <div className="top-2">
-        <div className="flex plrt-40">
+        <div className="flex m-auto">
           <div className="m-auto">
             <div className="pt-24">
               <div className="brd-12">
