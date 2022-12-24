@@ -173,7 +173,7 @@ function PartThree({ reviews, spot }) {
                           <img
                             className="r-img"
                             src={r.user.icon}
-                            alt="reviewer image"
+                            alt="reviewer"
                           />
                         </div>
                       </div>

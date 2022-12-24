@@ -170,6 +170,7 @@ section {
   max-height: calc(60vh - 64px);
   position: relative;
   min-height: 350px;
+  aspect-ratio: 2/1;
 }
 
 .img-1 {
@@ -201,9 +202,10 @@ section {
 }
 
 .img-size {
-  object-fit: fill;
+  object-fit: cover;
   height: 100%;
   width: 100%;
+  aspect-ratio: 1;
 }
 
 .h-50 {
