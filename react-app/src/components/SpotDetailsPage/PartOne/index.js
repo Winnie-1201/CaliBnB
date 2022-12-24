@@ -38,15 +38,17 @@ function PartOne({ spot }) {
                   </span>
                 </span>
                 <span className="m-8-0">·</span>
-                {avgs?.avg >= 3.3 && (
-                  <span className="mt-4-flex">
-                    <span className="mr-4-flex">
-                      <i className="fa-solid fa-trophy" />
+                {avgs?.avg >= 3.7 && (
+                  <>
+                    <span className="mt-4-flex">
+                      <span className="mr-4-flex">
+                        <i className="fa-solid fa-trophy" />
+                      </span>
+                      <span className="superhost">Superhost</span>
                     </span>
-                    <span className="superhost">Superhost</span>
-                  </span>
+                    <span className="m-8-0">·</span>
+                  </>
                 )}
-                <span className="m-8-0">·</span>
                 <span className="mt-4-flex">
                   <button className="show-map">
                     <span className="show-map-address">
@@ -78,7 +80,7 @@ function PartOne({ spot }) {
         </div>
       </div>
       <div className="top-2">
-        <div className="flex plrt-40">
+        <div className="flex m-auto">
           <div className="m-auto">
             <div className="pt-24">
               <div className="brd-12">

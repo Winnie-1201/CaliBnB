@@ -36,7 +36,7 @@ function Header() {
       <div className="header-left">
         <div className="inline-flex center relative z-1">
           <div className="logo-container flex center">
-            <img className="logo wh-30-32" src="/logo.png" />
+            <img className="logo wh-30-32" src="/logo.png" alt="logo png" />
             <div className="logo-text">calibnb</div>
           </div>
         </div>
@@ -116,7 +116,6 @@ function Header() {
                     </div>
                   </div>
                 </div>
-
                 <div className="bottom flex-column">
                   <div className="text-hover flex center">
                     <div className="top-text">

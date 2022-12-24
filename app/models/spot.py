@@ -107,6 +107,8 @@ class Spot(db.Model):
             "created": self.created,
             "updated": self.updated,
             "ownerId": self.userId,
+            "reviews": len(self.reviews) ,
+            'averages': self.avg_rating(),
         }
 
     def to_dict_details(self):

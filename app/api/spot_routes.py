@@ -30,13 +30,12 @@ def all_spots():
         return {'spots': [spot.to_dict() for spot in spots]}
 
 
-@spot_routes.route('/current')
-@login_required
-def user_spots():
+@spot_routes.route('/owner/<int:ownerId>')
+def user_spots(ownerId):
     '''
     Query for all spots of current user and return them in a list of dictionaries
     '''
-    spots = Spot.query.filter_by(userId=current_user.id).all()
+    spots = Spot.query.filter_by(userId=ownerId).all()
 
     return {"spots": [spot.to_dict() for spot in spots]}
 
@@ -50,7 +49,7 @@ def spot_by_id(id):
 
     print("-------")
     print("spot", spot)
-    return {'spot': spot.to_dict_details()}
+    return spot.to_dict_details()
 
 
 @spot_routes.route("", methods=["POST"])
@@ -200,7 +199,6 @@ def add_review(spotId):
 
 
 @spot_routes.route('/<int:spotId>/bookings')
-@login_required
 def spot_bookings(spotId):
     '''
     Query for a specific spot's bookings and return them in a list of dictionaries

@@ -13,7 +13,7 @@ const loadOne = (spot) => ({
   spot,
 });
 
-const loadCurr = (spots) => ({
+const loadOwner = (spots) => ({
   type: LOAD_CURR,
   spots,
 });
@@ -41,18 +41,19 @@ export const getOneSpotThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
-    dispatch(loadOne(spot.spot));
+    console.log("spot", spot);
+    dispatch(loadOne(spot));
 
     return spot;
   }
 };
 
-export const getCurrUserSpotsThunk = () => async (dispatch) => {
-  const response = await fetch("/api/spots/current");
+export const getOwnerSpotsThunk = (ownerId) => async (dispatch) => {
+  const response = await fetch(`/api/spots/owner/${ownerId}`);
 
   if (response.ok) {
     const spots = await response.json();
-    dispatch(loadCurr(spots.spots));
+    dispatch(loadOwner(spots.spots));
 
     return spots;
   }
@@ -103,7 +104,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
   }
 };
 
-const initialState = { allSpots: {}, singleSpot: {}, currUserSpots: {} };
+const initialState = { allSpots: {}, singleSpot: {}, ownerSpots: {} };
 
 export default function spotReducer(state = initialState, action) {
   let newState = { ...state };
@@ -113,7 +114,7 @@ export default function spotReducer(state = initialState, action) {
       // return { ...state, allSpots: action.spots };
       return newState;
     case LOAD_CURR:
-      action.spots.forEach((spot) => (newState.currUserSpots[spot.id] = spot));
+      action.spots.forEach((spot) => (newState.ownerSpots[spot.id] = spot));
       return newState;
     // return { ...state, currUserSpots: action.spots };
     case LOAD_ONE:
