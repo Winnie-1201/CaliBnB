@@ -311,6 +311,9 @@
   padding: 26px 12px 10px;
   background-color: transparent;
   font-size: 14px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   overflow: hidden;
 }
 
