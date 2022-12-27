@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+// import { Calendar } from "react-calendar";
+import CalendarForm from "./Calendar";
+import moment from "moment";
 import "./index.css";
 
 function PartTwo({ spot }) {
   const reviews = spot.reviews;
   // const images = spot.images;
   const avgs = spot.averages;
+
+  const [start, setStartDate] = useState(moment());
+  const [end, setEndDate] = useState(moment());
+  const [startSelected, setStartSelected] = useState(false);
+  const [endSelected, setEndSelected] = useState(false);
+
+  const handleReserve = () => {};
+
+  let stay;
+  if (start && end) stay = end.diff(start, "days");
+
+  // console.log("start and end type", start, start.format("MM/D/YYYY"));
+
   return (
     <div className="max-width">
       <div className="flex">
@@ -149,22 +165,61 @@ function PartTwo({ spot }) {
           <div className="block-container not-sure-yet">
             what this place offers block
           </div>
-          <div className="block-container">
-            <div className="ptm-48">
-              <div>
-                <div className="calender-header">
-                  <div className="stay-nights">
-                    <h2 className="block-header-h2">? nights in {spot.city}</h2>
-                  </div>
-                  <div className="stay-dates pt-8">
-                    <div className="ava-date">first few avaliable dates</div>
-                  </div>
+          <div className="block-container-no-border w-100">
+            <div className="ptm-48 w-100">
+              <div className="calender-header">
+                <div className="stay-nights">
+                  <h2 className="block-header-h2">
+                    {!startSelected ? "Select check-in date" : ""}
+                    {startSelected && !endSelected
+                      ? "Select checkout date"
+                      : ""}
+                    {/* {startSelected && endSelected
+                      ? stay + " nights " + "in " + spot.city
+                      : "Select check-in date"} */}
+                    {/* // {stay} nights in {spot.city} */}
+                  </h2>
+                  {stay > 0 && (
+                    <h2 className="block-header-h2">
+                      {stay} nights in {spot.city}
+                    </h2>
+                  )}
                 </div>
-                <div className="flex not-sure-yet">calender block</div>
+                <div className="stay-dates pt-8">
+                  {startSelected && endSelected && (
+                    <div className="ava-date">
+                      {start.format("MMM D, YYYY") +
+                        " - " +
+                        end.format("MMM D, YYYY")}
+                    </div>
+                  )}
+                  {startSelected && !endSelected && (
+                    <div className="ava-date">Minimum stay: 2 nights</div>
+                  )}
+                  {/* <div className="ava-date">
+                    {startSelected && !endSelected
+                      ? "Minimum stay: 2 nights"
+                      : ""}
+                    {!startSelected && !endSelected
+                      ? "Add your travel dates for exact pricing"
+                      : start?.format("MMM D, YYYY") +
+                        " - " +
+                        end?.format("MMM D, YYYY")}
+                  </div> */}
+                </div>
+              </div>
+              <div className="flex w-100">
+                <CalendarForm
+                  start={start}
+                  end={end}
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                  setStartSelected={setStartSelected}
+                  setEndSelected={setEndSelected}
+                />
               </div>
             </div>
           </div>
-          <div className="block-container"></div>
         </div>
         <div className="mr-0-right retative">
           <div className="sticky z-1 pr-1">
@@ -207,7 +262,7 @@ function PartTwo({ spot }) {
                             <div className="bbox-calender-left">
                               <div className="bbox-calender-text">Check-in</div>
                               <div className="bbox-calender-date">
-                                date from cal
+                                {startSelected ? start.format("MM/D/YYYY") : ""}
                               </div>
                             </div>
                             <div className="bbox-calender-right">
@@ -215,7 +270,7 @@ function PartTwo({ spot }) {
                                 Check-out
                               </div>
                               <div className="bbox-calender-date">
-                                date from cal
+                                {endSelected ? end.format("MM/D/YYYY") : ""}
                               </div>
                             </div>
                           </button>
@@ -224,7 +279,7 @@ function PartTwo({ spot }) {
                           guests dropdown holder
                         </div>
                       </div>
-                      <button className="bbox-bottom">
+                      <button className="bbox-bottom" onClick={handleReserve}>
                         <span>Reserve</span>
                       </button>
                     </div>
@@ -232,28 +287,32 @@ function PartTwo({ spot }) {
                       <li className="mt-8">You won't be charged yet</li>
                     </ul>
                     <div className="mt-24">
-                      <section>
-                        <div className="price-detail">
-                          <div className="price-block">
-                            <span>${spot.price} x ? nights</span>
-                            <span>$ total</span>
+                      {startSelected && endSelected && (
+                        <section>
+                          <div className="price-detail">
+                            <div className="price-block">
+                              <span>
+                                {spot.price} x {stay} nights
+                              </span>
+                              <span>{spot.price * stay}</span>
+                            </div>
+                            <div className="price-block pt-16">
+                              <span>Cleaning fee</span>
+                              <span>$ ?</span>
+                            </div>
+                            <div className="price-block pt-16">
+                              <span>Service fee</span>
+                              <span>$ ?</span>
+                            </div>
                           </div>
-                          <div className="price-block pt-16">
-                            <span>Cleaning fee</span>
-                            <span>$ ?</span>
+                          <div className="mt-24 pt-24 border-top">
+                            <div className="price-block">
+                              <span className="fw-600">Total before taxes</span>
+                              <span>$ ?</span>
+                            </div>
                           </div>
-                          <div className="price-block pt-16">
-                            <span>Service fee</span>
-                            <span>$ ?</span>
-                          </div>
-                        </div>
-                        <div className="mt-24 pt-24 border-top">
-                          <div className="price-block">
-                            <span className="fw-600">Total before taxes</span>
-                            <span>$ ?</span>
-                          </div>
-                        </div>
-                      </section>
+                        </section>
+                      )}
                     </div>
                   </div>
                 </div>

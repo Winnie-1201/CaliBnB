@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
 import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
-import LoginForm from "./components/LoginSignup/LoginForm";
 import SpotDetalsPage from "./components/SpotDetailsPage";
+import CalendarForm from "./components/SpotDetailsPage/PartTwo/Calendar";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,7 +27,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/test" exact={true}>
-          <LoginForm />
+          <CalendarForm />
         </Route>
         <Route path="/spots/:spotId" exact={true}>
           <SpotDetalsPage />
