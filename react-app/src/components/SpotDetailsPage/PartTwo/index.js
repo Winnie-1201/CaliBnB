@@ -3,8 +3,14 @@ import React, { useState } from "react";
 import CalendarForm from "./Calendar";
 import moment from "moment";
 import "./index.css";
+import { useDispatch } from "react-redux";
+import { createBookingThunk } from "../../../store/bookings";
+import { useHistory } from "react-router-dom";
 
 function PartTwo({ spot }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const reviews = spot.reviews;
   // const images = spot.images;
   const avgs = spot.averages;
@@ -14,7 +20,22 @@ function PartTwo({ spot }) {
   const [startSelected, setStartSelected] = useState(false);
   const [endSelected, setEndSelected] = useState(false);
 
-  const handleReserve = () => {};
+  const handleReserve = () => {
+    console.log("start to date in com", start.toDate());
+    const booking = {
+      start: start.toISOString().split("T")[0],
+      end: end.toISOString().split("T")[0],
+    };
+    dispatch(createBookingThunk(spot.id, booking));
+    console.log("after dispatch in comp");
+    history.push("/");
+  };
+
+  // console.log(
+  //   "start to date in com",
+  //   new Date(start.toDate()),
+  //   start.toISOString().split("T")[0]
+  // );
 
   let stay;
   if (start && end) stay = end.diff(start, "days");
