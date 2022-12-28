@@ -54,8 +54,8 @@ export const getOneBookingThunk = (bookingId) => async (dispatch) => {
 };
 
 export const createBookingThunk = (spotId, booking) => async (dispatch) => {
-  console.log("spotId", spotId);
-  console.log("booking in thunk", booking);
+  // console.log("spotId", spotId);
+  // console.log("booking in thunk", booking);
   const response = await fetch(`/api/spots/${spotId}/bookings`, {
     method: "POST",
     headers: {
@@ -66,7 +66,7 @@ export const createBookingThunk = (spotId, booking) => async (dispatch) => {
 
   if (response.ok) {
     const booking = await response.json();
-    console.log("create booking thunk", booking);
+    // console.log("create booking thunk", booking);
     dispatch(getOneBooking(booking));
     return booking;
   }

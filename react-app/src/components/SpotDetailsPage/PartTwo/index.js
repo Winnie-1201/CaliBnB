@@ -21,13 +21,14 @@ function PartTwo({ spot }) {
   const [endSelected, setEndSelected] = useState(false);
 
   const handleReserve = () => {
-    console.log("start to date in com", start.toDate());
+    // console.log("start to date in com", start.toDate());
     const booking = {
       start: start.toISOString().split("T")[0],
       end: end.toISOString().split("T")[0],
     };
     dispatch(createBookingThunk(spot.id, booking));
-    console.log("after dispatch in comp");
+    // console.log("after dispatch in comp");
+    // change the route to the trips page later
     history.push("/");
   };
 

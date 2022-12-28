@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
@@ -10,6 +11,8 @@ function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
+
+  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const isLogin = !user || user?.error ? false : true;
@@ -31,10 +34,18 @@ function Header() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleHomepage = (e) => {
+    e.preventDefault();
+    history.push("/");
+  };
+
   return (
     <div className="flex center relative s-b z-1 plr-40 header">
       <div className="header-left">
-        <div className="inline-flex center relative z-1">
+        <div
+          className="inline-flex center relative z-1 redirect"
+          onClick={handleHomepage}
+        >
           <div className="logo-container flex center">
             <img className="logo wh-30-32" src="/logo.png" alt="logo png" />
             <div className="logo-text">calibnb</div>

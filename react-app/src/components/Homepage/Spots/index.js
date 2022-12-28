@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import "./index.css";
 
 function AllSpots() {
@@ -9,7 +10,11 @@ function AllSpots() {
     <div className="main-inner">
       <div className="grid">
         {spots.map((spot) => (
-          <div key={spot.id}>
+          <NavLink
+            key={spot.id}
+            to={`/spots/${spot.id}`}
+            className="navlink-hp"
+          >
             <div className="grid-column">
               <div className="flex one-spot">
                 <div className="mb-12">
@@ -32,7 +37,7 @@ function AllSpots() {
                 </div>
               </div>
             </div>
-          </div>
+          </NavLink>
         ))}
       </div>
     </div>

@@ -1,6 +1,8 @@
 .main-inner {
   color: #222222;
-  margin: 24px 0;
+  margin: 24px auto;
+  max-width: 1120px;
+  padding: 0 40px;
 }
 
 .grid {
@@ -8,6 +10,11 @@
   grid-template-columns: repeat(4, 1fr);
   row-gap: 40px;
   column-gap: 24px;
+}
+
+.navlink-hp {
+  text-decoration: none;
+  color: #222222;
 }
 
 .grid-column {
