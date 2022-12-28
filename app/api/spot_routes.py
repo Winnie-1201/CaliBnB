@@ -225,7 +225,17 @@ def create_booking(spotId):
         start = form.data['start']
         end = form.data['end']
 
-        new_booking = Booking(start, end, spotId=spotId, userId=current_user.id)
+        # print("------------")
+        # print("------------", form.data)
+        # print("start in backend", start, end)
+
+        new_booking = Booking(start=start, end=end, spotId=spotId, userId=current_user.id)
+        # print("------------")
+        # print("------------")
+        # print("new booking", new_booking)
+        # print("------------")
+        # print("------------")
+
 
         db.session.add(new_booking)
         db.session.commit()
