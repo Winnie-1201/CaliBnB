@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import DateTimeField
+from wtforms import DateField
 from wtforms.validators import DataRequired, ValidationError
 import datetime
 from app.models import Booking
@@ -27,5 +27,5 @@ def enddate_conflict(form, field):
         raise ValidationError('The spot is already book on this date')
 
 class BookingForm(FlaskForm):
-    start = DateTimeField('start', validators=[DataRequired(), valid_start, startdate_conflict])
-    end = DateTimeField('emd', validators=[DataRequired(), valid_end, enddate_conflict])
+    start = DateField('start', validators=[DataRequired(), valid_start, startdate_conflict])
+    end = DateField('end', validators=[DataRequired(), valid_end, enddate_conflict])

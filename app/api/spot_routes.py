@@ -72,6 +72,9 @@ def create_spot():
         beds = form.data["beds"]
         bath = form.data["bath"]
         preview_img = form.data["preview_img"]
+        clean_fee = form.data['clean_fee']
+        service_fee = form.data["service_fee"]
+        type = form.data['type']
 
         new_spot = Spot(
             address=address,
@@ -86,6 +89,9 @@ def create_spot():
             beds=beds,
             bath=bath,
             preview_img=preview_img,
+            clean_fee=clean_fee,
+            service_fee=service_fee,
+            type=type,
             userId=current_user.id,
         )
 
@@ -114,7 +120,13 @@ def edit_spot(id):
             if form.data["name"]: spot.name = form.data["name"] 
             if form.data["price"]: spot.price = form.data["price"]
             if form.data["tags"]: spot.tags = form.data["tags"]
-
+            if form.data['guests']: spot.guests = form.data['guests']
+            if form.data['bedroom']: spot.bedroom = form.data['bedroom']
+            if form.data['beds']: spot.beds = form.data['beds']
+            if form.data['bath']: spot.bath = form.data['bath']
+            if form.data['clean_fee']: spot.clean_fee = form.data['clean_fee']
+            if form.data['service_fee']: spot.service_fee = form.data['service_fee']
+            if form.data['type']: spot.type = form.data['type']
 
             db.session.commit()
 
@@ -148,6 +160,12 @@ def spot_reviews(spotId):
     Query for all reviews of a spot and return them in a list of dictionaries
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
+
+    print("-----")
+    print("-----")
+    print("reviews---", reviews)
+    print("-----")
+    print("-----")
 
     return {'Reviews': [review.to_dict() for review in reviews]}
         
@@ -225,7 +243,17 @@ def create_booking(spotId):
         start = form.data['start']
         end = form.data['end']
 
-        new_booking = Booking(start, end, spotId=spotId, userId=current_user.id)
+        # print("------------")
+        # print("------------", form.data)
+        # print("start in backend", start, end)
+
+        new_booking = Booking(start=start, end=end, spotId=spotId, userId=current_user.id)
+        # print("------------")
+        # print("------------")
+        # print("new booking", new_booking)
+        # print("------------")
+        # print("------------")
+
 
         db.session.add(new_booking)
         db.session.commit()

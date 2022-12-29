@@ -17,12 +17,16 @@ class Spot(db.Model):
     price = db.Column(db.Float, nullable=False)
     preview_img = db.Column(db.String(255), nullable=False)
     tags = db.Column(db.String(255), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
 
     # house condition
     guests = db.Column(db.Integer, nullable=False)
     bedroom = db.Column(db.Integer, nullable=False)
     beds = db.Column(db.Integer, nullable=False)
     bath = db.Column(db.Integer, nullable=False)
+
+    clean_fee = db.Column(db.Float, nullable=False)
+    service_fee = db.Column(db.Float, nullable=False)
     # created = db.Column(db.DateTime(
     #     timezone=True), nullable=False, server_default=func.current_timestamp())
     created = db.Column(db.DateTime(
@@ -59,12 +63,12 @@ class Spot(db.Model):
             review_dict['location'] = review_dict['location'] + r.to_dict_rates()['location']
             review_dict['accuracy'] = review_dict['accuracy'] + r.to_dict_rates()['accuracy']
 
-        avg_c = round(review_dict['cleanliness'] / count, 1)
-        avg_ci = round(review_dict["check_in"] / count, 1)
-        avg_cm = round(review_dict["communication"] / count,1)
-        avg_v = round(review_dict["value"] / count, 1)
-        avg_l = round(review_dict["location"] / count, 1)
-        avg_a = round(review_dict["accuracy"] / count, 1)
+        avg_c = 0 if count ==0 else round(review_dict['cleanliness'] / count, 1)
+        avg_ci = 0 if count ==0 else round(review_dict["check_in"] / count, 1)
+        avg_cm = 0 if count ==0 else round(review_dict["communication"] / count,1)
+        avg_v = 0 if count ==0 else round(review_dict["value"] / count, 1)
+        avg_l = 0 if count ==0 else round(review_dict["location"] / count, 1)
+        avg_a = 0 if count ==0 else round(review_dict["accuracy"] / count, 1)
 
         avg = round((avg_c + avg_ci + avg_cm + avg_v + avg_l + avg_a) / 6, 1)
 
@@ -131,5 +135,8 @@ class Spot(db.Model):
             'bedroom': self.bedroom,
             'bath': self.bath,
             'averages': self.avg_rating(),
+            'type': self.type,
+            'clean_fee': self.clean_fee,
+            'service_fee': self.service_fee,
             "reviews": len(self.reviews) 
         }
