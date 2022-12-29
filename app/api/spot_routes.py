@@ -161,6 +161,12 @@ def spot_reviews(spotId):
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
 
+    print("-----")
+    print("-----")
+    print("reviews---", reviews)
+    print("-----")
+    print("-----")
+
     return {'Reviews': [review.to_dict() for review in reviews]}
         
 
