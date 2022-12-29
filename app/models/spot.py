@@ -17,12 +17,16 @@ class Spot(db.Model):
     price = db.Column(db.Float, nullable=False)
     preview_img = db.Column(db.String(255), nullable=False)
     tags = db.Column(db.String(255), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
 
     # house condition
     guests = db.Column(db.Integer, nullable=False)
     bedroom = db.Column(db.Integer, nullable=False)
     beds = db.Column(db.Integer, nullable=False)
     bath = db.Column(db.Integer, nullable=False)
+
+    clean_fee = db.Column(db.Float, nullable=False)
+    service_fee = db.Column(db.Float, nullable=False)
     # created = db.Column(db.DateTime(
     #     timezone=True), nullable=False, server_default=func.current_timestamp())
     created = db.Column(db.DateTime(
@@ -131,5 +135,8 @@ class Spot(db.Model):
             'bedroom': self.bedroom,
             'bath': self.bath,
             'averages': self.avg_rating(),
+            'type': self.type,
+            'clean_fee': self.clean_fee,
+            'service_fee': self.service_fee,
             "reviews": len(self.reviews) 
         }
