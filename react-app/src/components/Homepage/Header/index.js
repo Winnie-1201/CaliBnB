@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
+import CreateSpot from "../../CreateSpot";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -11,6 +12,7 @@ function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
+  const [createSpotModal, setCreateSpotModal] = useState(false);
 
   const history = useHistory();
 
@@ -37,6 +39,11 @@ function Header() {
   const handleHomepage = (e) => {
     e.preventDefault();
     history.push("/");
+  };
+
+  const handleCalibnb = (e) => {
+    e.preventDefault();
+    setCreateSpotModal(true);
   };
 
   return (
@@ -76,7 +83,7 @@ function Header() {
         <div className="flex center relative h-80">
           <div className="flex auto">
             {/* change it to a link later */}
-            <div className="p-12 z-1">
+            <div className="p-12 z-1" onClick={handleCalibnb}>
               <div className="flex relative center z-1">Calibnb your home</div>
             </div>
           </div>
@@ -149,6 +156,14 @@ function Header() {
             {signupModal && (
               <Modal onClose={() => setSignupModal(false)}>
                 <SignupForm setSignupModal={setSignupModal} />
+              </Modal>
+            )}
+            {createSpotModal && (
+              <Modal onClose={() => setCreateSpotModal(false)}>
+                <CreateSpot
+                  setCreateSpotModal={setCreateSpotModal}
+                  createSpotModal={createSpotModal}
+                />
               </Modal>
             )}
             {showMenu && isLogin && <DropdownLogin />}

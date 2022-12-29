@@ -6,6 +6,7 @@ import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
 import SpotDetalsPage from "./components/SpotDetailsPage";
 import CalendarForm from "./components/SpotDetailsPage/PartTwo/Calendar";
+import CreateSpot from "./components/CreateSpot";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,7 +28,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/test" exact={true}>
-          <CalendarForm />
+          <CreateSpot />
         </Route>
         <Route path="/spots/:spotId" exact={true}>
           <SpotDetalsPage />
