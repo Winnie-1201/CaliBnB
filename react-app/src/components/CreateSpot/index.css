@@ -1,0 +1,42 @@
+.cs-body {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+  outline: none;
+  height: 100%;
+}
+
+.cs-block {
+  cursor: text;
+  /* min-height: 40px; */
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  color: rgb(34, 34, 34);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.cs-text {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px;
+  height: 30px;
+  /* min-height: 1px; */
+  margin-top: 4px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: rgb(176 176 176) 0px 0px 0px 1px inset;
+}
+
+.cs-text::placeholder {
+  color: rgb(176 176 176);
+}
+
+.error-cs {
+  font-size: 12px;
+  color: #ff385c;
+  margin-left: 8px;
+}
