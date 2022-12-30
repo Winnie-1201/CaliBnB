@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
 import CreateSpot from "../../CreateSpot";
+import NextStepForm from "../../CreateSpot/NextStepModal";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -13,6 +14,9 @@ function Header() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [createSpotModal, setCreateSpotModal] = useState(false);
+  const [next, setNext] = useState(false);
+
+  const data = {};
 
   const history = useHistory();
 
@@ -159,13 +163,23 @@ function Header() {
               </Modal>
             )}
             {createSpotModal && (
-              <Modal onClose={() => setCreateSpotModal(false)}>
-                <CreateSpot
-                  setCreateSpotModal={setCreateSpotModal}
-                  createSpotModal={createSpotModal}
-                />
+              <Modal
+                onClose={() => {
+                  setCreateSpotModal(false);
+                }}
+              >
+                {next ? (
+                  <NextStepForm next={next} setNext={setNext} data={data} />
+                ) : (
+                  <CreateSpot next={next} setNext={setNext} data={data} />
+                  // <CreateSpot
+                  //   setCreateSpotModal={setCreateSpotModal}
+                  //   createSpotModal={createSpotModal}
+                  // />
+                )}
               </Modal>
             )}
+
             {showMenu && isLogin && <DropdownLogin />}
           </div>
         </div>
