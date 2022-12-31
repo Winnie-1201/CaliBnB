@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../context/Modal";
-import { createSpotThunk } from "../../store/spots";
+import { addImageThunk, createSpotThunk } from "../../store/spots";
 import Header from "../Homepage/Header";
 import "./index.css";
 
@@ -21,7 +21,6 @@ function CreateSpot({ next, setNext, data }) {
   const [country, setCountry] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  // const [images, setImages] = useState([]);
   const [tags, setTags] = useState("");
   const [guests, setGuests] = useState();
   const [bedroom, setBedroom] = useState();
@@ -32,7 +31,10 @@ function CreateSpot({ next, setNext, data }) {
   const [price, setPrice] = useState();
   const [preview_img, setPreviewImg] = useState("");
 
-  const [image, setImage] = useState(null);
+  // const [images, setImages] = useState({});
+  const [images, setImages] = useState([]);
+
+  // const [image, setImage] = useState(null);
   // const [imgaeLoading, setImageLoading] = useState(false);
 
   useEffect(() => {
@@ -70,6 +72,10 @@ function CreateSpot({ next, setNext, data }) {
     if (name && name.length > 255)
       newErrors.longName = "The spot name you entered is too long.";
 
+    if (images && Object.values(images).length < 4)
+      newErrors.shortImage =
+        "Please upload at least five images for your spot (preview image included).";
+
     // setNextStep(false);
     setSubmit(false);
     setErrors(newErrors);
@@ -89,6 +95,7 @@ function CreateSpot({ next, setNext, data }) {
     clean_fee,
     price,
     preview_img,
+    images,
   ]);
 
   // const handleNextStep = (e) => {
@@ -124,14 +131,27 @@ function CreateSpot({ next, setNext, data }) {
       service_fee,
     };
 
+    console.log("preview img", preview_img);
     const newSpot = await dispatch(createSpotThunk(spotData));
 
     console.log("new spot", newSpot);
 
+    console.log("image collection", img_coll);
+
     if (newSpot) {
-      // console.log("i am here");
+      dispatch(addImageThunk(newSpot.id, preview_img, true));
+
+      img_coll.forEach((img) =>
+        dispatch(addImageThunk(newSpot.id, img, false))
+      );
+
       history.push(`/spots/${newSpot.id}`);
     }
+
+    // if (newSpot) {
+    //   // console.log("i am here");
+    //   history.push(`/spots/${newSpot.id}`);
+    // }
 
     // const formData = new FormData();
     // formData.append("image", image);
@@ -143,28 +163,27 @@ function CreateSpot({ next, setNext, data }) {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
-    console.log("file", file);
-    setImage(file);
+    // console.log("file", file);
     setPreviewImg(file);
 
     const image = document.getElementById("preview-img");
     image.src = URL.createObjectURL(file);
-
-    // const loadFile = function (e) {
-    //   const image = document.getElementById("preview-img");
-    //   image.src = URL.createObjectURL(e.target.files[0]);
-    // };
-
-    // const reader = new FileReader();
-    // reader.onload = function (e) {
-    //   console.log("e.target", e.target);
-    //   console.log("e.target.result", e.target.result);
-    //   document.querySelector("#preview-img").src = e.target.result;
-    // };
-
-    // reader.readAsDataURL(file);
-    // setImages([...images, image]);
   };
+
+  const updateImages = (e, id) => {
+    const file = e.target.files[0];
+    // const image = images[id];
+    // console.log("id", id);
+    // console.log("image", image);
+    // setImages([...images, file]);
+
+    const obj = {};
+    obj[id] = file;
+    setImages({ ...images, ...obj });
+    // console.log("images", images);
+  };
+
+  const img_coll = Object.values(images);
 
   // console.log("errors", errors);
   // console.log("price", price, service_fee, clean_fee);
@@ -174,14 +193,18 @@ function CreateSpot({ next, setNext, data }) {
     Math.round(price * clean_fee);
 
   // console.log("repveiw ", preview_img);
+
   return (
     <>
       <Header />
       <div className="cs-container plr-40">
         <div className="cs-body flex-column">
           <div className="cs-imgs-container flex-column">
-            <div className="cs-imgs-header">
+            <div className="cs-imgs-header flex center">
               <h3 className="cs-ih-h3">* Upload your spot images</h3>
+              {submit && errors.shortImage && (
+                <div className="error-cs">* {errors.shortImage}</div>
+              )}
             </div>
             <div className="cs-imgs-body flex">
               <div className="flex-column s-b">
@@ -209,23 +232,56 @@ function CreateSpot({ next, setNext, data }) {
               <div className="cs-other-imgs flex">
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {/* {console.log(
+                      "images length in jsx",
+                      `images-${images.length}`
+                    )} */}
+
+                    {/* {Object.values(images) > 0 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(Object.values(images)[0])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : ( */}
+                    {img_coll.length > 0 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[0])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 1)}
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length > 5 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[4])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 5)}
                     />
                   </div>
                   {/* <div className="cs-imgs-one">
@@ -237,67 +293,127 @@ function CreateSpot({ next, setNext, data }) {
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length > 1 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[1])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 2)}
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length >= 6 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[5])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 6)}
                     />
                   </div>
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length >= 3 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[2])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 3)}
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length >= 7 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[6])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 7)}
                     />
                   </div>
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length >= 4 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[3])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 4)}
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    <div className="cs-imgs-one-box">
-                      <i className="fa-solid fa-folder-plus" />
-                    </div>
+                    {img_coll.length >= 8 ? (
+                      <img
+                        // id="images-1"
+                        src={URL.createObjectURL(img_coll[7])}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                    ) : (
+                      <div className="cs-imgs-one-box">
+                        <i className="fa-solid fa-folder-plus" />
+                      </div>
+                    )}
                     <input
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
+                      onChange={(e) => updateImages(e, 8)}
                     />
                   </div>
                 </div>

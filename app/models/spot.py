@@ -15,7 +15,7 @@ class Spot(db.Model):
     country = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    preview_img = db.Column(db.String(255), nullable=False)
+    preview_img = db.Column(db.String(255))
     tags = db.Column(db.String(255), nullable=False)
     type = db.Column(db.String(50), nullable=False)
 
@@ -90,7 +90,7 @@ class Spot(db.Model):
             "country": self.country,
             "name": self.name,
             "price": self.price,
-            'preview_img': self.preview_img,
+            'preview_img': self.images[0].to_dict()['url'],
             'tags': self.tags,
             'ownerId': self.userId,
             'beds': self.beds
@@ -106,7 +106,7 @@ class Spot(db.Model):
             "country": self.country,
             "name": self.name,
             "price": self.price,
-            'preview_img': self.preview_img,
+            'preview_img': self.images[0].to_dict()['url'],
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
@@ -124,7 +124,7 @@ class Spot(db.Model):
             "country": self.country,
             "name": self.name,
             "price": self.price,
-            'preview_img': self.preview_img,
+            'preview_img': self.images[0].to_dict()['url'],
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,

@@ -114,6 +114,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 
 export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
   const formData = new FormData();
+  console.log("formdata--------", formData);
   formData.append("image", image);
   formData.append("preview", preview);
 
@@ -125,8 +126,10 @@ export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
     body: formData,
   });
 
+  console.log("response", response);
   if (response.ok) {
     const new_img = await response.json();
+    console.log("new img int hunk", new_img);
     dispatch(addImg(new_img.new_img, spotId));
   }
 };
@@ -150,7 +153,7 @@ export default function spotReducer(state = initialState, action) {
       return { ...state, singleSpot: {} };
 
     case ADD:
-      newState.singleSpot[action.spotId].images.push(action.image);
+      newState.singleSpot.images.push(action.image);
     default:
       return state;
   }
