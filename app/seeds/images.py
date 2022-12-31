@@ -636,6 +636,37 @@ cabins = [
         preview=False,
         spotId=20
     ), 
+
+    Image(
+        url="https://a0.muscache.com/im/pictures/0337bf1f-1bc4-4d04-9717-74e616a0137c.jpg?im_w=720",
+        preview=True,
+        spotId=21
+    ), 
+    Image(
+        url="https://a0.muscache.com/im/pictures/0337bf1f-1bc4-4d04-9717-74e616a0137c.jpg?im_w=720",
+        preview=False,
+        spotId=21
+    ), 
+    Image(
+        url="https://a0.muscache.com/im/pictures/0337bf1f-1bc4-4d04-9717-74e616a0137c.jpg?im_w=720",
+        preview=False,
+        spotId=21
+    ), 
+    Image(
+        url="https://a0.muscache.com/im/pictures/0337bf1f-1bc4-4d04-9717-74e616a0137c.jpg?im_w=720",
+        preview=False,
+        spotId=21
+    ), 
+    Image(
+        url="https://a0.muscache.com/im/pictures/0337bf1f-1bc4-4d04-9717-74e616a0137c.jpg?im_w=720",
+        preview=False,
+        spotId=21
+    ), 
+    Image(
+        url="https://a0.muscache.com/im/pictures/0337bf1f-1bc4-4d04-9717-74e616a0137c.jpg?im_w=720",
+        preview=False,
+        spotId=21
+    ), 
     
     Image(
         url="https://a0.muscache.com/im/pictures/ff132e6f-45df-4784-a75f-98c87cbb1f8e.jpg?im_w=720",

@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Spot, Review, Booking, Experience, Wishlist, Image
 from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm, ImageForm
+from app.aws_upload import upload_file_to_s3, allowed_file, get_unique_filename
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -13,7 +14,12 @@ def all_spots():
     params = request.args # [('name', 'Beach')]
     if len(params) == 0:
         spots = Spot.query.all()
-        # print('all spots', spots)
+        # for s in spots:
+
+        # print("-------")
+        # print('all spots', spots[0].images[0].to_dict())
+        # print('all spots', spots[0].images[0].to_dict()['url'])
+        # print("-------")
         # print('one spot', spots[0].to_dict_basic())
         return {"spots": [spot.to_dict_basic() for spot in spots]}
     else:
@@ -60,6 +66,12 @@ def create_spot():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit:
+
+        print('-------')
+        print('-------')
+        print("------", form.data)
+        print('-------')
+        print('-------')
         address = form.data["address"]
         city = form.data["city"]
         state = form.data["state"]
@@ -103,8 +115,38 @@ def create_spot():
     if form.errors:
         return form.errors
 
+@spot_routes.route('/<int:spotId>/images', methods=["POST"])
+@login_required
+def add_images(spotId):
+    if "image" not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+    print(image)
+
+    if not allowed_file(image.filename):
+        return {'errors': 'file type is not permitted'}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload['url']
+    preview = request.form['preview'] == 'true'
+
+    new_img = Image(url=url, preview=preview, spotId=spotId)
+    db.session.add(new_img)
+    db.session.commit()
+
+    return {"new_img", new_img.to_dict()}
     
-@spot_routes.route('<int:id>', methods=["PUT"])
+@spot_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_spot(id):
     form = SpotForm()
@@ -161,11 +203,11 @@ def spot_reviews(spotId):
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
 
-    print("-----")
-    print("-----")
-    print("reviews---", reviews)
-    print("-----")
-    print("-----")
+    # print("-----")
+    # print("-----")
+    # print("reviews---", reviews)
+    # print("-----")
+    # print("-----")
 
     return {'Reviews': [review.to_dict() for review in reviews]}
         

@@ -27,7 +27,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/test" exact={true}>
+        <Route path="/spots/current/new" exact={true}>
           <CreateSpot />
         </Route>
         <Route path="/spots/:spotId" exact={true}>
