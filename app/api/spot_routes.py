@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Spot, Review, Booking, Experience, Wishlist, Image
 from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm, ImageForm
+from app.aws_upload import upload_file_to_s3, allowed_file, get_unique_filename
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -13,7 +14,12 @@ def all_spots():
     params = request.args # [('name', 'Beach')]
     if len(params) == 0:
         spots = Spot.query.all()
-        # print('all spots', spots)
+        # for s in spots:
+
+        # print("-------")
+        # print('all spots', spots[0].images[0].to_dict())
+        # print('all spots', spots[0].images[0].to_dict()['url'])
+        # print("-------")
         # print('one spot', spots[0].to_dict_basic())
         return {"spots": [spot.to_dict_basic() for spot in spots]}
     else:
@@ -60,6 +66,12 @@ def create_spot():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit:
+
+        print('-------')
+        print('-------')
+        print("------", form.data)
+        print('-------')
+        print('-------')
         address = form.data["address"]
         city = form.data["city"]
         state = form.data["state"]
@@ -71,10 +83,17 @@ def create_spot():
         bedroom = form.data["bedroom"]
         beds = form.data["beds"]
         bath = form.data["bath"]
-        preview_img = form.data["preview_img"]
+        preview_img = "none"
         clean_fee = form.data['clean_fee']
         service_fee = form.data["service_fee"]
         type = form.data['type']
+
+        # preview_img = request.form['preview_img']
+        # print('preview imges in the form.data', preview_img)
+        # preview_img = get_unique_filename(preview_img.filename)
+        # upload = upload_file_to_s3(preview_img)
+
+        # preview_img = upload['url']
 
         new_spot = Spot(
             address=address,
@@ -103,8 +122,61 @@ def create_spot():
     if form.errors:
         return form.errors
 
+@spot_routes.route('/<int:spotId>/images', methods=["POST"])
+@login_required
+def add_images(spotId):
+    spot = Spot.query.get(spotId)
+
+    if "image" not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+    # print('----------')
+    # print('----------')
+    # print("going in bakcend creating image", image)
+    # print("going in bakcend creating image", image.filename)
+    # print('----------')
+    # print('----------')
+    # print('----------')
+
+    if not allowed_file(image.filename):
+        # print("------in line 141")
+        return {'errors': 'file type is not permitted'}, 400
+
+    # print("------in line 144")
+    image.filename = get_unique_filename(image.filename)
+    # print("files name", image.filename)
+
+    upload = upload_file_to_s3(image)
+    # print("------in line 149", upload)
+    if 'url' not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        # print("------in line 154")
+        return upload, 400
+
+    # print("------in line 157", upload)
+    url = upload['url']
+    preview = request.form['preview'] == 'true'
+
+    # print("url------", url)
+    # print('preview------', preview)
+
+    new_img = Image(url=url, preview=preview, spotId=spotId)
+
+    # print("-------------")
+    # print("-------------new img", new_img)
+    # print("-------------")
+
+    # spot.images.append(new_img)
     
-@spot_routes.route('<int:id>', methods=["PUT"])
+    db.session.add(new_img)
+    db.session.commit()
+
+    return {"new_img": new_img.to_dict()}
+    
+@spot_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_spot(id):
     form = SpotForm()
@@ -161,11 +233,11 @@ def spot_reviews(spotId):
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
 
-    print("-----")
-    print("-----")
-    print("reviews---", reviews)
-    print("-----")
-    print("-----")
+    # print("-----")
+    # print("-----")
+    # print("reviews---", reviews)
+    # print("-----")
+    # print("-----")
 
     return {'Reviews': [review.to_dict() for review in reviews]}
         

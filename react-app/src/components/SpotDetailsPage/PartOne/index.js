@@ -89,7 +89,7 @@ function PartOne({ spot }) {
                     {/* maybe change it to a button later for reviews all images */}
                     <img
                       className="img-size"
-                      src={images[0].url}
+                      src={images[0]?.url}
                       alt="spot pic"
                     />
                   </div>
@@ -98,14 +98,14 @@ function PartOne({ spot }) {
                       <div className="h-50">
                         <img
                           className="img-size"
-                          src={images[1].url}
+                          src={images[1]?.url}
                           alt="spot pic"
                         />
                       </div>
                       <div className="h-50 pt-8">
                         <img
                           className="img-size"
-                          src={images[2].url}
+                          src={images[2]?.url}
                           alt="spot pic"
                         />
                       </div>
@@ -117,14 +117,14 @@ function PartOne({ spot }) {
                       <div className="h-50">
                         <img
                           className="img-size"
-                          src={images[3].url}
+                          src={images[3]?.url}
                           alt="spot pic"
                         />
                       </div>
                       <div className="h-50 pt-8">
                         <img
                           className="img-size"
-                          src={images[4].url}
+                          src={images[4]?.url}
                           alt="spot pic"
                         />
                       </div>

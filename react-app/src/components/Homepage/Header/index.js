@@ -13,8 +13,8 @@ function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
-  const [createSpotModal, setCreateSpotModal] = useState(false);
-  const [next, setNext] = useState(false);
+  // const [createSpotModal, setCreateSpotModal] = useState(false);
+  // const [next, setNext] = useState(false);
 
   const data = {};
 
@@ -47,7 +47,8 @@ function Header() {
 
   const handleCalibnb = (e) => {
     e.preventDefault();
-    setCreateSpotModal(true);
+    history.push("/spots/current/new");
+    // setCreateSpotModal(true);
   };
 
   return (
@@ -162,7 +163,7 @@ function Header() {
                 <SignupForm setSignupModal={setSignupModal} />
               </Modal>
             )}
-            {createSpotModal && (
+            {/* {createSpotModal && (
               <Modal
                 onClose={() => {
                   setCreateSpotModal(false);
@@ -172,13 +173,10 @@ function Header() {
                   <NextStepForm next={next} setNext={setNext} data={data} />
                 ) : (
                   <CreateSpot next={next} setNext={setNext} data={data} />
-                  // <CreateSpot
-                  //   setCreateSpotModal={setCreateSpotModal}
-                  //   createSpotModal={createSpotModal}
-                  // />
+        
                 )}
               </Modal>
-            )}
+            )} */}
 
             {showMenu && isLogin && <DropdownLogin />}
           </div>
