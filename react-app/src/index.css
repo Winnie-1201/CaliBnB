@@ -1,8 +1,10 @@
 /* TODO Add site wide styles */
-@import url(https://fonts.googleapis.com/css?family=Nunito+Sans);
+/* @import url(https://fonts.googleapis.com/css?family=Nunito+Sans); */
+@import url(https://fonts.googleapis.com/css?family=Inter);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 body {
-  font-family: Nunito Sans;
+  font-family: Inter;
   font-size: 14px;
   color: #222;
   background-color: #fff;
