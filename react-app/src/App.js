@@ -8,6 +8,7 @@ import SpotDetalsPage from "./components/SpotDetailsPage";
 import CalendarForm from "./components/SpotDetailsPage/PartTwo/Calendar";
 import CreateSpot from "./components/CreateSpot";
 import Account from "./components/Account";
+import Calibnb from "./components/Calibnb";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +29,10 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/test/profile" exact={true}>
+        <Route path="/users/calibnb" exact={true}>
+          <Calibnb />
+        </Route>
+        <Route path="/users/profile" exact={true}>
           <Account />
         </Route>
         <Route path="/spots/current/new" exact={true}>
