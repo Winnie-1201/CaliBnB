@@ -1,16 +1,22 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getImgsBySpotThunk } from "../../../store/images";
+import { getOneSpotThunk } from "../../../store/spots";
 import { dateTransfer } from "../../dateTransfer";
 import "./index.css";
 
 function SpotCard({ spots }) {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const userSpots = Object.values(spots);
 
   const handleEdit = (e, spotId) => {
     e.preventDefault();
-    history.push(`/spots/${spotId}/edit`);
+    dispatch(getOneSpotThunk(spotId))
+      .then(() => dispatch(getImgsBySpotThunk(spotId)))
+      .then(() => history.push(`/spots/${spotId}/edit`));
   };
 
   return (

@@ -151,7 +151,6 @@ export default function spotReducer(state = initialState, action) {
       return { ...state, singleSpot: action.spot };
     case DELETE_SPOT:
       return { ...state, singleSpot: {} };
-
     case ADD:
       newState.singleSpot.images.push(action.image);
     default:

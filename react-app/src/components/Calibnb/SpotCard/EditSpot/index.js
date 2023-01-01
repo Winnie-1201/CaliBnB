@@ -1,34 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { addImageThunk, createSpotThunk } from "../../store/spots";
-import Header from "../Homepage/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getImgsBySpotThunk } from "../../../../store/images";
+import Header from "../../../Homepage/Header";
 import "./index.css";
 
-function CreateSpot() {
+function EditSpot() {
+  const { spotId } = useParams();
+
   const dispatch = useDispatch();
-  const history = useHistory();
+
+  const spot = useSelector((state) => state.spots.allSpots)[spotId];
+  const imgs = useSelector((state) => state.images.allImages);
 
   const [errors, setErrors] = useState({});
   const [submit, setSubmit] = useState(false);
 
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [tags, setTags] = useState("");
-  const [guests, setGuests] = useState();
-  const [bedroom, setBedroom] = useState();
-  const [beds, setBeds] = useState();
-  const [bath, setBath] = useState();
-  const [service_fee, setservice_fee] = useState();
-  const [clean_fee, setclean_fee] = useState();
-  const [price, setPrice] = useState();
-  const [preview_img, setPreviewImg] = useState("");
+  const [address, setAddress] = useState(spot.address);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [name, setName] = useState(spot.name);
+  const [type, setType] = useState(spot.type);
+  const [tags, setTags] = useState(spot.tags);
+  const [guests, setGuests] = useState(spot.guests);
+  const [bedroom, setBedroom] = useState(spot.bedroom);
+  const [beds, setBeds] = useState(spot.beds);
+  const [bath, setBath] = useState(spot.bath);
+  const [service_fee, setservice_fee] = useState(spot.service_fee);
+  const [clean_fee, setclean_fee] = useState(spot.clean_fee);
+  const [price, setPrice] = useState(spot.price);
+  const [preview_img, setPreviewImg] = useState(spot.preview_img);
+  const [images, setImages] = useState(imgs);
+  const [newImgs, setNewImgs] = useState([]);
 
-  const [images, setImages] = useState({});
+  useEffect(() => {
+    dispatch(getImgsBySpotThunk(spotId));
+  }, [dispatch]);
 
   useEffect(() => {
     const newErrors = {};
@@ -91,40 +99,6 @@ function CreateSpot() {
     images,
   ]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setSubmit(true);
-    const spotData = {
-      address,
-      city,
-      state,
-      country,
-      name,
-      price,
-      tags,
-      type,
-      guests,
-      bedroom,
-      beds,
-      bath,
-      clean_fee,
-      service_fee,
-    };
-
-    const newSpot = await dispatch(createSpotThunk(spotData));
-
-    if (newSpot) {
-      dispatch(addImageThunk(newSpot.id, preview_img, true));
-
-      img_coll.forEach((img) =>
-        dispatch(addImageThunk(newSpot.id, img, false))
-      );
-
-      history.push(`/spots/${newSpot.id}`);
-    }
-  };
-
   const updateImage = (e) => {
     const file = e.target.files[0];
     setPreviewImg(file);
@@ -138,15 +112,26 @@ function CreateSpot() {
 
     const obj = {};
     obj[id] = file;
+    console.log("images", images, obj);
     setImages({ ...images, ...obj });
-  };
 
-  const img_coll = Object.values(images);
+    // const image = document.getElementById(`img-uploaded-${id}`);
+    // image.src = URL.createObjectURL(file);
+    // console.log("images after", images, obj);
+  };
 
   const total =
     Number(price) +
     Math.round(price * service_fee) +
     Math.round(price * clean_fee);
+
+  //   console.log("spot", spot, spot.images);
+  //   console.log("imges", images, preview_img);
+  const boxes = Array(8 - Object.values(imgs).length + 1)
+    .fill(null)
+    .map((_, i) => i);
+  console.log("boxes", boxes);
+  console.log("images,", imgs);
 
   return (
     <>
@@ -164,14 +149,11 @@ function CreateSpot() {
               <div className="flex-column s-b">
                 <div className="cs-preview-img-box">
                   <img
+                    src={spot.preview_img}
                     id="preview-img"
                     alt="preview image"
-                    className={`${
-                      preview_img ? "cs-preview-img" : "no-preview-img"
-                    }`}
-                    hidden={preview_img ? false : true}
+                    className="cs-preview-img"
                   />
-                  <div className={`${preview_img ? "" : "img-box"}`}></div>
                 </div>
                 <input
                   className="cs-preview-img-content"
@@ -183,13 +165,48 @@ function CreateSpot() {
                   <div className="error-cs">* {errors.noPreviewImg}</div>
                 )}
               </div>
-              <div className="cs-other-imgs flex">
-                <div className="cs-imgs-block flex-column s-b">
-                  <div className="cs-imgs-one flex-column">
-                    {img_coll.length > 0 ? (
+              {/* <div className="cs-other-imgs flex"> */}
+              <div className="cs-imgs-grid">
+                {Object.values(images)
+                  .slice(1)
+                  .map((img) => (
+                    <div className="cs-grid-one flex-column" key={img.id}>
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[0])}
+                        id={`img-uploaded-${img.id}`}
+                        src={img.url}
+                        alt="spot image"
+                        className="image-uploaded"
+                      />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="cs-imgs-one-input"
+                        onChange={(e) => updateImages(e, img.id)}
+                      />
+                    </div>
+                  ))}
+                {boxes.map((box) => (
+                  <div className="cs-grid-one flex-column" key={`a${box}`}>
+                    <div className="cs-imgs-one-box">
+                      <i className="fa-solid fa-folder-plus" />
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="cs-imgs-one-input"
+                      onChange={(e) =>
+                        updateImages(e, box + Object.values(images).length - 1)
+                      }
+                    />
+                  </div>
+                ))}
+                {/* <div className="cs-imgs-block flex-column s-b">
+                  <div className="cs-imgs-one flex-column">
+                    {images.length > 0 ? (
+                      <img
+              
+                        src={images[0].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -206,10 +223,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length > 5 ? (
+                    {images.length > 5 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[4])}
+                        src={images[4].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -225,19 +242,13 @@ function CreateSpot() {
                       onChange={(e) => updateImages(e, 5)}
                     />
                   </div>
-                  {/* <div className="cs-imgs-one">
-                    <i className="fa-solid fa-folder-plus" />
-                  </div>
-                  <div className="cs-imgs-one">
-                    <i className="fa-solid fa-folder-plus" />
-                  </div> */}
-                </div>
-                <div className="cs-imgs-block flex-column s-b">
+                </div> */}
+                {/* <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length > 1 ? (
+                    {images.length > 1 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[1])}
+                        src={images[1].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -254,10 +265,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 6 ? (
+                    {images.length >= 6 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[5])}
+                        src={images[5].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -276,10 +287,10 @@ function CreateSpot() {
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 3 ? (
+                    {images.length >= 3 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[2])}
+                        src={images[2].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -296,10 +307,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 7 ? (
+                    {images.length >= 7 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[6])}
+                        src={images[6].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -318,10 +329,10 @@ function CreateSpot() {
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 4 ? (
+                    {images.length >= 4 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[3])}
+                        src={images[3].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -338,10 +349,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 8 ? (
+                    {images.length >= 8 ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[7])}
+                        src={images[7].url}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -357,7 +368,7 @@ function CreateSpot() {
                       onChange={(e) => updateImages(e, 8)}
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -599,277 +610,12 @@ function CreateSpot() {
           </div>
 
           <div className="cs-button-container">
-            <button className="cs-button" onClick={handleSubmit}>
-              Create
-            </button>
+            <button className="cs-button">Create</button>
           </div>
         </div>
       </div>
     </>
   );
-
-  // return (
-  //   <div className="flex-column login-form">
-  //     <div className="x"></div>
-  //     <div className="login-header flex s-b center">
-  //       <div className="header-left"></div>
-  //       <div className="mlr-16">
-  //         <h1 className="h1-inherit">Calibnb your home</h1>
-  //       </div>
-  //       <div className="header-right"></div>
-  //     </div>
-  //     <div className="p-24 cs-body">
-  //       <div className="mtb-8-24">
-  //         <h3 className="mb-8">Get started!</h3>
-  //       </div>
-  //       <form className="login-form">
-  //         <div className="mt-16">
-  //           {/* <div className="br relative"> */}
-  //           <div className="flex-column cs-block">
-  //             <label>Spot address</label>
-  //             <input
-  //               className="cs-text"
-  //               type="text"
-  //               value={address}
-  //               onChange={(e) => setAddress(e.target.value)}
-  //               //   required
-  //               placeholder="Address"
-  //             />
-  //             {nextStep && errors.noAddress && (
-  //               <div className="error-cs">* {errors.noAddress}</div>
-  //             )}
-  //           </div>
-  //           <div className="flex-column cs-block">
-  //             <label>City</label>
-  //             <input
-  //               className="cs-text"
-  //               type="text"
-  //               value={city}
-  //               onChange={(e) => setCity(e.target.value)}
-  //               //   required
-  //               placeholder="City"
-  //             />
-  //             {nextStep && errors.noCity && (
-  //               <div className="error-cs">* {errors.noCity}</div>
-  //             )}
-  //           </div>
-  //           <div className="flex-column cs-block">
-  //             <label>State</label>
-  //             <input
-  //               className="cs-text"
-  //               type="text"
-  //               value={state}
-  //               onChange={(e) => setState(e.target.value)}
-  //               //   required
-  //               placeholder="State"
-  //             />
-  //             {nextStep && errors.noState && (
-  //               <div className="error-cs">* {errors.noState}</div>
-  //             )}
-  //           </div>
-  //           <div className="flex-column cs-block">
-  //             <label>Country</label>
-  //             <input
-  //               className="cs-text"
-  //               type="text"
-  //               value={country}
-  //               onChange={(e) => setCountry(e.target.value)}
-  //               //   required
-  //               placeholder="Country"
-  //             />
-  //             {nextStep && errors.noCountry && (
-  //               <div className="error-cs">* {errors.noCountry}</div>
-  //             )}
-  //           </div>
-  //           <div className="flex-column cs-block">
-  //             <label>Spot name</label>
-  //             <input
-  //               className="cs-text"
-  //               type="text"
-  //               value={name}
-  //               onChange={(e) => setName(e.target.value)}
-  //               //   required
-  //               placeholder="Spot name"
-  //             />
-  //             {nextStep && errors.noName && (
-  //               <div className="error-cs">* {errors.noName}</div>
-  //             )}
-  //           </div>
-  //           <div className="flex-column cs-block">
-  //             <label>Type</label>
-  //             <input
-  //               className="cs-text"
-  //               type="text"
-  //               value={type}
-  //               onChange={(e) => setType(e.target.value)}
-  //               //   required
-  //               placeholder="Type (e.g. Entire home)"
-  //             />
-  //             {nextStep && errors.noType && (
-  //               <div className="error-cs">* {errors.noType}</div>
-  //             )}
-  //           </div>
-  //         </div>
-  //         {/* </div> */}
-
-  //         <div className="mtb-16-24">
-  //           <div className="p-14-24" onClick={handleNextStep}>
-  //             <span>Continue</span>
-  //           </div>
-  //         </div>
-  //       </form>
-  //       {/* {nextStep && nextStepModal && (
-  //         <>
-  //           <Modal onClose={() => setNextStepModal(false)}>
-  //             <NextStepForm setNextStepModal={setNextStepModal} />
-  //           </Modal>
-  //         </>
-  //       )} */}
-  //     </div>
-  //   </div>
-  // );
 }
 
-// function NextStepForm({ setNextStepModal }) {
-//   const [tags, setTags] = useState("");
-//   const [guests, setGuests] = useState();
-//   const [bedroom, setBedroom] = useState();
-//   const [beds, setBeds] = useState();
-//   const [bath, setBath] = useState();
-//   const [service_fee, setservice_fee] = useState();
-//   const [clean_fee, setclean_fee] = useState();
-
-//   const [errors, setErrors] = useState({});
-//   const [submit, setSubmit] = useState(false);
-
-//   useEffect(() => {
-//     const newErros = {};
-//   });
-
-//   return (
-//     <div className="flex-column login-form">
-//       <div className="x"></div>
-//       <div className="login-header flex s-b center">
-//         <div className="header-left"></div>
-//         <div className="mlr-16">
-//           <h1 className="h1-inherit">Calibnb your home</h1>
-//         </div>
-//         <div className="header-right"></div>
-//       </div>
-//       <div className="p-24 login-body">
-//         <div className="mtb-8-24">
-//           <h3 className="mb-8">Continue</h3>
-//         </div>
-//         <form className="login-form">
-//           <div className="mt-16">
-//             <div className="br relative">
-//               <div className="flex input-box">
-//                 <select
-//                   //   className="input-text"
-//                   value={tags}
-//                   onChange={(e) => setTags(e.target.value)}
-//                 >
-//                   <option value="" disabled>
-//                     Please select a tag
-//                   </option>
-//                   <option>Camping</option>
-//                   <option>Cabins</option>
-//                   <option>Amazing views</option>
-//                 </select>
-//               </div>
-//               {/* {nextStep && errors.noAddress && (
-//                 <div className="error-cs">{errors.noAddress}</div>
-//               )} */}
-//               <div className="flex input-box">
-//                 <input
-//                   className="input-text"
-//                   type="number"
-//                   value={guests}
-//                   onChange={(e) => setGuests(e.target.value)}
-//                   placeholder="Guests number"
-//                 />
-//               </div>
-//               {/* {nextStep && errors.noCity && (
-//                 <div className="error-cs">{errors.noCity}</div>
-//               )} */}
-//               <div className="flex input-box">
-//                 <input
-//                   className="input-text"
-//                   type="number"
-//                   value={bedroom}
-//                   onChange={(e) => setBedroom(e.target.value)}
-//                   placeholder="Bedroom(s)"
-//                 />
-//               </div>
-//               {/* {nextStep && errors.noState && (
-//                 <div className="error-cs">{errors.noState}</div>
-//               )} */}
-//               <div className="flex input-box">
-//                 <input
-//                   className="input-text"
-//                   type="number"
-//                   value={beds}
-//                   onChange={(e) => setBeds(e.target.value)}
-//                   //   required
-//                   placeholder="Bed(s)"
-//                 />
-//               </div>
-//               {/* {nextStep && errors.noCountry && (
-//                 <div className="error-cs">{errors.noCountry}</div>
-//               )} */}
-//               <div className="flex input-box">
-//                 <input
-//                   className="input-text"
-//                   type="number"
-//                   value={bath}
-//                   onChange={(e) => setBath(e.target.value)}
-//                   placeholder="Bath number"
-//                 />
-//               </div>
-//               {/* {nextStep && errors.noName && (
-//                 <div className="error-cs">{errors.noName}</div>
-//               )} */}
-//               <div className="flex input-box">
-//                 <input
-//                   className="input-text"
-//                   type="decimal"
-//                   value={clean_fee}
-//                   onChange={(e) => setclean_fee(e.target.value)}
-//                   placeholder="clean_fee fee (in %)"
-//                 />
-//               </div>
-//               {/* {nextStep && errors.noType && (
-//                 <div className="error-cs">{errors.noType}</div>
-//               )} */}
-//               <div className="flex input-box">
-//                 <input
-//                   className="input-text"
-//                   type="decimal"
-//                   value={service_fee}
-//                   onChange={(e) => setservice_fee(e.target.value)}
-//                   placeholder="service_fee fee (in %)"
-//                 />
-//               </div>
-//             </div>
-//           </div>
-
-//           <div className="mtb-16-24">
-//             <div
-//               className="p-14-24"
-//               onClick={(e) => {
-//                 e.preventDefault();
-//                 // setCreateSpotModal(false);
-//                 // setNextStep(true);
-//                 setNextStepModal(false);
-//               }}
-//             >
-//               <span>Submit</span>
-//             </div>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-export default CreateSpot;
+export default EditSpot;

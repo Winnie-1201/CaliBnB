@@ -11,6 +11,7 @@ import { getSpotBookingsThunk } from "../../store/bookings";
 import PartThree from "./PartThree";
 import PartFour from "./PartFour";
 import PartFive from "./PartFive";
+import { getImgsBySpotThunk } from "../../store/images";
 
 function SpotDetailsPage() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function SpotDetailsPage() {
   const reviews = useSelector((state) => state.reviews.spotReviews);
   const bookings = useSelector((state) => state.bookings.spotBookings);
   const ownerSpots = useSelector((state) => state.spots.ownerSpots);
+  const images = useSelector((state) => state.images.allImages);
   const owner = spotDetail.owner;
 
   useEffect(() => {
@@ -31,15 +33,18 @@ function SpotDetailsPage() {
       })
       .then(() => dispatch(getSpotReivewsThunk(spotId)))
       .then(() => dispatch(getSpotBookingsThunk(spotId)))
+      .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => setLoaded(true));
   }, [dispatch, spotId]);
+
+  // console.log("all images", images);
 
   return (
     isLoaded && (
       <>
         <Header />
         <main className="site-content">
-          <PartOne spot={spotDetail} />
+          <PartOne spot={spotDetail} imgs={images} />
           <PartTwo spot={spotDetail} bookings={bookings} />
           <PartThree spot={spotDetail} reviews={reviews} />
           <PartFour />

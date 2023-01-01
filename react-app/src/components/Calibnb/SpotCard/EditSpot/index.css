@@ -1,0 +1,12 @@
+.cs-imgs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
+  margin-left: 40px;
+}
+
+.cs-grid-one {
+  height: 100%;
+}

@@ -21,7 +21,7 @@ def all_spots():
         # print('all spots', spots[0].images[0].to_dict()['url'])
         # print("-------")
         # print('one spot', spots[0].to_dict_basic())
-        return {"spots": [spot.to_dict_basic() for spot in spots]}
+        return {"spots": [spot.to_dict_details() for spot in spots]}
     else:
         # test if it works
         spots = Spot.query.all()
@@ -33,7 +33,7 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'spots': [spot.to_dict() for spot in spots]}
+        return {'spots': [spot.to_dict_details() for spot in spots]}
 
 
 @spot_routes.route('/owner/<int:ownerId>')
@@ -175,6 +175,12 @@ def add_images(spotId):
     db.session.commit()
 
     return {"new_img": new_img.to_dict()}
+
+@spot_routes.route('/<int:spotId>/images')
+def spot_images(spotId):
+    images = Image.query.filter_by(spotId=spotId).all()
+
+    return {'images': [i.to_dict() for i in images]}
     
 @spot_routes.route('/<int:id>', methods=["PUT"])
 @login_required
