@@ -94,6 +94,7 @@ export const editSpotThunk = (spot) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
+    console.log("update spot thunk", spot);
     dispatch(loadOne(spot));
 
     return spot;
