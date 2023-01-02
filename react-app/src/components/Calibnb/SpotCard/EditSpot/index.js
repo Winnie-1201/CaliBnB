@@ -174,6 +174,7 @@ function EditSpot() {
           }
         }
       })
+      .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => history.push(`/spots/${spotId}`));
   };
 
@@ -305,10 +306,22 @@ function EditSpot() {
                               />
                             </>
                           )} */}
-
-                          <div className="cs-imgs-one-box">
-                            <i className="fa-solid fa-folder-plus" />
-                          </div>
+                          {console.log(
+                            "newImgs[rest[0] + 1]",
+                            newImgs[rest[0]],
+                            rest[0]
+                          )}
+                          {newImgs[rest[0]] ? (
+                            <img
+                              src={URL.createObjectURL(newImgs[rest[0]])}
+                              alt="spot image"
+                              className="image-uploaded"
+                            />
+                          ) : (
+                            <div className="cs-imgs-one-box">
+                              <i className="fa-solid fa-folder-plus" />
+                            </div>
+                          )}
                           <input
                             type="file"
                             accept="image/*"
@@ -781,7 +794,9 @@ function EditSpot() {
             </div>
 
             <div className="cs-button-container">
-              <button className="cs-button">Create</button>
+              <button className="cs-button" onClick={handleUpdate}>
+                Update
+              </button>
             </div>
           </div>
         </div>
