@@ -106,7 +106,8 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(deleteSpot());
+    console.log("delete spot");
+    dispatch(deleteSpot(spotId));
 
     return response;
   }
@@ -131,6 +132,7 @@ export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
     const new_img = await response.json();
     // console.log("new img int hunk", new_img);
     dispatch(addImg(new_img.new_img, spotId));
+    return new_img;
   }
 };
 
@@ -150,10 +152,14 @@ export default function spotReducer(state = initialState, action) {
     case LOAD_ONE:
       return { ...state, singleSpot: action.spot };
     case DELETE_SPOT:
-      return { ...state, singleSpot: {} };
+      delete newState.ownerSpots[action.spotId];
+      return newState;
 
     case ADD:
+      // if (!newState.singleSpot.images)
+      //   newState.singleSpot.images = [action.image];
       newState.singleSpot.images.push(action.image);
+      return newState;
     default:
       return state;
   }

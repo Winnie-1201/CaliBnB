@@ -20,7 +20,7 @@ function AllSpots() {
                 <div className="mb-12">
                   <img
                     className="one-spot-img"
-                    src={spot.preview_img}
+                    src={spot.images[0].url}
                     alt="spot"
                   />
                 </div>

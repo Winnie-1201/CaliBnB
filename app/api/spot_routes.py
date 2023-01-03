@@ -117,7 +117,7 @@ def create_spot():
         db.session.add(new_spot)
         db.session.commit()
 
-        return new_spot.to_dict_basic()
+        return new_spot.to_dict_details()
 
     if form.errors:
         return form.errors

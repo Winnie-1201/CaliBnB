@@ -120,21 +120,46 @@ function CreateSpot() {
     //   })
     //   .then(() => dispatch(getImgsBySpotThunk(data.id)))
     //   .then(() => history.push(`/spots/${data.id}`));
-
     const newSpot = await dispatch(createSpotThunk(spotData));
 
     if (newSpot) {
-      // console.log("new spot in comp", newSpot);
-      addImageThunk(newSpot.id, preview_img, true);
-
-      img_coll.forEach((img) =>
-        dispatch(addImageThunk(newSpot.id, img, false))
-      );
-
-      dispatch(getImgsBySpotThunk(newSpot.id)).then(() =>
-        history.push(`/spots/${newSpot.id}`)
-      );
+      dispatch(addImageThunk(newSpot.id, preview_img, true))
+        .then(() => {
+          img_coll.forEach((img) =>
+            dispatch(addImageThunk(newSpot.id, img, false))
+          );
+        })
+        .then(() => history.push(`/spots/${newSpot.id}`));
     }
+
+    // await dispatch(createSpotThunk(spotData)).then((data) => {
+    //   dispatch(addImageThunk(data.id, preview_img, true))
+    //   .then(() => {
+    //     img_coll.forEach((img) => dispatch(addImageThunk(data.id, img, false)));
+    //     history.push(`/spots/${data.id}`);
+    //   });
+
+    // console.log("data", data);
+
+    // const newSpot = await dispatch(createSpotThunk(spotData));
+
+    // console.log("new spot in comn", newSpot);
+    // if (newSpot) {
+    //   // console.log("new spot in comp", newSpot);
+    //   console.log("preview image", preview_img);
+    //   const new_prev = await addImageThunk(newSpot.id, preview_img, true);
+
+    //   console.log("newImge", new_prev);
+    //   if (new_prev) {
+    //     img_coll.forEach((img) =>
+    //       dispatch(addImageThunk(newSpot.id, img, false))
+    //     );
+
+    //     dispatch(getImgsBySpotThunk(newSpot.id)).then(() =>
+    //       history.push(`/spots/${newSpot.id}`)
+    //     );
+    //   }
+    // }
     //   dispatch(addImageThunk(newSpot.id, preview_img, true));
 
     //   img_coll.forEach((img) =>
@@ -167,6 +192,8 @@ function CreateSpot() {
     Number(price) +
     Math.round(price * service_fee) +
     Math.round(price * clean_fee);
+
+  // console.log("preview image outside", preview_img);
 
   return (
     <>
@@ -484,6 +511,7 @@ function CreateSpot() {
                     <input
                       type="number"
                       className="p-10"
+                      min="1"
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
                     />
@@ -496,6 +524,7 @@ function CreateSpot() {
                     <input
                       type="number"
                       className="p-10"
+                      min="1"
                       value={beds}
                       onChange={(e) => setBeds(e.target.value)}
                     />
@@ -508,6 +537,7 @@ function CreateSpot() {
                     <input
                       type="number"
                       className="p-10"
+                      min="1"
                       value={bedroom}
                       onChange={(e) => setBedroom(e.target.value)}
                     />
