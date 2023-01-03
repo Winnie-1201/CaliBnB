@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
-import CreateSpot from "../../CreateSpot";
-import NextStepForm from "../../CreateSpot/NextStepModal";
+import CreateSpot from "../../Calibnb/CreateSpot";
+
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";

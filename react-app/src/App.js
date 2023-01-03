@@ -5,11 +5,10 @@ import { authenticate } from "./store/session";
 import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
 import SpotDetalsPage from "./components/SpotDetailsPage";
-import CalendarForm from "./components/SpotDetailsPage/PartTwo/Calendar";
-import CreateSpot from "./components/CreateSpot";
+import CreateSpot from "./components/Calibnb/CreateSpot";
 import Account from "./components/Account";
 import Calibnb from "./components/Calibnb";
-import EditSpot from "./components/Calibnb/SpotCard/EditSpot";
+import EditSpot from "./components/Calibnb/EditSpot";
 
 function App() {
   const [loaded, setLoaded] = useState(false);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { changeImgThunk, getImgsBySpotThunk } from "../../../../store/images";
-import { addImageThunk, editSpotThunk } from "../../../../store/spots";
-import Header from "../../../Homepage/Header";
+import { changeImgThunk, getImgsBySpotThunk } from "../../../store/images";
+import { addImageThunk, editSpotThunk } from "../../../store/spots";
+import Header from "../../Homepage/Header";
 import "./index.css";
 
 function EditSpot() {
@@ -186,9 +186,12 @@ function EditSpot() {
   //   console.log("spot", spot, spot.images);
   //   console.log("imges", images, preview_img);
 
-  const boxes = Array(8)
-    .fill(null)
-    .map((_, i) => i + parseInt(Object.keys(images)[0]) + 1);
+  let boxes;
+  if (loaded) {
+    boxes = Array(8)
+      .fill(null)
+      .map((_, i) => i + parseInt(Object.keys(images)[0]) + 1);
+  }
 
   //   const rest = Array(
   //     8 - Object.values(imgs).length - Object.values(newImgs).length + 1

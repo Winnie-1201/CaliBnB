@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getImgsBySpotThunk } from "../../store/images";
-import { addImageThunk, createSpotThunk } from "../../store/spots";
-import Header from "../Homepage/Header";
+import { getImgsBySpotThunk } from "../../../store/images";
+import { addImageThunk, createSpotThunk } from "../../../store/spots";
+import Header from "../../Homepage/Header";
 import "./index.css";
 
 function CreateSpot() {
