@@ -59,12 +59,13 @@
 
 .logo-text {
   color: #ff385c;
-  font-weight: 600;
+  font-weight: bolder;
+  font-size: 18px;
 }
 
 .wh-30-32 {
-  width: 30px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
 }
 
 .header-mid {
@@ -254,11 +255,11 @@
 
 .top {
   border-bottom: 1px solid #dddddd;
+  padding-bottom: 10px;
 }
 
-.top,
 .bottom {
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 .top-text {

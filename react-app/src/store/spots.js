@@ -68,6 +68,7 @@ export const getOwnerSpotsThunk = (ownerId) => async (dispatch) => {
 };
 
 export const createSpotThunk = (spot) => async (dispatch) => {
+  console.log("spot in thunk create before", spot);
   const response = await fetch(`/api/spots`, {
     method: "POST",
     headers: {
@@ -79,6 +80,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
   if (response.ok) {
     const spot = await response.json();
     dispatch(loadOne(spot));
+    console.log("spot in thunk createspot", spot);
     return spot;
   }
 };
@@ -94,6 +96,7 @@ export const editSpotThunk = (spot) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
+    console.log("update spot thunk", spot);
     dispatch(loadOne(spot));
 
     return spot;
@@ -151,7 +154,6 @@ export default function spotReducer(state = initialState, action) {
       return { ...state, singleSpot: action.spot };
     case DELETE_SPOT:
       return { ...state, singleSpot: {} };
-
     case ADD:
       newState.singleSpot.images.push(action.image);
     default:

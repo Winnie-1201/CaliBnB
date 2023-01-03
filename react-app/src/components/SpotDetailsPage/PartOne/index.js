@@ -2,9 +2,10 @@ import React from "react";
 
 import "./index.css";
 
-function PartOne({ spot }) {
+function PartOne({ spot, imgs }) {
+  // console.log("images", images);
   const reviews = spot.reviews;
-  const images = spot.images;
+  const images = Object.values(imgs);
   const avgs = spot.averages;
 
   return (

@@ -21,7 +21,7 @@ def all_spots():
         # print('all spots', spots[0].images[0].to_dict()['url'])
         # print("-------")
         # print('one spot', spots[0].to_dict_basic())
-        return {"spots": [spot.to_dict_basic() for spot in spots]}
+        return {"spots": [spot.to_dict_details() for spot in spots]}
     else:
         # test if it works
         spots = Spot.query.all()
@@ -33,7 +33,7 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'spots': [spot.to_dict() for spot in spots]}
+        return {'spots': [spot.to_dict_details() for spot in spots]}
 
 
 @spot_routes.route('/owner/<int:ownerId>')
@@ -117,7 +117,7 @@ def create_spot():
         db.session.add(new_spot)
         db.session.commit()
 
-        return new_spot.to_dict()
+        return new_spot.to_dict_basic()
 
     if form.errors:
         return form.errors
@@ -131,50 +131,61 @@ def add_images(spotId):
         return {'errors': 'image required'}, 400
 
     image = request.files['image']
-    # print('----------')
-    # print('----------')
-    # print("going in bakcend creating image", image)
-    # print("going in bakcend creating image", image.filename)
-    # print('----------')
-    # print('----------')
+    print('----------')
+    print('----------')
+    print("going in bakcend creating image", image)
+    print("going in bakcend creating image", image.filename)
+    print('----------')
+    print('----------')
     # print('----------')
 
     if not allowed_file(image.filename):
-        # print("------in line 141")
+        print("------in line 141")
         return {'errors': 'file type is not permitted'}, 400
 
-    # print("------in line 144")
+    print("------in line 144")
     image.filename = get_unique_filename(image.filename)
-    # print("files name", image.filename)
+    print("files name", image.filename)
 
     upload = upload_file_to_s3(image)
-    # print("------in line 149", upload)
+    print("------in line 149", upload)
     if 'url' not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
-        # print("------in line 154")
+        print("------in line 154")
         return upload, 400
 
-    # print("------in line 157", upload)
+    print("------in line 157", upload)
     url = upload['url']
     preview = request.form['preview'] == 'true'
 
-    # print("url------", url)
-    # print('preview------', preview)
+    print("url------", url)
+    print('preview------', preview)
 
     new_img = Image(url=url, preview=preview, spotId=spotId)
 
-    # print("-------------")
-    # print("-------------new img", new_img)
-    # print("-------------")
+    print("-------------")
+    print("-------------new img", new_img)
+    print("-------------")
 
-    # spot.images.append(new_img)
+    spot.images.append(new_img)
     
     db.session.add(new_img)
     db.session.commit()
 
     return {"new_img": new_img.to_dict()}
+
+@spot_routes.route('/<int:spotId>/images')
+def spot_images(spotId):
+    images = Image.query.filter_by(spotId=spotId).all()
+    print('-----')
+    print('-----')
+    print('----- images in backend', images)
+    print('-----')
+    print('-----')
+
+    return {'images': [i.to_dict() for i in images]}
     
 @spot_routes.route('/<int:id>', methods=["PUT"])
 @login_required

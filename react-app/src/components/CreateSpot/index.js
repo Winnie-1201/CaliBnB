@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Modal } from "../../context/Modal";
+import { getImgsBySpotThunk } from "../../store/images";
 import { addImageThunk, createSpotThunk } from "../../store/spots";
 import Header from "../Homepage/Header";
 import "./index.css";
 
-function CreateSpot({ next, setNext, data }) {
+function CreateSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const [nextStep, setNextStep] = useState(false);
-  // const [nextStepModal, setNextStepModal] = useState(false);
   const [errors, setErrors] = useState({});
   const [submit, setSubmit] = useState(false);
 
@@ -31,11 +29,7 @@ function CreateSpot({ next, setNext, data }) {
   const [price, setPrice] = useState();
   const [preview_img, setPreviewImg] = useState("");
 
-  // const [images, setImages] = useState({});
-  const [images, setImages] = useState([]);
-
-  // const [image, setImage] = useState(null);
-  // const [imgaeLoading, setImageLoading] = useState(false);
+  const [images, setImages] = useState({});
 
   useEffect(() => {
     const newErrors = {};
@@ -98,22 +92,10 @@ function CreateSpot({ next, setNext, data }) {
     images,
   ]);
 
-  // const handleNextStep = (e) => {
-  //   e.preventDefault();
-  //   // setNextStep(true);
-
-  //   if (Object.values(errors).length === 0) {
-  //     //   setNextStepModal(true);
-  //     //   setCreateSpotModal(false);
-  //     setNext(true);
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setSubmit(true);
-    // setErrors([]);
     const spotData = {
       address,
       city,
@@ -131,39 +113,40 @@ function CreateSpot({ next, setNext, data }) {
       service_fee,
     };
 
-    console.log("preview img", preview_img);
+    // await dispatch(createSpotThunk(spotData))
+    //   .then((data) => addImageThunk(data.id, preview_img, true))
+    //   .then(() => {
+    //     img_coll.forEach((img) => dispatch(addImageThunk(data.id, img, false)));
+    //   })
+    //   .then(() => dispatch(getImgsBySpotThunk(data.id)))
+    //   .then(() => history.push(`/spots/${data.id}`));
+
     const newSpot = await dispatch(createSpotThunk(spotData));
 
-    console.log("new spot", newSpot);
-
-    console.log("image collection", img_coll);
-
     if (newSpot) {
-      dispatch(addImageThunk(newSpot.id, preview_img, true));
+      console.log("new spot in comp", newSpot);
+      addImageThunk(newSpot.id, preview_img, true);
 
       img_coll.forEach((img) =>
         dispatch(addImageThunk(newSpot.id, img, false))
       );
 
-      history.push(`/spots/${newSpot.id}`);
+      dispatch(getImgsBySpotThunk(newSpot.id)).then(() =>
+        history.push(`/spots/${newSpot.id}`)
+      );
     }
+    //   dispatch(addImageThunk(newSpot.id, preview_img, true));
 
-    // if (newSpot) {
-    //   // console.log("i am here");
+    //   img_coll.forEach((img) =>
+    //     dispatch(addImageThunk(newSpot.id, img, false))
+    //   );
+
     //   history.push(`/spots/${newSpot.id}`);
     // }
-
-    // const formData = new FormData();
-    // formData.append("image", image);
-
-    // aws uploads can be a bit slow-displaying
-    // some sort of loadin gmessage is a good idea
-    // setImageLoading(true);
   };
 
   const updateImage = (e) => {
     const file = e.target.files[0];
-    // console.log("file", file);
     setPreviewImg(file);
 
     const image = document.getElementById("preview-img");
@@ -172,27 +155,18 @@ function CreateSpot({ next, setNext, data }) {
 
   const updateImages = (e, id) => {
     const file = e.target.files[0];
-    // const image = images[id];
-    // console.log("id", id);
-    // console.log("image", image);
-    // setImages([...images, file]);
 
     const obj = {};
     obj[id] = file;
     setImages({ ...images, ...obj });
-    // console.log("images", images);
   };
 
   const img_coll = Object.values(images);
 
-  // console.log("errors", errors);
-  // console.log("price", price, service_fee, clean_fee);
   const total =
     Number(price) +
     Math.round(price * service_fee) +
     Math.round(price * clean_fee);
-
-  // console.log("repveiw ", preview_img);
 
   return (
     <>
@@ -232,19 +206,6 @@ function CreateSpot({ next, setNext, data }) {
               <div className="cs-other-imgs flex">
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {/* {console.log(
-                      "images length in jsx",
-                      `images-${images.length}`
-                    )} */}
-
-                    {/* {Object.values(images) > 0 ? (
-                      <img
-                        // id="images-1"
-                        src={URL.createObjectURL(Object.values(images)[0])}
-                        alt="spot image"
-                        className="image-uploaded"
-                      />
-                    ) : ( */}
                     {img_coll.length > 0 ? (
                       <img
                         // id="images-1"
@@ -491,7 +452,7 @@ function CreateSpot({ next, setNext, data }) {
                       <option value="" disable="true">
                         Please select the state
                       </option>
-                      <option>CA</option>
+                      <option>California</option>
                     </select>
                     {submit && errors.noState && (
                       <div className="error-cs">* {errors.noState}</div>
@@ -576,9 +537,9 @@ function CreateSpot({ next, setNext, data }) {
                       <option value="" disable="true">
                         Please select one tag
                       </option>
-                      <option>Camping</option>
-                      <option>Cabins</option>
-                      <option>Amazing views</option>
+                      <option>camping</option>
+                      <option>cabins</option>
+                      <option>amazing views</option>
                     </select>
                     {submit && errors.noTags && (
                       <div className="error-cs">* {errors.noTags}</div>

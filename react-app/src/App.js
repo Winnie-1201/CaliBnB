@@ -7,6 +7,9 @@ import Homepage from "./components/Homepage";
 import SpotDetalsPage from "./components/SpotDetailsPage";
 import CalendarForm from "./components/SpotDetailsPage/PartTwo/Calendar";
 import CreateSpot from "./components/CreateSpot";
+import Account from "./components/Account";
+import Calibnb from "./components/Calibnb";
+import EditSpot from "./components/Calibnb/SpotCard/EditSpot";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +30,15 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/spots/:spotId/edit" exact={true}>
+          <EditSpot />
+        </Route>
+        <Route path="/users/calibnb" exact={true}>
+          <Calibnb />
+        </Route>
+        <Route path="/users/profile" exact={true}>
+          <Account />
+        </Route>
         <Route path="/spots/current/new" exact={true}>
           <CreateSpot />
         </Route>

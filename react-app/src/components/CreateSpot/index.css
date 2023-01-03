@@ -228,6 +228,7 @@
 .image-uploaded {
   width: 95%;
   height: 95%;
+  max-height: 110px;
   border-radius: 4px;
   margin-bottom: 10px;
 }

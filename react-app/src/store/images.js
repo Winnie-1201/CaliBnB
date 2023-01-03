@@ -1,47 +1,82 @@
-// // const GET_ALL = "images/getAllImages";
-// // const GET_ONE = "images/getOneImage"
-// const CHANGE = "images/changeImage";
+const GET_ALL = "images/getAllImages";
+// const GET_ONE = "images/getOneImage"
+const CHANGE = "images/changeImage";
 // const ADD = "images/addImage";
-// const DELETE = "images/deleteImage";
+const DELETE = "images/deleteImage";
 
-// // const getAll = images => ({
-// //     type: GET_ALL,
-// //     images
-// // })
+const getAll = (images, spotId) => ({
+  type: GET_ALL,
+  images,
+  spotId,
+});
 
 // // const getOne = image => ({
 // //     type: GET_ONE,
 // //     image
 // // })
 
-// const changeImg = (image) => ({
-//   type: CHANGE,
-//   image,
-// });
+const changeImg = (image) => ({
+  type: CHANGE,
+  image,
+});
 
 // const addImg = (image) => ({
 //   type: ADD,
 //   image,
 // });
 
-// const deleteImg = (imageId) => ({
-//   type: DELETE,
-//   imageId,
-// });
+const deleteImg = (imageId) => ({
+  type: DELETE,
+  imageId,
+});
 
-// // export const getOneImage
-// // const addImageThunk = (spotId, image, preview) = async dispatch => {
-// //   const formData = new FormData()
-// //   formData.append('image', image)
-// //   formData.append('preview', preview)
+export const getImgsBySpotThunk = (spotId) => async (dispatch) => {
+  const response = await fetch(`/api/spots/${spotId}/images`);
 
-// //   const response = await fetch(`/api/spots/${spotId}/images`, {
-// //     method: 'POST',
-// //     body: formData
-// //   })
+  if (response.ok) {
+    const images = await response.json();
+    console.log("images in thunk", images);
+    dispatch(getAll(images.images, spotId));
+  }
+};
 
-// //   if (response.ok) {
-// //     const new_img = await response.json()
-// //     dispatch(addImg(new_img.new_img))
-// //   }
-// // }
+export const changeImgThunk = (imgId, imgFile, preview) => async (dispatch) => {
+  const formData = new FormData();
+  formData.append("image", imgFile);
+  formData.append("preview", preview);
+
+  const response = fetch(`/api/images/${imgId}`, {
+    method: "PUT",
+    body: formData,
+  });
+
+  if (response.ok) {
+    const img = await (await response).json();
+    dispatch(changeImg(img));
+  }
+};
+
+const initialState = { allImages: {} };
+
+export default function imageReducer(state = initialState, action) {
+  let newState;
+  switch (action.type) {
+    case GET_ALL:
+      newState = { ...state };
+      const spotImgs = {};
+      action.images.forEach((img) => {
+        // const newImg = {};
+        // newImg[img.id] = img;
+        spotImgs[img.id] = img;
+        // newState.allImages[action.spotId] = newImg;
+      });
+      newState.allImages[action.spotId] = spotImgs;
+      return newState;
+    case CHANGE:
+      newState = { ...state };
+      newState.allImages[action.image.id] = action.image;
+      return newState;
+    default:
+      return state;
+  }
+}
