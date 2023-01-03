@@ -13,7 +13,7 @@ function EditSpot() {
   const history = useHistory();
 
   const spot = useSelector((state) => state.spots.allSpots)[spotId];
-  const imgs = useSelector((state) => state.images.allImages);
+  const imgs = useSelector((state) => state.images.allImages[spotId]);
 
   const [errors, setErrors] = useState({});
   const [submit, setSubmit] = useState(false);
@@ -185,17 +185,18 @@ function EditSpot() {
 
   //   console.log("spot", spot, spot.images);
   //   console.log("imges", images, preview_img);
+
   const boxes = Array(8)
     .fill(null)
-    .map((_, i) => i + parseInt(Object.keys(imgs)[0]) + 1);
+    .map((_, i) => i + imgs[0] + 1);
 
-  const rest = Array(
-    8 - Object.values(imgs).length - Object.values(newImgs).length + 1
-  )
-    .fill(null)
-    .map(
-      (_, i) => i + Object.values(imgs).length + Object.values(newImgs).length
-    );
+  //   const rest = Array(
+  //     8 - Object.values(imgs).length - Object.values(newImgs).length + 1
+  //   )
+  //     .fill(null)
+  //     .map(
+  //       (_, i) => i + Object.values(imgs).length + Object.values(newImgs).length
+  //     );
 
   console.log("boxes", boxes);
   console.log("images,", images);
@@ -203,7 +204,7 @@ function EditSpot() {
   console.log("new images", newImgs);
   //   console.log("tags and type", tags, type);
   console.log("imgs change or not", imgs);
-  console.log("rest of box", rest);
+  //   console.log("rest of box", rest);
 
   return (
     loaded && (
@@ -243,28 +244,8 @@ function EditSpot() {
                 </div>
                 {/* <div className="cs-other-imgs flex"> */}
                 <div className="cs-imgs-grid">
-                  {/* {Object.values(images)
-                  .slice(1)
-                  .map((img) => (
-                    <div className="cs-grid-one flex-column" key={img.id}>
-                      <img
-                        // id="images-1"
-                        id={`img-uploaded-${img.id}`}
-                        src={img.url}
-                        alt="spot image"
-                        className="image-uploaded"
-                      />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="cs-imgs-one-input"
-                        onChange={(e) => updateImages(e, img.id)}
-                      />
-                    </div>
-                  ))} */}
                   {boxes.map((box) => (
                     <div className="cs-grid-one flex-column" key={`a${box}`}>
-                      {/* {console.log("images[box]", images[box])} */}
                       {images[box] ? (
                         <>
                           <img
@@ -287,109 +268,24 @@ function EditSpot() {
                         </>
                       ) : (
                         <>
-                          {/* {Object.values(newImgs).length === 1 && (
-                            <>
-                              <img
-                                src={URL.createObjectURL(
-                                  Object.values(newImgs)[0]
-                                )}
-                                alt="spot image"
-                                className="image-uploaded"
-                              />
-                              <input
-                                type="file"
-                                accept="image/*"
-                                className="cs-imgs-one-input"
-                                onChange={(e) =>
-                                  updateImages(e, imgs.length + 1)
-                                }
-                              />
-                            </>
-                          )} */}
-                          {console.log(
-                            "newImgs[rest[0] + 1]",
-                            newImgs[rest[0]],
-                            rest[0]
-                          )}
-                          {newImgs[rest[0]] ? (
-                            <img
-                              src={URL.createObjectURL(newImgs[rest[0]])}
-                              alt="spot image"
-                              className="image-uploaded"
-                            />
-                          ) : (
-                            <div className="cs-imgs-one-box">
-                              <i className="fa-solid fa-folder-plus" />
-                            </div>
-                          )}
+                          <div className="cs-imgs-one-box">
+                            <i className="fa-solid fa-folder-plus" />
+                          </div>
                           <input
                             type="file"
                             accept="image/*"
                             className="cs-imgs-one-input"
-                            onChange={(e) => updateImages(e, rest[0] + 1)}
+                            onChange={(e) => updateImages(e, box)}
                           />
-
-                          {/* {Object.values(newImgs).map((img) => (
-                            <>
-                              <img
-                                src={URL.createObjectURL(img)}
-                                alt="spot image"
-                                className="image-uploaded"
-                              />
-                              <input
-                                type="file"
-                                accept="image/*"
-                                className="cs-imgs-one-input"
-                                onChange={(e) =>
-                                  updateImages(e, imgs.length + newImgs.length)
-                                }
-                              />
-                            </>
-                          ))} */}
-                          {/* {Object.values(newImgs).length === 1 ? (
-                            <img
-                              src={URL.createObjectURL(
-                                Object.values(newImgs)[0
-                                ]
-                              )}
-                              alt="spot image"
-                              className="image-uploaded"
-                            />
-                          ) : ( */}
-                          {/* {rest.map((r) => (
-                            <>
-                              {console.log("r in the rest loop", r)}
-                              <div className="cs-imgs-one-box">
-                                <i className="fa-solid fa-folder-plus" />
-                              </div>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                className="cs-imgs-one-input"
-                                onChange={(e) => updateImages(e, r)}
-                              />
-                            </>
-                          ))} */}
-                          {/* )} */}
                         </>
                       )}
-                      {/* <input
-                        type="file"
-                        accept="image/*"
-                        className="cs-imgs-one-input"
-                        onChange={(e) =>
-                          updateImages(e, Object.values(images)[box + 1].id)
-                        }
-                      /> */}
                     </div>
                   ))}
-                  {/* <div className="cs-imgs-block flex-column s-b">
-                  <div className="cs-imgs-one flex-column">
-                    {images.length > 0 ? (
+                  {/* <div className="cs-grid-one flex-column">
+                    {Object.values(newImgs).length > 0 ? (
                       <img
-              
-                        src={images[0].url}
-                        alt="spot image"
+                        src={URL.createObjectURL(Object.values(newImgs)[0])}
+                        alt="new image"
                         className="image-uploaded"
                       />
                     ) : (
@@ -401,15 +297,14 @@ function EditSpot() {
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 1)}
+                      onChange={(e) => updateImages(e, rest[0])}
                     />
                   </div>
-                  <div className="cs-imgs-one flex-column">
-                    {images.length > 5 ? (
+                  <div className="cs-grid-one flex-column">
+                    {Object.values(newImgs).length > 1 ? (
                       <img
-                        // id="images-1"
-                        src={images[4].url}
-                        alt="spot image"
+                        src={URL.createObjectURL(Object.values(newImgs)[1])}
+                        alt="new image"
                         className="image-uploaded"
                       />
                     ) : (
@@ -421,17 +316,14 @@ function EditSpot() {
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 5)}
+                      onChange={(e) => updateImages(e, rest[0])}
                     />
                   </div>
-                </div> */}
-                  {/* <div className="cs-imgs-block flex-column s-b">
-                  <div className="cs-imgs-one flex-column">
-                    {images.length > 1 ? (
+                  <div className="cs-grid-one flex-column">
+                    {Object.values(newImgs).length > 2 ? (
                       <img
-                        // id="images-1"
-                        src={images[1].url}
-                        alt="spot image"
+                        src={URL.createObjectURL(Object.values(newImgs)[2])}
+                        alt="new image"
                         className="image-uploaded"
                       />
                     ) : (
@@ -443,15 +335,14 @@ function EditSpot() {
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 2)}
+                      onChange={(e) => updateImages(e, rest[0])}
                     />
                   </div>
-                  <div className="cs-imgs-one flex-column">
-                    {images.length >= 6 ? (
+                  <div className="cs-grid-one flex-column">
+                    {Object.values(newImgs).length > 3 ? (
                       <img
-                        // id="images-1"
-                        src={images[5].url}
-                        alt="spot image"
+                        src={URL.createObjectURL(Object.values(newImgs)[3])}
+                        alt="new image"
                         className="image-uploaded"
                       />
                     ) : (
@@ -463,94 +354,9 @@ function EditSpot() {
                       type="file"
                       accept="image/*"
                       className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 6)}
+                      onChange={(e) => updateImages(e, rest[0])}
                     />
-                  </div>
-                </div>
-                <div className="cs-imgs-block flex-column s-b">
-                  <div className="cs-imgs-one flex-column">
-                    {images.length >= 3 ? (
-                      <img
-                        // id="images-1"
-                        src={images[2].url}
-                        alt="spot image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 3)}
-                    />
-                  </div>
-                  <div className="cs-imgs-one flex-column">
-                    {images.length >= 7 ? (
-                      <img
-                        // id="images-1"
-                        src={images[6].url}
-                        alt="spot image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 7)}
-                    />
-                  </div>
-                </div>
-                <div className="cs-imgs-block flex-column s-b">
-                  <div className="cs-imgs-one flex-column">
-                    {images.length >= 4 ? (
-                      <img
-                        // id="images-1"
-                        src={images[3].url}
-                        alt="spot image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 4)}
-                    />
-                  </div>
-                  <div className="cs-imgs-one flex-column">
-                    {images.length >= 8 ? (
-                      <img
-                        // id="images-1"
-                        src={images[7].url}
-                        alt="spot image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, 8)}
-                    />
-                  </div>
-                </div> */}
+                  </div> */}
                 </div>
               </div>
             </div>

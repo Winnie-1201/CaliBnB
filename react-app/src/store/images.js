@@ -4,9 +4,10 @@ const CHANGE = "images/changeImage";
 // const ADD = "images/addImage";
 const DELETE = "images/deleteImage";
 
-const getAll = (images) => ({
+const getAll = (images, spotId) => ({
   type: GET_ALL,
   images,
+  spotId,
 });
 
 // // const getOne = image => ({
@@ -34,7 +35,8 @@ export const getImgsBySpotThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const images = await response.json();
-    dispatch(getAll(images.images));
+    console.log("images in thunk", images);
+    dispatch(getAll(images.images, spotId));
   }
 };
 
@@ -57,14 +59,21 @@ export const changeImgThunk = (imgId, imgFile, preview) => async (dispatch) => {
 const initialState = { allImages: {} };
 
 export default function imageReducer(state = initialState, action) {
-  let newState = { ...state };
+  let newState;
   switch (action.type) {
     case GET_ALL:
+      newState = { ...state };
+      const spotImgs = {};
       action.images.forEach((img) => {
-        newState.allImages[img.id] = img;
+        // const newImg = {};
+        // newImg[img.id] = img;
+        spotImgs[img.id] = img;
+        // newState.allImages[action.spotId] = newImg;
       });
+      newState.allImages[action.spotId] = spotImgs;
       return newState;
     case CHANGE:
+      newState = { ...state };
       newState.allImages[action.image.id] = action.image;
       return newState;
     default:

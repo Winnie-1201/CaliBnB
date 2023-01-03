@@ -23,8 +23,10 @@ function SpotDetailsPage() {
   const reviews = useSelector((state) => state.reviews.spotReviews);
   const bookings = useSelector((state) => state.bookings.spotBookings);
   const ownerSpots = useSelector((state) => state.spots.ownerSpots);
-  const images = useSelector((state) => state.images.allImages);
+  const images = useSelector((state) => state.images.allImages[spotId]);
   const owner = spotDetail.owner;
+
+  // console.log("go in n");
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId))
@@ -35,9 +37,10 @@ function SpotDetailsPage() {
       .then(() => dispatch(getSpotBookingsThunk(spotId)))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => setLoaded(true));
-  }, [dispatch, spotId]);
+  }, [dispatch]);
 
   // console.log("all images", images);
+  // console.log("is loaded", isLoaded);
 
   return (
     isLoaded && (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getImgsBySpotThunk } from "../../store/images";
 import { addImageThunk, createSpotThunk } from "../../store/spots";
 import Header from "../Homepage/Header";
 import "./index.css";
@@ -112,17 +113,36 @@ function CreateSpot() {
       service_fee,
     };
 
+    // await dispatch(createSpotThunk(spotData))
+    //   .then((data) => addImageThunk(data.id, preview_img, true))
+    //   .then(() => {
+    //     img_coll.forEach((img) => dispatch(addImageThunk(data.id, img, false)));
+    //   })
+    //   .then(() => dispatch(getImgsBySpotThunk(data.id)))
+    //   .then(() => history.push(`/spots/${data.id}`));
+
     const newSpot = await dispatch(createSpotThunk(spotData));
 
     if (newSpot) {
-      dispatch(addImageThunk(newSpot.id, preview_img, true));
+      console.log("new spot in comp", newSpot);
+      addImageThunk(newSpot.id, preview_img, true);
 
       img_coll.forEach((img) =>
         dispatch(addImageThunk(newSpot.id, img, false))
       );
 
-      history.push(`/spots/${newSpot.id}`);
+      dispatch(getImgsBySpotThunk(newSpot.id)).then(() =>
+        history.push(`/spots/${newSpot.id}`)
+      );
     }
+    //   dispatch(addImageThunk(newSpot.id, preview_img, true));
+
+    //   img_coll.forEach((img) =>
+    //     dispatch(addImageThunk(newSpot.id, img, false))
+    //   );
+
+    //   history.push(`/spots/${newSpot.id}`);
+    // }
   };
 
   const updateImage = (e) => {
@@ -432,7 +452,7 @@ function CreateSpot() {
                       <option value="" disable="true">
                         Please select the state
                       </option>
-                      <option>CA</option>
+                      <option>California</option>
                     </select>
                     {submit && errors.noState && (
                       <div className="error-cs">* {errors.noState}</div>
@@ -517,9 +537,9 @@ function CreateSpot() {
                       <option value="" disable="true">
                         Please select one tag
                       </option>
-                      <option>Camping</option>
-                      <option>Cabins</option>
-                      <option>Amazing views</option>
+                      <option>camping</option>
+                      <option>cabins</option>
+                      <option>amazing views</option>
                     </select>
                     {submit && errors.noTags && (
                       <div className="error-cs">* {errors.noTags}</div>
