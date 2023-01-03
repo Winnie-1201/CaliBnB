@@ -15,6 +15,17 @@ function DropdownLogin() {
 
     history.push("/");
   };
+
+  const handleAccount = (e) => {
+    e.preventDefault();
+    history.push("/users/profile");
+  };
+
+  const handleCalibnb = (e) => {
+    e.preventDefault();
+    history.push("/users/calibnb");
+  };
+
   return (
     <div className="flex-column ptb mt login-dropdown">
       <div className="top flex-column">
@@ -32,13 +43,13 @@ function DropdownLogin() {
         </div>
       </div>
       <div className="mid flex-column">
-        <div className="text-hover flex center">
+        <div className="text-hover flex center" onClick={handleCalibnb}>
           <div className="top-text">Calibnb your home</div>
         </div>
         <div className="text-hover flex center">
           <div className="top-text">Share your experience</div>
         </div>
-        <div className="text-hover flex center">
+        <div className="text-hover flex center" onClick={handleAccount}>
           <div className="top-text">Account</div>
         </div>
       </div>

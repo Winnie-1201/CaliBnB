@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
+import CreateSpot from "../../CreateSpot";
+import NextStepForm from "../../CreateSpot/NextStepModal";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -10,6 +13,12 @@ function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
+  // const [createSpotModal, setCreateSpotModal] = useState(false);
+  // const [next, setNext] = useState(false);
+
+  const data = {};
+
+  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const isLogin = !user || user?.error ? false : true;
@@ -31,12 +40,27 @@ function Header() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleHomepage = (e) => {
+    e.preventDefault();
+    history.push("/");
+  };
+
+  const handleCalibnb = (e) => {
+    e.preventDefault();
+    history.push("/spots/current/new");
+    // setCreateSpotModal(true);
+  };
+
   return (
-    <div className="flex center relative s-b z-1 plr-40">
+    <div className="flex center relative s-b z-1 plr-40 header">
       <div className="header-left">
-        <div className="inline-flex center relative z-1">
-          <div className="logo-container">
-            <div className="logo wh-30-32">logo</div>
+        <div
+          className="inline-flex center relative z-1 redirect"
+          onClick={handleHomepage}
+        >
+          <div className="logo-container flex center">
+            <img className="logo wh-30-32" src="/logo.png" alt="logo png" />
+            <div className="logo-text">calibnb</div>
           </div>
         </div>
       </div>
@@ -64,7 +88,7 @@ function Header() {
         <div className="flex center relative h-80">
           <div className="flex auto">
             {/* change it to a link later */}
-            <div className="p-12 z-1">
+            <div className="p-12 z-1" onClick={handleCalibnb}>
               <div className="flex relative center z-1">Calibnb your home</div>
             </div>
           </div>
@@ -115,7 +139,6 @@ function Header() {
                     </div>
                   </div>
                 </div>
-
                 <div className="bottom flex-column">
                   <div className="text-hover flex center">
                     <div className="top-text">
@@ -140,6 +163,21 @@ function Header() {
                 <SignupForm setSignupModal={setSignupModal} />
               </Modal>
             )}
+            {/* {createSpotModal && (
+              <Modal
+                onClose={() => {
+                  setCreateSpotModal(false);
+                }}
+              >
+                {next ? (
+                  <NextStepForm next={next} setNext={setNext} data={data} />
+                ) : (
+                  <CreateSpot next={next} setNext={setNext} data={data} />
+        
+                )}
+              </Modal>
+            )} */}
+
             {showMenu && isLogin && <DropdownLogin />}
           </div>
         </div>

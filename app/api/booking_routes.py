@@ -14,7 +14,7 @@ def user_bookings():
 
     bookings = Booking.query.filter_by(userId=current_user.id).all()
 
-    return {'Bookings', [booking.to_dict() for booking in bookings]}
+    return {'Bookings': [booking.to_dict() for booking in bookings]}
 
 
 

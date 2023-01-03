@@ -28,6 +28,7 @@ export const getSpotReivewsThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const reviews = await response.json();
+    // console.log("spot review in thunk", reviews.Reviews);
     dispatch(getSpotReviews(reviews.Reviews));
     return reviews;
   }
@@ -103,6 +104,7 @@ export default function reviewReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case SPOT_REV:
+      // console.log("new state in reducer", newState);
       action.reviews.forEach(
         (review) => (newState.spotReviews[review.id] = review)
       );

@@ -33,7 +33,7 @@ class Review(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "content": self.address,
+            "content": self.content,
             "cleanliness": self.cleanliness,
             "check_in": self.check_in,
             "communication": self.communication,
@@ -76,3 +76,14 @@ class Review(db.Model):
             'user': self.user.to_dict(),
             'spot': self.spot.to_dict_basic()
         } 
+
+    def to_dict_rates(self):
+        return {
+            "id": self.id,
+            "cleanliness": self.cleanliness,
+            "check_in": self.check_in,
+            "communication": self.communication,
+            "value": self.value,
+            "location": self.location,
+            "accuracy": self.accuracy,
+        }

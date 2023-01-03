@@ -14,6 +14,7 @@ from .api.review_routes import review_routes
 from .api.booking_routes import booking_routes
 from .api.experience_routes import experience_routes
 from .api.wishlist_routes import wishlist_routes
+from .api.image_routes import image_routes
 
 
 app = Flask(__name__, static_folder="../react-app/build", static_url_path="/")
@@ -37,6 +38,7 @@ app.register_blueprint(review_routes, url_prefix="/api/reviews")
 app.register_blueprint(booking_routes, url_prefix='/api/bookings')
 app.register_blueprint(experience_routes, url_prefix='/api/experiences')
 app.register_blueprint(wishlist_routes, url_prefix='/api/wishlists')
+app.register_blueprint(image_routes, url_prefix='/api/images')
 db.init_app(app)
 Migrate(app, db)
 

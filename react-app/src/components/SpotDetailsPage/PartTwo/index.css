@@ -1,0 +1,370 @@
+.max-width {
+  /* max-width: 1120px; */
+  border-bottom: 1px solid #dddddd;
+}
+
+.block-container {
+  border-bottom: 1px solid #dddddd;
+}
+
+.mr-0-right {
+  width: 33.33%;
+  margin-left: 8.33%;
+  margin-right: 0%;
+}
+
+.ptb-48-24 {
+  padding-top: 38px;
+  padding-bottom: 24px;
+}
+
+.flex-0-1 {
+  flex: 0 1 100%;
+}
+
+.ml-16 {
+  margin-left: 16px;
+}
+
+.mb-8-house {
+  margin-bottom: 8px;
+}
+
+.mb-8-text {
+  font-weight: 500;
+  font-size: 20px;
+  /* font-family: inherit; */
+}
+
+.ol {
+  margin: 0;
+  padding: 0;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.pl-3 {
+  padding-left: 3px;
+}
+
+.wh-56 {
+  width: 56px;
+  height: 56px;
+}
+
+.wh-100-img {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.img-size-host {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  position: static;
+  border-radius: 50%;
+}
+
+.ptb-32 {
+  padding: 32px 0;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.mw-24 {
+  min-width: 24px;
+}
+
+.svg-spotdetail {
+  width: 24px;
+  height: 24px;
+}
+
+.text-16 {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.text-14 {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.bir {
+  margin: 0;
+  padding: 0;
+  color: #ff385c;
+  font-size: 24px;
+}
+
+.cover {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.showmore-button {
+  cursor: pointer;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  border: none;
+  text-decoration: underline;
+  font-size: 14px;
+  color: rgb(34, 34, 34);
+}
+
+.not-sure-yet {
+  border: 1px solid green;
+  /* width: 500px; */
+  height: 200px;
+}
+
+.ptm-48 {
+  padding: 48px 0;
+}
+
+.block-header-h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ava-date {
+  color: #717171;
+  font-weight: 400;
+}
+
+.mlr-0-left {
+  width: 58.33%;
+  margin-left: 0%;
+  margin-right: 0%;
+}
+
+.sticky {
+  position: sticky;
+  top: 80px;
+  display: inline-block;
+}
+
+.pr-1 {
+  padding-right: 1px;
+  width: 100%;
+}
+
+.pb-48 {
+  padding-bottom: 48px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.rare-fine-box {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.pr-16 {
+  padding-right: 16px;
+}
+
+.mt-48 {
+  margin-top: 48px;
+}
+
+.with-shadow {
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 16px rgb(0, 0, 0, 0.12);
+}
+
+.default-style-booking {
+  font-size: 16px;
+}
+
+.other-text {
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.baseline {
+  align-items: baseline;
+}
+
+.bbox-top {
+  flex-flow: row wrap;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+
+.bbox-price {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bbox-night {
+  font-size: 14px;
+  font-weight: 400;
+  padding-left: 4px;
+}
+
+.font-12 {
+  font-size: 12px;
+  text-align: center;
+}
+
+.bbox-star {
+  height: 12px;
+  width: 12px;
+  fill: currentColor;
+  display: block;
+}
+
+.bbox-avg {
+  padding-left: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.bbox-color {
+  color: rgb(113, 113, 113);
+}
+
+.bbox-mid {
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.bbox-calender-button {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-size: 100%;
+}
+
+.bbox-calender-left {
+  position: relative;
+  flex: 1 1 0%;
+  padding: 0;
+  overflow: hidden;
+  border-right: 1px solid rgb(221, 221, 221);
+}
+
+.bbox-calender-right {
+  position: relative;
+  flex: 1 1 0%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bbox-calender-text {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.bbox-calender-date {
+  min-height: 56px;
+  width: 100%;
+  border: none;
+  outline: none;
+  margin: 0px;
+  padding: 26px 12px 10px;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bb {
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.holder {
+  height: 50px;
+  width: 100%;
+  border: 1px solid green;
+}
+
+.bbox-bottom {
+  background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+  cursor: pointer;
+  display: inline-block;
+  margin: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  width: 100%;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  height: 48px;
+}
+
+.price-detail {
+  font-size: 14px;
+  padding-top: 0;
+  color: #222222;
+  font-weight: 400;
+}
+
+.price-block {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.pt-16 {
+  padding-top: 16px;
+}
+
+.border-top {
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+.fw-600 {
+  font-weight: 600;
+}

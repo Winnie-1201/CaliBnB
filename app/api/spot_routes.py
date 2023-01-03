@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Spot, Review, Booking, Experience, Wishlist, Image
 from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm, ImageForm
+from app.aws_upload import upload_file_to_s3, allowed_file, get_unique_filename
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -13,9 +14,14 @@ def all_spots():
     params = request.args # [('name', 'Beach')]
     if len(params) == 0:
         spots = Spot.query.all()
-        # print('all spots', spots)
+        # for s in spots:
+
+        # print("-------")
+        # print('all spots', spots[0].images[0].to_dict())
+        # print('all spots', spots[0].images[0].to_dict()['url'])
+        # print("-------")
         # print('one spot', spots[0].to_dict_basic())
-        return {"spots": [spot.to_dict_basic() for spot in spots]}
+        return {"spots": [spot.to_dict_details() for spot in spots]}
     else:
         # test if it works
         spots = Spot.query.all()
@@ -27,27 +33,29 @@ def all_spots():
             spots = spots.filter(Spot.price <= params.get('max'))
         spots = spots.all()
 
-        return {'spots', [spot.to_dict() for spot in spots]}
+        return {'spots': [spot.to_dict_details() for spot in spots]}
 
 
-@spot_routes.route('/current')
-@login_required
-def user_spots():
+@spot_routes.route('/owner/<int:ownerId>')
+def user_spots(ownerId):
     '''
     Query for all spots of current user and return them in a list of dictionaries
     '''
-    spots = Spot.query.filter_by(userId=current_user.id).all()
+    spots = Spot.query.filter_by(userId=ownerId).all()
 
     return {"spots": [spot.to_dict() for spot in spots]}
 
 
-@spot_routes.route('<int:id>')
+@spot_routes.route("/<int:id>")
 def spot_by_id(id):
     '''
     Query one spot by its id and return it in a disctionary
     '''
     spot = Spot.query.get(id)
-    return {'spot': spot.to_dict_details()}
+
+    print("-------")
+    print("spot", spot)
+    return spot.to_dict_details()
 
 
 @spot_routes.route("", methods=["POST"])
@@ -58,6 +66,12 @@ def create_spot():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit:
+
+        print('-------')
+        print('-------')
+        print("------", form.data)
+        print('-------')
+        print('-------')
         address = form.data["address"]
         city = form.data["city"]
         state = form.data["state"]
@@ -69,7 +83,17 @@ def create_spot():
         bedroom = form.data["bedroom"]
         beds = form.data["beds"]
         bath = form.data["bath"]
-        preview_img = form.data["preview_img"]
+        preview_img = "none"
+        clean_fee = form.data['clean_fee']
+        service_fee = form.data["service_fee"]
+        type = form.data['type']
+
+        # preview_img = request.form['preview_img']
+        # print('preview imges in the form.data', preview_img)
+        # preview_img = get_unique_filename(preview_img.filename)
+        # upload = upload_file_to_s3(preview_img)
+
+        # preview_img = upload['url']
 
         new_spot = Spot(
             address=address,
@@ -84,19 +108,86 @@ def create_spot():
             beds=beds,
             bath=bath,
             preview_img=preview_img,
+            clean_fee=clean_fee,
+            service_fee=service_fee,
+            type=type,
             userId=current_user.id,
         )
 
         db.session.add(new_spot)
         db.session.commit()
 
-        return new_spot.to_dict()
+        return new_spot.to_dict_basic()
 
     if form.errors:
         return form.errors
 
+@spot_routes.route('/<int:spotId>/images', methods=["POST"])
+@login_required
+def add_images(spotId):
+    spot = Spot.query.get(spotId)
+
+    if "image" not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+    print('----------')
+    print('----------')
+    print("going in bakcend creating image", image)
+    print("going in bakcend creating image", image.filename)
+    print('----------')
+    print('----------')
+    # print('----------')
+
+    if not allowed_file(image.filename):
+        print("------in line 141")
+        return {'errors': 'file type is not permitted'}, 400
+
+    print("------in line 144")
+    image.filename = get_unique_filename(image.filename)
+    print("files name", image.filename)
+
+    upload = upload_file_to_s3(image)
+    print("------in line 149", upload)
+    if 'url' not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        print("------in line 154")
+        return upload, 400
+
+    print("------in line 157", upload)
+    url = upload['url']
+    preview = request.form['preview'] == 'true'
+
+    print("url------", url)
+    print('preview------', preview)
+
+    new_img = Image(url=url, preview=preview, spotId=spotId)
+
+    print("-------------")
+    print("-------------new img", new_img)
+    print("-------------")
+
+    spot.images.append(new_img)
     
-@spot_routes.route('<int:id>', methods=["PUT"])
+    db.session.add(new_img)
+    db.session.commit()
+
+    return {"new_img": new_img.to_dict()}
+
+@spot_routes.route('/<int:spotId>/images')
+def spot_images(spotId):
+    images = Image.query.filter_by(spotId=spotId).all()
+    print('-----')
+    print('-----')
+    print('----- images in backend', images)
+    print('-----')
+    print('-----')
+
+    return {'images': [i.to_dict() for i in images]}
+    
+@spot_routes.route('/<int:id>', methods=["PUT"])
 @login_required
 def edit_spot(id):
     form = SpotForm()
@@ -112,7 +203,13 @@ def edit_spot(id):
             if form.data["name"]: spot.name = form.data["name"] 
             if form.data["price"]: spot.price = form.data["price"]
             if form.data["tags"]: spot.tags = form.data["tags"]
-
+            if form.data['guests']: spot.guests = form.data['guests']
+            if form.data['bedroom']: spot.bedroom = form.data['bedroom']
+            if form.data['beds']: spot.beds = form.data['beds']
+            if form.data['bath']: spot.bath = form.data['bath']
+            if form.data['clean_fee']: spot.clean_fee = form.data['clean_fee']
+            if form.data['service_fee']: spot.service_fee = form.data['service_fee']
+            if form.data['type']: spot.type = form.data['type']
 
             db.session.commit()
 
@@ -147,7 +244,13 @@ def spot_reviews(spotId):
     '''
     reviews = Review.query.filter_by(spotId=spotId).all()
 
-    return {'Reviews', [review.to_dict() for review in reviews]}
+    # print("-----")
+    # print("-----")
+    # print("reviews---", reviews)
+    # print("-----")
+    # print("-----")
+
+    return {'Reviews': [review.to_dict() for review in reviews]}
         
 
 @spot_routes.route('<int:spotId>/reviews', methods=["POST"])
@@ -197,7 +300,6 @@ def add_review(spotId):
 
 
 @spot_routes.route('/<int:spotId>/bookings')
-@login_required
 def spot_bookings(spotId):
     '''
     Query for a specific spot's bookings and return them in a list of dictionaries
@@ -205,7 +307,7 @@ def spot_bookings(spotId):
 
     bookings = Booking.query.filter_by(spotId=spotId).all()
 
-    return {'Bookings', [booking.to_dict() for booking in bookings]}
+    return {'Bookings': [booking.to_dict() for booking in bookings]}
 
         
 
@@ -224,7 +326,17 @@ def create_booking(spotId):
         start = form.data['start']
         end = form.data['end']
 
-        new_booking = Booking(start, end, spotId=spotId, userId=current_user.id)
+        # print("------------")
+        # print("------------", form.data)
+        # print("start in backend", start, end)
+
+        new_booking = Booking(start=start, end=end, spotId=spotId, userId=current_user.id)
+        # print("------------")
+        # print("------------")
+        # print("new booking", new_booking)
+        # print("------------")
+        # print("------------")
+
 
         db.session.add(new_booking)
         db.session.commit()
@@ -240,7 +352,7 @@ def spot_experiences(spotId):
     '''
     experiences = Experience.query.filter_by(spotId=spotId)
 
-    return {'Experiences', [e.to_dict() for e in experiences]}
+    return {'Experiences': [e.to_dict() for e in experiences]}
 
 
 @spot_routes.route('/<int:spotId>/experiences', methods=['POST'])
@@ -311,3 +423,5 @@ def add_imgage(spotId):
             if form.validate_on_submit:
                 # not sure yet
                 pass
+
+

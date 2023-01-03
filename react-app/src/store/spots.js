@@ -3,6 +3,8 @@ const LOAD_ONE = "spots/loadOneSpot";
 const LOAD_CURR = "spots/loadCurrUserSpots";
 const DELETE_SPOT = "spots/deleteSpot";
 
+const ADD = "images/addImage";
+
 const loadAll = (spots) => ({
   type: LOAD_ALL,
   spots,
@@ -13,13 +15,19 @@ const loadOne = (spot) => ({
   spot,
 });
 
-const loadCurr = (spots) => ({
+const loadOwner = (spots) => ({
   type: LOAD_CURR,
   spots,
 });
 
 const deleteSpot = (spotId) => ({
   type: DELETE_SPOT,
+  spotId,
+});
+
+const addImg = (image, spotId) => ({
+  type: ADD,
+  image,
   spotId,
 });
 
@@ -41,18 +49,19 @@ export const getOneSpotThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
-    dispatch(loadOne(spot.spot));
+    console.log("spot", spot);
+    dispatch(loadOne(spot));
 
     return spot;
   }
 };
 
-export const getCurrUserSpotsThunk = () => async (dispatch) => {
-  const response = await fetch("/api/spots/current");
+export const getOwnerSpotsThunk = (ownerId) => async (dispatch) => {
+  const response = await fetch(`/api/spots/owner/${ownerId}`);
 
   if (response.ok) {
     const spots = await response.json();
-    dispatch(loadCurr(spots.spots));
+    dispatch(loadOwner(spots.spots));
 
     return spots;
   }
@@ -103,7 +112,29 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
   }
 };
 
-const initialState = { allSpots: {}, singleSpot: {}, currUserSpots: {} };
+export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
+  const formData = new FormData();
+  // console.log("formdata--------", formData);
+  formData.append("image", image);
+  formData.append("preview", preview);
+
+  // console.log("image-----", image);
+  // console.log("formdata--------", formData);
+  //
+  const response = await fetch(`/api/spots/${spotId}/images`, {
+    method: "POST",
+    body: formData,
+  });
+
+  // console.log("response", response);
+  if (response.ok) {
+    const new_img = await response.json();
+    // console.log("new img int hunk", new_img);
+    dispatch(addImg(new_img.new_img, spotId));
+  }
+};
+
+const initialState = { allSpots: {}, singleSpot: {}, ownerSpots: {} };
 
 export default function spotReducer(state = initialState, action) {
   let newState = { ...state };
@@ -113,13 +144,16 @@ export default function spotReducer(state = initialState, action) {
       // return { ...state, allSpots: action.spots };
       return newState;
     case LOAD_CURR:
-      action.spots.forEach((spot) => (newState.currUserSpots[spot.id] = spot));
+      action.spots.forEach((spot) => (newState.ownerSpots[spot.id] = spot));
       return newState;
     // return { ...state, currUserSpots: action.spots };
     case LOAD_ONE:
       return { ...state, singleSpot: action.spot };
     case DELETE_SPOT:
       return { ...state, singleSpot: {} };
+
+    case ADD:
+      newState.singleSpot.images.push(action.image);
     default:
       return state;
   }
