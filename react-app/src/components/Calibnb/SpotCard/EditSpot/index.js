@@ -188,7 +188,7 @@ function EditSpot() {
 
   const boxes = Array(8)
     .fill(null)
-    .map((_, i) => i + imgs[0] + 1);
+    .map((_, i) => i + parseInt(Object.keys(images)[0]) + 1);
 
   //   const rest = Array(
   //     8 - Object.values(imgs).length - Object.values(newImgs).length + 1
