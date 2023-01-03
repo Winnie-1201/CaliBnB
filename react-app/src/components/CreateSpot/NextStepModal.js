@@ -56,11 +56,11 @@ function NextStepForm({ setNextStepModal, data }) {
       clean,
     };
 
-    console.log("new spot", newSpot);
+    // console.log("new spot", newSpot);
 
     dispatch(createSpotThunk(newSpot)).apply.catch(async (res) => {
       const data = await res.json();
-      console.log("data in thunk comp", data);
+      // console.log("data in thunk comp", data);
       if (data && data.errors) setErrors(data.errors);
     });
   };

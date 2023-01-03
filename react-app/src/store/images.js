@@ -35,7 +35,7 @@ export const getImgsBySpotThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const images = await response.json();
-    console.log("images in thunk", images);
+    // console.log("images in thunk", images);
     dispatch(getAll(images.images, spotId));
   }
 };

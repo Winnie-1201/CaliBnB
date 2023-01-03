@@ -124,7 +124,7 @@ function CreateSpot() {
     const newSpot = await dispatch(createSpotThunk(spotData));
 
     if (newSpot) {
-      console.log("new spot in comp", newSpot);
+      // console.log("new spot in comp", newSpot);
       addImageThunk(newSpot.id, preview_img, true);
 
       img_coll.forEach((img) =>

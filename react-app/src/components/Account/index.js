@@ -4,7 +4,7 @@ import Header from "../Homepage/Header";
 import { useSelector } from "react-redux";
 
 function Account() {
-  console.log("goi ");
+  // console.log("g/.oi ");
   const currUser = useSelector((state) => state.session.user);
 
   return (

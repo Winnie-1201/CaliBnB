@@ -30,7 +30,7 @@ function CalendarForm({
   };
 
   const onFocusChange = (focusedInput) => {
-    console.log("focus", focusedInput);
+    // console.log("focus", focusedInput);
     setFocusedInput(focusedInput);
   };
 

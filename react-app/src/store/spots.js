@@ -68,7 +68,6 @@ export const getOwnerSpotsThunk = (ownerId) => async (dispatch) => {
 };
 
 export const createSpotThunk = (spot) => async (dispatch) => {
-  console.log("spot in thunk create before", spot);
   const response = await fetch(`/api/spots`, {
     method: "POST",
     headers: {
@@ -80,7 +79,6 @@ export const createSpotThunk = (spot) => async (dispatch) => {
   if (response.ok) {
     const spot = await response.json();
     dispatch(loadOne(spot));
-    console.log("spot in thunk createspot", spot);
     return spot;
   }
 };
@@ -96,7 +94,6 @@ export const editSpotThunk = (spot) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
-    console.log("update spot thunk", spot);
     dispatch(loadOne(spot));
 
     return spot;
@@ -117,22 +114,22 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 
 export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
   const formData = new FormData();
-  console.log("formdata--------", formData);
+  // console.log("formdata--------", formData);
   formData.append("image", image);
   formData.append("preview", preview);
 
-  console.log("image-----", image);
-  console.log("formdata--------", formData);
-
+  // console.log("image-----", image);
+  // console.log("formdata--------", formData);
+  //
   const response = await fetch(`/api/spots/${spotId}/images`, {
     method: "POST",
     body: formData,
   });
 
-  console.log("response", response);
+  // console.log("response", response);
   if (response.ok) {
     const new_img = await response.json();
-    console.log("new img int hunk", new_img);
+    // console.log("new img int hunk", new_img);
     dispatch(addImg(new_img.new_img, spotId));
   }
 };
@@ -154,6 +151,7 @@ export default function spotReducer(state = initialState, action) {
       return { ...state, singleSpot: action.spot };
     case DELETE_SPOT:
       return { ...state, singleSpot: {} };
+
     case ADD:
       newState.singleSpot.images.push(action.image);
     default:

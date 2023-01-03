@@ -114,7 +114,7 @@ function EditSpot() {
 
   const updateImages = (e, id) => {
     const file = e.target.files[0];
-    console.log("id", id);
+    // console.log("id", id);
 
     if (!images[id]) {
       const obj = {};
@@ -123,7 +123,7 @@ function EditSpot() {
     } else {
       const obj = {};
       obj[id] = file;
-      console.log("images", images, obj);
+      // console.log("images", images, obj);
       setImages({ ...images, ...obj });
 
       if (file) {
@@ -158,18 +158,18 @@ function EditSpot() {
       .then(() => {
         if (Object.values(updateImgs).length > 0) {
           for (let key in updateImgs) {
-            console.log(
-              "key in update image and the preview",
-              key,
-              imgs[key].preview
-            );
+            // console.log(
+            //   "key in update image and the preview",
+            //   key,
+            //   imgs[key].preview
+            // );
             dispatch(changeImgThunk(key, updateImgs[key], imgs[key].preview));
           }
         }
 
         if (Object.values(newImgs).length > 0) {
           for (let key in newImgs) {
-            console.log("key in add image", key);
+            // console.log("key in add image", key);
             dispatch(addImageThunk(spotId, newImgs[key], false));
           }
         }
@@ -198,12 +198,12 @@ function EditSpot() {
   //       (_, i) => i + Object.values(imgs).length + Object.values(newImgs).length
   //     );
 
-  console.log("boxes", boxes);
-  console.log("images,", images);
-  console.log("update images", updateImgs);
-  console.log("new images", newImgs);
+  // console.log("boxes", boxes);
+  // console.log("images,", images);
+  // console.log("update images", updateImgs);
+  // console.log("new images", newImgs);
   //   console.log("tags and type", tags, type);
-  console.log("imgs change or not", imgs);
+  // console.log("imgs change or not", imgs);
   //   console.log("rest of box", rest);
 
   return (
