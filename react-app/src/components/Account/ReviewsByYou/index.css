@@ -1,0 +1,74 @@
+.rp-header-h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.rp-star-svg {
+  display: block;
+  height: 16px;
+  width: 16px;
+  fill: currentColor;
+}
+
+.rp-body {
+  margin-top: 8px;
+}
+
+.rp-block {
+  /* margin: 24px 0 48px 0; */
+  padding: 24px 0;
+  border-radius: 1px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.rp-block-left {
+  margin-right: 16px;
+}
+
+.link-to-sd {
+  cursor: pointer;
+  /* border: 1px solid black; */
+  background: transparent;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.rp-owner-icon {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.rp-block-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+/* .rp-owner-info {
+  font-size: 16px;
+  line-height: 20px;
+} */
+.rp-owner-name {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.rp-date {
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 300;
+  color: #717171;
+}
+
+.rp-content {
+  font-size: 14px;
+  line-height: 20px;
+  /* max-height: 60px;
+  text-overflow: ellipsis; */
+}

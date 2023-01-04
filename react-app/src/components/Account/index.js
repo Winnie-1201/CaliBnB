@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import Header from "../Homepage/Header";
 import { useSelector } from "react-redux";
+import ReviewsByYou from "./ReviewsByYou";
 
 function Account() {
   // console.log("g/.oi ");
   const currUser = useSelector((state) => state.session.user);
+
+  const [openLeft, setOpenLeft] = useState(true);
+  const [openRight, setOpenRight] = useState(false);
 
   return (
     <>
@@ -57,7 +61,7 @@ function Account() {
                     </div>
                   </div>
                   <section>
-                    <div className="review-box">review placeholder</div>
+                    <ReviewsByYou />
                   </section>
                 </section>
               </div>

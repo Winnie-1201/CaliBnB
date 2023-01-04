@@ -173,8 +173,9 @@ function EditSpot() {
             dispatch(addImageThunk(spotId, newImgs[key], false));
           }
         }
+        console.log("edit spot----------------");
       })
-      .then(() => dispatch(getImgsBySpotThunk(spotId)))
+      // .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => history.push(`/spots/${spotId}`));
   };
 

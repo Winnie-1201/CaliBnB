@@ -120,46 +120,10 @@ function CreateSpot() {
           img_coll.forEach(
             async (img) => await dispatch(addImageThunk(newSpot.id, img, false))
           );
+          console.log("i am here");
         })
         .then(() => history.push(`/spots/${newSpot.id}`));
     }
-
-    // await dispatch(createSpotThunk(spotData)).then((data) => {
-    //   dispatch(addImageThunk(data.id, preview_img, true))
-    //   .then(() => {
-    //     img_coll.forEach((img) => dispatch(addImageThunk(data.id, img, false)));
-    //     history.push(`/spots/${data.id}`);
-    //   });
-
-    // console.log("data", data);
-
-    // const newSpot = await dispatch(createSpotThunk(spotData));
-
-    // console.log("new spot in comn", newSpot);
-    // if (newSpot) {
-    //   // console.log("new spot in comp", newSpot);
-    //   console.log("preview image", preview_img);
-    //   const new_prev = await addImageThunk(newSpot.id, preview_img, true);
-
-    //   console.log("newImge", new_prev);
-    //   if (new_prev) {
-    //     img_coll.forEach((img) =>
-    //       dispatch(addImageThunk(newSpot.id, img, false))
-    //     );
-
-    //     dispatch(getImgsBySpotThunk(newSpot.id)).then(() =>
-    //       history.push(`/spots/${newSpot.id}`)
-    //     );
-    //   }
-    // }
-    //   dispatch(addImageThunk(newSpot.id, preview_img, true));
-
-    //   img_coll.forEach((img) =>
-    //     dispatch(addImageThunk(newSpot.id, img, false))
-    //   );
-
-    //   history.push(`/spots/${newSpot.id}`);
-    // }
   };
 
   const updateImage = (e) => {
@@ -178,7 +142,7 @@ function CreateSpot() {
     setImages({ ...images, ...obj });
   };
 
-  const img_coll = Object.values(images);
+  let img_coll = Object.values(images);
 
   const total =
     Number(price) +
