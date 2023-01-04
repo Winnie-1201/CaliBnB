@@ -30,7 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/test/trips" exact={true}>
+        <Route path="/users/trips" exact={true}>
           <TripsPage />
         </Route>
         <Route path="/spots/:spotId/edit" exact={true}>
