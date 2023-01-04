@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -15,7 +15,11 @@ function SpotCard({ spots }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const userSpots = Object.values(spots);
+  // const userSpots = Object.values(spots);
+
+  const userSpots = Object.values(
+    useSelector((state) => state.spots.ownerSpots)
+  );
   const currUser = useSelector((state) => state.session.user);
 
   // useEffect(() => {
@@ -24,18 +28,19 @@ function SpotCard({ spots }) {
 
   const handleEdit = (e, spotId) => {
     e.preventDefault();
+    console.log("go in the edit page");
     dispatch(getOneSpotThunk(spotId))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => history.push(`/spots/${spotId}/edit`));
   };
 
-  const handleDelete = (e, spotId) => {
-    e.preventDefault();
-    dispatch(deleteSpotThunk(spotId)).then(() =>
-      // history.push("/users/calibnb")
-      dispatch(getOwnerSpotsThunk(currUser.id))
-    );
-  };
+  // const handleDelete = (e, spotId) => {
+  //   e.preventDefault();
+  //   dispatch(deleteSpotThunk(spotId));
+  // };
+  // if (!userSpots) return null;
+
+  console.log("userSpot in comp", userSpots);
 
   return (
     <>
@@ -45,7 +50,7 @@ function SpotCard({ spots }) {
             <div className="sc-img-container">
               <img
                 className="cs-img"
-                src={spot.images[0].url}
+                src={spot.images[0]?.url}
                 alt="spot image"
               />
             </div>
@@ -62,7 +67,11 @@ function SpotCard({ spots }) {
             </div>
             <div
               className="sc-del mtb-16-24"
-              onClick={(e) => handleDelete(e, spot.id)}
+              onClick={async () => {
+                await dispatch(deleteSpotThunk(spot.id)).then(() =>
+                  dispatch(getOwnerSpotsThunk(currUser.id))
+                );
+              }}
             >
               <button className="sc-del-bt">Delete</button>
             </div>

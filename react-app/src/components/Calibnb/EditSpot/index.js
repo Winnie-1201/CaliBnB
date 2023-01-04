@@ -12,7 +12,7 @@ function EditSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const spot = useSelector((state) => state.spots.allSpots)[spotId];
+  const spot = useSelector((state) => state.spots.singleSpot);
   const imgs = useSelector((state) => state.images.allImages[spotId]);
 
   const [errors, setErrors] = useState({});

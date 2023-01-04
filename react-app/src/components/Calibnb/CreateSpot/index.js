@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getImgsBySpotThunk } from "../../../store/images";
 import { addImageThunk, createSpotThunk } from "../../../store/spots";
 import Header from "../../Homepage/Header";
 import "./index.css";
@@ -113,13 +112,6 @@ function CreateSpot() {
       service_fee,
     };
 
-    // await dispatch(createSpotThunk(spotData))
-    //   .then((data) => addImageThunk(data.id, preview_img, true))
-    //   .then(() => {
-    //     img_coll.forEach((img) => dispatch(addImageThunk(data.id, img, false)));
-    //   })
-    //   .then(() => dispatch(getImgsBySpotThunk(data.id)))
-    //   .then(() => history.push(`/spots/${data.id}`));
     const newSpot = await dispatch(createSpotThunk(spotData));
 
     if (newSpot) {
