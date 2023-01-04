@@ -116,9 +116,9 @@ function CreateSpot() {
 
     if (newSpot) {
       dispatch(addImageThunk(newSpot.id, preview_img, true))
-        .then(() => {
-          img_coll.forEach((img) =>
-            dispatch(addImageThunk(newSpot.id, img, false))
+        .then(async () => {
+          await img_coll.forEach(
+            async (img) => await dispatch(addImageThunk(newSpot.id, img, false))
           );
         })
         .then(() => history.push(`/spots/${newSpot.id}`));
