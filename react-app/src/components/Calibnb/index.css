@@ -33,7 +33,7 @@
 
 .spot-card {
   padding: 20px;
-  border: 1px solid pink;
+  /* border: 1px solid pink; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   row-gap: 20px;

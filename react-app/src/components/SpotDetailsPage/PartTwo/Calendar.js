@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-// import Calendar from "react-calendar";
+import React, { useEffect, useState } from "react";
 import "react-dates/initialize";
 import { DayPickerRangeController, isInclusivelyAfterDay } from "react-dates";
-
-import moment from "moment";
-// import "react-dates/lib/css/_datepicker.css";
-
-// import "./Calendar.css";
+import Moment from "moment";
+import { extendMoment } from "moment-range";
 import "./DatePicker.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getSpotBookingsThunk } from "../../../store/bookings";
 
 function CalendarForm({
   start,
@@ -17,25 +15,52 @@ function CalendarForm({
   setStartSelected,
   setEndSelected,
 }) {
-  //   const [startDate, setStartDate] = useState(moment());
-  //   const [endDate, setEndDate] = useState();
+  const dispatch = useDispatch();
+  const moment = extendMoment(Moment);
+
+  const spot = useSelector((state) => state.spots.singleSpot);
+  const bookings = useSelector((state) => state.bookings.spotBookings);
+
   const [focusedInput, setFocusedInput] = useState("startDate");
+  const [unvaliable, setUnvaliable] = useState([]);
+
+  console.log("bookings", bookings);
+  useEffect(() => {
+    dispatch(getSpotBookingsThunk(spot.id));
+  }, [dispatch]);
+
+  const isDayBlocked = (date) => {
+    let bookedDate = [];
+
+    // console.log("date in isdayblock", date);
+
+    // if the start date selected before the most recent unavaliable date
+    // the dates after that date should be unavaliable
+    const bookingArr = Object.values(bookings);
+
+    bookingArr.forEach((b) => {
+      const unvaliableRange = moment.range(b.start, b.end);
+      bookedDate.push(unvaliableRange);
+      // console.log("bookedDate", unvaliableRange);
+    });
+
+    const blockedDates = bookedDate.find((dateRange) =>
+      dateRange.contains(date)
+    );
+    return blockedDates;
+  };
 
   const onDatesChange = (dates) => {
     setStartDate(dates.startDate);
     setEndDate(dates.endDate);
     setStartSelected(dates.startDate);
     setEndSelected(dates.endDate);
-    // console.log("start and end date", dates.startDate, dates.endDate);
   };
 
   const onFocusChange = (focusedInput) => {
-    // console.log("focus", focusedInput);
     setFocusedInput(focusedInput);
   };
 
-  //   console.log("startdate", start);
-  //   console.log("enddate", end);
   return (
     <DayPickerRangeController
       numberOfMonths={2}
@@ -46,6 +71,7 @@ function CalendarForm({
       focusedInput={focusedInput || "startDate"}
       startDate={start}
       endDate={end}
+      isDayBlocked={isDayBlocked}
       //   initialVisibleMonth={() => moment().add(2, "M")} // PropTypes.func or null,
       //   startDate={this.state.startDate} // momentPropTypes.momentObj or null,
       //   startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,

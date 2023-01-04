@@ -101,7 +101,7 @@ export const deleteReviewThunk = (reviewId) => async (dispatch) => {
 const initialState = { spotReviews: {}, userReviews: {} };
 
 export default function reviewReducer(state = initialState, action) {
-  let newState = { ...state };
+  let newState = { spotReviews: {}, userReviews: {} };
   switch (action.type) {
     case SPOT_REV:
       // console.log("new state in reducer", newState);

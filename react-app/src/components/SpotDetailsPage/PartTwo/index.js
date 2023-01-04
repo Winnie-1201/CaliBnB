@@ -27,19 +27,13 @@ function PartTwo({ spot }) {
       end: end.toISOString().split("T")[0],
     };
     dispatch(createBookingThunk(spot.id, booking));
-    // console.log("after dispatch in comp");
-    // change the route to the trips page later
-    history.push("/");
+    history.push("/test/trips");
   };
-
-  // console.log(
-  //   "start to date in com",
-  //   new Date(start.toDate()),
-  //   start.toISOString().split("T")[0]
-  // );
 
   let stay;
   if (start && end) stay = end.diff(start, "days");
+  const s_fee = Math.round(spot.service_fee * spot.price);
+  const c_fee = Math.round(spot.clean_fee * spot.price);
 
   // console.log("start and end type", start, start.format("MM/D/YYYY"));
 
@@ -320,17 +314,22 @@ function PartTwo({ spot }) {
                             </div>
                             <div className="price-block pt-16">
                               <span>Cleaning fee</span>
-                              <span>$ ?</span>
+                              <span>$ {c_fee * stay}</span>
                             </div>
                             <div className="price-block pt-16">
                               <span>Service fee</span>
-                              <span>$ ?</span>
+                              <span>$ {s_fee * stay}</span>
                             </div>
                           </div>
                           <div className="mt-24 pt-24 border-top">
                             <div className="price-block">
                               <span className="fw-600">Total before taxes</span>
-                              <span>$ ?</span>
+                              <span>
+                                ${" "}
+                                {spot.price * stay +
+                                  s_fee * stay +
+                                  c_fee * stay}
+                              </span>
                             </div>
                           </div>
                         </section>

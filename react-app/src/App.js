@@ -9,6 +9,7 @@ import CreateSpot from "./components/Calibnb/CreateSpot";
 import Account from "./components/Account";
 import Calibnb from "./components/Calibnb";
 import EditSpot from "./components/Calibnb/EditSpot";
+import TripsPage from "./components/Trips";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,6 +30,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/users/trips" exact={true}>
+          <TripsPage />
+        </Route>
         <Route path="/spots/:spotId/edit" exact={true}>
           <EditSpot />
         </Route>
