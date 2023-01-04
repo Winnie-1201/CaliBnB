@@ -24,23 +24,22 @@ function SpotDetailsPage() {
   const bookings = useSelector((state) => state.bookings.spotBookings);
   const ownerSpots = useSelector((state) => state.spots.ownerSpots);
   const images = useSelector((state) => state.images.allImages[spotId]);
-  const owner = spotDetail.owner;
+  const owner = spotDetail?.owner;
 
   // console.log("go in n");
 
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId))
-      .then((data) => {
-        dispatch(getOwnerSpotsThunk(data.owner.id));
-      })
+      // .then((data) => {
+      //   dispatch(getOwnerSpotsThunk(data.owner.id));
+      // })
       .then(() => dispatch(getSpotReivewsThunk(spotId)))
       .then(() => dispatch(getSpotBookingsThunk(spotId)))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => setLoaded(true));
-  }, [dispatch]);
+  }, [dispatch, spotId]);
 
   // console.log("all images", images);
-  // console.log("is loaded", isLoaded);
 
   return (
     isLoaded && (

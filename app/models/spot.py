@@ -82,6 +82,7 @@ class Spot(db.Model):
             "avg":avg}
 
     def to_dict_basic(self):
+        owner = User.query.get(self.userId)
         return {
             "id": self.id,
             "address": self.address,
@@ -92,7 +93,7 @@ class Spot(db.Model):
             "price": self.price,
             # 'preview_img': self.images[0].to_dict()['url'],
             'tags': self.tags,
-            'ownerId': self.userId,
+            'owner': owner.to_dict(),
             'beds': self.beds
         }
 
@@ -109,9 +110,8 @@ class Spot(db.Model):
             "country": self.country,
             "name": self.name,
             "price": self.price,
-            'preview_img': self.images[0].to_dict()['url'],
+            # 'preview_img': self.images[0].to_dict()['url'],
             "images": [i.to_dict_basic() for i in self.images],
-
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
@@ -132,7 +132,7 @@ class Spot(db.Model):
             "country": self.country,
             "name": self.name,
             "price": self.price,
-            'preview_img': self.images[0].to_dict()['url'],
+            # 'preview_img': self.images[0].to_dict()['url'],
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,

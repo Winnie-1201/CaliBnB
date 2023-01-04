@@ -12,7 +12,7 @@ function EditSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const spot = useSelector((state) => state.spots.allSpots)[spotId];
+  const spot = useSelector((state) => state.spots.singleSpot);
   const imgs = useSelector((state) => state.images.allImages[spotId]);
 
   const [errors, setErrors] = useState({});
@@ -190,7 +190,7 @@ function EditSpot() {
   if (loaded) {
     boxes = Array(8)
       .fill(null)
-      .map((_, i) => i + parseInt(Object.keys(images)[0]) + 1);
+      .map((_, i) => i + parseInt(Object.keys(imgs)[0]) + 1);
   }
 
   //   const rest = Array(
@@ -201,13 +201,13 @@ function EditSpot() {
   //       (_, i) => i + Object.values(imgs).length + Object.values(newImgs).length
   //     );
 
-  // console.log("boxes", boxes);
-  // console.log("images,", images);
-  // console.log("update images", updateImgs);
-  // console.log("new images", newImgs);
-  //   console.log("tags and type", tags, type);
-  // console.log("imgs change or not", imgs);
-  //   console.log("rest of box", rest);
+  console.log("boxes", boxes);
+  console.log("images,", images);
+  console.log("update images", updateImgs);
+  console.log("new images", newImgs);
+  // console.log("tags and type", tags, type);
+  console.log("imgs change or not", imgs);
+  // console.log("rest of box", rest);
 
   return (
     loaded && (
@@ -271,9 +271,16 @@ function EditSpot() {
                         </>
                       ) : (
                         <>
-                          <div className="cs-imgs-one-box">
-                            <i className="fa-solid fa-folder-plus" />
-                          </div>
+                          {newImgs[box] ? (
+                            <img
+                              src={URL.createObjectURL(newImgs[box])}
+                              className="image-uploaded"
+                            />
+                          ) : (
+                            <div className="cs-imgs-one-box">
+                              <i className="fa-solid fa-folder-plus" />
+                            </div>
+                          )}
                           <input
                             type="file"
                             accept="image/*"
