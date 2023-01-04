@@ -115,9 +115,9 @@ function CreateSpot() {
     const newSpot = await dispatch(createSpotThunk(spotData));
 
     if (newSpot) {
-      dispatch(addImageThunk(newSpot.id, preview_img, true))
-        .then(async () => {
-          await img_coll.forEach(
+      await dispatch(addImageThunk(newSpot.id, preview_img, true))
+        .then(() => {
+          img_coll.forEach(
             async (img) => await dispatch(addImageThunk(newSpot.id, img, false))
           );
         })

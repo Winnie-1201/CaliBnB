@@ -388,9 +388,15 @@
 .CalendarDay__blocked_calendar,
 .CalendarDay__blocked_calendar:active,
 .CalendarDay__blocked_calendar:hover {
-  background: #cacccd;
+  color: rgb(176, 176, 176);
+  text-decoration: line-through;
+  /* background: #cacccd;
   border: 1px solid #cacccd;
-  color: #82888a;
+  color: #82888a; */
+}
+
+.CalendarDay__blocked_calendar:hover {
+  background: white;
 }
 .CalendarDay__blocked_out_of_range,
 .CalendarDay__blocked_out_of_range:active,
