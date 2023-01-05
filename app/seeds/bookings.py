@@ -66,6 +66,24 @@ bookings = [
         userId=7,
         spotId=3
         ),
+    Booking(
+        start=datetime.datetime(2022, 12, 20),
+        end=datetime.datetime(2022, 12, 24),
+        userId=4,
+        spotId=10
+        ),
+    Booking(
+        start=datetime.datetime(2022, 12, 27),
+        end=datetime.datetime(2022, 12, 29),
+        userId=4,
+        spotId=7
+        ),
+    Booking(
+        start=datetime.datetime(2023, 1, 1),
+        end=datetime.datetime(2023, 1, 4),
+        userId=4,
+        spotId=7
+        ),
 ]
 
 
