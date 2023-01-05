@@ -108,6 +108,12 @@ function EditSpot() {
     const file = e.target.files[0];
     setPreviewImg(file);
 
+    if (imgs[id]) {
+      const obj = {};
+      obj[id] = file;
+      setUpdateImgs({ ...updateImgs, ...obj });
+    }
+
     const image = document.getElementById("preview-img");
     image.src = URL.createObjectURL(file);
   };
@@ -154,38 +160,36 @@ function EditSpot() {
       service_fee,
     };
 
-    dispatch(editSpotThunk(spotData))
-      .then(() => {
-        if (Object.values(updateImgs).length > 0) {
-          for (let key in updateImgs) {
-            // console.log(
-            //   "key in update image and the preview",
-            //   key,
-            //   imgs[key].preview
-            // );
-            dispatch(changeImgThunk(key, updateImgs[key], imgs[key].preview));
-          }
-        }
+    await dispatch(editSpotThunk(spotData));
 
-        if (Object.values(newImgs).length > 0) {
-          for (let key in newImgs) {
-            // console.log("key in add image", key);
-            dispatch(addImageThunk(spotId, newImgs[key], false));
-          }
-        }
-        console.log("edit spot----------------");
-      })
-      // .then(() => dispatch(getImgsBySpotThunk(spotId)))
-      .then(() => history.push(`/spots/${spotId}`));
+    let promiseArr = [];
+
+    // console.log("go in");
+    if (Object.values(updateImgs).length > 0) {
+      for (let key in updateImgs) {
+        // console.log("key in uppdate image", key);
+        promiseArr.push(
+          dispatch(changeImgThunk(key, updateImgs[key], imgs[key].preview))
+        );
+      }
+    }
+
+    if (Object.values(newImgs).length > 0) {
+      for (let key in newImgs) {
+        // console.log("key in newImgs", key);
+        promiseArr.push(dispatch(addImageThunk(spotId, newImgs[key], false)));
+      }
+    }
+
+    // console.log("all promise", promiseArr);
+
+    Promise.all(promiseArr).then(() => history.push(`/spots/${spotId}`));
   };
 
   const total =
     Number(price) +
     Math.round(price * service_fee) +
     Math.round(price * clean_fee);
-
-  //   console.log("spot", spot, spot.images);
-  //   console.log("imges", images, preview_img);
 
   let boxes;
   if (loaded) {
@@ -194,20 +198,12 @@ function EditSpot() {
       .map((_, i) => i + parseInt(Object.keys(imgs)[0]) + 1);
   }
 
-  //   const rest = Array(
-  //     8 - Object.values(imgs).length - Object.values(newImgs).length + 1
-  //   )
-  //     .fill(null)
-  //     .map(
-  //       (_, i) => i + Object.values(imgs).length + Object.values(newImgs).length
-  //     );
-
-  console.log("boxes", boxes);
-  console.log("images,", images);
-  console.log("update images", updateImgs);
-  console.log("new images", newImgs);
+  // console.log("boxes", boxes);
+  // console.log("images,", images);
+  // console.log("update images", updateImgs);
+  // console.log("new images", newImgs);
   // console.log("tags and type", tags, type);
-  console.log("imgs change or not", imgs);
+  // console.log("imgs change or not", imgs);
   // console.log("rest of box", rest);
 
   return (

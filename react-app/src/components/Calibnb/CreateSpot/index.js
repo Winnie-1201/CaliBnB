@@ -113,16 +113,28 @@ function CreateSpot() {
     };
 
     const newSpot = await dispatch(createSpotThunk(spotData));
+    // console.log("new spot in create", newSpot);
 
     if (newSpot) {
-      await dispatch(addImageThunk(newSpot.id, preview_img, true))
-        .then(() => {
-          img_coll.forEach(
-            async (img) => await dispatch(addImageThunk(newSpot.id, img, false))
-          );
-          console.log("i am here");
-        })
-        .then(() => history.push(`/spots/${newSpot.id}`));
+      await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
+
+      let promise_arr = [];
+
+      img_coll.forEach((img) => {
+        promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
+      });
+
+      Promise.all(promise_arr).then(() => history.push(`/spots/${newSpot.id}`));
+
+      // img_coll.forEach((img) => {
+      //   console.log("dispatch img ---------");
+      //    dispatch(addImageThunk(newSpot.id, img, false)); // [promise, promise]
+      // });
+      // })
+      // .then(() => {
+      //   console.log("history push -------");
+      //   history.push(`/spots/${newSpot.id}`);
+      // });
     }
   };
 

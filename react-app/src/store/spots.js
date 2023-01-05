@@ -132,7 +132,7 @@ export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
   if (response.ok) {
     const new_img = await response.json();
     // console.log("new img int hunk", new_img);
-    dispatch(addImg(new_img.new_img, spotId));
+    await dispatch(addImg(new_img.new_img, spotId));
     return new_img;
   }
 };
