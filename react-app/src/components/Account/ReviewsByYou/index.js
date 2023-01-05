@@ -54,8 +54,8 @@ function ReviewsByYou() {
                       />
                     </div>
                     <div className="flex-column">
-                      <button>Edit</button>
-                      <button>Delete</button>
+                      <button className="er-edit-bt">Edit</button>
+                      <button className="er-delete-bt">Delete</button>
                     </div>
                   </div>
                   <div className="rp-block-right">
