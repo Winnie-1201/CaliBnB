@@ -14,8 +14,14 @@ export function dateTransfer(type, date) {
       return new Intl.DateTimeFormat("en-US", {
         month: "long",
       }).format(new Date(date));
+    case "s_month":
+      return new Intl.DateTimeFormat("en-US", {
+        month: "short",
+      }).format(new Date(date));
     case "year":
       return new Date(date).getFullYear();
+    case "date_num":
+      return new Date(date).getDate();
     case "date":
       const n = new Date(date).getDate();
       const result =

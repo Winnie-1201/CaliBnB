@@ -2,7 +2,6 @@
   color: #222222;
   margin: 24px auto;
   max-width: 1120px;
-  padding: 0 40px;
 }
 
 .grid {
@@ -45,4 +44,30 @@
 
 .start {
   justify-content: flex-start;
+}
+
+.location {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.type {
+  color: #717171;
+  margin-bottom: 3px;
+}
+
+.price-d {
+  font-weight: 800;
+}
+
+.hp-star-svg {
+  display: block;
+  height: 12px;
+  width: 12px;
+  fill: currentColor;
+}
+
+.avg-rating {
+  margin-left: 3px;
 }

@@ -49,7 +49,7 @@ export const getOneSpotThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
-    console.log("spot", spot);
+    // console.log("spot", spot);
     dispatch(loadOne(spot));
 
     return spot;
@@ -78,6 +78,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
+
     dispatch(loadOne(spot));
     return spot;
   }
@@ -106,7 +107,8 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(deleteSpot());
+    // console.log("delete spot");
+    dispatch(deleteSpot(spotId));
 
     return response;
   }
@@ -130,30 +132,46 @@ export const addImageThunk = (spotId, image, preview) => async (dispatch) => {
   if (response.ok) {
     const new_img = await response.json();
     // console.log("new img int hunk", new_img);
-    dispatch(addImg(new_img.new_img, spotId));
+    await dispatch(addImg(new_img.new_img, spotId));
+    return new_img;
   }
 };
 
 const initialState = { allSpots: {}, singleSpot: {}, ownerSpots: {} };
 
 export default function spotReducer(state = initialState, action) {
-  let newState = { ...state };
+  // let newState = { ...state };
+  let newState = {};
   switch (action.type) {
     case LOAD_ALL:
-      action.spots.forEach((spot) => (newState.allSpots[spot.id] = spot));
+      const allSpots = {};
+      action.spots.forEach((spot) => (allSpots[spot.id] = spot));
+      // action.spots.forEach((spot) => (newState.allSpots[spot.id] = spot));
       // return { ...state, allSpots: action.spots };
+      newState.allSpots = allSpots;
       return newState;
     case LOAD_CURR:
-      action.spots.forEach((spot) => (newState.ownerSpots[spot.id] = spot));
+      const ownerSpots = {};
+      action.spots.forEach((spot) => (ownerSpots[spot.id] = spot));
+      newState.ownerSpots = ownerSpots;
+      // action.spots.forEach((spot) => (newState.ownerSpots[spot.id] = spot));
       return newState;
     // return { ...state, currUserSpots: action.spots };
     case LOAD_ONE:
-      return { ...state, singleSpot: action.spot };
+      newState = { ...state };
+      newState.singleSpot = action.spot;
+      return newState;
+    // return { ...state, singleSpot: action.spot };
     case DELETE_SPOT:
-      return { ...state, singleSpot: {} };
-
+      newState = { ...state };
+      delete newState.ownerSpots[action.spotId];
+      return newState;
     case ADD:
+      // if (!newState.singleSpot.images)
+      //   newState.singleSpot.images = [action.image];
+      newState = { ...state };
       newState.singleSpot.images.push(action.image);
+      return newState;
     default:
       return state;
   }

@@ -5,11 +5,12 @@ import { authenticate } from "./store/session";
 import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
 import SpotDetalsPage from "./components/SpotDetailsPage";
-import CalendarForm from "./components/SpotDetailsPage/PartTwo/Calendar";
-import CreateSpot from "./components/CreateSpot";
+import CreateSpot from "./components/Calibnb/CreateSpot";
 import Account from "./components/Account";
 import Calibnb from "./components/Calibnb";
-import EditSpot from "./components/Calibnb/SpotCard/EditSpot";
+import EditSpot from "./components/Calibnb/EditSpot";
+import TripsPage from "./components/Trips";
+import ReviewForm from "./components/Account/EditReviewsForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -18,7 +19,7 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(getAllSpotThunk());
+      // await dispatch(getAllSpotThunk());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -30,6 +31,12 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/spots/:spotId/review" exact={true}>
+          <ReviewForm />
+        </Route>
+        <Route path="/users/trips" exact={true}>
+          <TripsPage />
+        </Route>
         <Route path="/spots/:spotId/edit" exact={true}>
           <EditSpot />
         </Route>

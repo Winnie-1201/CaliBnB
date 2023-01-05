@@ -141,9 +141,32 @@
 review box
 
 */
+.pcr-header {
+  display: flex;
+  white-space: nowrap;
+}
 
-.review-box {
-  border: 2px solid blue;
-  width: 100%;
-  height: 600px;
+.pcr-left-title,
+.pcr-right-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #717171;
+  padding: 10px 0;
+  margin: 6px 20px 0 0px;
+  border-radius: 8px;
+}
+.pcr-left-title:hover,
+.pcr-right-title:hover {
+  background-color: rgb(250, 250, 250);
+  cursor: pointer;
+}
+.selected {
+  border-bottom: 2px solid black;
+  color: #222222;
+  border-radius: 0px;
+}
+.pc-show-left,
+.pc-show-right {
+  margin-top: 24px;
+  margin-bottom: 80px;
 }

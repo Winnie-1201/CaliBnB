@@ -72,7 +72,7 @@ export const createBookingThunk = (spotId, booking) => async (dispatch) => {
   }
 };
 
-export const editReviewThunk = (booking) => async (dispatch) => {
+export const editBookingThunk = (booking) => async (dispatch) => {
   const response = await fetch(`/api/bookings/${booking.id}`, {
     method: "POST",
     headers: {
@@ -102,7 +102,7 @@ export const cancelBookingThunk = (bookingId) => async (dispatch) => {
 const initialState = { spotBookings: {}, userBookings: {} };
 
 export default function bookingReducer(state = initialState, action) {
-  let newState = { ...state };
+  let newState = { spotBookings: {}, userBookings: {} };
   switch (action.type) {
     case SPOT_BOOKING:
       action.bookings.forEach(

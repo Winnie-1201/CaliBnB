@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getImgsBySpotThunk } from "../../store/images";
-import { addImageThunk, createSpotThunk } from "../../store/spots";
-import Header from "../Homepage/Header";
+import { addImageThunk, createSpotThunk } from "../../../store/spots";
+import Header from "../../Homepage/Header";
 import "./index.css";
 
 function CreateSpot() {
@@ -113,36 +112,30 @@ function CreateSpot() {
       service_fee,
     };
 
-    // await dispatch(createSpotThunk(spotData))
-    //   .then((data) => addImageThunk(data.id, preview_img, true))
-    //   .then(() => {
-    //     img_coll.forEach((img) => dispatch(addImageThunk(data.id, img, false)));
-    //   })
-    //   .then(() => dispatch(getImgsBySpotThunk(data.id)))
-    //   .then(() => history.push(`/spots/${data.id}`));
-
     const newSpot = await dispatch(createSpotThunk(spotData));
+    // console.log("new spot in create", newSpot);
 
     if (newSpot) {
-      // console.log("new spot in comp", newSpot);
-      addImageThunk(newSpot.id, preview_img, true);
+      await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
 
-      img_coll.forEach((img) =>
-        dispatch(addImageThunk(newSpot.id, img, false))
-      );
+      let promise_arr = [];
 
-      dispatch(getImgsBySpotThunk(newSpot.id)).then(() =>
-        history.push(`/spots/${newSpot.id}`)
-      );
+      img_coll.forEach((img) => {
+        promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
+      });
+
+      Promise.all(promise_arr).then(() => history.push(`/spots/${newSpot.id}`));
+
+      // img_coll.forEach((img) => {
+      //   console.log("dispatch img ---------");
+      //    dispatch(addImageThunk(newSpot.id, img, false)); // [promise, promise]
+      // });
+      // })
+      // .then(() => {
+      //   console.log("history push -------");
+      //   history.push(`/spots/${newSpot.id}`);
+      // });
     }
-    //   dispatch(addImageThunk(newSpot.id, preview_img, true));
-
-    //   img_coll.forEach((img) =>
-    //     dispatch(addImageThunk(newSpot.id, img, false))
-    //   );
-
-    //   history.push(`/spots/${newSpot.id}`);
-    // }
   };
 
   const updateImage = (e) => {
@@ -161,12 +154,14 @@ function CreateSpot() {
     setImages({ ...images, ...obj });
   };
 
-  const img_coll = Object.values(images);
+  let img_coll = Object.values(images);
 
   const total =
     Number(price) +
     Math.round(price * service_fee) +
     Math.round(price * clean_fee);
+
+  // console.log("preview image outside", preview_img);
 
   return (
     <>
@@ -484,6 +479,7 @@ function CreateSpot() {
                     <input
                       type="number"
                       className="p-10"
+                      min="1"
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
                     />
@@ -496,6 +492,7 @@ function CreateSpot() {
                     <input
                       type="number"
                       className="p-10"
+                      min="1"
                       value={beds}
                       onChange={(e) => setBeds(e.target.value)}
                     />
@@ -508,6 +505,7 @@ function CreateSpot() {
                     <input
                       type="number"
                       className="p-10"
+                      min="1"
                       value={bedroom}
                       onChange={(e) => setBedroom(e.target.value)}
                     />

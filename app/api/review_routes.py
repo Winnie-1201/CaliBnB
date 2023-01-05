@@ -8,14 +8,14 @@ review_routes = Blueprint('reviews', __name__)
 
 @review_routes.route('/current')
 @login_required
-def spot_reviews():
+def user_reviews():
     '''
     Query for all reviews of current user and return them in a list of dictionaries
     '''
     userId = current_user.id
     reviews = Review.query.filter_by(userId=userId).all()
 
-    return {'Reviews': [review.to_dict() for review in reviews]}
+    return {'Reviews': [review.to_dict_spot() for review in reviews]}
 
 
 @review_routes.route('/<int:reviewId>')

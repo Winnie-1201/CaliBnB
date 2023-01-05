@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { changeImgThunk, getImgsBySpotThunk } from "../../../../store/images";
-import { addImageThunk, editSpotThunk } from "../../../../store/spots";
-import Header from "../../../Homepage/Header";
+import { changeImgThunk, getImgsBySpotThunk } from "../../../store/images";
+import { addImageThunk, editSpotThunk } from "../../../store/spots";
+import Header from "../../Homepage/Header";
 import "./index.css";
 
 function EditSpot() {
@@ -12,7 +12,7 @@ function EditSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const spot = useSelector((state) => state.spots.allSpots)[spotId];
+  const spot = useSelector((state) => state.spots.singleSpot);
   const imgs = useSelector((state) => state.images.allImages[spotId]);
 
   const [errors, setErrors] = useState({});
@@ -108,6 +108,12 @@ function EditSpot() {
     const file = e.target.files[0];
     setPreviewImg(file);
 
+    if (imgs[id]) {
+      const obj = {};
+      obj[id] = file;
+      setUpdateImgs({ ...updateImgs, ...obj });
+    }
+
     const image = document.getElementById("preview-img");
     image.src = URL.createObjectURL(file);
   };
@@ -154,28 +160,30 @@ function EditSpot() {
       service_fee,
     };
 
-    dispatch(editSpotThunk(spotData))
-      .then(() => {
-        if (Object.values(updateImgs).length > 0) {
-          for (let key in updateImgs) {
-            // console.log(
-            //   "key in update image and the preview",
-            //   key,
-            //   imgs[key].preview
-            // );
-            dispatch(changeImgThunk(key, updateImgs[key], imgs[key].preview));
-          }
-        }
+    await dispatch(editSpotThunk(spotData));
 
-        if (Object.values(newImgs).length > 0) {
-          for (let key in newImgs) {
-            // console.log("key in add image", key);
-            dispatch(addImageThunk(spotId, newImgs[key], false));
-          }
-        }
-      })
-      .then(() => dispatch(getImgsBySpotThunk(spotId)))
-      .then(() => history.push(`/spots/${spotId}`));
+    let promiseArr = [];
+
+    // console.log("go in");
+    if (Object.values(updateImgs).length > 0) {
+      for (let key in updateImgs) {
+        // console.log("key in uppdate image", key);
+        promiseArr.push(
+          dispatch(changeImgThunk(key, updateImgs[key], imgs[key].preview))
+        );
+      }
+    }
+
+    if (Object.values(newImgs).length > 0) {
+      for (let key in newImgs) {
+        // console.log("key in newImgs", key);
+        promiseArr.push(dispatch(addImageThunk(spotId, newImgs[key], false)));
+      }
+    }
+
+    // console.log("all promise", promiseArr);
+
+    Promise.all(promiseArr).then(() => history.push(`/spots/${spotId}`));
   };
 
   const total =
@@ -183,28 +191,20 @@ function EditSpot() {
     Math.round(price * service_fee) +
     Math.round(price * clean_fee);
 
-  //   console.log("spot", spot, spot.images);
-  //   console.log("imges", images, preview_img);
-
-  const boxes = Array(8)
-    .fill(null)
-    .map((_, i) => i + parseInt(Object.keys(images)[0]) + 1);
-
-  //   const rest = Array(
-  //     8 - Object.values(imgs).length - Object.values(newImgs).length + 1
-  //   )
-  //     .fill(null)
-  //     .map(
-  //       (_, i) => i + Object.values(imgs).length + Object.values(newImgs).length
-  //     );
+  let boxes;
+  if (loaded) {
+    boxes = Array(8)
+      .fill(null)
+      .map((_, i) => i + parseInt(Object.keys(imgs)[0]) + 1);
+  }
 
   // console.log("boxes", boxes);
   // console.log("images,", images);
   // console.log("update images", updateImgs);
   // console.log("new images", newImgs);
-  //   console.log("tags and type", tags, type);
+  // console.log("tags and type", tags, type);
   // console.log("imgs change or not", imgs);
-  //   console.log("rest of box", rest);
+  // console.log("rest of box", rest);
 
   return (
     loaded && (
@@ -268,9 +268,16 @@ function EditSpot() {
                         </>
                       ) : (
                         <>
-                          <div className="cs-imgs-one-box">
-                            <i className="fa-solid fa-folder-plus" />
-                          </div>
+                          {newImgs[box] ? (
+                            <img
+                              src={URL.createObjectURL(newImgs[box])}
+                              className="image-uploaded"
+                            />
+                          ) : (
+                            <div className="cs-imgs-one-box">
+                              <i className="fa-solid fa-folder-plus" />
+                            </div>
+                          )}
                           <input
                             type="file"
                             accept="image/*"

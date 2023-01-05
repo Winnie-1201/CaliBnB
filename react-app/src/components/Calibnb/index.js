@@ -14,6 +14,7 @@ function Calibnb() {
   const userSpots = useSelector((state) => state.spots.ownerSpots);
 
   const [loaded, setLoaded] = useState(false);
+  // console.log("userspots", userSpots);
 
   useEffect(() => {
     dispatch(getOwnerSpotsThunk(currUser.id)).then(() => setLoaded(true));

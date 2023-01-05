@@ -49,7 +49,7 @@ class Review(db.Model):
     def to_dict_user(self):
         return {
             "id": self.id,
-            "content": self.address,
+            "content": self.content,
             "cleanliness": self.cleanliness,
             "check_in": self.check_in,
             "communication": self.communication,
@@ -64,7 +64,7 @@ class Review(db.Model):
     def to_dict_spot(self):
         return {
             "id": self.id,
-            "content": self.address,
+            "content": self.content,
             "cleanliness": self.cleanliness,
             "check_in": self.check_in,
             "communication": self.communication,
