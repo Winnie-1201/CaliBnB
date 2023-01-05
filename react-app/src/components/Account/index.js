@@ -60,9 +60,31 @@ function Account() {
                       <button className="pc-edit-button">Edit profile</button>
                     </div>
                   </div>
-                  <section>
-                    <ReviewsByYou />
-                  </section>
+                  <div className="pcr-header">
+                    <div
+                      className={`pcr-left-title ${openLeft ? "selected" : ""}`}
+                      onClick={() => {
+                        setOpenLeft(true);
+                        setOpenRight(false);
+                      }}
+                    >
+                      Reivews by you
+                    </div>
+                    <div
+                      className={`pcr-right-title ${
+                        openRight ? "selected" : ""
+                      }`}
+                      onClick={() => {
+                        setOpenLeft(false);
+                        setOpenRight(true);
+                      }}
+                    >
+                      Reviews to write
+                    </div>
+                  </div>
+                  <div className="pc-show-left">
+                    {openLeft && <ReviewsByYou />}
+                  </div>
                 </section>
               </div>
             </div>
