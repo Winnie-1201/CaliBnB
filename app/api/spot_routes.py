@@ -265,11 +265,11 @@ def add_review(spotId):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     review = Review.query.filter_by(userId=current_user.id, spotId=spotId).first()
-    print('--------')
-    print('--------')
-    print('--------review form data', form.data)
-    print('--------')
-    print('--------')
+    # print('--------')
+    # print('--------')
+    # print('--------review form data', form.data)
+    # print('--------')
+    # print('--------')
 
 
     if review:
