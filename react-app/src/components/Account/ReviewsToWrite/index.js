@@ -27,24 +27,40 @@ function ReviewsToWrite() {
     loaded &&
     Object.values(userBookings).length > Object.values(userReviews).length
   ) {
+    const pastBooking = Object.values(userBookings).filter(
+      (booking) => new Date(booking.end) < new Date()
+    );
     let spotReviewed = [];
+    let spotBooked = [];
     for (let key in userReviews) {
       spotReviewed.push(userReviews[key].spot.id);
     }
     // console.log("spot reviewed id", spotReviewed, typeof spotReviewed[0]);
-    for (let key in userBookings) {
-      //   console.log(
-      //     "key in userbookings and type",
-      //     key,
-      //     typeof key,
-      //     spotReviewed,
-      //     spotReviewed.includes(key)
-      //   );
-      if (!spotReviewed.includes(parseInt(key))) {
-        reviewsToWrite.push(userBookings[key]);
+
+    for (let i in pastBooking) {
+      if (!spotReviewed.includes(pastBooking[i].spotInfo.id)) {
+        reviewsToWrite.push(pastBooking[i]);
       }
     }
-    // console.log("spot that need to be review", reviewsToWrite);
+    // for (let key in userBookings) {
+    //   console.log(
+    //     "key in userbookings and type",
+    //     userBookings[key].spotInfo.id,
+    //     typeof userBookings[key].spotInfo.id,
+    //     spotReviewed,
+    //     spotReviewed.includes(userBookings[key].spotInfo.id)
+    //   );
+    //   if (!spotReviewed.includes(userBookings[key].spotInfo.id)) {
+    //     reviewsToWrite.push(userBookings[key]);
+    //   }
+    // }
+
+    // for (let i in spotBooked) {
+    //   if (!spotReviewed.includes(spotBooked[i])) {
+    //     reviewsToWrite.push()
+    //   }
+    // }
+    console.log("spot that need to be review", reviewsToWrite);
   }
 
   return (
