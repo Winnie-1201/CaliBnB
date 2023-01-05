@@ -51,6 +51,11 @@ def update_img(id):
 
     db.session.commit()
     
+    print("-----------")
+    print("-----------")
+    print("img in backedn", img, img.to_dict())
+    print("-----------")
+    print("-----------")
     return img.to_dict()
 
     

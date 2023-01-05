@@ -41,18 +41,22 @@ export const getImgsBySpotThunk = (spotId) => async (dispatch) => {
 };
 
 export const changeImgThunk = (imgId, imgFile, preview) => async (dispatch) => {
+  // console.log("enter change image thubk ------------------");
   const formData = new FormData();
   formData.append("image", imgFile);
   formData.append("preview", preview);
 
-  const response = fetch(`/api/images/${imgId}`, {
+  const response = await fetch(`/api/images/${imgId}`, {
     method: "PUT",
     body: formData,
   });
 
+  // console.log("enter change image thubk response ------------------", response);
   if (response.ok) {
     const img = await (await response).json();
-    dispatch(changeImg(img));
+    // console.log("img in thunk edit ------------", img);
+    await dispatch(changeImg(img));
+    return img;
   }
 };
 

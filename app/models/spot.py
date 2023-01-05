@@ -97,6 +97,14 @@ class Spot(db.Model):
             'beds': self.beds
         }
 
+    def to_dict_booking(self):
+        owner = User.query.get(self.userId)
+        return {
+            "id": self.id,
+            "city": self.city,
+            "images": [i.to_dict_basic() for i in self.images],
+            "owner": owner.to_dict()
+        }
 
     def to_dict(self):
         print("--------")

@@ -4,23 +4,6 @@ def seed_users():
     for i in range(1, 16):
         demo = User(firstName=f"Demo{i}", lastName=f"User{i}", username=f"demouser{i}", email=f"demo{i}@aa.io", password="password", icon="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3")
         db.session.add(demo)
-    # demo = User(firstName="Winnie", lastName="", username="Demo", email="demo@aa.io", password="password")
-    # marnie = User(
-    #     username='marnie', email='marnie@aa.io', password='password')
-    # bobbie = User(
-    #     username='bobbie', email='bobbie@aa.io', password='password')
-    # lily = User(username="lily", email="lily@aa.io", password="password")
-    # maria = User(
-    #     username='maria', email='maria@aa.io', password='password')
-    # john = User(
-    #     username='john', email='john@aa.io', password='password')
-
-    # db.session.add(demo)
-    # db.session.add(marnie)
-    # db.session.add(bobbie)
-    # db.session.add(lily)
-    # db.session.add(maria)
-    # db.session.add(john)
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
