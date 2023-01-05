@@ -18,17 +18,17 @@ def username_exists(form, field):
     if user:
         raise ValidationError('Username already exists.')
     
-def same_password(form, field):
-    # Checking if the confirmed password is the same as the password
-    password = field.data
-    if password != form.data['password']:
-        raise ValidationError('The confirmed password needs to be the same.')
+# def same_password(form, field):
+#     # Checking if the confirmed password is the same as the password
+#     password = field.data
+#     if password != form.data['password']:
+#         raise ValidationError('The confirmed password needs to be the same.')
 
 class SignupForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
-    firstName = StringField('firstNmae', validators=[DataRequired()])
+    firstName = StringField('firstName', validators=[DataRequired()])
     lastName = StringField('lastName', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()])
-    icon = StringField('icon')
-    confirmed = StringField('confirm', validators=[DataRequired(), same_password])
+    # icon = StringField('icon')
+    # confirmed = StringField('confirm', validators=[DataRequired(), same_password])
