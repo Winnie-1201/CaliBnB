@@ -1,4 +1,5 @@
 from app.models import db, Spot, environment, SCHEMA
+import datetime
 
 spots = [
    Spot(
@@ -17,7 +18,8 @@ spots = [
         bath=1,
         type="camping",
         clean_fee=0.05,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
         address="provide later",
@@ -35,7 +37,8 @@ spots = [
         bath=2,
         type="cabin",
         clean_fee=0.15,
-        service_fee=0.2
+        service_fee=0.2,
+        created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
         address="provide later",
@@ -53,7 +56,8 @@ spots = [
         bath=1,
         type="amazing views",
         clean_fee=0.1,
-        service_fee=0.18
+        service_fee=0.18,
+        created=datetime.datetime(2022, 9, 20)
     )
 
 ]
@@ -75,7 +79,8 @@ camping = [
         bath=2,
         type="camping",
         clean_fee=0.08,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
         address="provide later",
@@ -93,7 +98,8 @@ camping = [
         bath=1,
         type="camping",
         clean_fee=0.02,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
         address="provide later",
@@ -111,7 +117,8 @@ camping = [
         bath=1,
         type="camping",
         clean_fee=0.07,
-        service_fee=0.13
+        service_fee=0.13,
+        created=datetime.datetime(2022, 8, 20)
     ),
     Spot(
         address="provide later",
@@ -129,7 +136,8 @@ camping = [
         bath=2,
         type="camping",
         clean_fee=0.08,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 6, 20)
     ),
     Spot(
        address="provide later",
@@ -147,7 +155,8 @@ camping = [
         bath=1,
         type="camping",
         clean_fee=0.02,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 7, 20)
     ),
     Spot(
         address="provide later",
@@ -165,7 +174,8 @@ camping = [
         bath=2,
         type="camping",
         clean_fee=0.08,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 6, 20)
     ),
     Spot(
         address="provide later",
@@ -183,7 +193,8 @@ camping = [
         bath=2,
         type="camping",
         clean_fee=0.08,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 5, 20)
     ),
     Spot(
         address="provide later",
@@ -201,7 +212,8 @@ camping = [
         bath=1,
         type="camping",
         clean_fee=0.07,
-        service_fee=0.13
+        service_fee=0.13,
+        created=datetime.datetime(2022, 4, 20)
     ),
 ]
 
@@ -222,7 +234,8 @@ amazing_views = [
         bath=2,
         type="amazing views",
         clean_fee=0.11,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 3, 20)
     ),
     Spot(
         address="provide later",
@@ -240,7 +253,8 @@ amazing_views = [
         bath=1,
         type="amazing views",
         clean_fee=0.08,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 2, 20)
     ),
     Spot(
         address="provide later",
@@ -258,7 +272,8 @@ amazing_views = [
         bath=2,
         type="amazing views",
         clean_fee=0.09,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 1, 20)
     ),
     Spot(
         address="provide later",
@@ -276,7 +291,8 @@ amazing_views = [
         bath=1,
         type="amazing views",
         clean_fee=0.11,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 10, 20)
     ),
     Spot(
         address="provide later",
@@ -294,7 +310,8 @@ amazing_views = [
         bath=3,
         type="amazing views",
         clean_fee=0.05,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
         address="provide later",
@@ -312,7 +329,8 @@ amazing_views = [
         bath=1,
         type="amazing views",
         clean_fee=0.08,
-        service_fee=0.12
+        service_fee=0.12,
+        created=datetime.datetime(2022, 6, 21)
     ),
     Spot(
         address="provide later",
@@ -330,7 +348,8 @@ amazing_views = [
         bath=2,
         type="amazing views",
         clean_fee=0.06,
-        service_fee=0.13
+        service_fee=0.13,
+        created=datetime.datetime(2022, 7, 10)
     ),
 ]
 
@@ -351,7 +370,8 @@ cabins = [
         bath=1,
         type="cabins",
         clean_fee=0.11,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 7, 10)
     ),
     Spot(
         address="provide later",
@@ -369,7 +389,8 @@ cabins = [
         bath=3,
         type="cabins",
         clean_fee=0.25,
-        service_fee=0.18
+        service_fee=0.18,
+        created=datetime.datetime(2022, 6, 10)
     ),
     Spot(
         address="provide later",
@@ -387,7 +408,8 @@ cabins = [
         bath=2,
         type="cabins",
         clean_fee=0.11,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 8, 20)
     ),
     Spot(
         address="provide later",
@@ -405,7 +427,8 @@ cabins = [
         bath=1,
         type="cabins",
         clean_fee=0.05,
-        service_fee=0.1
+        service_fee=0.1,
+        created=datetime.datetime(2022, 9, 2)
     ),
     Spot(
         address="provide later",
@@ -423,7 +446,8 @@ cabins = [
         bath=2,
         type="cabins",
         clean_fee=0.11,
-        service_fee=0.18
+        service_fee=0.18,
+        created=datetime.datetime(2022, 8, 20)
     ),
     Spot(
         address="provide later",
@@ -441,7 +465,8 @@ cabins = [
         bath=2,
         type="cabins",
         clean_fee=0.11,
-        service_fee=0.15
+        service_fee=0.15,
+        created=datetime.datetime(2022, 7, 20)
     ),
     
 ]

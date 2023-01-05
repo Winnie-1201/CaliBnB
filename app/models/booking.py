@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix
 from sqlalchemy.sql import func
+from .spot import Spot
 
 class Booking(db.Model):
     __tablename__ = 'bookings'
@@ -30,7 +31,7 @@ class Booking(db.Model):
             "created": self.created,
             "updated": self.updated,
             "userId": self.userId,
-            'spotId': self.spotId,
+            "spotInfo": Spot.query.get(self.spotId).to_dict_booking()
         }
 
     def to_dict_nonowner(self):
