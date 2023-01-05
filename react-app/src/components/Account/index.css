@@ -165,7 +165,8 @@ review box
   color: #222222;
   border-radius: 0px;
 }
-.pc-show-left {
+.pc-show-left,
+.pc-show-right {
   margin-top: 24px;
   margin-bottom: 80px;
 }

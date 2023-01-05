@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import {
   createReviewThunk,
   editReviewThunk,
@@ -7,9 +8,10 @@ import {
 } from "../../../store/reviews";
 import "./index.css";
 
-function ReviewForm({ review, type, spotId, setEditModal }) {
+function ReviewForm({ review, type, setReviewModal }) {
   const dispatch = useDispatch();
-  const history = useDispatch();
+  const history = useHistory();
+  const { spotId } = useParams();
 
   //   const [content, setContent] = useState(review.content);
   //   const [cleanliness, setCleanliness] = useState(review.cleanliness);
@@ -19,7 +21,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
   //   const [location, setLocation] = useState(review.location);
   //   const [accuracy, setAccuracy] = useState(review.accuracy);
 
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
   const [cleanliness, setCleanliness] = useState();
   const [check_in, setCheckin] = useState();
   const [communicatoin, setCommunication] = useState();
@@ -33,6 +35,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
   useEffect(() => {
     const newErrors = {};
 
+    console.log("cleaness in use effect", cleanliness);
     if (!content)
       newErrors.noContent = "Please enter your review of the place.";
     if (!cleanliness)
@@ -64,37 +67,64 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
 
     setSubmit(true);
     // review needs to be an object
-    cleanliness = parseInt(cleanliness);
-    check_in = parseInt(check_in);
-    communicatoin = parseInt(communicatoin);
-    value = parseInt(value);
-    location = parseInt(location);
-    accuracy = parseInt(accuracy);
+    // console.log("not error", Object.values(errors).length);
+    if (Object.values(errors).length === 0) {
+      const cl = parseInt(cleanliness);
+      const ch = parseInt(check_in);
+      const cm = parseInt(communicatoin);
+      const va = parseInt(value);
+      const lo = parseInt(location);
+      const ac = parseInt(accuracy);
 
-    review = {
-      ...review,
-      content,
-      cleanliness,
-      check_in,
-      communicatoin,
-      value,
-      location,
-      accuracy,
-    };
+      review = {
+        content: content,
+        cleanliness: cl,
+        check_in: ch,
+        communicatoin: cm,
+        value: va,
+        location: lo,
+        accuracy: ac,
+      };
 
-    if (type === "create") {
-      await dispatch(createReviewThunk(spotId, review)).then(() => {
-        setEditModal(false);
-        history.push(`/users/profile`);
-      });
-    } else if (type === "edit") {
-      await dispatch(editReviewThunk(review))
-        .then(() => dispatch(getUserReviewsThunk()))
-        .then(() => setEditModal(false));
+      if (type === "create") {
+        await dispatch(createReviewThunk(spotId, review)).then(() => {
+          setReviewModal(false);
+          history.push(`/users/profile`);
+        });
+      } else if (type === "edit") {
+        await dispatch(editReviewThunk(review))
+          .then(() => dispatch(getUserReviewsThunk()))
+          .then(() => setReviewModal(false));
+      } else {
+        await dispatch(createReviewThunk(spotId, review)).then(() => {
+          // setReviewModal(false);
+          history.push(`/users/profile`);
+        });
+      }
     }
   };
-  //   console.log("clean rating", cleanliness);
-  //   console.log("checkin rating", check_in);
+
+  // const hangleClean = (e) => {
+  //   e.preventDefault();
+  //   console.log("e.target.value", e.target.value, e.target);
+  //   setCleanliness(e.target.value);
+  // };
+
+  // const handleContent = (e) => {
+  //   e.preventDefault();
+  //   console.log("e content", e.target.value);
+  //   setContent(e.target.value);
+  // };
+  // console.log(
+  //   "clean rating",
+  //   cleanliness,
+  //   check_in,
+  //   communicatoin,
+  //   value,
+  //   location,
+  //   accuracy
+  // );
+  // console.log("errors", errors);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -108,8 +138,12 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               name="rate1"
               value="5"
               onChange={(e) => setCleanliness(e.target.value)}
+              // onChange={(e) => {
+              //   console.log("e.target.value", e.target.value, cleanliness);
+              //   setCleanliness(e.target.value);
+              // }}
             />
-            <label htmlFor="cl-star5" class="fas fa-star"></label>
+            <label htmlFor="cl-star5" className="fas fa-star"></label>
             <input
               type="radio"
               id="cl-star4"
@@ -117,7 +151,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="4"
               onChange={(e) => setCleanliness(e.target.value)}
             />
-            <label htmlFor="cl-star4" class="fas fa-star">
+            <label htmlFor="cl-star4" className="fas fa-star">
               {/* 4 stars */}
             </label>
             <input
@@ -127,7 +161,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="3"
               onChange={(e) => setCleanliness(e.target.value)}
             />
-            <label htmlFor="cl-star3" class="fas fa-star"></label>
+            <label htmlFor="cl-star3" className="fas fa-star"></label>
             <input
               type="radio"
               id="cl-star2"
@@ -135,7 +169,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="2"
               onChange={(e) => setCleanliness(e.target.value)}
             />
-            <label htmlFor="cl-star2" class="fas fa-star"></label>
+            <label htmlFor="cl-star2" className="fas fa-star"></label>
             <input
               type="radio"
               id="cl-star1"
@@ -143,8 +177,13 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="1"
               onChange={(e) => setCleanliness(e.target.value)}
             />
-            <label htmlFor="cl-star1" class="fas fa-star"></label>
+            <label htmlFor="cl-star1" className="fas fa-star"></label>
           </div>
+          {submit && errors.noCleanliness && (
+            <div className="cr-form-error">
+              <span>{errors.noCleanliness}</span>
+            </div>
+          )}
         </div>
         <div className="cr-rating-block">
           <div className="cr-label">Check in</div>
@@ -156,7 +195,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="5"
               onChange={(e) => setCheckin(e.target.value)}
             />
-            <label htmlFor="ci-star5" class="fas fa-star"></label>
+            <label htmlFor="ci-star5" className="fas fa-star"></label>
             <input
               type="radio"
               id="ci-star4"
@@ -164,7 +203,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="4"
               onChange={(e) => setCheckin(e.target.value)}
             />
-            <label htmlFor="ci-star4" class="fas fa-star"></label>
+            <label htmlFor="ci-star4" className="fas fa-star"></label>
             <input
               type="radio"
               id="ci-star3"
@@ -172,7 +211,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="3"
               onChange={(e) => setCheckin(e.target.value)}
             />
-            <label htmlFor="ci-star3" class="fas fa-star"></label>
+            <label htmlFor="ci-star3" className="fas fa-star"></label>
             <input
               type="radio"
               id="ci-star2"
@@ -180,7 +219,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="2"
               onChange={(e) => setCheckin(e.target.value)}
             />
-            <label htmlFor="ci-star2" class="fas fa-star"></label>
+            <label htmlFor="ci-star2" className="fas fa-star"></label>
             <input
               type="radio"
               id="ci-star1"
@@ -188,8 +227,13 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="1"
               onChange={(e) => setCheckin(e.target.value)}
             />
-            <label htmlFor="ci-star1" class="fas fa-star"></label>
+            <label htmlFor="ci-star1" className="fas fa-star"></label>
           </div>
+          {submit && errors.noCheckin && (
+            <div className="cr-form-error">
+              <span>{errors.noCheckin}</span>
+            </div>
+          )}
         </div>
         <div className="cr-rating-block">
           <div className="cr-label">Communication</div>
@@ -201,7 +245,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="5"
               onChange={(e) => setCommunication(e.target.value)}
             />
-            <label htmlFor="cm-star5" class="fas fa-star"></label>
+            <label htmlFor="cm-star5" className="fas fa-star"></label>
             <input
               type="radio"
               id="cm-star4"
@@ -209,7 +253,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="4"
               onChange={(e) => setCommunication(e.target.value)}
             />
-            <label htmlFor="cm-star4" class="fas fa-star"></label>
+            <label htmlFor="cm-star4" className="fas fa-star"></label>
             <input
               type="radio"
               id="cm-star3"
@@ -217,7 +261,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="3"
               onChange={(e) => setCommunication(e.target.value)}
             />
-            <label htmlFor="cm-star3" class="fas fa-star"></label>
+            <label htmlFor="cm-star3" className="fas fa-star"></label>
             <input
               type="radio"
               id="cm-star2"
@@ -225,7 +269,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="2"
               onChange={(e) => setCommunication(e.target.value)}
             />
-            <label htmlFor="cm-star2" class="fas fa-star"></label>
+            <label htmlFor="cm-star2" className="fas fa-star"></label>
             <input
               type="radio"
               id="cm-star1"
@@ -233,8 +277,13 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="1"
               onChange={(e) => setCommunication(e.target.value)}
             />
-            <label htmlFor="cm-star1" class="fas fa-star"></label>
+            <label htmlFor="cm-star1" className="fas fa-star"></label>
           </div>
+          {submit && errors.noCommunication && (
+            <div className="cr-form-error">
+              <span>{errors.noCommunication}</span>
+            </div>
+          )}
         </div>
         <div className="cr-rating-block">
           <div className="cr-label">Value</div>
@@ -246,7 +295,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="5"
               onChange={(e) => setValue(e.target.value)}
             />
-            <label htmlFor="va-star5" class="fas fa-star"></label>
+            <label htmlFor="va-star5" className="fas fa-star"></label>
             <input
               type="radio"
               id="va-star4"
@@ -254,7 +303,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="4"
               onChange={(e) => setValue(e.target.value)}
             />
-            <label htmlFor="va-star4" class="fas fa-star"></label>
+            <label htmlFor="va-star4" className="fas fa-star"></label>
             <input
               type="radio"
               id="va-star3"
@@ -262,7 +311,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="3"
               onChange={(e) => setValue(e.target.value)}
             />
-            <label htmlFor="va-star3" class="fas fa-star"></label>
+            <label htmlFor="va-star3" className="fas fa-star"></label>
             <input
               type="radio"
               id="va-star2"
@@ -270,7 +319,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="2"
               onChange={(e) => setValue(e.target.value)}
             />
-            <label htmlFor="va-star2" class="fas fa-star"></label>
+            <label htmlFor="va-star2" className="fas fa-star"></label>
             <input
               type="radio"
               id="va-star1"
@@ -278,8 +327,13 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="1"
               onChange={(e) => setValue(e.target.value)}
             />
-            <label htmlFor="va-star1" class="fas fa-star"></label>
+            <label htmlFor="va-star1" className="fas fa-star"></label>
           </div>
+          {submit && errors.noValue && (
+            <div className="cr-form-error">
+              <span>{errors.noValue}</span>
+            </div>
+          )}
         </div>
         <div className="cr-rating-block">
           <div className="cr-label">Location</div>
@@ -291,7 +345,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="5"
               onChange={(e) => setLocation(e.target.value)}
             />
-            <label htmlFor="lo-star5" class="fas fa-star"></label>
+            <label htmlFor="lo-star5" className="fas fa-star"></label>
             <input
               type="radio"
               id="lo-star4"
@@ -299,7 +353,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="4"
               onChange={(e) => setLocation(e.target.value)}
             />
-            <label htmlFor="lo-star4" class="fas fa-star"></label>
+            <label htmlFor="lo-star4" className="fas fa-star"></label>
             <input
               type="radio"
               id="lo-star3"
@@ -307,7 +361,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="3"
               onChange={(e) => setLocation(e.target.value)}
             />
-            <label htmlFor="lo-star3" class="fas fa-star"></label>
+            <label htmlFor="lo-star3" className="fas fa-star"></label>
             <input
               type="radio"
               id="lo-star2"
@@ -315,7 +369,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="2"
               onChange={(e) => setLocation(e.target.value)}
             />
-            <label htmlFor="lo-star2" class="fas fa-star"></label>
+            <label htmlFor="lo-star2" className="fas fa-star"></label>
             <input
               type="radio"
               id="lo-star1"
@@ -323,8 +377,13 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="1"
               onChange={(e) => setLocation(e.target.value)}
             />
-            <label htmlFor="lo-star1" class="fas fa-star"></label>
+            <label htmlFor="lo-star1" className="fas fa-star"></label>
           </div>
+          {submit && errors.noLocation && (
+            <div className="cr-form-error">
+              <span>{errors.noLocation}</span>
+            </div>
+          )}
         </div>
         <div className="cr-rating-block">
           <div className="cr-label">Accuracy</div>
@@ -336,7 +395,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="5"
               onChange={(e) => setAccuracy(e.target.value)}
             />
-            <label htmlFor="ac-star5" class="fas fa-star"></label>
+            <label htmlFor="ac-star5" className="fas fa-star"></label>
             <input
               type="radio"
               id="ac-star4"
@@ -344,7 +403,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="4"
               onChange={(e) => setAccuracy(e.target.value)}
             />
-            <label htmlFor="ac-star4" class="fas fa-star"></label>
+            <label htmlFor="ac-star4" className="fas fa-star"></label>
             <input
               type="radio"
               id="ac-star3"
@@ -352,7 +411,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="3"
               onChange={(e) => setAccuracy(e.target.value)}
             />
-            <label htmlFor="ac-star3" class="fas fa-star"></label>
+            <label htmlFor="ac-star3" className="fas fa-star"></label>
             <input
               type="radio"
               id="ac-star2"
@@ -360,7 +419,7 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="2"
               onChange={(e) => setAccuracy(e.target.value)}
             />
-            <label htmlFor="ac-star2" class="fas fa-star"></label>
+            <label htmlFor="ac-star2" className="fas fa-star"></label>
             <input
               type="radio"
               id="ac-star1"
@@ -368,8 +427,13 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
               value="1"
               onChange={(e) => setAccuracy(e.target.value)}
             />
-            <label htmlFor="ac-star1" class="fas fa-star"></label>
+            <label htmlFor="ac-star1" className="fas fa-star"></label>
           </div>
+          {submit && errors.noAccuracy && (
+            <div className="cr-form-error">
+              <span>{errors.noAccuracy}</span>
+            </div>
+          )}
         </div>
         <div className="cr-content-block">
           <div className="cr-content-label">Review</div>
@@ -381,10 +445,21 @@ function ReviewForm({ review, type, spotId, setEditModal }) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
+
+          {submit && errors.noContent && (
+            <div className="cr-form-error">
+              <span>{errors.noContent}</span>
+            </div>
+          )}
         </div>
-        <button className="cr-bt-block">
-          <span>Submit</span>
-        </button>
+        <div className="flex s-b plr-8">
+          <button className="cr-bt-block" onClick={() => setReviewModal(false)}>
+            <span>Cancel</span>
+          </button>
+          <button className="cr-bt-block" onClick={handleSubmit}>
+            <span>Submit</span>
+          </button>
+        </div>
       </div>
     </form>
   );

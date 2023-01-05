@@ -265,6 +265,12 @@ def add_review(spotId):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     review = Review.query.filter_by(userId=current_user.id, spotId=spotId).first()
+    print('--------')
+    print('--------')
+    print('--------review form data', form.data)
+    print('--------')
+    print('--------')
+
 
     if review:
         return {'error': 'You have posted a review already.'}
@@ -273,19 +279,19 @@ def add_review(spotId):
         content = form.data["content"]
         cleanliness = form.data["cleanliness"]
         check_in = form.data["check_in"]
-        communicatoin =form.data["communicatoin"]
+        communication =form.data["communicatoin"]
         value = form.data["value"]
         location = form.data["location"]
         accuracy = form.data["accuracy"]
 
         new_review = Review(
-            content, 
-            cleanliness,
-            check_in,
-            communicatoin,
-            value,
-            location,
-            accuracy,
+            content=content, 
+            cleanliness=cleanliness,
+            check_in=check_in,
+            communication=communication,
+            value=value,
+            location=location,
+            accuracy=accuracy,
             userId=current_user.id,
             spotId=spotId
         )

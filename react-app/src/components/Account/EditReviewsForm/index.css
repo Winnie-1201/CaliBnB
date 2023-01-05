@@ -8,15 +8,21 @@
 }
 
 .cl-block label {
-  font-size: 28px;
+  font-size: 25px;
   color: #dddddd;
-  padding: 10px 0 10px 5px;
+  padding: 10px 0 0px 5px;
   float: right;
   transition: all 0.2s ease;
 }
 .cl-block > input:checked ~ label {
   color: #fd4;
+  z-index: 100;
+  /* z-index: 999; */
 }
+/* .cl-block:not(:checked) > input {
+  top: -9999px;
+  z-index: -10;
+} */
 .cl-block > input:not(:checked) + label:hover,
 .cl-block > input:checked + label:hover,
 .cl-block:not(:checked) > label:hover ~ label {
@@ -36,12 +42,12 @@
   color: #c59b08;
   /* color: #fd4; */
 .cr-form-body {
-  margin: 10px;
+  margin: 15px 10px;
 }
 .cr-rating-block,
 .cr-content-block {
-  padding: 18px 15px 18px 15px;
-  margin: 5px 10px 10px 10px;
+  padding: 15px;
+  margin: 0px 10px 10px 10px;
   border: 1px solid #dddddd;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
@@ -96,4 +102,10 @@
   min-height: 47px;
   height: 100%;
   border-radius: 8px;
+}
+
+.cr-form-error {
+  margin-left: 8px;
+  color: #ff385c;
+  font-size: 12px;
 }
