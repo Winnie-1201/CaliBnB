@@ -44,7 +44,7 @@ function ReviewsToWrite() {
         reviewsToWrite.push(userBookings[key]);
       }
     }
-    console.log("spot that need to be review", reviewsToWrite);
+    // console.log("spot that need to be review", reviewsToWrite);
   }
 
   return (

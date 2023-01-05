@@ -19,7 +19,7 @@ function TripsPage() {
 
   const [loaded, setLoaded] = useState(false);
 
-  console.log("trips in tripspage", trips);
+  // console.log("trips in tripspage", trips);
 
   useEffect(() => {
     dispatch(getUserBookingsThunk()).then(() => setLoaded(true));
@@ -37,8 +37,8 @@ function TripsPage() {
     }
   }
 
-  console.log("upcoming trips", uTrips);
-  console.log("past trips", pTrips);
+  // console.log("upcoming trips", uTrips);
+  // console.log("past trips", pTrips);
 
   return (
     loaded && (

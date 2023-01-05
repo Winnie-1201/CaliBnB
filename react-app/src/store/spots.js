@@ -49,7 +49,7 @@ export const getOneSpotThunk = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const spot = await response.json();
-    console.log("spot", spot);
+    // console.log("spot", spot);
     dispatch(loadOne(spot));
 
     return spot;
@@ -107,7 +107,7 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
   });
 
   if (response.ok) {
-    console.log("delete spot");
+    // console.log("delete spot");
     dispatch(deleteSpot(spotId));
 
     return response;

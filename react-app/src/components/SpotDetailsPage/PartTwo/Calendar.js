@@ -24,7 +24,7 @@ function CalendarForm({
   const [focusedInput, setFocusedInput] = useState("startDate");
   const [unvaliable, setUnvaliable] = useState([]);
 
-  console.log("bookings", bookings);
+  // console.log("bookings", bookings);
   useEffect(() => {
     dispatch(getSpotBookingsThunk(spot.id));
   }, [dispatch]);

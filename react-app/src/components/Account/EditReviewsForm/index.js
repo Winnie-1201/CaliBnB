@@ -35,7 +35,7 @@ function ReviewForm({ review, type, setReviewModal }) {
   useEffect(() => {
     const newErrors = {};
 
-    console.log("cleaness in use effect", cleanliness);
+    // console.log("cleaness in use effect", cleanliness);
     if (!content)
       newErrors.noContent = "Please enter your review of the place.";
     if (!cleanliness)
