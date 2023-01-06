@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Calendar } from "react-calendar";
 import CalendarForm from "./Calendar";
 import moment from "moment";
@@ -19,16 +19,32 @@ function PartTwo({ spot }) {
   const [end, setEndDate] = useState(moment());
   const [startSelected, setStartSelected] = useState(false);
   const [endSelected, setEndSelected] = useState(false);
+  const [error, setError] = useState("");
+  const [submit, setSubmit] = useState(false);
+
+  useEffect(() => {
+    console.log("in use effect");
+    let err = "";
+    if (!startSelected || !endSelected)
+      err = "Please select the dates for your stay.";
+
+    setSubmit(false);
+    setError(err);
+  }, [startSelected, endSelected]);
 
   const handleReserve = async () => {
+    setSubmit(true);
     // console.log("start to date in com", start.toDate());
-    const booking = {
-      start: start.toISOString().split("T")[0],
-      end: end.toISOString().split("T")[0],
-    };
-    await dispatch(createBookingThunk(spot.id, booking)).then(() =>
-      history.push("/users/trips")
-    );
+    if (!error) {
+      const booking = {
+        start: start.toISOString().split("T")[0],
+        end: end.toISOString().split("T")[0],
+      };
+
+      await dispatch(createBookingThunk(spot.id, booking)).then(() =>
+        history.push("/users/trips")
+      );
+    }
   };
 
   let stay;
@@ -37,7 +53,7 @@ function PartTwo({ spot }) {
   const c_fee = Math.round((spot.clean_fee / 100) * spot.price);
 
   // console.log("start and end type", start, start.format("MM/D/YYYY"));
-
+  // console.log("error in ", error, startSelected, !startSelected);
   return (
     <div className="max-width">
       <div className="flex">
@@ -170,9 +186,9 @@ function PartTwo({ spot }) {
                   cancellations, listing inaccuracies, and other issues like
                   trouble checking in.
                 </div>
-                <button className="showmore-button">
+                {/* <button className="showmore-button">
                   Show more (change later)
-                </button>
+                </button> */}
               </section>
             </div>
           </div>
@@ -300,9 +316,17 @@ function PartTwo({ spot }) {
                         <span>Reserve</span>
                       </button>
                     </div>
-                    <ul className="flex-column other-text">
-                      <li className="mt-8">You won't be charged yet</li>
-                    </ul>
+                    {error && submit ? (
+                      <div className="reserve-error">* {error}</div>
+                    ) : (
+                      <ul className="flex-column other-text">
+                        <li className="mt-8">You won't be charged yet</li>
+                        {/* {error && submit ? (
+                        <li className="reserve-error">* {error}</li>
+                      ) : ( */}
+                        {/* )} */}
+                      </ul>
+                    )}
                     <div className="mt-24">
                       {startSelected && endSelected && (
                         <section>

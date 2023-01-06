@@ -83,7 +83,7 @@ export const signUp =
       }),
     });
 
-    console.log("response.status", response.status);
+    // console.log("response.status", response.status);
     if (response.ok) {
       const data = await response.json();
 
