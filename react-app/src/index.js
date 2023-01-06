@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App";
 import configureStore from "./store";
 import { ModalProvider } from "./context/Modal";
+import TagProvider from "./context/tag";
 
 const store = configureStore();
 
@@ -22,11 +23,13 @@ const store = configureStore();
 function Root() {
   return (
     <Provider store={store}>
-      <ModalProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ModalProvider>
+      <TagProvider>
+        <ModalProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalProvider>
+      </TagProvider>
     </Provider>
   );
 }

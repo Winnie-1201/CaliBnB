@@ -67,7 +67,7 @@ export const createBookingThunk = (spotId, booking) => async (dispatch) => {
 
   if (response.ok) {
     const booking = await response.json();
-    // console.log("create booking thunk", booking);
+    console.log("create booking thunk", booking);
     dispatch(getOneBooking(booking));
 
     return booking;

@@ -42,9 +42,9 @@ function SpotDetailsPage() {
   // console.log("all images", images);
 
   return (
-    isLoaded && (
-      <>
-        <Header />
+    <>
+      <Header />
+      {isLoaded && (
         <main className="site-content">
           <PartOne spot={spotDetail} imgs={images} />
           <PartTwo spot={spotDetail} bookings={bookings} />
@@ -52,8 +52,8 @@ function SpotDetailsPage() {
           <PartFour />
           <PartFive ownerSpots={ownerSpots} owner={owner} />
         </main>
-      </>
-    )
+      )}
+    </>
   );
 }
 

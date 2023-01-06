@@ -20,20 +20,21 @@ function PartTwo({ spot }) {
   const [startSelected, setStartSelected] = useState(false);
   const [endSelected, setEndSelected] = useState(false);
 
-  const handleReserve = () => {
+  const handleReserve = async () => {
     // console.log("start to date in com", start.toDate());
     const booking = {
       start: start.toISOString().split("T")[0],
       end: end.toISOString().split("T")[0],
     };
-    dispatch(createBookingThunk(spot.id, booking));
-    history.push("/test/trips");
+    await dispatch(createBookingThunk(spot.id, booking)).then(() =>
+      history.push("/users/trips")
+    );
   };
 
   let stay;
   if (start && end) stay = end.diff(start, "days");
-  const s_fee = Math.round(spot.service_fee * spot.price);
-  const c_fee = Math.round(spot.clean_fee * spot.price);
+  const s_fee = Math.round((spot.service_fee / 100) * spot.price);
+  const c_fee = Math.round((spot.clean_fee / 100) * spot.price);
 
   // console.log("start and end type", start, start.format("MM/D/YYYY"));
 
