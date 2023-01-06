@@ -50,7 +50,7 @@ class Booking(db.Model):
             "created": self.created,
             "updated": self.updated,
             'spotId': self.spotId,
-            'spot': self.spot.to_dict_basic(),
+            'spot': self.spot.to_dict_booking(),
             'user': self.user.to_dict()
         }
     
