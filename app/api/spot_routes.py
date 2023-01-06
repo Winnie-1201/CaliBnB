@@ -12,12 +12,12 @@ def all_spots():
     Query for all spots and return them in a list of dictionaries
     '''
     params = request.args # [('name', 'Beach')]
-    print("-------------")
-    print("-------------")
-    print("------------- request.args", params)
-    print("-------------")
-    print("-------------")
-    print("-------------")
+    # print("-------------")
+    # print("-------------")
+    # print("------------- request.args", params)
+    # print("-------------")
+    # print("-------------")
+    # print("-------------")
     if len(params) == 0 or not params.get('type'):
         spots = Spot.query.all()
         # for s in spots:
@@ -30,12 +30,12 @@ def all_spots():
         return {"spots": [spot.to_dict_details() for spot in spots]}
     else:
         # test if it works
-        print("-------------")
-        print("-------------")
-        print("------------- request.args", params)
-        print("-------------")
-        print("-------------")
-        print("-------------")
+        # print("-------------")
+        # print("-------------")
+        # print("------------- request.args", params)
+        # print("-------------")
+        # print("-------------")
+        # print("-------------")
 
         if params.get("type"):
             spots = Spot.query.filter_by(type=params.get('type'))
@@ -67,8 +67,8 @@ def spot_by_id(id):
     '''
     spot = Spot.query.get(id)
 
-    print("-------")
-    print("spot", spot)
+    # print("-------")
+    # print("spot", spot)
     return spot.to_dict_details()
 
 
@@ -159,7 +159,7 @@ def add_images(spotId):
 
     # print("------in line 144")
     image.filename = get_unique_filename(image.filename)
-    print("files name", image.filename)
+    # print("files name", image.filename)
 
     upload = upload_file_to_s3(image)
     # print("------in line 149", upload)
@@ -341,26 +341,26 @@ def create_booking(spotId):
 
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("------------")
-    print("------------")
-    print("------------", form.data)
-    print("------------")
-    print("------------")
+    # print("------------")
+    # print("------------")
+    # print("------------", form.data)
+    # print("------------")
+    # print("------------")
 
     if form.validate_on_submit:
         start = form.data['start']
         end = form.data['end']
 
-        print("------------")
-        print("------------", form.data)
-        print("start in backend", start, end)
+        # print("------------")
+        # print("------------", form.data)
+        # print("start in backend", start, end)
 
         new_booking = Booking(start=start, end=end, spotId=spotId, userId=current_user.id)
-        print("------------")
-        print("------------")
-        print("new booking", new_booking)
-        print("------------")
-        print("------------")
+        # print("------------")
+        # print("------------")
+        # print("new booking", new_booking)
+        # print("------------")
+        # print("------------")
 
 
         db.session.add(new_booking)

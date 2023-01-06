@@ -58,7 +58,7 @@ function ReviewsToWrite() {
     //     reviewsToWrite.push()
     //   }
     // }
-    console.log("spot that need to be review", reviewsToWrite);
+    // console.log("spot that need to be review", reviewsToWrite);
   }
 
   return (

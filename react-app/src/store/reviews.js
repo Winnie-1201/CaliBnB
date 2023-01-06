@@ -72,7 +72,7 @@ export const createReviewThunk = (spotId, review) => async (dispatch) => {
 };
 
 export const editReviewThunk = (review, reviewId) => async (dispatch) => {
-  console.log("review and id in thunk", review, reviewId);
+  // console.log("review and id in thunk", review, reviewId);
   const response = await fetch(`/api/reviews/${reviewId}`, {
     method: "PUT",
     headers: {
@@ -83,7 +83,7 @@ export const editReviewThunk = (review, reviewId) => async (dispatch) => {
 
   if (response.ok) {
     const review = await response.json();
-    console.log("review in thunk edit", review);
+    // console.log("review in thunk edit", review);
     dispatch(getOneReview(review));
     return review;
   }

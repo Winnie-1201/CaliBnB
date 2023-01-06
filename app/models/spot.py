@@ -55,7 +55,7 @@ class Spot(db.Model):
         }
 
         for r in reviews:
-            print('r', r.to_dict_rates())
+            # print('r', r.to_dict_rates())
             review_dict['cleanliness'] = review_dict['cleanliness'] + r.to_dict_rates()['cleanliness']
             review_dict['check_in'] = review_dict['check_in'] + r.to_dict_rates()['check_in']
             review_dict['communication'] = review_dict['communication'] + r.to_dict_rates()['communication']
@@ -107,9 +107,9 @@ class Spot(db.Model):
         }
 
     def to_dict(self):
-        print("--------")
-        print("preview image", self.images)
-        print("--------")
+        # print("--------")
+        # print("preview image", self.images)
+        # print("--------")
         return {
             "id": self.id,
             "address": self.address,
@@ -129,9 +129,9 @@ class Spot(db.Model):
         }
 
     def to_dict_details(self):
-        print("--------")
-        print("preview image", self.images)
-        print("--------")
+        # print("--------")
+        # print("preview image", self.images)
+        # print("--------")
         return {
             "id": self.id,
             "address": self.address,

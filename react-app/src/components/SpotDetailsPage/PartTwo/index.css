@@ -212,6 +212,11 @@
 .mt-8 {
   margin-top: 8px;
 }
+.reserve-error {
+  color: #ff385c;
+  font-size: 14px;
+  margin-top: 5px;
+}
 
 .baseline {
   align-items: baseline;
