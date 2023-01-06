@@ -9,15 +9,11 @@ import DropdownLogin from "./DropdownLogin";
 import "./index.css";
 
 function Header() {
+  const history = useHistory();
+
   const [showMenu, setShowMenu] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
-  // const [createSpotModal, setCreateSpotModal] = useState(false);
-  // const [next, setNext] = useState(false);
-
-  const data = {};
-
-  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const isLogin = !user || user?.error ? false : true;
@@ -46,8 +42,8 @@ function Header() {
 
   const handleCalibnb = (e) => {
     e.preventDefault();
-    history.push("/spots/current/new");
-    // setCreateSpotModal(true);
+    if (isLogin) history.push("/spots/current/new");
+    else setLoginModal(true);
   };
 
   return (
@@ -144,14 +140,16 @@ function Header() {
                   <div className="bottom flex-column">
                     <div className="text-hover flex center">
                       <div className="top-text">
-                        <div className="home">Calibnb your home</div>
+                        <div className="home" onClick={handleCalibnb}>
+                          Calibnb your home
+                        </div>
                       </div>
                     </div>
-                    <div className="text-hover flex center">
+                    {/* <div className="text-hover flex center">
                       <div className="top-text">
                         <div className="experience">Share your experience</div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}

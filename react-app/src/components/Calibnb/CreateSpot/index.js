@@ -112,29 +112,22 @@ function CreateSpot() {
       service_fee,
     };
 
-    const newSpot = await dispatch(createSpotThunk(spotData));
-    // console.log("new spot in create", newSpot);
+    if (Object.values(errors).length === 0) {
+      const newSpot = await dispatch(createSpotThunk(spotData));
 
-    if (newSpot) {
-      await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
+      if (newSpot) {
+        await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
 
-      let promise_arr = [];
+        let promise_arr = [];
 
-      img_coll.forEach((img) => {
-        promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
-      });
+        img_coll.forEach((img) => {
+          promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
+        });
 
-      Promise.all(promise_arr).then(() => history.push(`/spots/${newSpot.id}`));
-
-      // img_coll.forEach((img) => {
-      //   console.log("dispatch img ---------");
-      //    dispatch(addImageThunk(newSpot.id, img, false)); // [promise, promise]
-      // });
-      // })
-      // .then(() => {
-      //   console.log("history push -------");
-      //   history.push(`/spots/${newSpot.id}`);
-      // });
+        Promise.all(promise_arr).then(() =>
+          history.push(`/spots/${newSpot.id}`)
+        );
+      }
     }
   };
 
