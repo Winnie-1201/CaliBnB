@@ -17,8 +17,8 @@ spots = [
         beds=3,
         bath=1,
         type="camping",
-        clean_fee=0.05,
-        service_fee=0.15,
+        clean_fee=5,
+        service_fee=15,
         created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
@@ -36,8 +36,8 @@ spots = [
         beds=4,
         bath=2,
         type="cabin",
-        clean_fee=0.15,
-        service_fee=0.2,
+        clean_fee=15,
+        service_fee=2,
         created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
@@ -55,8 +55,8 @@ spots = [
         beds=2,
         bath=1,
         type="amazing views",
-        clean_fee=0.1,
-        service_fee=0.18,
+        clean_fee=1,
+        service_fee=18,
         created=datetime.datetime(2022, 9, 20)
     )
 
@@ -78,8 +78,8 @@ camping = [
         beds=4,
         bath=2,
         type="camping",
-        clean_fee=0.08,
-        service_fee=0.15,
+        clean_fee=8,
+        service_fee=15,
         created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
@@ -97,8 +97,8 @@ camping = [
         beds=2,
         bath=1,
         type="camping",
-        clean_fee=0.02,
-        service_fee=0.12,
+        clean_fee=2,
+        service_fee=12,
         created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
@@ -116,8 +116,8 @@ camping = [
         beds=1,
         bath=1,
         type="camping",
-        clean_fee=0.07,
-        service_fee=0.13,
+        clean_fee=7,
+        service_fee=13,
         created=datetime.datetime(2022, 8, 20)
     ),
     Spot(
@@ -135,8 +135,8 @@ camping = [
         beds=4,
         bath=2,
         type="camping",
-        clean_fee=0.08,
-        service_fee=0.15,
+        clean_fee=8,
+        service_fee=15,
         created=datetime.datetime(2022, 6, 20)
     ),
     Spot(
@@ -154,8 +154,8 @@ camping = [
         beds=2,
         bath=1,
         type="camping",
-        clean_fee=0.02,
-        service_fee=0.12,
+        clean_fee=2,
+        service_fee=12,
         created=datetime.datetime(2022, 7, 20)
     ),
     Spot(
@@ -173,8 +173,8 @@ camping = [
         beds=4,
         bath=2,
         type="camping",
-        clean_fee=0.08,
-        service_fee=0.15,
+        clean_fee=8,
+        service_fee=15,
         created=datetime.datetime(2022, 6, 20)
     ),
     Spot(
@@ -192,8 +192,8 @@ camping = [
         beds=4,
         bath=2,
         type="camping",
-        clean_fee=0.08,
-        service_fee=0.15,
+        clean_fee=8,
+        service_fee=15,
         created=datetime.datetime(2022, 5, 20)
     ),
     Spot(
@@ -211,8 +211,8 @@ camping = [
         beds=1,
         bath=1,
         type="camping",
-        clean_fee=0.07,
-        service_fee=0.13,
+        clean_fee=7,
+        service_fee=13,
         created=datetime.datetime(2022, 4, 20)
     ),
 ]
@@ -233,8 +233,8 @@ amazing_views = [
         beds=3,
         bath=2,
         type="amazing views",
-        clean_fee=0.11,
-        service_fee=0.12,
+        clean_fee=11,
+        service_fee=12,
         created=datetime.datetime(2022, 3, 20)
     ),
     Spot(
@@ -252,8 +252,8 @@ amazing_views = [
         beds=2,
         bath=1,
         type="amazing views",
-        clean_fee=0.08,
-        service_fee=0.15,
+        clean_fee=8,
+        service_fee=15,
         created=datetime.datetime(2022, 2, 20)
     ),
     Spot(
@@ -271,8 +271,8 @@ amazing_views = [
         beds=4,
         bath=2,
         type="amazing views",
-        clean_fee=0.09,
-        service_fee=0.12,
+        clean_fee=9,
+        service_fee=12,
         created=datetime.datetime(2022, 1, 20)
     ),
     Spot(
@@ -290,8 +290,8 @@ amazing_views = [
         beds=1,
         bath=1,
         type="amazing views",
-        clean_fee=0.11,
-        service_fee=0.12,
+        clean_fee=11,
+        service_fee=12,
         created=datetime.datetime(2022, 10, 20)
     ),
     Spot(
@@ -309,8 +309,8 @@ amazing_views = [
         beds=5,
         bath=3,
         type="amazing views",
-        clean_fee=0.05,
-        service_fee=0.12,
+        clean_fee=5,
+        service_fee=12,
         created=datetime.datetime(2022, 9, 20)
     ),
     Spot(
@@ -328,8 +328,8 @@ amazing_views = [
         beds=1,
         bath=1,
         type="amazing views",
-        clean_fee=0.08,
-        service_fee=0.12,
+        clean_fee=8,
+        service_fee=12,
         created=datetime.datetime(2022, 6, 21)
     ),
     Spot(
@@ -347,8 +347,8 @@ amazing_views = [
         beds=4,
         bath=2,
         type="amazing views",
-        clean_fee=0.06,
-        service_fee=0.13,
+        clean_fee=6,
+        service_fee=13,
         created=datetime.datetime(2022, 7, 10)
     ),
 ]
@@ -369,8 +369,8 @@ cabins = [
         beds=1,
         bath=1,
         type="cabins",
-        clean_fee=0.11,
-        service_fee=0.15,
+        clean_fee=11,
+        service_fee=15,
         created=datetime.datetime(2022, 7, 10)
     ),
     Spot(
@@ -388,8 +388,8 @@ cabins = [
         beds=7,
         bath=3,
         type="cabins",
-        clean_fee=0.25,
-        service_fee=0.18,
+        clean_fee=25,
+        service_fee=18,
         created=datetime.datetime(2022, 6, 10)
     ),
     Spot(
@@ -407,8 +407,8 @@ cabins = [
         beds=5,
         bath=2,
         type="cabins",
-        clean_fee=0.11,
-        service_fee=0.15,
+        clean_fee=11,
+        service_fee=15,
         created=datetime.datetime(2022, 8, 20)
     ),
     Spot(
@@ -426,8 +426,8 @@ cabins = [
         beds=1,
         bath=1,
         type="cabins",
-        clean_fee=0.05,
-        service_fee=0.1,
+        clean_fee=5,
+        service_fee=1,
         created=datetime.datetime(2022, 9, 2)
     ),
     Spot(
@@ -445,8 +445,8 @@ cabins = [
         beds=9,
         bath=2,
         type="cabins",
-        clean_fee=0.11,
-        service_fee=0.18,
+        clean_fee=11,
+        service_fee=18,
         created=datetime.datetime(2022, 8, 20)
     ),
     Spot(
@@ -464,8 +464,8 @@ cabins = [
         beds=3,
         bath=2,
         type="cabins",
-        clean_fee=0.11,
-        service_fee=0.15,
+        clean_fee=11,
+        service_fee=15,
         created=datetime.datetime(2022, 7, 20)
     ),
     

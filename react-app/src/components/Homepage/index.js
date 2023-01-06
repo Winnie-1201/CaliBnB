@@ -1,4 +1,5 @@
 import React from "react";
+import Banner from "./Banner";
 import Footer from "./Footer";
 import Header from "./Header";
 import "./index.css";
@@ -10,7 +11,9 @@ function Homepage() {
       {/* <div className="header-container"> */}
       <Header />
       {/* </div> */}
-      <div className="bannber-container"></div>
+      <div className="bannber-container">
+        <Banner />
+      </div>
       <div className="map-container grid"></div>
       <div className="main-container">
         <AllSpots />

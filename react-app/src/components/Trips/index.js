@@ -29,7 +29,10 @@ function TripsPage() {
     allTrips = Object.values(trips);
 
     for (let trip of allTrips) {
-      if (new Date(trip.start) > new Date()) {
+      if (
+        new Date(trip.start) >
+        new Date(new Date().setDate(new Date().getDate() - 1))
+      ) {
         uTrips.push(trip);
       } else {
         pTrips.push(trip);
@@ -81,10 +84,6 @@ function TripsPage() {
                               </div>
                               <div className="tc-date">
                                 <span className="tc-date-text">
-                                  {console.log(
-                                    "trip start date",
-                                    dateTransfer("date_num", trip.start)
-                                  )}
                                   {dateTransfer("s_month", trip.start)}{" "}
                                   {dateTransfer("date_num", trip.start)}
                                   {dateTransfer("year", trip.start) ===

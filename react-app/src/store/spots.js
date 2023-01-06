@@ -31,8 +31,8 @@ const addImg = (image, spotId) => ({
   spotId,
 });
 
-export const getAllSpotThunk = () => async (dispatch) => {
-  const response = await fetch("/api/spots");
+export const getAllSpotThunk = (type) => async (dispatch) => {
+  const response = await fetch(`/api/spots?type=${type}`);
   // console.log("response", response.ok);
 
   if (response.ok) {
