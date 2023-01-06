@@ -31,7 +31,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/spots/:spotId/review" exact={true}>
+        <Route path="/bookings/:bookingId/review" exact={true}>
           <ReviewForm />
         </Route>
         <Route path="/users/trips" exact={true}>

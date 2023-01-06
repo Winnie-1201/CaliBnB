@@ -86,7 +86,7 @@ function ReviewsToWrite() {
                     <button
                       className="rtr-review-bt"
                       onClick={() =>
-                        history.push(`/spots/${booking.spotInfo.id}/review`)
+                        history.push(`/bookings/${booking.id}/review`)
                       }
                       //   onClick={() => setReviewModal(true)}
                     >

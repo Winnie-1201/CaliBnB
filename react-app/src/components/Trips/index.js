@@ -81,15 +81,26 @@ function TripsPage() {
                               </div>
                               <div className="tc-date">
                                 <span className="tc-date-text">
+                                  {console.log(
+                                    "trip start date",
+                                    dateTransfer("date_num", trip.start)
+                                  )}
                                   {dateTransfer("s_month", trip.start)}{" "}
-                                  {dateTransfer("date_num", trip.start)}-
+                                  {dateTransfer("date_num", trip.start)}
+                                  {dateTransfer("year", trip.start) ===
+                                  dateTransfer("year", trip.end)
+                                    ? "-"
+                                    : dateTransfer("year", trip.start) + " - "}
                                   {dateTransfer("s_month", trip.start) ===
                                   dateTransfer("s_month", trip.end)
                                     ? dateTransfer("date_num", trip.end)
                                     : dateTransfer("s_month", trip.end) +
                                       " " +
                                       dateTransfer("date_num", trip.end)}
-                                  , {dateTransfer("year", trip.start)}
+                                  {dateTransfer("year", trip.start) ===
+                                  dateTransfer("year", trip.end)
+                                    ? ", " + dateTransfer("year", trip.start)
+                                    : dateTransfer("year", trip.start)}
                                 </span>
                               </div>
                             </div>
