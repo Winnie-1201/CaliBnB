@@ -155,11 +155,11 @@ review box
   margin: 6px 20px 0 0px;
   border-radius: 8px;
 }
-.pcr-left-title:hover,
+/* .pcr-left-title:hover,
 .pcr-right-title:hover {
   background-color: rgb(250, 250, 250);
   cursor: pointer;
-}
+} */
 .selected {
   border-bottom: 2px solid black;
   color: #222222;

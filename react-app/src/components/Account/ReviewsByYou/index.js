@@ -38,7 +38,7 @@ function ReviewsByYou() {
           </svg>
         </div>
         {Object.values(userReviews).length >= 1
-          ? Object.values(userReviews).length + " reivews"
+          ? Object.values(userReviews).length + " reviews"
           : Object.values(userReviews).length + " review"}
       </h2>
       <div className="rp-body">

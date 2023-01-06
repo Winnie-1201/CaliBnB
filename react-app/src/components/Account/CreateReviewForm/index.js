@@ -15,7 +15,7 @@ import { dateTransfer } from "../../dateTransfer";
 import Header from "../../Homepage/Header";
 import "./index.css";
 
-function ReviewForm({ type, setReviewModal }) {
+function ReviewForm({}) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -104,21 +104,21 @@ function ReviewForm({ type, setReviewModal }) {
         accuracy: ac,
       };
 
-      if (type === "create") {
-        await dispatch(createReviewThunk(spotId, review)).then(() => {
-          setReviewModal(false);
-          history.push(`/users/profile`);
-        });
-      } else if (type === "edit") {
-        await dispatch(editReviewThunk(review))
-          .then(() => dispatch(getUserReviewsThunk()))
-          .then(() => setReviewModal(false));
-      } else {
-        await dispatch(createReviewThunk(spotId, review)).then(() => {
-          // setReviewModal(false);
-          history.push(`/users/profile`);
-        });
-      }
+      // if (type === "create") {
+      //   await dispatch(createReviewThunk(spotId, review)).then(() => {
+      //     setReviewModal(false);
+      //     history.push(`/users/profile`);
+      //   });
+      // } else if (type === "edit") {
+      //   await dispatch(editReviewThunk(review))
+      //     .then(() => dispatch(getUserReviewsThunk()))
+      //     .then(() => setReviewModal(false));
+      // } else {
+      await dispatch(createReviewThunk(spotId, review)).then(() => {
+        // setReviewModal(false);
+        history.push(`/users/profile`);
+      });
+      // }
     }
   };
 
@@ -507,7 +507,7 @@ function ReviewForm({ type, setReviewModal }) {
               <div className="flex s-b plr-8">
                 <button
                   className="cr-bt-block"
-                  onClick={() => setReviewModal(false)}
+                  onClick={() => history.push("/users/trips")}
                 >
                   <span>Cancel</span>
                 </button>
