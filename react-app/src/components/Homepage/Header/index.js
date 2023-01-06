@@ -61,8 +61,8 @@ function Header() {
           </div>
         </div>
         <div className="header-mid plr-24">
-          <div className="flex mid-box">
-            {/* change the buttons to input later */}
+          {/* <div className="flex mid-box">
+           
             <span></span>
             <button className="flex anywhere default-button z-1 relative">
               <div className="anywhere-text">Anywhere</div>
@@ -78,7 +78,7 @@ function Header() {
                 <i className="fa-solid fa-magnifying-glass" />
               </div>
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="header-right">
           <div className="flex center relative h-80">

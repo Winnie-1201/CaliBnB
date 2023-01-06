@@ -11,6 +11,7 @@ import Calibnb from "./components/Calibnb";
 import EditSpot from "./components/Calibnb/EditSpot";
 import TripsPage from "./components/Trips";
 import ReviewForm from "./components/Account/CreateReviewForm";
+import Footer from "./components/Homepage/Footer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,24 +34,31 @@ function App() {
       <Switch>
         <Route path="/bookings/:bookingId/review" exact={true}>
           <ReviewForm />
+          <Footer />
         </Route>
         <Route path="/users/trips" exact={true}>
           <TripsPage />
+          <Footer />
         </Route>
         <Route path="/spots/:spotId/edit" exact={true}>
           <EditSpot />
+          <Footer />
         </Route>
         <Route path="/users/calibnb" exact={true}>
           <Calibnb />
+          <Footer />
         </Route>
         <Route path="/users/profile" exact={true}>
           <Account />
+          <Footer />
         </Route>
         <Route path="/spots/current/new" exact={true}>
           <CreateSpot />
+          <Footer />
         </Route>
         <Route path="/spots/:spotId" exact={true}>
           <SpotDetalsPage />
+          <Footer />
         </Route>
         <Route path="/" exact={true}>
           <Homepage />
