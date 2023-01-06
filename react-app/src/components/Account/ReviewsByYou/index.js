@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserReviewsThunk } from "../../../store/reviews";
+import { Modal } from "../../../context/Modal";
+import { deleteReviewThunk, getUserReviewsThunk } from "../../../store/reviews";
 import { dateTransfer } from "../../dateTransfer";
+import EditReviewModal from "../EditReviewModal";
 import "./index.css";
 
 function ReviewsByYou() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const currUser = useSelector(state => state.session.user)
+  const [showReviewModal, setEditReviewModal] = useState(false);
+  const [showDelModal, setDelModal] = useState(false);
+
   const userReviews = useSelector((state) => state.reviews.userReviews);
 
-  // const [loaded, setLoaded] = useState(false);
+  const handleDelete = async (e, reviewId) => {
+    e.preventDefault();
 
-  // useEffect(() => {
-  //   dispatch(getUserReviewsThunk()).then(() => setLoaded(true));
-  // }, [dispatch]);
-
-  // console.log("userReview ----", userReviews);
+    await dispatch(deleteReviewThunk(reviewId))
+      .then(() => dispatch(getUserReviewsThunk()))
+      .then(() => setDelModal(false));
+  };
 
   return (
     // loaded && (
@@ -41,44 +45,91 @@ function ReviewsByYou() {
         {Object.values(userReviews).length > 0 ? (
           <section>
             {Object.values(userReviews).map((review) => (
-              <div className="rp-block" key={review.id}>
-                <div className="flex">
-                  <div className="rp-block-left">
-                    <div
-                      className="link-to-sd"
-                      onClick={() => history.push(`/spots/${review.spot.id}`)}
-                    >
-                      <img
-                        src={review.spot.owner.icon}
-                        className="rp-owner-icon"
-                      />
+              <div key={review.id}>
+                <div className="rp-block">
+                  <div className="flex">
+                    <div className="rp-block-left">
+                      <div
+                        className="link-to-sd"
+                        onClick={() => history.push(`/spots/${review.spot.id}`)}
+                      >
+                        <img
+                          src={review.spot.owner.icon}
+                          className="rp-owner-icon"
+                        />
+                      </div>
+                      <div className="flex-column">
+                        <button
+                          className="er-edit-bt"
+                          onClick={() => setEditReviewModal(true)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="er-delete-bt"
+                          onClick={() => setDelModal(true)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex-column">
-                      <button className="er-edit-bt">Edit</button>
-                      <button className="er-delete-bt">Delete</button>
-                    </div>
-                  </div>
-                  <div className="rp-block-right">
-                    <div className="rp-owner-info">
-                      <span className="rp-owner-name">
-                        {review.spot.owner.firstName}
-                      </span>
-                      <span className="rp-date">
-                        {dateTransfer("month", review.created) +
-                          " " +
-                          dateTransfer("year", review.created)}
-                      </span>
-                    </div>
-                    <div className="mt-16">
-                      <div className="rp-content">
-                        {review.content}
-                        {/* {review.content.length > 255 ? (
+                    <div className="rp-block-right">
+                      <div className="rp-owner-info">
+                        <span className="rp-owner-name">
+                          {review.spot.owner.firstName}
+                        </span>
+                        <span className="rp-date">
+                          {dateTransfer("month", review.created) +
+                            " " +
+                            dateTransfer("year", review.created)}
+                        </span>
+                      </div>
+                      <div className="mt-16">
+                        <div className="rp-content">
+                          {review.content}
+                          {/* {review.content.length > 255 ? (
                             review.content
                           )} */}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                {showReviewModal && (
+                  <Modal onClose={() => setEditReviewModal(false)}>
+                    <EditReviewModal
+                      setEditReviewModal={setEditReviewModal}
+                      review={review}
+                    />
+                  </Modal>
+                )}
+                {showDelModal && (
+                  <Modal onClose={() => setDelModal(false)}>
+                    <form className="del-modal-box">
+                      <div className="flex-column">
+                        <div className="del-msg">
+                          <span>
+                            Are you sure you want to delete this review?{" "}
+                          </span>
+                        </div>
+                        <div className="del-bt-box">
+                          <button
+                            className="del-bt"
+                            onClick={() => setDelModal(false)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="del-bt"
+                            onClick={(e) => handleDelete(e, review.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </Modal>
+                )}
               </div>
             ))}
           </section>

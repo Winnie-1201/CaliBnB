@@ -37,8 +37,8 @@
   cursor: pointer;
   /* border: 1px solid black; */
   background: transparent;
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
 }
 
@@ -85,6 +85,8 @@
   /* width: 30%; */
   cursor: pointer;
   margin-top: 10px;
+  width: 54px;
+  height: 32px;
   text-align: center;
   text-decoration: none;
   padding: 4px 6px;
@@ -98,4 +100,39 @@
   color: rgb(255, 255, 255);
   font-size: 12px;
   border-radius: 8px;
+}
+.del-modal-box {
+  min-height: 160px;
+  padding: 20px;
+}
+.del-msg {
+  margin: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.del-bt-box {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+}
+.del-bt {
+  margin-right: 22px;
+  border-radius: 8px;
+  border: none;
+  height: 38px;
+  width: 72px;
+  background: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  );
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  padding: 4px 6px;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-weight: 600;
 }

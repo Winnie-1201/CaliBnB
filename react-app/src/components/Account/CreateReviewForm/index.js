@@ -15,7 +15,7 @@ import { dateTransfer } from "../../dateTransfer";
 import Header from "../../Homepage/Header";
 import "./index.css";
 
-function ReviewForm({ review, type, setReviewModal }) {
+function ReviewForm({ type, setReviewModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -94,7 +94,7 @@ function ReviewForm({ review, type, setReviewModal }) {
       const lo = parseInt(location);
       const ac = parseInt(accuracy);
 
-      review = {
+      const review = {
         content: content,
         cleanliness: cl,
         check_in: ch,

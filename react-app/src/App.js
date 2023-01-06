@@ -10,7 +10,7 @@ import Account from "./components/Account";
 import Calibnb from "./components/Calibnb";
 import EditSpot from "./components/Calibnb/EditSpot";
 import TripsPage from "./components/Trips";
-import ReviewForm from "./components/Account/EditReviewsForm";
+import ReviewForm from "./components/Account/CreateReviewForm";
 
 function App() {
   const [loaded, setLoaded] = useState(false);

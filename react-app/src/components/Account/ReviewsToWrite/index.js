@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
 import { getUserBookingsThunk } from "../../../store/bookings";
-import ReviewForm from "../EditReviewsForm";
+import ReviewForm from "../CreateReviewForm";
 import "./index.css";
 
 function ReviewsToWrite() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [showReviewModal, setReviewModal] = useState(false);
+  // const [showReviewModal, setReviewModal] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const userBookings = useSelector((state) => state.bookings.userBookings);
