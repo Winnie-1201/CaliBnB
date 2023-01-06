@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserBookingsThunk } from "../../store/bookings";
+import { getUserReviewsThunk } from "../../store/reviews";
+import ReviewsToWrite from "../Account/ReviewsToWrite";
 import { dateTransfer } from "../dateTransfer";
 import Header from "../Homepage/Header";
 import "./index.css";
@@ -22,7 +24,9 @@ function TripsPage() {
   // console.log("trips in tripspage", trips);
 
   useEffect(() => {
-    dispatch(getUserBookingsThunk()).then(() => setLoaded(true));
+    dispatch(getUserBookingsThunk())
+      .then(() => dispatch(getUserReviewsThunk()))
+      .then(() => setLoaded(true));
   }, [dispatch]);
 
   if (loaded) {
@@ -218,7 +222,9 @@ function TripsPage() {
               <></>
             )}
           </div>
-          <div className="tp-ct-container"></div>
+          <div className="tp-ct-container">
+            <ReviewsToWrite />
+          </div>
         </main>
       </>
     )
