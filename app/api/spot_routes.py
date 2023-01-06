@@ -12,7 +12,13 @@ def all_spots():
     Query for all spots and return them in a list of dictionaries
     '''
     params = request.args # [('name', 'Beach')]
-    if len(params) == 0:
+    # print("-------------")
+    # print("-------------")
+    # print("------------- request.args", params)
+    # print("-------------")
+    # print("-------------")
+    # print("-------------")
+    if len(params) == 0 or not params.get('type'):
         spots = Spot.query.all()
         # for s in spots:
 
@@ -24,14 +30,22 @@ def all_spots():
         return {"spots": [spot.to_dict_details() for spot in spots]}
     else:
         # test if it works
-        spots = Spot.query.all()
-        if params.get('name'):
-            spots = spots.filter_by(name=params.get('name'))
-        if params.get('min'):
-            spots = spots.filter(Spot.price >= params.get('min'))
-        if params.get('max'):
-            spots = spots.filter(Spot.price <= params.get('max'))
-        spots = spots.all()
+        # print("-------------")
+        # print("-------------")
+        # print("------------- request.args", params)
+        # print("-------------")
+        # print("-------------")
+        # print("-------------")
+
+        if params.get("type"):
+            spots = Spot.query.filter_by(type=params.get('type'))
+        # if params.get('name'):
+        #     spots = spots.filter_by(name=params.get('name'))
+        # if params.get('min'):
+        #     spots = spots.filter(Spot.price >= params.get('min'))
+        # if params.get('max'):
+        #     spots = spots.filter(Spot.price <= params.get('max'))
+        # spots = spots.all()
 
         return {'spots': [spot.to_dict_details() for spot in spots]}
 
@@ -53,8 +67,8 @@ def spot_by_id(id):
     '''
     spot = Spot.query.get(id)
 
-    print("-------")
-    print("spot", spot)
+    # print("-------")
+    # print("spot", spot)
     return spot.to_dict_details()
 
 
@@ -67,11 +81,11 @@ def create_spot():
 
     if form.validate_on_submit:
 
-        print('-------')
-        print('-------')
-        print("------", form.data)
-        print('-------')
-        print('-------')
+        # print('-------')
+        # print('-------')
+        # print("------", form.data)
+        # print('-------')
+        # print('-------')
         address = form.data["address"]
         city = form.data["city"]
         state = form.data["state"]
@@ -131,43 +145,43 @@ def add_images(spotId):
         return {'errors': 'image required'}, 400
 
     image = request.files['image']
-    print('----------')
-    print('----------')
-    print("going in bakcend creating image", image)
-    print("going in bakcend creating image", image.filename)
-    print('----------')
-    print('----------')
+    # print('----------')
+    # print('----------')
+    # print("going in bakcend creating image", image)
+    # print("going in bakcend creating image", image.filename)
+    # print('----------')
+    # print('----------')
     # print('----------')
 
     if not allowed_file(image.filename):
-        print("------in line 141")
+        # print("------in line 141")
         return {'errors': 'file type is not permitted'}, 400
 
-    print("------in line 144")
+    # print("------in line 144")
     image.filename = get_unique_filename(image.filename)
-    print("files name", image.filename)
+    # print("files name", image.filename)
 
     upload = upload_file_to_s3(image)
-    print("------in line 149", upload)
+    # print("------in line 149", upload)
     if 'url' not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
-        print("------in line 154")
+        # print("------in line 154")
         return upload, 400
 
-    print("------in line 157", upload)
+    # print("------in line 157", upload)
     url = upload['url']
     preview = request.form['preview'] == 'true'
 
-    print("url------", url)
-    print('preview------', preview)
+    # print("url------", url)
+    # print('preview------', preview)
 
     new_img = Image(url=url, preview=preview, spotId=spotId)
 
-    print("-------------")
-    print("-------------new img", new_img)
-    print("-------------")
+    # print("-------------")
+    # print("-------------new img", new_img)
+    # print("-------------")
 
     spot.images.append(new_img)
     
@@ -179,11 +193,11 @@ def add_images(spotId):
 @spot_routes.route('/<int:spotId>/images')
 def spot_images(spotId):
     images = Image.query.filter_by(spotId=spotId).all()
-    print('-----')
-    print('-----')
-    print('----- images in backend', images)
-    print('-----')
-    print('-----')
+    # print('-----')
+    # print('-----')
+    # print('----- images in backend', images)
+    # print('-----')
+    # print('-----')
 
     return {'images': [i.to_dict() for i in images]}
     
@@ -327,6 +341,11 @@ def create_booking(spotId):
 
     form = BookingForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # print("------------")
+    # print("------------")
+    # print("------------", form.data)
+    # print("------------")
+    # print("------------")
 
     if form.validate_on_submit:
         start = form.data['start']

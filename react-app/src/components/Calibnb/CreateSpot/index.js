@@ -67,7 +67,7 @@ function CreateSpot() {
 
     if (images && Object.values(images).length < 4)
       newErrors.shortImage =
-        "Please upload at least five images for your spot (preview image included).";
+        "Please upload a preview image and at least 4 other images for your spot.";
 
     // setNextStep(false);
     setSubmit(false);
@@ -112,29 +112,22 @@ function CreateSpot() {
       service_fee,
     };
 
-    const newSpot = await dispatch(createSpotThunk(spotData));
-    // console.log("new spot in create", newSpot);
+    if (Object.values(errors).length === 0) {
+      const newSpot = await dispatch(createSpotThunk(spotData));
 
-    if (newSpot) {
-      await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
+      if (newSpot) {
+        await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
 
-      let promise_arr = [];
+        let promise_arr = [];
 
-      img_coll.forEach((img) => {
-        promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
-      });
+        img_coll.forEach((img) => {
+          promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
+        });
 
-      Promise.all(promise_arr).then(() => history.push(`/spots/${newSpot.id}`));
-
-      // img_coll.forEach((img) => {
-      //   console.log("dispatch img ---------");
-      //    dispatch(addImageThunk(newSpot.id, img, false)); // [promise, promise]
-      // });
-      // })
-      // .then(() => {
-      //   console.log("history push -------");
-      //   history.push(`/spots/${newSpot.id}`);
-      // });
+        Promise.all(promise_arr).then(() =>
+          history.push(`/spots/${newSpot.id}`)
+        );
+      }
     }
   };
 
@@ -158,8 +151,8 @@ function CreateSpot() {
 
   const total =
     Number(price) +
-    Math.round(price * service_fee) +
-    Math.round(price * clean_fee);
+    Math.round((price * service_fee) / 100) +
+    Math.round((price * clean_fee) / 100);
 
   // console.log("preview image outside", preview_img);
 
@@ -575,9 +568,8 @@ function CreateSpot() {
                     </label>
                     <input
                       type="number"
-                      step="0.01"
-                      min="0"
-                      max="1"
+                      min="1"
+                      max="100"
                       className="p-10"
                       value={service_fee}
                       onChange={(e) => setservice_fee(e.target.value)}
@@ -590,9 +582,8 @@ function CreateSpot() {
                     <label className="cs-detail-label">clean_fee fee (%)</label>
                     <input
                       type="number"
-                      step="0.01"
-                      min="0"
-                      max="1"
+                      min="1"
+                      max="100"
                       className="p-10"
                       value={clean_fee}
                       onChange={(e) => setclean_fee(e.target.value)}

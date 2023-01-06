@@ -1,0 +1,35 @@
+.banner-box {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.bb-bt {
+  background-color: unset;
+  text-align: center;
+  border-radius: 8px;
+  border: unset;
+  margin: 12px 30px 10px 0;
+  padding: 4px 0 10px 0;
+  /* transition: color 0.2s ease; */
+  /* color: #717171; */
+  font-size: 12px;
+  filter: opacity(60%);
+  cursor: pointer;
+}
+.gap-8 {
+  gap: 8px;
+}
+.bb-img {
+  width: 24px;
+  height: auto;
+  /* aspect-ratio:  auto 24/24; */
+}
+.highlight {
+  filter: opacity(100%);
+  border-radius: 0;
+  border-bottom: 2px solid black;
+}
+.bb-bt:hover {
+  border-radius: 0;
+  border-bottom: 2px solid #717171;
+}

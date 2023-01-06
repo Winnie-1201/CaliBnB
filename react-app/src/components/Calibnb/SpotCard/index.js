@@ -2,45 +2,35 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Modal } from "../../../context/Modal";
 import { getImgsBySpotThunk } from "../../../store/images";
-import {
-  deleteSpotThunk,
-  getOneSpotThunk,
-  getOwnerSpotsThunk,
-} from "../../../store/spots";
+import { deleteSpotThunk, getOneSpotThunk } from "../../../store/spots";
 import { dateTransfer } from "../../dateTransfer";
 import "./index.css";
 
-function SpotCard({ spots }) {
+function SpotCard() {
   const history = useHistory();
   const dispatch = useDispatch();
-
-  // const userSpots = Object.values(spots);
 
   const userSpots = Object.values(
     useSelector((state) => state.spots.ownerSpots)
   );
-  const currUser = useSelector((state) => state.session.user);
+  // const currUser = useSelector((state) => state.session.user);
 
-  // useEffect(() => {
-  //   dispatch(getOwnerSpotsThunk(currUser.id));
-  // }, [dispatch]);
+  const [showDelSpotModal, setDelSpotModal] = useState(false);
+  const [delId, setDelId] = useState();
 
   const handleEdit = (e, spotId) => {
     e.preventDefault();
-    // console.log("go in the edit page");
     dispatch(getOneSpotThunk(spotId))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => history.push(`/spots/${spotId}/edit`));
   };
 
-  // const handleDelete = (e, spotId) => {
-  //   e.preventDefault();
-  //   dispatch(deleteSpotThunk(spotId));
-  // };
-  // if (!userSpots) return null;
-
-  // console.log("userSpot in comp", userSpots);
+  const handleDelete = async (e, spotId) => {
+    e.preventDefault();
+    await dispatch(deleteSpotThunk(spotId)).then(() => setDelSpotModal(false));
+  };
 
   return (
     <>
@@ -67,10 +57,9 @@ function SpotCard({ spots }) {
             </div>
             <div
               className="sc-del mtb-16-24"
-              onClick={async () => {
-                await dispatch(deleteSpotThunk(spot.id)).then(() =>
-                  dispatch(getOwnerSpotsThunk(currUser.id))
-                );
+              onClick={() => {
+                setDelSpotModal(true);
+                setDelId(spot.id);
               }}
             >
               <button className="sc-del-bt">Delete</button>
@@ -78,6 +67,31 @@ function SpotCard({ spots }) {
           </div>
         </div>
       ))}
+      {showDelSpotModal && (
+        <Modal onClose={() => setDelSpotModal(false)}>
+          <form className="del-modal-box">
+            <div className="flex-column">
+              <div className="del-msg">
+                <span>Are you sure you want to delete this spot? </span>
+              </div>
+              <div className="del-bt-box">
+                <button
+                  className="del-bt"
+                  onClick={() => setDelSpotModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="del-bt"
+                  onClick={(e) => handleDelete(e, delId)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </form>
+        </Modal>
+      )}
     </>
   );
 }

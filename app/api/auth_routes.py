@@ -64,12 +64,20 @@ def sign_up():
         user = User(
             username=form.data["username"],
             email=form.data["email"],
+            firstName=form.data['firstName'],
+            lastName=form.data["lastName"],
             password=form.data["passowrd"]
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
+
+    # print("----------")
+    # print("----------")
+    # print("---------- form errors", form.errors)
+    # print("---------- validatiaon", validation_errors_to_error_messages(form.errors))
+    # print("----------")
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

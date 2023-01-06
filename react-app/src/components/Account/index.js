@@ -39,9 +39,9 @@ function Account() {
                         alt="profile icon"
                       />
                     </div>
-                    <div className="pc-icon-text">
+                    {/* <div className="pc-icon-text">
                       <div className="link-to-update">Update photo</div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="mb-16">
                     <svg
@@ -68,12 +68,13 @@ function Account() {
                         </div>
                         <div className="pc-right-join">Joined in</div>
                       </div>
-                      <div className="pc-edit-profile">
+                      {/* <div className="pc-edit-profile">
                         <button className="pc-edit-button">Edit profile</button>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="pcr-header">
                       <div
+                        // className="pcr-left-title"
                         className={`pcr-left-title ${
                           openLeft ? "selected" : ""
                         }`}
@@ -82,9 +83,9 @@ function Account() {
                           setOpenRight(false);
                         }}
                       >
-                        Reivews by you
+                        Reviews by you
                       </div>
-                      <div
+                      {/* <div
                         className={`pcr-right-title ${
                           openRight ? "selected" : ""
                         }`}
@@ -94,11 +95,12 @@ function Account() {
                         }}
                       >
                         Reviews to write
-                      </div>
+                      </div> */}
                     </div>
                     <div className="pc-show-left">
-                      {openLeft && <ReviewsByYou />}
-                      {openRight && <ReviewsToWrite />}
+                      <ReviewsByYou />
+                      {/* {openLeft && <ReviewsByYou />} */}
+                      {/* {openRight && <ReviewsToWrite />} */}
                     </div>
                   </section>
                 </div>

@@ -48,6 +48,7 @@ export const getOneBookingThunk = (bookingId) => async (dispatch) => {
 
   if (response.ok) {
     const booking = await response.json();
+    // console.log("get one booking", booking);
     dispatch(getOneBooking(booking));
     return booking;
   }
@@ -68,6 +69,7 @@ export const createBookingThunk = (spotId, booking) => async (dispatch) => {
     const booking = await response.json();
     // console.log("create booking thunk", booking);
     dispatch(getOneBooking(booking));
+
     return booking;
   }
 };
@@ -99,10 +101,10 @@ export const cancelBookingThunk = (bookingId) => async (dispatch) => {
   }
 };
 
-const initialState = { spotBookings: {}, userBookings: {} };
+const initialState = { spotBookings: {}, userBookings: {}, oneBooking: null };
 
 export default function bookingReducer(state = initialState, action) {
-  let newState = { spotBookings: {}, userBookings: {} };
+  let newState = { spotBookings: {}, userBookings: {}, oneBooking: null };
   switch (action.type) {
     case SPOT_BOOKING:
       action.bookings.forEach(
@@ -116,7 +118,9 @@ export default function bookingReducer(state = initialState, action) {
       );
       return newState;
     // return { ...state, userReviews: action.reviews };
-    // case LOAD_ONE:
+    case LOAD_ONE:
+      newState.oneBooking = action.booking;
+      return newState;
 
     case CANCEL:
       // change the userReview to a dict

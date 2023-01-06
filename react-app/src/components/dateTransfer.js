@@ -1,4 +1,5 @@
 export function dateTransfer(type, date) {
+  date = new Date(date).setDate(new Date(date).getDate() + 1);
   switch (type) {
     case "hour":
       return new Date(date).getHours();

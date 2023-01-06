@@ -32,7 +32,7 @@ def edit_review(reviewId):
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
  
-    review = Spot.query.get(reviewId)
+    review = Review.query.get(reviewId)
 
     if review.userId == current_user.id:
         if form.validate_on_submit:

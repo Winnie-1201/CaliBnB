@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useTag } from "../../../context/tag";
 import { getAllSpotThunk } from "../../../store/spots";
 import "./index.css";
 
@@ -9,11 +10,13 @@ function AllSpots() {
   const dispatch = useDispatch();
 
   const [loaded, setLoaded] = useState(false);
+
   let spots = useSelector((state) => state.spots.allSpots);
+  const { type } = useTag();
 
   useEffect(() => {
-    dispatch(getAllSpotThunk()).then(() => setLoaded(true));
-  }, [dispatch]);
+    dispatch(getAllSpotThunk(type)).then(() => setLoaded(true));
+  }, [dispatch, type]);
 
   if (loaded) {
     spots = Object.values(spots);

@@ -84,7 +84,7 @@ section {
 
 .show-review,
 .show-map {
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 14px;
   font-weight: 500;
   position: relative;
@@ -115,7 +115,7 @@ section {
 }
 
 .save-button {
-  cursor: pointer;
+  /* cursor: pointer; */
   margin: 0px -8px;
   text-align: center;
   width: auto;

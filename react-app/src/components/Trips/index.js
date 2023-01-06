@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUserBookingsThunk } from "../../store/bookings";
+import { getUserReviewsThunk } from "../../store/reviews";
+import ReviewsToWrite from "../Account/ReviewsToWrite";
 import { dateTransfer } from "../dateTransfer";
 import Header from "../Homepage/Header";
 import "./index.css";
@@ -22,14 +24,19 @@ function TripsPage() {
   // console.log("trips in tripspage", trips);
 
   useEffect(() => {
-    dispatch(getUserBookingsThunk()).then(() => setLoaded(true));
+    dispatch(getUserBookingsThunk())
+      .then(() => dispatch(getUserReviewsThunk()))
+      .then(() => setLoaded(true));
   }, [dispatch]);
 
   if (loaded) {
     allTrips = Object.values(trips);
 
     for (let trip of allTrips) {
-      if (new Date(trip.start) > new Date()) {
+      if (
+        new Date(trip.start) >
+        new Date(new Date().setDate(new Date().getDate() - 1))
+      ) {
         uTrips.push(trip);
       } else {
         pTrips.push(trip);
@@ -82,14 +89,21 @@ function TripsPage() {
                               <div className="tc-date">
                                 <span className="tc-date-text">
                                   {dateTransfer("s_month", trip.start)}{" "}
-                                  {dateTransfer("date_num", trip.start)}-
+                                  {dateTransfer("date_num", trip.start)}
+                                  {dateTransfer("year", trip.start) ===
+                                  dateTransfer("year", trip.end)
+                                    ? "-"
+                                    : dateTransfer("year", trip.start) + " - "}
                                   {dateTransfer("s_month", trip.start) ===
                                   dateTransfer("s_month", trip.end)
                                     ? dateTransfer("date_num", trip.end)
                                     : dateTransfer("s_month", trip.end) +
                                       " " +
                                       dateTransfer("date_num", trip.end)}
-                                  , {dateTransfer("year", trip.start)}
+                                  {dateTransfer("year", trip.start) ===
+                                  dateTransfer("year", trip.end)
+                                    ? ", " + dateTransfer("year", trip.start)
+                                    : dateTransfer("year", trip.start)}
                                 </span>
                               </div>
                             </div>
@@ -208,7 +222,9 @@ function TripsPage() {
               <></>
             )}
           </div>
-          <div className="tp-ct-container"></div>
+          <div className="tp-ct-container">
+            <ReviewsToWrite />
+          </div>
         </main>
       </>
     )

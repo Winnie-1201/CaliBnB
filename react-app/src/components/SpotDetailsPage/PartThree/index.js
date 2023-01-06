@@ -180,13 +180,13 @@ function PartThree({ reviews, spot }) {
                     </div>
                     <div className="r-text-bottom">
                       <div className="r-text-container">{r.content}</div>
-                      {r.content.length >= 160 && (
+                      {/* {r.content.length >= 160 && (
                         <div className="r-show-more">
                           <button className="r-show-more-button">
                             Show more {">"}
                           </button>
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>

@@ -2,6 +2,7 @@
   margin: 40px auto 0 auto;
   max-width: 1120px;
   padding: 0 40px;
+  min-height: 100vh;
 }
 
 .cc-header {
