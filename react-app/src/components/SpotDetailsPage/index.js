@@ -51,7 +51,7 @@ function SpotDetailsPage() {
           <PartOne spot={spotDetail} imgs={images} />
           <PartTwo spot={spotDetail} bookings={bookings} />
           <PartThree spot={spotDetail} reviews={reviews} />
-          <PartFour />
+          {/* <PartFour /> */}
           <PartFive ownerSpots={ownerSpots} owner={owner} />
         </main>
       )}

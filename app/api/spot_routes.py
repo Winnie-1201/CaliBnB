@@ -267,7 +267,7 @@ def spot_reviews(spotId):
     return {'Reviews': [review.to_dict() for review in reviews]}
         
 
-@spot_routes.route('<int:spotId>/reviews', methods=["POST"])
+@spot_routes.route('/<int:spotId>/reviews', methods=["POST"])
 @login_required
 def add_review(spotId):
 

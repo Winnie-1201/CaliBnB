@@ -55,6 +55,7 @@ export const getOneReviewThunk = (reviewId) => async (dispatch) => {
 };
 
 export const createReviewThunk = (spotId, review) => async (dispatch) => {
+  // console.log("spotId in create review thunk", spotId);
   const response = await fetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: {
