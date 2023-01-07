@@ -92,6 +92,7 @@ class Spot(db.Model):
             "name": self.name,
             "price": self.price,
             # 'preview_img': self.images[0].to_dict()['url'],
+            'type': self.type,
             'tags': self.tags,
             'owner': owner.to_dict(),
             'beds': self.beds
@@ -120,6 +121,7 @@ class Spot(db.Model):
             "price": self.price,
             # 'preview_img': self.images[0].to_dict()['url'],
             "images": [i.to_dict_basic() for i in self.images],
+            'type': self.type,
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
@@ -141,6 +143,7 @@ class Spot(db.Model):
             "name": self.name,
             "price": self.price,
             # 'preview_img': self.images[0].to_dict()['url'],
+            'type': self.type,
             'tags': self.tags,
             "created": self.created,
             "updated": self.updated,
