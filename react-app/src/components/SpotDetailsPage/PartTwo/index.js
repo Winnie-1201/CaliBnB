@@ -109,7 +109,9 @@ function PartTwo({ spot }) {
                       <div className="wh-100-img">
                         <img
                           className="img-size-host"
-                          src={spot.owner.icon}
+                          src={
+                            spot.owner.icon ? spot.owner.icon : "/default.JPG"
+                          }
                           alt="host icon"
                           onError={(e) => {
                             e.currentTarget.src = "/default.JPG";
@@ -195,12 +197,12 @@ function PartTwo({ spot }) {
               </section>
             </div>
           </div>
-          <div className="block-container not-sure-yet">
+          {/* <div className="block-container not-sure-yet">
             Where you'll sleep block
           </div>
           <div className="block-container not-sure-yet">
             what this place offers block
-          </div>
+          </div> */}
           <div className="block-container-no-border w-100">
             <div className="ptm-48 w-100">
               <div className="calender-header">
@@ -311,9 +313,9 @@ function PartTwo({ spot }) {
                             </div>
                           </button>
                         </div>
-                        <div className="flex holder">
+                        {/* <div className="flex holder">
                           guests dropdown holder
-                        </div>
+                        </div> */}
                       </div>
                       <button className="bbox-bottom" onClick={handleReserve}>
                         <span>Reserve</span>
@@ -366,13 +368,13 @@ function PartTwo({ spot }) {
                   </div>
                 </div>
               </div>
-              <div className="mt-24">
+              {/* <div className="mt-24">
                 <div className="rare-fine-box">
                   <div className="flex">
                     <div className="pr-16">block placeholder</div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
