@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useTag } from "../../../context/tag";
 import { getAllSpotThunk } from "../../../store/spots";
+import LoadingBlock from "../../LoadingBlock";
 import "./index.css";
 
 function AllSpots() {
@@ -21,6 +22,8 @@ function AllSpots() {
   if (loaded) {
     spots = Object.values(spots);
   }
+
+  if (!loaded) return <LoadingBlock />;
 
   return (
     loaded && (
