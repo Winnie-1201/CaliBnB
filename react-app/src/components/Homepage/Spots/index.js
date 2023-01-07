@@ -42,6 +42,9 @@ function AllSpots() {
                       className="one-spot-img"
                       src={spot.images[0].url}
                       alt="spot"
+                      onError={(e) => {
+                        e.currentTarget.src = "/default.JPG";
+                      }}
                     />
                   </div>
                   <div className="flex s-b plr-8">

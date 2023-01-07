@@ -138,7 +138,13 @@ function ReviewForm({}) {
                   <div className="flex-column">
                     <div className="crfs-one">
                       <div className="crfs-img-container">
-                        <img src={spot.images[0].url} className="crfs-img" />
+                        <img
+                          src={spot.images[0].url}
+                          className="crfs-img"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
+                        />
                       </div>
                     </div>
                     <div className="crfs-two">

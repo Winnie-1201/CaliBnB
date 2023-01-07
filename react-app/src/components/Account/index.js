@@ -39,6 +39,9 @@ function Account() {
                         className="pc-icon"
                         src={currUser.icon}
                         alt="profile icon"
+                        onError={(e) => {
+                          e.currentTarget.src = "/default.JPG";
+                        }}
                       />
                     </div>
                     {/* <div className="pc-icon-text">

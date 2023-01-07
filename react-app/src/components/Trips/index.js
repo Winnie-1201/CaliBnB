@@ -76,6 +76,9 @@ function TripsPage() {
                                   className="tp-img"
                                   src={trip.spotInfo.images[0].url}
                                   alt="trip image"
+                                  onError={(e) => {
+                                    e.currentTarget.src = "/default.JPG";
+                                  }}
                                 />
                               </div>
                               <div className="grid-li-right">
@@ -163,6 +166,9 @@ function TripsPage() {
                         <img
                           className="nout-img"
                           src="https://a0.muscache.com/im/pictures/d727f355-3f10-44b5-9750-d1efca2438fc.jpg?im_w=320"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                     </div>
@@ -188,6 +194,9 @@ function TripsPage() {
                                   className="tp-img"
                                   src={trip.spotInfo.images[0].url}
                                   alt="trip image"
+                                  onError={(e) => {
+                                    e.currentTarget.src = "/default.JPG";
+                                  }}
                                 />
                               </div>
                               <div className="grid-li-right">

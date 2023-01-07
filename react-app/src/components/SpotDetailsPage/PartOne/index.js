@@ -92,6 +92,9 @@ function PartOne({ spot, imgs }) {
                       className="img-size"
                       src={images[0]?.url}
                       alt="spot pic"
+                      onError={(e) => {
+                        e.currentTarget.src = "/default.JPG";
+                      }}
                     />
                   </div>
                   <div className="flex-column img-2-3">
@@ -101,6 +104,9 @@ function PartOne({ spot, imgs }) {
                           className="img-size"
                           src={images[1]?.url}
                           alt="spot pic"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                       <div className="h-50 pt-8">
@@ -108,6 +114,9 @@ function PartOne({ spot, imgs }) {
                           className="img-size"
                           src={images[2]?.url}
                           alt="spot pic"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                     </div>
@@ -120,6 +129,9 @@ function PartOne({ spot, imgs }) {
                           className="img-size"
                           src={images[3]?.url}
                           alt="spot pic"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                       <div className="h-50 pt-8">
@@ -127,6 +139,9 @@ function PartOne({ spot, imgs }) {
                           className="img-size"
                           src={images[4]?.url}
                           alt="spot pic"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                     </div>
