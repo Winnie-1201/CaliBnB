@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useTag } from "../../../context/tag";
 import { getAllSpotThunk } from "../../../store/spots";
+import LoadingBlock from "../../LoadingBlock";
 import "./index.css";
 
 function AllSpots() {
@@ -22,6 +23,8 @@ function AllSpots() {
     spots = Object.values(spots);
   }
 
+  if (!loaded) return <LoadingBlock />;
+
   return (
     loaded && (
       <div className="main-inner">
@@ -39,6 +42,9 @@ function AllSpots() {
                       className="one-spot-img"
                       src={spot.images[0].url}
                       alt="spot"
+                      onError={(e) => {
+                        e.currentTarget.src = "/default.JPG";
+                      }}
                     />
                   </div>
                   <div className="flex s-b plr-8">

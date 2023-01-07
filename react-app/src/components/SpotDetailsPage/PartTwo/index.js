@@ -111,6 +111,9 @@ function PartTwo({ spot }) {
                           className="img-size-host"
                           src={spot.owner.icon}
                           alt="host icon"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                     </div>

@@ -79,6 +79,9 @@ function ReviewsToWrite() {
                         className="tp-img"
                         src={booking.spotInfo.images[0].url}
                         alt="trip image"
+                        onError={(e) => {
+                          e.currentTarget.src = "/default.JPG";
+                        }}
                       />
                     </div>
                     <div className="grid-li-right">

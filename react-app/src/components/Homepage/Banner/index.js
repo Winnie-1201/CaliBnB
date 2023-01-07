@@ -39,6 +39,9 @@ function Banner() {
                   className="bb-img saturate"
                   src="https://a0.muscache.com/pictures/1d477273-96d6-4819-9bda-9085f809dad3.jpg"
                   alt="all"
+                  onError={(e) => {
+                    e.currentTarget.src = "/default.JPG";
+                  }}
                 />
                 <div className="bb-text">
                   <span>All</span>
@@ -60,6 +63,9 @@ function Banner() {
                   className="bb-img"
                   src="https://a0.muscache.com/pictures/ca25c7f3-0d1f-432b-9efa-b9f5dc6d8770.jpg"
                   alt="all"
+                  onError={(e) => {
+                    e.currentTarget.src = "/default.JPG";
+                  }}
                 />
                 <div className="bb-text">
                   <span>Camping</span>
@@ -81,6 +87,9 @@ function Banner() {
                   className="bb-img"
                   src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg"
                   alt="cabins"
+                  onError={(e) => {
+                    e.currentTarget.src = "/default.JPG";
+                  }}
                 />
                 <div className="bb-text">
                   <span>Cabins</span>
@@ -102,6 +111,9 @@ function Banner() {
                   className="bb-img"
                   src="https://a0.muscache.com/pictures/3b1eb541-46d9-4bef-abc4-c37d77e3c21b.jpg"
                   alt="amazing views"
+                  onError={(e) => {
+                    e.currentTarget.src = "/default.JPG";
+                  }}
                 />
                 <div className="bb-text">
                   <span>Amazing views</span>

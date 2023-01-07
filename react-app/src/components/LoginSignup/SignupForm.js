@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useId } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
 // import "./LoginForm.css";
@@ -10,8 +11,9 @@ const checkValidName = (name) => {
   return name.split("").filter((el) => !isNaN(el)).length > 0;
 };
 
-function SignupForm() {
+function SignupForm({ setSignupModal }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -58,18 +60,27 @@ function SignupForm() {
     e.preventDefault();
 
     setSubmit(true);
-
     const data = await dispatch(
       signUp(firstName, lastName, username, email, password)
     );
     // console.log("data in comp", data);
-    if (data.errors) {
-      const errorMsg = data.errors[0].split(": ")[1];
-      setErrors({ email: errorMsg });
+    if (!data) {
+      setSignupModal(false);
+      history.push("/");
+    } else if (data.errors.length > 0) {
+      const errs = {};
+      for (let i in data.errors) {
+        const errName = data.errors[i].split(" : ")[0];
+        const errMsg = data.errors[i].split(" : ")[1];
+
+        errs[errName] = errMsg;
+      }
+      // const errorMsg = data.errors[0].split(": ")[1];
+      setErrors(errs);
     }
   };
 
-  // console.log("errors", errors);
+  // console.log("errors", errors, errors.email, submit);
   return (
     <div className="flex-column login-form">
       <div className="x"></div>
@@ -132,7 +143,9 @@ function SignupForm() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              {errors.email && <p className="su-err-msg">{errors.email}</p>}
+              {submit && errors.email && (
+                <p className="su-err-msg">{errors.email}</p>
+              )}
               {errors.validEmail && (
                 <p className="su-err-msg">{errors.validEmail}</p>
               )}
@@ -159,6 +172,9 @@ function SignupForm() {
               )}
               {submit && errors.noUsername && (
                 <p className="su-err-msg">{errors.noUsername}</p>
+              )}
+              {submit && errors.username && (
+                <p className="su-err-msg">{errors.username}</p>
               )}
             </div>
             <div className="signup-block">

@@ -228,6 +228,9 @@ function EditSpot() {
                       id="preview-img"
                       alt="preview image"
                       className="cs-preview-img"
+                      onError={(e) => {
+                        e.currentTarget.src = "/default.JPG";
+                      }}
                     />
                   </div>
                   <input

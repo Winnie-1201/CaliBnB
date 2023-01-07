@@ -42,6 +42,9 @@ function SpotCard() {
                 className="cs-img"
                 src={spot.images[0]?.url}
                 alt="spot image"
+                onError={(e) => {
+                  e.currentTarget.src = "/default.JPG";
+                }}
               />
             </div>
             <div className="sc-date">

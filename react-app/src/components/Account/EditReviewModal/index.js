@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editReviewThunk, getUserReviewsThunk } from "../../../store/reviews";
+import "./index.css";
 
 function EditReviewModal({ setEditReviewModal, review }) {
   const dispatch = useDispatch();
@@ -68,155 +69,163 @@ function EditReviewModal({ setEditReviewModal, review }) {
   };
 
   const rating = [5, 4, 3, 2, 1];
+  // console.log("content", content);
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit} className="cr-form-box">
-          <div className="cr-form-body flex-column">
-            <div className="cr-rating-block">
-              <div className="cr-label">
-                Cleanliness
-                <select
-                  name="cleanRate"
-                  value={cleanliness}
-                  onChange={(e) => setCleanliness(parseInt(e.target.value))}
-                >
-                  {rating.map((r) => (
-                    <option key={"cl" + r}>{r}</option>
-                  ))}
-                </select>
-              </div>
-              {submit && errors.noCleanliness && (
-                <div className="cr-form-error">
-                  <span>{errors.noCleanliness}</span>
-                </div>
-              )}
-            </div>
-            <div className="cr-rating-block">
-              <div className="cr-label">Check in</div>
-              <div className="cl-block">
-                <select
-                  name="checkinRate"
-                  value={check_in}
-                  onChange={(e) => setCheckin(parseInt(e.target.value))}
-                >
-                  {rating.map((r) => (
-                    <option key={"ch" + r}>{r}</option>
-                  ))}
-                </select>
-              </div>
-              {submit && errors.noCheckin && (
-                <div className="cr-form-error">
-                  <span>{errors.noCheckin}</span>
-                </div>
-              )}
-            </div>
-            <div className="cr-rating-block">
-              <div className="cr-label">Communication</div>
-              <div className="cl-block">
-                <select
-                  name="commuRate"
-                  value={communication}
-                  onChange={(e) => setCommunication(parseInt(e.target.value))}
-                >
-                  {rating.map((r) => (
-                    <option key={"cm" + r}>{r}</option>
-                  ))}
-                </select>
-              </div>
-              {submit && errors.noCommunication && (
-                <div className="cr-form-error">
-                  <span>{errors.noCommunication}</span>
-                </div>
-              )}
-            </div>
-            <div className="cr-rating-block">
-              <div className="cr-label">Value</div>
-              <div className="cl-block">
-                <select
-                  name="valueRate"
-                  value={value}
-                  onChange={(e) => setValue(parseInt(e.target.value))}
-                >
-                  {rating.map((r) => (
-                    <option key={"va" + r}>{r}</option>
-                  ))}
-                </select>
-              </div>
-              {submit && errors.noValue && (
-                <div className="cr-form-error">
-                  <span>{errors.noValue}</span>
-                </div>
-              )}
-            </div>
-            <div className="cr-rating-block">
-              <div className="cr-label">Location</div>
-              <div className="cl-block">
-                <select
-                  name="locaRate"
-                  value={location}
-                  onChange={(e) => setLocation(parseInt(e.target.value))}
-                >
-                  {rating.map((r) => (
-                    <option key={"lo" + r}>{r}</option>
-                  ))}
-                </select>
-              </div>
-              {submit && errors.noLocation && (
-                <div className="cr-form-error">
-                  <span>{errors.noLocation}</span>
-                </div>
-              )}
-            </div>
-            <div className="cr-rating-block">
-              <div className="cr-label">Accuracy</div>
-              <div className="cl-block">
-                <select
-                  name="accRate"
-                  value={accuracy}
-                  onChange={(e) => setAccuracy(parseInt(e.target.value))}
-                >
-                  {rating.map((r) => (
-                    <option key={"ac" + r}>{r}</option>
-                  ))}
-                </select>
-              </div>
-              {submit && errors.noAccuracy && (
-                <div className="cr-form-error">
-                  <span>{errors.noAccuracy}</span>
-                </div>
-              )}
-            </div>
-            <div className="cr-content-block">
-              <div className="cr-content-label">Review</div>
-              <textarea
-                className="cr-content-text"
-                rows={5}
-                placeholder="Describe your experience"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
-
-              {submit && errors.noContent && (
-                <div className="cr-form-error">
-                  <span>{errors.noContent}</span>
-                </div>
-              )}
-            </div>
-            <div className="flex s-b plr-8">
-              <button
-                className="cr-bt-block"
-                onClick={() => setEditReviewModal(false)}
+      <form onSubmit={handleSubmit} className="er-form-box">
+        <div className="cr-form-body flex-column">
+          <div className="er-rating-block">
+            <div className="er-label flex s-b center">
+              <div className="er-label-text">Cleanliness</div>
+              <select
+                className="er-select"
+                name="cleanRate"
+                value={cleanliness}
+                onChange={(e) => setCleanliness(parseInt(e.target.value))}
               >
-                <span>Cancel</span>
-              </button>
-              <button className="cr-bt-block" onClick={handleSubmit}>
-                <span>Submit</span>
-              </button>
+                {rating.map((r) => (
+                  <option key={"cl" + r}>{r}</option>
+                ))}
+              </select>
             </div>
+            {submit && errors.noCleanliness && (
+              <div className="er-form-error">
+                <span>{errors.noCleanliness}</span>
+              </div>
+            )}
           </div>
-        </form>
-      </div>
+          <div className="er-rating-block">
+            <div className="er-label flex s-b center">
+              <div className="er-label-text">Check in</div>
+              <select
+                className="er-select"
+                name="checkinRate"
+                value={check_in}
+                onChange={(e) => setCheckin(parseInt(e.target.value))}
+              >
+                {rating.map((r) => (
+                  <option key={"ch" + r}>{r}</option>
+                ))}
+              </select>
+            </div>
+            {submit && errors.noCheckin && (
+              <div className="er-form-error">
+                <span>{errors.noCheckin}</span>
+              </div>
+            )}
+          </div>
+          <div className="er-rating-block">
+            <div className="er-label flex s-b center">
+              <div className="er-label-text">Communication</div>
+              <select
+                className="er-select"
+                name="commuRate"
+                value={communication}
+                onChange={(e) => setCommunication(parseInt(e.target.value))}
+              >
+                {rating.map((r) => (
+                  <option key={"cm" + r}>{r}</option>
+                ))}
+              </select>
+            </div>
+
+            {submit && errors.noCommunication && (
+              <div className="er-form-error">
+                <span>{errors.noCommunication}</span>
+              </div>
+            )}
+          </div>
+          <div className="er-rating-block">
+            <div className="er-label flex s-b center">
+              <div className="er-label-text">Value</div>
+              <select
+                className="er-select"
+                name="valueRate"
+                value={value}
+                onChange={(e) => setValue(parseInt(e.target.value))}
+              >
+                {rating.map((r) => (
+                  <option key={"va" + r}>{r}</option>
+                ))}
+              </select>
+            </div>
+
+            {submit && errors.noValue && (
+              <div className="er-form-error">
+                <span>{errors.noValue}</span>
+              </div>
+            )}
+          </div>
+          <div className="er-rating-block">
+            <div className="er-label flex s-b center">
+              <div className="er-label-text">Location</div>
+              <select
+                className="er-select"
+                name="locaRate"
+                value={location}
+                onChange={(e) => setLocation(parseInt(e.target.value))}
+              >
+                {rating.map((r) => (
+                  <option key={"lo" + r}>{r}</option>
+                ))}
+              </select>
+            </div>
+
+            {submit && errors.noLocation && (
+              <div className="er-form-error">
+                <span>{errors.noLocation}</span>
+              </div>
+            )}
+          </div>
+          <div className="er-rating-block">
+            <div className="er-label flex s-b center">
+              <div className="er-label-text">Accuracy</div>
+              <select
+                className="er-select"
+                name="accRate"
+                value={accuracy}
+                onChange={(e) => setAccuracy(parseInt(e.target.value))}
+              >
+                {rating.map((r) => (
+                  <option key={"ac" + r}>{r}</option>
+                ))}
+              </select>
+            </div>
+            {submit && errors.noAccuracy && (
+              <div className="er-form-error">
+                <span>{errors.noAccuracy}</span>
+              </div>
+            )}
+          </div>
+          <div className="er-content-block">
+            <div className="er-content-label">Review</div>
+            <textarea
+              className="er-content-text"
+              rows={5}
+              placeholder="Describe your experience"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+
+            {submit && errors.noContent && (
+              <div className="er-form-error">
+                <span>{errors.noContent}</span>
+              </div>
+            )}
+          </div>
+          <div className="flex s-b plr-8">
+            <button
+              className="er-bt-block"
+              onClick={() => setEditReviewModal(false)}
+            >
+              <span>Cancel</span>
+            </button>
+            <button className="er-bt-block" onClick={handleSubmit}>
+              <span>Submit</span>
+            </button>
+          </div>
+        </div>
+      </form>
     </>
   );
 }

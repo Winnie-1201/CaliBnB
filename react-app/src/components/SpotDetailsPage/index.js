@@ -12,6 +12,7 @@ import PartThree from "./PartThree";
 import PartFour from "./PartFour";
 import PartFive from "./PartFive";
 import { getImgsBySpotThunk } from "../../store/images";
+import LoadingBlock from "../LoadingBlock";
 
 function SpotDetailsPage() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function SpotDetailsPage() {
   return (
     <>
       <Header />
+      {!isLoaded && <LoadingBlock />}
       {isLoaded && (
         <main className="site-content">
           <PartOne spot={spotDetail} imgs={images} />
