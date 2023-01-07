@@ -24,6 +24,9 @@ function PartFive({ ownerSpots, owner }) {
                     src={owner.icon}
                     alt="owner icon"
                     className="pf-host-img"
+                    onError={(e) => {
+                      e.currentTarget.src = "/default.JPG";
+                    }}
                   />
                 </div>
                 {/* <div className="ab-superhost">

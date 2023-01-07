@@ -6,6 +6,7 @@ import ReviewsByYou from "./ReviewsByYou";
 import ReviewsToWrite from "./ReviewsToWrite";
 import { getUserBookingsThunk } from "../../store/bookings";
 import { getUserReviewsThunk } from "../../store/reviews";
+import LoadingBlock from "../LoadingBlock";
 
 function Account() {
   // console.log("g/.oi ");
@@ -23,9 +24,10 @@ function Account() {
   }, [dispatch]);
 
   return (
-    loaded && (
-      <>
-        <Header />
+    <>
+      <Header />
+      {!loaded && <LoadingBlock />}
+      {loaded && (
         <main className="account-profile">
           <div className="profile-frame">
             <div className="profile-content">
@@ -37,6 +39,9 @@ function Account() {
                         className="pc-icon"
                         src={currUser.icon}
                         alt="profile icon"
+                        onError={(e) => {
+                          e.currentTarget.src = "/default.JPG";
+                        }}
                       />
                     </div>
                     {/* <div className="pc-icon-text">
@@ -108,8 +113,8 @@ function Account() {
             </div>
           </div>
         </main>
-      </>
-    )
+      )}
+    </>
   );
 }
 

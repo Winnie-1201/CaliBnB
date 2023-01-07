@@ -174,6 +174,9 @@ function PartThree({ reviews, spot }) {
                             className="r-img"
                             src={r.user.icon}
                             alt="reviewer"
+                            onError={(e) => {
+                              e.currentTarget.src = "/default.JPG";
+                            }}
                           />
                         </div>
                       </div>

@@ -12,6 +12,9 @@ import EditSpot from "./components/Calibnb/EditSpot";
 import TripsPage from "./components/Trips";
 import ReviewForm from "./components/Account/CreateReviewForm";
 import Footer from "./components/Homepage/Footer";
+import LoadingBlock from "./components/LoadingBlock";
+import Header from "./components/Homepage/Header";
+import Banner from "./components/Homepage/Banner";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,6 +35,12 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        {/* <Route path="/test/loading" exact={true}>
+          <Header />
+          <Banner />
+          <LoadingBlock />
+          <Footer />
+        </Route> */}
         <Route path="/bookings/:bookingId/review" exact={true}>
           <ReviewForm />
           <Footer />

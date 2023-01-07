@@ -56,6 +56,9 @@ function ReviewsByYou() {
                         <img
                           src={review.spot.owner.icon}
                           className="rp-owner-icon"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
                         />
                       </div>
                       <div className="flex-column">
