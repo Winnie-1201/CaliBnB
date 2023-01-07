@@ -36,7 +36,7 @@ def edit_review(reviewId):
 
     if review.userId == current_user.id:
         if form.validate_on_submit:
-            if form.data["content"]: review.addrcontentess = form.data["content"] 
+            if form.data["content"]: review.content = form.data["content"] 
             if form.data["cleanliness"]: review.cleanliness = form.data["cleanliness"] 
             if form.data["check_in"]: review.check_in = form.data["check_in"] 
             if form.data["communicatoin"]: review.communicatoin = form.data["communicatoin"] 
