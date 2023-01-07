@@ -19,7 +19,7 @@ function ReviewForm({}) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { spotId } = useParams();
+  // const { spotId } = useParams();
   const { bookingId } = useParams();
 
   //   const [content, setContent] = useState(review.content);
@@ -114,7 +114,9 @@ function ReviewForm({}) {
       //     .then(() => dispatch(getUserReviewsThunk()))
       //     .then(() => setReviewModal(false));
       // } else {
-      await dispatch(createReviewThunk(spotId, review)).then(() => {
+      // console.log("booking in create review", booking);
+      // console.log("spot id", booking.spotId);
+      await dispatch(createReviewThunk(booking.spotId, review)).then(() => {
         // setReviewModal(false);
         history.push(`/users/profile`);
       });

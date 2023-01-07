@@ -88,7 +88,7 @@ function LoginForm({ setLoginModal }) {
               <span>Demo User</span>
             </button>
           </div>
-          <div className="mtb-16-24">
+          {/* <div className="mtb-16-24">
             <button
               className="p-14-24"
               type="submit"
@@ -99,16 +99,16 @@ function LoginForm({ setLoginModal }) {
             >
               <span>Demo Host</span>
             </button>
-          </div>
+          </div> */}
         </form>
-        <div className="mtb-16">
+        {/* <div className="mtb-16">
           <div className="flex center mtb-16 or">or</div>
         </div>
         <div className="mtb-16-24">
           <button className="p-14-24" type="submit">
             <span>Sign up No Function Yet</span>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
