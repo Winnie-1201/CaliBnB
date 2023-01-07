@@ -37,11 +37,11 @@ function Account() {
                     <div className="pc-icon-container">
                       <img
                         className="pc-icon"
-                        src={currUser.icon}
-                        alt="profile icon"
+                        src={currUser.icon ? currUser.icon : "/default.JPG"}
                         onError={(e) => {
                           e.currentTarget.src = "/default.JPG";
                         }}
+                        alt="profile icon"
                       />
                     </div>
                     {/* <div className="pc-icon-text">

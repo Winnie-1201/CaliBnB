@@ -54,7 +54,11 @@ function ReviewsByYou() {
                         onClick={() => history.push(`/spots/${review.spot.id}`)}
                       >
                         <img
-                          src={review.spot.owner.icon}
+                          src={
+                            review.spot.owner.icon
+                              ? review.spot.owner.icon
+                              : "/default.JPG"
+                          }
                           className="rp-owner-icon"
                           onError={(e) => {
                             e.currentTarget.src = "/default.JPG";
