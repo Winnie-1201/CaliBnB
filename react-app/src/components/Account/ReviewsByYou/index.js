@@ -13,6 +13,8 @@ function ReviewsByYou() {
 
   const [showReviewModal, setEditReviewModal] = useState(false);
   const [showDelModal, setDelModal] = useState(false);
+  const [editReview, setEditReview] = useState("");
+  const [delReview, setDelReview] = useState("");
 
   const userReviews = useSelector((state) => state.reviews.userReviews);
 
@@ -68,13 +70,19 @@ function ReviewsByYou() {
                       <div className="flex-column">
                         <button
                           className="er-edit-bt"
-                          onClick={() => setEditReviewModal(true)}
+                          onClick={() => {
+                            setEditReview(review);
+                            setEditReviewModal(true);
+                          }}
                         >
                           Edit
                         </button>
                         <button
                           className="er-delete-bt"
-                          onClick={() => setDelModal(true)}
+                          onClick={() => {
+                            setDelReview(review);
+                            setDelModal(true);
+                          }}
                         >
                           Delete
                         </button>
@@ -102,41 +110,6 @@ function ReviewsByYou() {
                     </div>
                   </div>
                 </div>
-                {showReviewModal && (
-                  <Modal onClose={() => setEditReviewModal(false)}>
-                    <EditReviewModal
-                      setEditReviewModal={setEditReviewModal}
-                      review={review}
-                    />
-                  </Modal>
-                )}
-                {showDelModal && (
-                  <Modal onClose={() => setDelModal(false)}>
-                    <form className="del-modal-box">
-                      <div className="flex-column">
-                        <div className="del-msg">
-                          <span>
-                            Are you sure you want to delete this review?{" "}
-                          </span>
-                        </div>
-                        <div className="del-bt-box">
-                          <button
-                            className="del-bt"
-                            onClick={() => setDelModal(false)}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            className="del-bt"
-                            onClick={(e) => handleDelete(e, review.id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </Modal>
-                )}
               </div>
             ))}
           </section>
@@ -144,6 +117,42 @@ function ReviewsByYou() {
           <></>
         )}
       </div>
+      {showReviewModal && (
+        <Modal onClose={() => setEditReviewModal(false)}>
+          <EditReviewModal
+            setEditReviewModal={setEditReviewModal}
+            review={editReview}
+          />
+        </Modal>
+      )}
+      {showDelModal && (
+        <Modal onClose={() => setDelModal(false)}>
+          <form className="del-modal-box">
+            <div className="flex-column">
+              <div className="del-msg">
+                <span>Are you sure you want to delete this review? </span>
+              </div>
+              <div className="del-bt-box">
+                <button
+                  className="del-bt"
+                  onClick={() => {
+                    setDelReview("");
+                    setDelModal(false);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="del-bt"
+                  onClick={(e) => handleDelete(e, delReview.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </form>
+        </Modal>
+      )}
     </>
     // )
   );
