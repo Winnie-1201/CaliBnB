@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllWishlistThunk } from "../../../store/wishlists";
+import {
+  createWishlistThunk,
+  getAllWishlistThunk,
+} from "../../../store/wishlists";
 import "./index.css";
 
-function WishlistModal() {
+function WishlistModal({ setWishlistModal, spotId }) {
   const dispatch = useDispatch();
 
+  //   const [wishlist, setWishlist] = useState("");
   const [wishlist, setWishlist] = useState("");
-  const [title, setTitle] = useState("");
   const [createNew, setCreateNew] = useState(false);
   const [saveExist, setSaveExist] = useState(true);
 
@@ -24,12 +27,12 @@ function WishlistModal() {
   useEffect(() => {
     const newErrors = {};
 
-    if (!title)
-      newErrors.noTitle = "Please enter the name of your new wishlist.";
+    if (!wishlist)
+      newErrors.noWishilist = "Please enter the name of your new wishlist.";
 
     setSubmit(false);
     setErrors(newErrors);
-  }, [title]);
+  }, [wishlist]);
 
   console.log(
     "wishlist and its true",
@@ -37,27 +40,34 @@ function WishlistModal() {
     Object.values(userWishlists).length
   );
 
+  const handleSave = async (e) => {
+    e.preventDefault();
+    await dispatch(createWishlistThunk(wishlist, spotId)).then(() =>
+      setWishlistModal(false)
+    );
+  };
+
   //   if (Object.values(userWishlists).length > 0) {
   //     setSaveExist(false);
   //     setCreateNew(true);
   //   }
 
-  let titleOption = [];
+  let wishlistOption = [];
   if (userWishlists) {
     for (let key in userWishlists) {
-      if (!titleOption.includes(userWishlists[key].title)) {
-        titleOption.push(userWishlists[key].title);
+      if (!wishlistOption.includes(userWishlists[key].wishlist)) {
+        wishlistOption.push(userWishlists[key].wishlist);
       }
     }
   }
 
-  console.log("save exist and create new", saveExist, createNew);
+  //   console.log("save exist and create new", saveExist, createNew);
   return (
     loaded && (
       <>
         <form className="wl-form flex-columnm">
-          <div className="wl-title">
-            <h2 className="wl-title-text">Save the place</h2>
+          <div className="wl-wishlist">
+            <h2 className="wl-wishlist-text">Save the place</h2>
           </div>
           <div className="wl-form-body flex-column">
             <div className="wl-form-input">
@@ -66,29 +76,40 @@ function WishlistModal() {
                   <div className="wl-input-label">Save to</div>
                   <select
                     className="wl-select"
-                    name="wl-title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    name="wl-wishlist"
+                    value={wishlist}
+                    onChange={(e) => setWishlist(e.target.value)}
                   ></select>
-                  {titleOption.map((option) => (
+                  {wishlistOption.map((option) => (
                     <option key={option}>{option}</option>
                   ))}
                 </>
               )}
               {(createNew || Object.values(userWishlists).length === 0) && (
                 <>
-                  <div className="wl-input-label">Title</div>
+                  <div className="wl-input-label">Wishlist title</div>
                   {/* <div className="wl-input-box"> */}
                   <input
                     className="wl-input-box"
                     type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={wishlist}
+                    onChange={(e) => setWishlist(e.target.value)}
                     placeholder="create new wishilist"
                   ></input>
                   {/* </div> */}
                 </>
               )}
+            </div>
+            <div className="wl-form-bt flex s-b">
+              <button
+                className="wl-cancel-bt"
+                onClick={() => setWishlistModal(false)}
+              >
+                Cancel
+              </button>
+              <button className="wl-save-bt" onClick={handleSave}>
+                Save
+              </button>
             </div>
           </div>
         </form>

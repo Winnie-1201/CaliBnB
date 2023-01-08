@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal } from "../../../context/Modal";
+import WishlistModal from "../../Wishlist/WishlistModal";
 
 import "./index.css";
 
@@ -7,6 +9,9 @@ function PartOne({ spot, imgs }) {
   const reviews = spot.reviews;
   const images = Object.values(imgs);
   const avgs = spot.averages;
+
+  const [wishlistModal, setWishlistModal] = useState(false);
+  const [spotId, setSpotId] = useState("");
 
   return (
     <>
@@ -60,7 +65,13 @@ function PartOne({ spot, imgs }) {
               </div>
               <div className="flex flex-end">
                 <div>
-                  <button className="save-button">
+                  <button
+                    className="save-button"
+                    onClick={() => {
+                      setWishlistModal(true);
+                      setSpotId(spot.id);
+                    }}
+                  >
                     <div className="flex center">
                       <span className="mr-8">
                         <svg
@@ -152,6 +163,11 @@ function PartOne({ spot, imgs }) {
           </div>
         </div>
       </div>
+      {wishlistModal && (
+        <Modal onClose={() => setWishlistModal(false)}>
+          <WishlistModal setWishlistModal={setWishlistModal} spotId={spotId} />
+        </Modal>
+      )}
     </>
   );
 }
