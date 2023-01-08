@@ -1,0 +1,20 @@
+.wl-form {
+  margin: 20px;
+  padding: 20px;
+}
+.wl-title {
+  margin: 12px 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+.wl-input-label {
+  margin-bottom: 5px;
+  padding: 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.wl-input-box {
+  height: 36px;
+  width: 100%;
+  padding: 10px 8px;
+}
