@@ -89,6 +89,12 @@ function CreateSpot() {
       newErrors.invalidBeds = "Bed number needs to be greater than 0.";
     if (bath && bath <= 0)
       newErrors.invalidBath = "Bath number needs to be greater than 0.";
+    if (type && type.length > 50)
+      newErrors.longType = "The spot type has too many characters.";
+    if (address && address.length > 255)
+      newErrors.longAddress = "The address has too many characters.";
+    if (city && city.length > 50)
+      newErrors.longCity = "The city has too many characters.";
 
     // setNextStep(false);
     setSubmit(false);
@@ -145,6 +151,10 @@ function CreateSpot() {
           promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
         });
 
+        // const submitBt = document.getElementsByClassName("cs-button");
+        // // submitBt.className = "cs-submited-loading"
+        // submitBt.innerHTML = "<div className='spinner' id='spinner'></div>";
+
         Promise.all(promise_arr).then(() =>
           history.push(`/spots/${newSpot.id}`)
         );
@@ -175,7 +185,7 @@ function CreateSpot() {
     Math.round((price * service_fee) / 100) +
     Math.round((price * clean_fee) / 100);
 
-  // console.log("preview image outside", preview_img);
+  // console.log("preview image outside", errors);
 
   return (
     <>
@@ -184,7 +194,10 @@ function CreateSpot() {
         <div className="cs-body flex-column">
           <div className="cs-imgs-container flex-column">
             <div className="cs-imgs-header flex center">
-              <h3 className="cs-ih-h3">* Upload your spot images</h3>
+              <h3 className="cs-ih-h3">
+                * Upload your spot images (a preview image and at least 4 other
+                images)
+              </h3>
               {submit && errors.shortImage && (
                 <div className="error-cs">* {errors.shortImage}</div>
               )}
@@ -408,6 +421,9 @@ function CreateSpot() {
                     {submit && errors.noName && (
                       <div className="error-cs">* {errors.noName}</div>
                     )}
+                    {errors.longName && (
+                      <div className="error-cs">* {errors.longName}</div>
+                    )}
                   </div>
                   <div className="cs-dt-type flex-column w-35 mrb-40-20">
                     <label className="cs-detail-label">
@@ -421,6 +437,9 @@ function CreateSpot() {
                     />
                     {submit && errors.noType && (
                       <div className="error-cs">* {errors.noType}</div>
+                    )}
+                    {errors.longType && (
+                      <div className="error-cs">* {errors.longType}</div>
                     )}
                   </div>
                 </div>
@@ -438,6 +457,9 @@ function CreateSpot() {
                     {submit && errors.noAddress && (
                       <div className="error-cs">* {errors.noAddress}</div>
                     )}
+                    {errors.longAddress && (
+                      <div className="error-cs">* {errors.longAddress}</div>
+                    )}
                   </div>
                   <div className="cs-dm-city flex-column w-20 mrb-40-20">
                     <label className="cs-detail-label">City</label>
@@ -449,6 +471,9 @@ function CreateSpot() {
                     />
                     {submit && errors.noCity && (
                       <div className="error-cs">* {errors.noCity}</div>
+                    )}
+                    {errors.longCity && (
+                      <div className="error-cs">* {errors.longCity}</div>
                     )}
                   </div>
                   <div className="cs-dm-state flex-column w-20 mrb-40-20">
