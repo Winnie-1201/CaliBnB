@@ -148,3 +148,10 @@
   background-color: rgb(221, 221, 221);
   margin-left: 16px;
 }
+.login-err-msg {
+  color: #ff385c;
+  list-style: none;
+}
+.error-messages {
+  padding-left: 12px;
+}

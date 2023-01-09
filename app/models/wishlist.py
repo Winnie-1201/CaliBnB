@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix
 from sqlalchemy.sql import func
+from .spot import Spot
 
 class Wishlist(db.Model):
     __tablename__ = 'wishlists'
@@ -32,7 +33,7 @@ class Wishlist(db.Model):
             "created": self.created,
             "updated": self.updated,
             "userId": self.userId,
-            "spotId": self.spotId
+            "spot": Spot.query.get(self.spotId).to_dict_booking()
         }
 
     

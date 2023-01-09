@@ -12,7 +12,13 @@ def user_wishlist():
     Query for getting current user's wishlist and
     return them in a list of dictionaries
     '''
-    wishlists = Wishlist.query.filter_by(userId=current_user.id)
+    wishlists = Wishlist.query.filter_by(userId=current_user.id).all()
+    print("----------")
+    print("----------")
+    print("---------- wishlists in backend", wishlists)
+    print("----------")
+    print("----------")
+    print("----------")
 
     return {'Wishlists': [w.to_dict() for w in wishlists]}
 
@@ -21,11 +27,21 @@ def user_wishlist():
 @login_required
 def create_wishlist():
 
+    spotId = request.arg.get("spotId")
+   
+
     form = WishlistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    print("----------")
+    print("----------")
+    print("----- form.data", form.data)
+    print("spot id", spotId)
+    print("----------")
+    print("----------")
+
     if form.validate_on_submit:
-        new_wishlist = Wishlist(title=form.data['title'], userId=current_user.id)
+        new_wishlist = Wishlist(title=form.data['title'], userId=current_user.id, spotId=spotId)
 
         db.session.add(new_wishlist)
         db.session.commit()

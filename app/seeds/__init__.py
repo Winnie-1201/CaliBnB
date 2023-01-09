@@ -4,6 +4,7 @@ from .spots import seed_spots, undo_spots
 from .images import seed_images, undo_images
 from .reviews import seed_reviews, undo_reviews
 from .bookings import seed_bookings, undo_bookings
+from .wishlists import seed_wishlists, undo_wishlists
 
 from app.models.db import db, environment, SCHEMA
 
@@ -20,6 +21,7 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         
+        undo_wishlists()
         undo_reviews()
         undo_bookings()
         undo_images()
@@ -31,11 +33,13 @@ def seed():
     seed_images()
     seed_bookings()
     seed_reviews()
+    seed_wishlists()
     # Add other seed functions here
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_wishlists()
     undo_reviews()
     undo_bookings()
     undo_images()

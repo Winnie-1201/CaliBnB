@@ -17,13 +17,30 @@ function LoginForm({ setLoginModal }) {
     e.preventDefault();
 
     setErrors([]);
-    setLoginModal(false);
-    return dispatch(login(email, password)).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+
+    const data = await dispatch(login(email, password));
+
+    console.log("data in login", data);
+    if (data && data.errors) {
+      console.log("go in ");
+      const newErrors = {};
+      for (let i in data.errors) {
+        const err = data.errors[i].split(" : ")[0];
+        const msg = data.errors[i].split(" : ")[1];
+        newErrors[err] = msg;
+      }
+      setErrors(newErrors);
+    } else setLoginModal(false);
+
+    // return dispatch(login(email, password)).catch(async (res) => {
+    //   const data = await res.json();
+    //   console.log("data in login", data);
+    //   if (data && data.errors) setErrors(data.errors);
+    //   else setLoginModal(false);
+    // });
   };
 
+  console.log("error", errors);
   return (
     // <div>Testing</div>
     <div className="flex-column login-form">
@@ -64,10 +81,12 @@ function LoginForm({ setLoginModal }) {
               </div>
             </div>
           </div>
-          {errors.length > 0 && (
+          {Object.values(errors).length > 0 && (
             <ul className="error-messages">
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
+              {Object.values(errors).map((error, idx) => (
+                <li className="login-err-msg" key={idx}>
+                  * {error}
+                </li>
               ))}
             </ul>
           )}

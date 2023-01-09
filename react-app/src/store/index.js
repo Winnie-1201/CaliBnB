@@ -5,6 +5,7 @@ import imageReducer from "./images";
 import reviewReducer from "./reviews";
 import session from "./session";
 import spotReducer from "./spots";
+import wishlistReducer from "./wishlists";
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   reviews: reviewReducer,
   bookings: bookingReducer,
   images: imageReducer,
+  wishlists: wishlistReducer,
 });
 
 let enhancer;

@@ -43,6 +43,7 @@ function CalendarForm({
       bookedDate.push(unvaliableRange);
       // console.log("bookedDate", unvaliableRange);
     });
+    // console.log("booked date in cal", bookedDate);
 
     const blockedDates = bookedDate.find((dateRange) =>
       dateRange.contains(date)

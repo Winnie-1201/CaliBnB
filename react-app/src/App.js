@@ -15,6 +15,8 @@ import Footer from "./components/Homepage/Footer";
 import LoadingBlock from "./components/LoadingBlock";
 import Header from "./components/Homepage/Header";
 import Banner from "./components/Homepage/Banner";
+import Wishlist from "./components/Wishlist";
+import WishlistModal from "./components/Wishlist/WishlistModal";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,6 +43,13 @@ function App() {
           <LoadingBlock />
           <Footer />
         </Route> */}
+        <Route path="/test/wishlist" exact={true}>
+          <Header />
+          <Banner />
+          {/* <LoadingBlock /> */}
+          <WishlistModal />
+          <Footer />
+        </Route>
         <Route path="/bookings/:bookingId/review" exact={true}>
           <ReviewForm />
           <Footer />

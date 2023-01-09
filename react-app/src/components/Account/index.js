@@ -44,9 +44,9 @@ function Account() {
                         alt="profile icon"
                       />
                     </div>
-                    {/* <div className="pc-icon-text">
+                    <div className="pc-icon-text">
                       <div className="link-to-update">Update photo</div>
-                    </div> */}
+                    </div>
                   </div>
                   <div className="mb-16">
                     <svg
@@ -73,9 +73,9 @@ function Account() {
                         </div>
                         <div className="pc-right-join">Joined in</div>
                       </div>
-                      {/* <div className="pc-edit-profile">
+                      <div className="pc-edit-profile">
                         <button className="pc-edit-button">Edit profile</button>
-                      </div> */}
+                      </div>
                     </div>
                     <div className="pcr-header">
                       <div
