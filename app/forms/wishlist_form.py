@@ -6,4 +6,4 @@ class WishlistForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     # may not need
     start = DateTimeField('start')
-    end = DateTimeField('emd')
+    end = DateTimeField('end')

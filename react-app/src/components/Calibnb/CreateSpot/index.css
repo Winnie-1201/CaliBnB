@@ -339,14 +339,18 @@
   margin: 0;
   font-size: 16px;
 }
-
 .cs-button-container {
   padding: 20px;
-  margin: 30px 0;
+  margin-top: 30px;
   display: flex;
   justify-content: flex-end;
 }
-
+.cs-bt-err-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  /* margin-right: 40px; */
+}
 .cs-button {
   min-height: 47px;
   width: 30%;
@@ -365,4 +369,14 @@
   color: rgb(255, 255, 255);
   font-size: 15px;
   border-radius: 8px;
+}
+.disable-bt {
+  cursor: not-allowed;
+  background: #dddddd;
+}
+.error-cs-bt {
+  color: #ff385c;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
 }

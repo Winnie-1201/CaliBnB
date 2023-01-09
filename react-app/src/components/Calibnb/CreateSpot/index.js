@@ -390,7 +390,7 @@ function CreateSpot() {
                   </div>
                   <div className="cs-dt-type flex-column w-35 mrb-40-20">
                     <label className="cs-detail-label">
-                      Spot type (i.e. Entire Home)
+                      Spot type (i.e. Entire home)
                     </label>
                     <input
                       type="text"
@@ -608,9 +608,27 @@ function CreateSpot() {
           </div>
 
           <div className="cs-button-container">
-            <button className="cs-button" onClick={handleSubmit}>
+            <button
+              className={`cs-button ${
+                Object.values(errors).length > 0 && submit ? "disable-bt" : ""
+              }`}
+              onClick={handleSubmit}
+            >
               Create
             </button>
+          </div>
+          <div className="cs-bt-err-container">
+            {submit && Object.values(errors).length > 0 && (
+              <div className="error-cs-bt">
+                There{" "}
+                {Object.values(errors).length > 1
+                  ? " are " + Object.values(errors).length + " errors "
+                  : "is 1 error "}
+                in the form. Please fix{" "}
+                {Object.values(errors).length > 1 ? " them " : " it "} before
+                you submit.
+              </div>
+            )}
           </div>
         </div>
       </div>
