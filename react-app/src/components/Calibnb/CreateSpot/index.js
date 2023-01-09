@@ -69,6 +69,16 @@ function CreateSpot() {
       newErrors.shortImage =
         "Please upload a preview image and at least 4 other images for your spot.";
 
+    if (price && price <= 0)
+      newErrors.invalidPrice =
+        "Invalid price (Price needs to be greater than zero).";
+    if (service_fee && (service_fee > 100 || service_fee < 0))
+      newErrors.invalidService =
+        "Service fee needs to be greater or equal to 0, and less than 100.";
+    if (clean_fee && (clean_fee > 100 || clean_fee < 0))
+      newErrors.invalidClean =
+        "Clean fee needs to be greater or equal to 0, and less than 100.";
+
     // setNextStep(false);
     setSubmit(false);
     setErrors(newErrors);
@@ -561,6 +571,9 @@ function CreateSpot() {
                     {submit && errors.noPrice && (
                       <div className="error-cs">* {errors.noPrice}</div>
                     )}
+                    {errors.invalidPrice && (
+                      <div className="error-cs">* {errors.invalidPrice}</div>
+                    )}
                   </div>
                   <div className="cs-pb-service_fee flex-column w-20 mrb-40-20">
                     <label className="cs-detail-label">
@@ -577,6 +590,9 @@ function CreateSpot() {
                     {submit && errors.noservice_fee && (
                       <div className="error-cs">* {errors.noservice_fee}</div>
                     )}
+                    {errors.invalidService && (
+                      <div className="error-cs">* {errors.invalidService}</div>
+                    )}
                   </div>
                   <div className="cs-pb-clean_fee flex-column w-20 mrb-40-20">
                     <label className="cs-detail-label">clean_fee fee (%)</label>
@@ -590,6 +606,9 @@ function CreateSpot() {
                     />
                     {submit && errors.noclean_fee && (
                       <div className="error-cs">* {errors.noclean_fee}</div>
+                    )}
+                    {errors.invalidClean && (
+                      <div className="error-cs">* {errors.invalidClean}</div>
                     )}
                   </div>
                 </div>
