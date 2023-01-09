@@ -20,9 +20,9 @@ function LoginForm({ setLoginModal }) {
 
     const data = await dispatch(login(email, password));
 
-    console.log("data in login", data);
+    // console.log("data in login", data);
     if (data && data.errors) {
-      console.log("go in ");
+      // console.log("go in ");
       const newErrors = {};
       for (let i in data.errors) {
         const err = data.errors[i].split(" : ")[0];
@@ -40,7 +40,7 @@ function LoginForm({ setLoginModal }) {
     // });
   };
 
-  console.log("error", errors);
+  // console.log("error", errors);
   return (
     // <div>Testing</div>
     <div className="flex-column login-form">

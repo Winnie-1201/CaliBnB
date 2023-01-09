@@ -34,11 +34,11 @@ function WishlistModal({ setWishlistModal, spotId }) {
     setErrors(newErrors);
   }, [wishlist]);
 
-  console.log(
-    "wishlist and its true",
-    userWishlists,
-    Object.values(userWishlists).length
-  );
+  // console.log(
+  //   "wishlist and its true",
+  //   userWishlists,
+  //   Object.values(userWishlists).length
+  // );
 
   const handleSave = async (e) => {
     e.preventDefault();
