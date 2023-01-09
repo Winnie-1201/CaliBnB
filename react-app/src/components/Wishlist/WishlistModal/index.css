@@ -2,6 +2,34 @@
   margin: 20px;
   padding: 20px;
 }
+.wl-wishlist-text {
+  font-size: 18px;
+  font-weight: 600;
+}
+.m-20 {
+  margin: 40px 0;
+}
+.wl-or {
+  /* margin: 20px 0; */
+  /* text-align: center; */
+  font-size: 14px;
+  /* font-weight: 600; */
+  width: 100%;
+}
+.wl-or::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: rgb(221, 221, 221);
+  margin-right: 16px;
+}
+.wl-or::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: rgb(221, 221, 221);
+  margin-left: 16px;
+}
 .wl-title {
   margin: 12px 0;
   font-size: 18px;
@@ -49,4 +77,16 @@
   color: rgb(255, 255, 255);
   font-size: 15px;
   border-radius: 8px;
+}
+.wl-select {
+  height: 40px;
+  width: 160px;
+  border-radius: 6px;
+  padding: 10px;
+  margin-left: 20px;
+  font-size: 15px;
+}
+.wl-option {
+  font-size: 15px;
+  background-color: white;
 }

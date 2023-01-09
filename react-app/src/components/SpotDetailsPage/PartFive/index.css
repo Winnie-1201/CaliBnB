@@ -109,6 +109,7 @@
 
 .contact-button {
   /* cursor: pointer; */
+  cursor: not-allowed;
   margin: 0;
   position: relative;
   text-align: center;

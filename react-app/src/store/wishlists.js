@@ -33,8 +33,10 @@ const deleteOne = (wishlistId) => ({
 export const getAllWishlistThunk = () => async (dispatch) => {
   const response = await fetch("/api/wishlists/current");
 
+  //   console.log("response in thunk wishlist get all", response);
   if (response.ok) {
     const wishlists = await response.json();
+    // console.log("wishlist list in get all thunk", wishlists);
     dispatch(getAll(wishlists.Wishlists));
     return wishlists;
   }

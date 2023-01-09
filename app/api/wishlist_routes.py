@@ -12,7 +12,13 @@ def user_wishlist():
     Query for getting current user's wishlist and
     return them in a list of dictionaries
     '''
-    wishlists = Wishlist.query.filter_by(userId=current_user.id)
+    wishlists = Wishlist.query.filter_by(userId=current_user.id).all()
+    print("----------")
+    print("----------")
+    print("---------- wishlists in backend", wishlists)
+    print("----------")
+    print("----------")
+    print("----------")
 
     return {'Wishlists': [w.to_dict() for w in wishlists]}
 

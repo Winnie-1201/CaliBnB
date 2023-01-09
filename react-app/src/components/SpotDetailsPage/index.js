@@ -13,6 +13,7 @@ import PartFour from "./PartFour";
 import PartFive from "./PartFive";
 import { getImgsBySpotThunk } from "../../store/images";
 import LoadingBlock from "../LoadingBlock";
+import { getAllWishlistThunk } from "../../store/wishlists";
 
 function SpotDetailsPage() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function SpotDetailsPage() {
       .then(() => dispatch(getSpotReivewsThunk(spotId)))
       .then(() => dispatch(getSpotBookingsThunk(spotId)))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
+      .then(() => dispatch(getAllWishlistThunk()))
       .then(() => setLoaded(true));
   }, [dispatch, spotId]);
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 // import { dateTransfer } from "../../dateTransfer";
 import "./index.css";
 
@@ -8,6 +9,8 @@ function PartFive({ ownerSpots, owner }) {
   for (let key in ownerSpots) {
     review_length += ownerSpots[key].reviews;
   }
+
+  const spotAvg = useSelector((state) => state.spots.singleSpot).averages.avg;
 
   //   console.log("review", review_length);
 
@@ -21,7 +24,7 @@ function PartFive({ ownerSpots, owner }) {
                 {/* change it to a link later maybe */}
                 <div className="pf-host-icon">
                   <img
-                    src={owner.icon}
+                    src={owner.icon ? owner.icon : "/default.JPG"}
                     alt="owner icon"
                     className="pf-host-img"
                     onError={(e) => {
@@ -93,8 +96,14 @@ function PartFive({ ownerSpots, owner }) {
                   </li>
                   <li className="pf-li-style">
                     <div className="flex">
-                      <span></span>
-                      <span className="pf-total-review">Superhost</span>
+                      {spotAvg >= 3.7 && (
+                        <>
+                          <span>
+                            <i className="fa-solid fa-trophy" />
+                          </span>
+                          <span className="pf-total-review">Superhost</span>
+                        </>
+                      )}
                     </div>
                   </li>
                   <li className="pf-li-style">
@@ -122,15 +131,17 @@ function PartFive({ ownerSpots, owner }) {
                   </li>
                 </ul>
               </div>
-              <div className="mb-24">
-                <div className="mb-8">
-                  <h3 className="fs-16">{owner.firstName} is a Superhost</h3>
+              {spotAvg >= 3.7 && (
+                <div className="mb-24">
+                  <div className="mb-8">
+                    <h3 className="fs-16">{owner.firstName} is a Superhost</h3>
+                  </div>
+                  <span>
+                    Superhosts are experienced, highly rated hosts who are
+                    committed to providing great stays for guests.
+                  </span>
                 </div>
-                <span>
-                  Superhosts are experienced, highly rated hosts who are
-                  committed to providing great stays for guests.
-                </span>
-              </div>
+              )}
             </div>
             <div className="pf-host-detail-right">
               <ul className="pf-re-ul-style">

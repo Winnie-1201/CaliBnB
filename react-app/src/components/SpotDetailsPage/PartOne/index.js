@@ -67,10 +67,10 @@ function PartOne({ spot, imgs }) {
                 <div>
                   <button
                     className="save-button"
-                    onClick={() => {
-                      setWishlistModal(true);
-                      setSpotId(spot.id);
-                    }}
+                    // onClick={() => {
+                    //   setWishlistModal(true);
+                    //   setSpotId(spot.id);
+                    // }}
                   >
                     <div className="flex center">
                       <span className="mr-8">
