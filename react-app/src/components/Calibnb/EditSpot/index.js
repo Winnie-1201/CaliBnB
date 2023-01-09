@@ -81,6 +81,27 @@ function EditSpot() {
     if (images && Object.values(images).length < 4)
       newErrors.shortImage =
         "Please upload at least five images for your spot (preview image included).";
+    if (price && price <= 0)
+      newErrors.invalidPrice =
+        "Invalid price (Price needs to be greater than zero).";
+    if (service_fee && (service_fee > 100 || service_fee < 0))
+      newErrors.invalidService =
+        "Service fee needs to be greater or equal to 0, and less than 100.";
+    if (clean_fee && (clean_fee > 100 || clean_fee < 0))
+      newErrors.invalidClean =
+        "Clean fee needs to be greater or equal to 0, and less than 100.";
+
+    if (guests && beds && guests > beds * 3)
+      newErrors.tooManyGuests = "Too many guests for your property.";
+    if (guests && guests <= 0)
+      newErrors.invalidGuest = "Guest number needs to be greater than 0.";
+    if (bedroom && bedroom <= 0)
+      newErrors.invalidBedroom = "Bedroom number needs to be greater than 0.";
+    if (beds && beds <= 0)
+      newErrors.invalidBeds = "Bed number needs to be greater than 0.";
+    if (bath && bath <= 0)
+      newErrors.invalidBath = "Bath number needs to be greater than 0.";
+    // if (guests && guests <= 0) newErrors.invalidGuest = "Guest number needs to be greater than 0."
 
     // setNextStep(false);
     setSubmit(false);
@@ -391,12 +412,12 @@ function EditSpot() {
                     </div>
                     <div className="cs-dt-type flex-column w-35 mrb-40-20">
                       <label className="cs-detail-label">
-                        Spot tags (i.e. Entire Home)
+                        Spot type (i.e. Entire home)
                       </label>
                       <input
                         type="text"
                         className="p-10"
-                        value={tags}
+                        value={type}
                         onChange={(e) => setType(e.target.value)}
                       />
                       {submit && errors.noTags && (
@@ -479,6 +500,12 @@ function EditSpot() {
                       {submit && errors.noGuests && (
                         <div className="error-cs">* {errors.noGuests}</div>
                       )}
+                      {errors.invalidGuest && (
+                        <div className="error-cs">* {errors.invalidGuest}</div>
+                      )}
+                      {errors.tooManyGuests && (
+                        <div className="error-cs">* {errors.tooManyGuests}</div>
+                      )}
                     </div>
                     <div className="cs-db-beds flex-column w-20 mrb-40-20">
                       <label className="cs-detail-label">Bed number</label>
@@ -490,6 +517,9 @@ function EditSpot() {
                       />
                       {submit && errors.noBeds && (
                         <div className="error-cs">* {errors.noBeds}</div>
+                      )}
+                      {errors.invalidBeds && (
+                        <div className="error-cs">* {errors.invalidBeds}</div>
                       )}
                     </div>
                     <div className="cs-db-bedroom flex-column w-20 mrb-40-20">
@@ -503,6 +533,11 @@ function EditSpot() {
                       {submit && errors.noBedroom && (
                         <div className="error-cs">* {errors.noBedroom}</div>
                       )}
+                      {errors.invalidBedroom && (
+                        <div className="error-cs">
+                          * {errors.invalidBedroom}
+                        </div>
+                      )}
                     </div>
                     <div className="cs-db-bath flex-column w-20 mrb-40-20">
                       <label className="cs-detail-label">Bath number</label>
@@ -515,12 +550,15 @@ function EditSpot() {
                       {submit && errors.noBath && (
                         <div className="error-cs">* {errors.noBath}</div>
                       )}
+                      {submit && errors.invalidBath && (
+                        <div className="error-cs">* {errors.invalidBath}</div>
+                      )}
                     </div>
                     <div className="cs-db-tags flex-column w-20 mrb-40-20">
                       <label className="cs-detail-label">Tags</label>
                       <select
                         className="p-6"
-                        value={type}
+                        value={tags}
                         onChange={(e) => setTags(e.target.value)}
                       >
                         <option value="" disable="true">
@@ -530,8 +568,8 @@ function EditSpot() {
                         <option>cabins</option>
                         <option>amazing views</option>
                       </select>
-                      {submit && errors.noType && (
-                        <div className="error-cs">* {errors.noType}</div>
+                      {submit && errors.noTags && (
+                        <div className="error-cs">* {errors.noTags}</div>
                       )}
                     </div>
                   </div>
@@ -610,7 +648,12 @@ function EditSpot() {
             </div>
 
             <div className="cs-button-container">
-              <button className="cs-button" onClick={handleUpdate}>
+              <button
+                className={`cs-button ${
+                  Object.values(errors).length > 0 ? "disable-bt" : ""
+                }`}
+                onClick={handleUpdate}
+              >
                 Update
               </button>
             </div>

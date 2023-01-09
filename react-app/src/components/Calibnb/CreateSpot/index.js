@@ -79,6 +79,17 @@ function CreateSpot() {
       newErrors.invalidClean =
         "Clean fee needs to be greater or equal to 0, and less than 100.";
 
+    if (guests && beds && guests > beds * 3)
+      newErrors.tooManyGuests = "Too many guests for your property.";
+    if (guests && guests <= 0)
+      newErrors.invalidGuest = "Guest number needs to be greater than 0.";
+    if (bedroom && bedroom <= 0)
+      newErrors.invalidBedroom = "Bedroom number needs to be greater than 0.";
+    if (beds && beds <= 0)
+      newErrors.invalidBeds = "Bed number needs to be greater than 0.";
+    if (bath && bath <= 0)
+      newErrors.invalidBath = "Bath number needs to be greater than 0.";
+
     // setNextStep(false);
     setSubmit(false);
     setErrors(newErrors);
@@ -489,6 +500,12 @@ function CreateSpot() {
                     {submit && errors.noGuests && (
                       <div className="error-cs">* {errors.noGuests}</div>
                     )}
+                    {errors.invalidGuest && (
+                      <div className="error-cs">* {errors.invalidGuest}</div>
+                    )}
+                    {errors.tooManyGuests && (
+                      <div className="error-cs">* {errors.tooManyGuests}</div>
+                    )}
                   </div>
                   <div className="cs-db-beds flex-column w-20 mrb-40-20">
                     <label className="cs-detail-label">Bed number</label>
@@ -501,6 +518,9 @@ function CreateSpot() {
                     />
                     {submit && errors.noBeds && (
                       <div className="error-cs">* {errors.noBeds}</div>
+                    )}
+                    {errors.invalidBeds && (
+                      <div className="error-cs">* {errors.invalidBeds}</div>
                     )}
                   </div>
                   <div className="cs-db-bedroom flex-column w-20 mrb-40-20">
@@ -515,6 +535,9 @@ function CreateSpot() {
                     {submit && errors.noBedroom && (
                       <div className="error-cs">* {errors.noBedroom}</div>
                     )}
+                    {errors.invalidBedroom && (
+                      <div className="error-cs">* {errors.invalidBedroom}</div>
+                    )}
                   </div>
                   <div className="cs-db-bath flex-column w-20 mrb-40-20">
                     <label className="cs-detail-label">Bath number</label>
@@ -526,6 +549,9 @@ function CreateSpot() {
                     />
                     {submit && errors.noBath && (
                       <div className="error-cs">* {errors.noBath}</div>
+                    )}
+                    {errors.invalidBath && (
+                      <div className="error-cs">* {errors.invalidBath}</div>
                     )}
                   </div>
                   <div className="cs-db-tags flex-column w-20 mrb-40-20">
@@ -629,7 +655,7 @@ function CreateSpot() {
           <div className="cs-button-container">
             <button
               className={`cs-button ${
-                Object.values(errors).length > 0 && submit ? "disable-bt" : ""
+                Object.values(errors).length > 0 ? "disable-bt" : ""
               }`}
               onClick={handleSubmit}
             >
