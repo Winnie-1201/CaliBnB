@@ -32,44 +32,64 @@ function SpotCard() {
     await dispatch(deleteSpotThunk(spotId)).then(() => setDelSpotModal(false));
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push("/spots/current/new");
+  };
+
   return (
     <>
-      {userSpots.map((spot) => (
-        <div className="sc-one flex" key={spot.id}>
-          <div className="flex-column w-70">
-            <div className="sc-img-container">
-              <img
-                className="cs-img"
-                src={spot.images[0]?.url}
-                alt="spot image"
-                onError={(e) => {
-                  e.currentTarget.src = "/default.JPG";
-                }}
-              />
+      {userSpots.length === 0 && (
+        <div className="no-spots-container">
+          <div className="no-spots-text">You don't have any spot yet!</div>
+          <div className="create-spot-text">
+            Click{" "}
+            <span className="click-to-create" onClick={handleClick}>
+              here
+            </span>{" "}
+            to post your first spot! (might have more css on it later)
+          </div>
+        </div>
+      )}
+      <div className="spot-card">
+        {userSpots.map((spot) => (
+          <div className="sc-one flex" key={spot.id}>
+            <div className="flex-column w-70">
+              <div className="sc-img-container">
+                <img
+                  className="cs-img"
+                  src={spot.images[0]?.url}
+                  alt="spot image"
+                  onError={(e) => {
+                    e.currentTarget.src = "/default.JPG";
+                  }}
+                />
+              </div>
+              <div className="sc-date">
+                <div className="sc-date-text">
+                  Posted {dateTransfer("month", spot.created)},{" "}
+                  {dateTransfer("year", spot.created)}
+                </div>
+              </div>
             </div>
-            <div className="sc-date">
-              <div className="sc-date-text">
-                Posted {dateTransfer("month", spot.created)},{" "}
-                {dateTransfer("year", spot.created)}
+            <div className="sc-buttons flex-column">
+              <div className="sc-edit" onClick={(e) => handleEdit(e, spot.id)}>
+                <button className="sc-edit-bt">Edit</button>
+              </div>
+              <div
+                className="sc-del mtb-16-24"
+                onClick={() => {
+                  setDelSpotModal(true);
+                  setDelId(spot.id);
+                }}
+              >
+                <button className="sc-del-bt">Delete</button>
               </div>
             </div>
           </div>
-          <div className="sc-buttons flex-column">
-            <div className="sc-edit" onClick={(e) => handleEdit(e, spot.id)}>
-              <button className="sc-edit-bt">Edit</button>
-            </div>
-            <div
-              className="sc-del mtb-16-24"
-              onClick={() => {
-                setDelSpotModal(true);
-                setDelId(spot.id);
-              }}
-            >
-              <button className="sc-del-bt">Delete</button>
-            </div>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
       {showDelSpotModal && (
         <Modal onClose={() => setDelSpotModal(false)}>
           <form className="del-modal-box">
