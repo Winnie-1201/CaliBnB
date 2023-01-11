@@ -11,6 +11,7 @@
   background: #fff;
   width: 100%;
   margin: 16px 0 40px 0;
+  min-height: 100vh;
 }
 
 .homepage-container {
