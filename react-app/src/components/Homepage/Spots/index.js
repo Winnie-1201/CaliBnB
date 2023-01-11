@@ -28,6 +28,11 @@ function AllSpots() {
   return (
     loaded && (
       <div className="main-inner">
+        {spots.length === 0 && (
+          <div className="vh-100">
+            <div className="no-result-text">No result for {type}</div>
+          </div>
+        )}
         <div className="grid">
           {spots.map((spot) => (
             <NavLink
