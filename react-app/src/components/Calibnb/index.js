@@ -50,9 +50,7 @@ function Calibnb() {
                   </div>
                 </div>
               ) : (
-                <div className="spot-card">
-                  <SpotCard spots={userSpots} />
-                </div>
+                <SpotCard spots={userSpots} />
               )}
             </section>
           </main>

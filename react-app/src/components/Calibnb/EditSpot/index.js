@@ -32,7 +32,7 @@ function EditSpot() {
   const [service_fee, setservice_fee] = useState(spot.service_fee);
   const [clean_fee, setclean_fee] = useState(spot.clean_fee);
   const [price, setPrice] = useState(spot.price);
-  const [preview_img, setPreviewImg] = useState(spot.preview_img);
+  const [preview_img, setPreviewImg] = useState(spot.images[0].url);
   const [images, setImages] = useState(imgs);
 
   const [newImgs, setNewImgs] = useState({});
