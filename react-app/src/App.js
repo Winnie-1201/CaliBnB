@@ -44,11 +44,11 @@ function App() {
           <Footer />
         </Route> */}
         <Route path="/test/wishlist" exact={true}>
-          <Header />
-          <Banner />
+          {/* <Header />
+          <Banner /> */}
           {/* <LoadingBlock /> */}
           <WishlistModal />
-          <Footer />
+          {/* <Footer /> */}
         </Route>
         <Route path="/bookings/:bookingId/review" exact={true}>
           <ReviewForm />

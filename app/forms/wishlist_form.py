@@ -5,5 +5,5 @@ from wtforms.validators import DataRequired
 class WishlistForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     # may not need
-    start = DateTimeField('start')
-    end = DateTimeField('end')
+    # start = DateTimeField('start')
+    # end = DateTimeField('end')

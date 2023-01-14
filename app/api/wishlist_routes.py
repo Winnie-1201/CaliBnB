@@ -27,10 +27,16 @@ def user_wishlist():
 @login_required
 def create_wishlist():
 
-    spotId = request.arg.get("spotId")
+    spotId = request.args.get("spotId")
    
 
     form = WishlistForm()
+    print("----------")
+    print("----------")
+    print("----- form.data", form.data)
+    print("spot id", spotId)
+    print("----------")
+    print("----------")
     form['csrf_token'].data = request.cookies['csrf_token']
 
     print("----------")
