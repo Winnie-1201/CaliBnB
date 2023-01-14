@@ -116,8 +116,8 @@ section {
 }
 
 .save-button {
-  /* cursor: pointer; */
-  cursor: not-allowed;
+  cursor: pointer;
+  /* cursor: not-allowed; */
   margin: 0px -8px;
   text-align: center;
   width: auto;
