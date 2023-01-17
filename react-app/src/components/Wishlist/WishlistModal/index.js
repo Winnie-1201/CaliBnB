@@ -31,17 +31,11 @@ function WishlistModal({ setWishlistModal, spotId }) {
     const newErrors = {};
 
     if (!wishlist)
-      newErrors.noWishilist = "Please enter the name of your new wishlist.";
+      newErrors.noWishlist = "Please enter the name of your new wishlist.";
 
     setSubmit(false);
     setErrors(newErrors);
   }, [wishlist]);
-
-  // console.log(
-  //   "wishlist and its true",
-  //   userWishlists,
-  //   Object.values(userWishlists).length
-  // );
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -55,26 +49,26 @@ function WishlistModal({ setWishlistModal, spotId }) {
       });
   };
 
+  const handleSaveExist = async (e, title) => {
+    e.preventDefault();
+
+    const wishlist = { title: title };
+    await dispatch(createWishlistThunk(wishlist, spotId))
+      .then(() => dispatch(getAllWishlistThunk()))
+      .then(() => setWishlistModal(false));
+  };
   const handleNext = (e) => {
     e.preventDefault();
     setCreateWishlishModal(true);
-    // setWishlistModal(false);
   };
-  //   if (Object.values(userWishlists).length > 0) {
-  //     setSaveExist(false);
-  //     setCreateNew(true);
-  //   }
 
   let wishlistOption = [];
   if (userWishlists) {
-    for (let key in userWishlists) {
-      if (!wishlistOption.includes(userWishlists[key].title)) {
-        wishlistOption.push(userWishlists[key].title);
-      }
-    }
+    wishlistOption = Object.keys(userWishlists);
   }
   // console.log("create modal open", createModal);
   // console.log("name", name, name.length);
+  // console.log("wishlist option", wishlistOption);
   //   console.log("save exist and create new", saveExist, createNew);
   return (
     loaded && (
@@ -131,9 +125,14 @@ function WishlistModal({ setWishlistModal, spotId }) {
               </button>
             </div>
             {Object.values(userWishlists).length > 0 &&
-              Object.values(userWishlists).map((wishlist) => (
-                <div key={wishlist.id}>
-                  <button className="wl-block-bt" onClick={handleSave}>
+              wishlistOption.map((wishlist) => (
+                <div key={wishlist}>
+                  <button
+                    className="wl-block-bt"
+                    onClick={(e) => {
+                      handleSaveExist(e, wishlist);
+                    }}
+                  >
                     <div className="flex s-b center pt-2">
                       <div className="ptb-8 br-1 flex">
                         <div className="flex">
@@ -141,13 +140,17 @@ function WishlistModal({ setWishlistModal, spotId }) {
                             <div className="block-plus">
                               <img
                                 className="block-plus-img"
-                                src={wishlist.spot.images[0].url}
+                                src={
+                                  userWishlists[wishlist][0].spot.images[0].url
+                                }
                                 alt="wishlist image"
                               />
                             </div>
                           </div>
                           <div className="wl-block-right">
-                            <div className="wl-br-text">{wishlist.title}</div>
+                            <div className="wl-br-text">
+                              {userWishlists[wishlist][0].title}
+                            </div>
                           </div>
                         </div>
                       </div>
