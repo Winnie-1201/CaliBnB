@@ -11,9 +11,9 @@ function WishlistModal({ setWishlistModal, spotId }) {
   const dispatch = useDispatch();
 
   //   const [wishlist, setWishlist] = useState("");
-  const [wishlist, setWishlist] = useState("");
-  const [createNew, setCreateNew] = useState(false);
-  const [saveExist, setSaveExist] = useState(true);
+  // const [wishlist, setWishlist] = useState("");
+  // const [createNew, setCreateNew] = useState(false);
+  // const [saveExist, setSaveExist] = useState(true);
   const [name, setName] = useState("");
   const [createModal, setCreateWishlishModal] = useState(false);
 
@@ -30,12 +30,12 @@ function WishlistModal({ setWishlistModal, spotId }) {
   useEffect(() => {
     const newErrors = {};
 
-    if (!wishlist)
+    if (!name)
       newErrors.noWishlist = "Please enter the name of your new wishlist.";
 
     setSubmit(false);
     setErrors(newErrors);
-  }, [wishlist]);
+  }, [name]);
 
   const handleSave = async (e) => {
     e.preventDefault();

@@ -45,34 +45,12 @@ def user_wishlist():
 @login_required
 def create_wishlist():
 
-    print("---------- in create b")
-    print("----------")
-    print("----------")
-    print("----------")
-    print("----------")
-    print("----------")
-    print("----------")
-
     spotId = request.args.get("spotId")
-    print("----------")
-    print("----------, spotId", spotId)
    
 
     form = WishlistForm()
-    print("----------")
-    print("----------")
-    print("----- form.data", form.data)
-    print("spot id", spotId)
-    print("----------")
-    print("----------")
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print("----------")
-    print("----------")
-    print("----- form.data", form.data)
-    print("spot id", spotId)
-    print("----------")
-    print("----------")
 
     if form.validate_on_submit:
         new_wishlist = Wishlist(title=form.data['title'], userId=current_user.id, spotId=spotId)

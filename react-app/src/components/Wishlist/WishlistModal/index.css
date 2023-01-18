@@ -156,14 +156,14 @@
   position: relative;
   cursor: pointer;
   display: flex;
-  min-height: 56px;
+  min-height: 64px;
   width: 100%;
   margin: 0px;
   border: none;
   border-radius: 8px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(176 176 176) 0px 0px 0px 1px inset;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 20;
 }
@@ -172,10 +172,11 @@
   padding: 16px 12px 6px;
   width: 100%;
   border: none;
-  border: none;
   border-radius: 8px;
   background-color: transparent;
   outline: none;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 /* .wl-input-box:hover, */

@@ -41,6 +41,17 @@ export const getAllWishlistThunk = () => async (dispatch) => {
   }
 };
 
+export const getOneWishlist = (title) => async (dispatch) => {
+  const response = await fetch("/api/wishlists/current");
+
+  //   console.log("response in thunk wishlist get all", response);
+  if (response.ok) {
+    const wishlists = await response.json();
+    dispatch(getOne(wishlists[title]));
+    return wishlists;
+  }
+};
+
 export const createWishlistThunk = (wishlist, spotId) => async (dispatch) => {
   const response = await fetch(`/api/wishlists/new?spotId=${spotId}`, {
     method: "POST",
