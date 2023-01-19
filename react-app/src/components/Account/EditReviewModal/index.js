@@ -19,8 +19,6 @@ function EditReviewModal({ setEditReviewModal, review }) {
 
   useEffect(() => {
     const newErrors = {};
-
-    // console.log("cleaness in use effect", cleanliness);
     if (!content)
       newErrors.noContent = "Please enter your review of the place.";
     if (!cleanliness)
@@ -69,7 +67,6 @@ function EditReviewModal({ setEditReviewModal, review }) {
   };
 
   const rating = [5, 4, 3, 2, 1];
-  // console.log("content", content);
   return (
     <>
       <form onSubmit={handleSubmit} className="er-form-box">

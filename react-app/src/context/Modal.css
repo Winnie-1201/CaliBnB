@@ -36,3 +36,25 @@
   overflow: clip;
   /* overflow-y: scroll; */
 }
+
+/* #modal-content {
+  opacity: 1;
+  animation: show 0.5s;
+  transform: scale(1);
+}
+@keyframes show {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+} */
+
+/* #modal-content {
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: transform, opacity, visibility;
+} */

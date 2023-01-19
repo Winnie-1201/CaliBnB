@@ -1,7 +1,8 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.models import db, Spot, Review, Booking, Experience, Wishlist
 from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm
+
 
 wishlist_routes = Blueprint('wishlists', __name__)
 
@@ -12,33 +13,31 @@ def user_wishlist():
     Query for getting current user's wishlist and
     return them in a list of dictionaries
     '''
-    wishlists = Wishlist.query.filter_by(userId=current_user.id).all()
-    print("----------")
-    print("----------")
-    print("---------- wishlists in backend", wishlists)
-    print("----------")
-    print("----------")
-    print("----------")
+    # wishlists = Wishlist.query.filter_by(userId=current_user.id).group_by(Wishlist.title).all()
+    # wishlist_title = [w.to_dict().title for w in wishlists]
 
-    return {'Wishlists': [w.to_dict() for w in wishlists]}
+    all_wishlist = Wishlist.query.filter_by(userId=current_user.id).all()
+    wishlist_obj = {}
+    
+    for w in all_wishlist:
+        if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append(w.to_dict())
+        else: wishlist_obj[w.to_dict()['title']] = [w.to_dict()]
+    
+
+    return jsonify(wishlist_obj)
+    # return {'Wishlists': [w.to_dict() for w in wishlists]}
 
 
 @wishlist_routes.route('/new', methods=['POST'])
 @login_required
 def create_wishlist():
 
-    spotId = request.arg.get("spotId")
+    spotId = request.args.get("spotId")
    
 
     form = WishlistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print("----------")
-    print("----------")
-    print("----- form.data", form.data)
-    print("spot id", spotId)
-    print("----------")
-    print("----------")
 
     if form.validate_on_submit:
         new_wishlist = Wishlist(title=form.data['title'], userId=current_user.id, spotId=spotId)

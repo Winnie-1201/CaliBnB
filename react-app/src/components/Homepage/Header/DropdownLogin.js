@@ -31,6 +31,11 @@ function DropdownLogin() {
     history.push("/users/trips");
   };
 
+  const handleWishlists = (e) => {
+    e.preventDefault();
+    history.push("/users/wishlists");
+  };
+
   return (
     <div className="flex-column ptb mt login-dropdown">
       <div className="top flex-column">
@@ -43,9 +48,9 @@ function DropdownLogin() {
         <div className="text-hover flex center" onClick={handleTrips}>
           <div className="top-text-login">Trips</div>
         </div>
-        {/* <div className="text-hover flex center">
+        <div className="text-hover flex center" onClick={handleWishlists}>
           <div className="top-text-login">Wishlists</div>
-        </div> */}
+        </div>
       </div>
       <div className="mid flex-column">
         <div className="text-hover flex center" onClick={handleCalibnb}>

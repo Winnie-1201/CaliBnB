@@ -18,7 +18,7 @@ function TripsPage() {
   let allTrips;
   let uTrips = [];
   let pTrips = [];
-  let cTrips = [];
+  // let cTrips = [];
 
   const [loaded, setLoaded] = useState(false);
 
@@ -44,9 +44,6 @@ function TripsPage() {
       }
     }
   }
-
-  // console.log("upcoming trips", uTrips);
-  // console.log("past trips", pTrips);
 
   return (
     <>

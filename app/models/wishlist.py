@@ -33,7 +33,7 @@ class Wishlist(db.Model):
             "created": self.created,
             "updated": self.updated,
             "userId": self.userId,
-            "spot": Spot.query.get(self.spotId).to_dict_booking()
+            "spot": Spot.query.get(self.spotId).to_dict()
         }
 
     

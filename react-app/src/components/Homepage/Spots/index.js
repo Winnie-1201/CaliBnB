@@ -28,6 +28,11 @@ function AllSpots() {
   return (
     loaded && (
       <div className="main-inner">
+        {spots.length === 0 && (
+          <div className="vh-100">
+            <div className="no-result-text">No result for {type}</div>
+          </div>
+        )}
         <div className="grid">
           {spots.map((spot) => (
             <NavLink
@@ -47,7 +52,7 @@ function AllSpots() {
                       }}
                     />
                   </div>
-                  <div className="flex s-b plr-8">
+                  <div className="flex s-b plr-8 font-16">
                     <div className="flex-column left">
                       <div className="location">{spot.city}</div>
                       <div className="type">{spot.type}</div>

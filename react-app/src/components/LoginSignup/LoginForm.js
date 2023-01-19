@@ -20,9 +20,7 @@ function LoginForm({ setLoginModal }) {
 
     const data = await dispatch(login(email, password));
 
-    // console.log("data in login", data);
     if (data && data.errors) {
-      // console.log("go in ");
       const newErrors = {};
       for (let i in data.errors) {
         const err = data.errors[i].split(" : ")[0];
@@ -31,18 +29,9 @@ function LoginForm({ setLoginModal }) {
       }
       setErrors(newErrors);
     } else setLoginModal(false);
-
-    // return dispatch(login(email, password)).catch(async (res) => {
-    //   const data = await res.json();
-    //   console.log("data in login", data);
-    //   if (data && data.errors) setErrors(data.errors);
-    //   else setLoginModal(false);
-    // });
   };
 
-  // console.log("error", errors);
   return (
-    // <div>Testing</div>
     <div className="flex-column login-form">
       <div className="x"></div>
       <div className="login-header flex s-b center">
@@ -124,8 +113,12 @@ function LoginForm({ setLoginModal }) {
           <div className="flex center mtb-16 or">or</div>
         </div>
         <div className="mtb-16-24">
-          <button className="p-14-24" type="submit">
-            <span>Sign up No Function Yet</span>
+          <button
+            className="p-14-24"
+            type="submit"
+            onClick={() => setLoginModal("signup")}
+          >
+            <span>Sign up</span>
           </button>
         </div> */}
       </div>

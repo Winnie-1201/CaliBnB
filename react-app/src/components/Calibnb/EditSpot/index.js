@@ -45,8 +45,6 @@ function EditSpot() {
 
   useEffect(() => {
     const newErrors = {};
-
-    // console.log("next step in useeffect", nextStep, !name);
     if (!address)
       newErrors.noAddress = "Please enter the address of your new spot.";
     if (!city) newErrors.noCity = "Please enter the city of your new spot.";
@@ -81,8 +79,27 @@ function EditSpot() {
     if (images && Object.values(images).length < 4)
       newErrors.shortImage =
         "Please upload at least five images for your spot (preview image included).";
+    if (price && price <= 0)
+      newErrors.invalidPrice =
+        "Invalid price (Price needs to be greater than zero).";
+    if (service_fee && (service_fee > 100 || service_fee < 0))
+      newErrors.invalidService =
+        "Service fee needs to be greater or equal to 0, and less than 100.";
+    if (clean_fee && (clean_fee > 100 || clean_fee < 0))
+      newErrors.invalidClean =
+        "Clean fee needs to be greater or equal to 0, and less than 100.";
 
-    // setNextStep(false);
+    if (guests && beds && guests > beds * 3)
+      newErrors.tooManyGuests = "Too many guests for your property.";
+    if (guests && guests <= 0)
+      newErrors.invalidGuest = "Guest number needs to be greater than 0.";
+    if (bedroom && bedroom <= 0)
+      newErrors.invalidBedroom = "Bedroom number needs to be greater than 0.";
+    if (beds && beds <= 0)
+      newErrors.invalidBeds = "Bed number needs to be greater than 0.";
+    if (bath && bath <= 0)
+      newErrors.invalidBath = "Bath number needs to be greater than 0.";
+
     setSubmit(false);
     setErrors(newErrors);
   }, [
@@ -120,7 +137,6 @@ function EditSpot() {
 
   const updateImages = (e, id) => {
     const file = e.target.files[0];
-    // console.log("id", id);
 
     if (!images[id]) {
       const obj = {};
@@ -129,7 +145,6 @@ function EditSpot() {
     } else {
       const obj = {};
       obj[id] = file;
-      // console.log("images", images, obj);
       setImages({ ...images, ...obj });
 
       if (file) {
@@ -176,13 +191,9 @@ function EditSpot() {
 
     if (Object.values(newImgs).length > 0) {
       for (let key in newImgs) {
-        // console.log("key in newImgs", key);
         promiseArr.push(dispatch(addImageThunk(spotId, newImgs[key], false)));
       }
     }
-
-    // console.log("all promise", promiseArr);
-
     Promise.all(promiseArr).then(() => history.push(`/spots/${spotId}`));
   };
 
@@ -198,15 +209,6 @@ function EditSpot() {
       .map((_, i) => i + parseInt(Object.keys(imgs)[0]) + 1);
   }
 
-  // console.log("boxes", boxes);
-  // console.log("images,", images);
-  // console.log("update images", updateImgs);
-  // console.log("new images", newImgs);
-  // console.log("tags and type", tags, type);
-  // console.log("imgs change or not", imgs);
-  // console.log("rest of box", rest);
-
-  // console.log("errors", errors);
   return (
     loaded && (
       <>
@@ -292,82 +294,6 @@ function EditSpot() {
                       )}
                     </div>
                   ))}
-                  {/* <div className="cs-grid-one flex-column">
-                    {Object.values(newImgs).length > 0 ? (
-                      <img
-                        src={URL.createObjectURL(Object.values(newImgs)[0])}
-                        alt="new image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, rest[0])}
-                    />
-                  </div>
-                  <div className="cs-grid-one flex-column">
-                    {Object.values(newImgs).length > 1 ? (
-                      <img
-                        src={URL.createObjectURL(Object.values(newImgs)[1])}
-                        alt="new image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, rest[0])}
-                    />
-                  </div>
-                  <div className="cs-grid-one flex-column">
-                    {Object.values(newImgs).length > 2 ? (
-                      <img
-                        src={URL.createObjectURL(Object.values(newImgs)[2])}
-                        alt="new image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, rest[0])}
-                    />
-                  </div>
-                  <div className="cs-grid-one flex-column">
-                    {Object.values(newImgs).length > 3 ? (
-                      <img
-                        src={URL.createObjectURL(Object.values(newImgs)[3])}
-                        alt="new image"
-                        className="image-uploaded"
-                      />
-                    ) : (
-                      <div className="cs-imgs-one-box">
-                        <i className="fa-solid fa-folder-plus" />
-                      </div>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className="cs-imgs-one-input"
-                      onChange={(e) => updateImages(e, rest[0])}
-                    />
-                  </div> */}
                 </div>
               </div>
             </div>

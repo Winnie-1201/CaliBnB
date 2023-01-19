@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Homepage/Header";
-import PartOne from "./PartOne";
-import "./index.css";
-import PartTwo from "./PartTwo";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getOneSpotThunk, getOwnerSpotsThunk } from "../../store/spots";
+import { getOneSpotThunk } from "../../store/spots";
 import { getSpotReivewsThunk } from "../../store/reviews";
 import { getSpotBookingsThunk } from "../../store/bookings";
-import PartThree from "./PartThree";
-import PartFour from "./PartFour";
-import PartFive from "./PartFive";
 import { getImgsBySpotThunk } from "../../store/images";
-import LoadingBlock from "../LoadingBlock";
 import { getAllWishlistThunk } from "../../store/wishlists";
+import Header from "../Homepage/Header";
+import PartOne from "./PartOne";
+import PartTwo from "./PartTwo";
+import PartThree from "./PartThree";
+// import PartFour from "./PartFour";
+import PartFive from "./PartFive";
+import LoadingBlock from "../LoadingBlock";
+import "./index.css";
 
 function SpotDetailsPage() {
   const dispatch = useDispatch();
@@ -28,21 +28,14 @@ function SpotDetailsPage() {
   const images = useSelector((state) => state.images.allImages[spotId]);
   const owner = spotDetail?.owner;
 
-  // console.log("go in n");
-
   useEffect(() => {
     dispatch(getOneSpotThunk(spotId))
-      // .then((data) => {
-      //   dispatch(getOwnerSpotsThunk(data.owner.id));
-      // })
       .then(() => dispatch(getSpotReivewsThunk(spotId)))
       .then(() => dispatch(getSpotBookingsThunk(spotId)))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
       .then(() => dispatch(getAllWishlistThunk()))
       .then(() => setLoaded(true));
   }, [dispatch, spotId]);
-
-  // console.log("all images", images);
 
   return (
     <>

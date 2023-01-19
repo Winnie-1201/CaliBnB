@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import "./SignupForm.css";
-// import "./LoginForm.css";
 
 const checkValidName = (name) => {
-  // console.log(name.split("").filter((el) => !isNaN(el)))
   return name.split("").filter((el) => !isNaN(el)).length > 0;
 };
 
@@ -19,7 +16,6 @@ function SignupForm({ setSignupModal }) {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  // const [icon, setIcon] = useState("")
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
@@ -40,8 +36,6 @@ function SignupForm({ setSignupModal }) {
       newErrors.same = "Username cannot be an email";
     if (password && confirm && password !== confirm)
       newErrors.samePw = "Please enter the same password";
-    // if (password && password.length < 6)
-    //   newErrors.password = "Password must be 6 characters or more.";
     if (email && !email.split("").includes("@"))
       newErrors.validEmail = "Please provide a valid email.";
 
@@ -63,7 +57,7 @@ function SignupForm({ setSignupModal }) {
     const data = await dispatch(
       signUp(firstName, lastName, username, email, password)
     );
-    // console.log("data in comp", data);
+
     if (!data) {
       setSignupModal(false);
       history.push("/");
@@ -75,12 +69,10 @@ function SignupForm({ setSignupModal }) {
 
         errs[errName] = errMsg;
       }
-      // const errorMsg = data.errors[0].split(": ")[1];
       setErrors(errs);
     }
   };
 
-  // console.log("errors", errors, errors.email, submit);
   return (
     <div className="flex-column login-form">
       <div className="x"></div>

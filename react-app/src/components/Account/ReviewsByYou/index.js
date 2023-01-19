@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
@@ -27,7 +27,6 @@ function ReviewsByYou() {
   };
 
   return (
-    // loaded && (
     <>
       <h2 className="rp-header-h2 flex center">
         <div className="mr-8">
@@ -154,7 +153,6 @@ function ReviewsByYou() {
         </Modal>
       )}
     </>
-    // )
   );
 }
 
