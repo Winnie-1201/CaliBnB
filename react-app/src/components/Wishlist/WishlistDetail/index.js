@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneWishlist } from "../../../store/wishlists";
+import {
+  deleteWishlistThunk,
+  editWishlistThunk,
+  getOneWishlist,
+} from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
 import Header from "../../Homepage/Header";
 import Footer from "../../Homepage/Footer";
@@ -34,13 +38,30 @@ function WishlistDetail() {
     setErrors(errs);
   }, [newTitle]);
 
-  // const handleDelete = async (e) => {
-  //   e.preventDefault();
-  // };
+  const handleDelete = async (e) => {
+    e.preventDefault();
 
-  // const handleSave = async (e) => {
-  //   e.preventDefault();
-  // };
+    const titleData = { title: newTitle };
+    await dispatch(deleteWishlistThunk(title, titleData)).then(() =>
+      history.push("/users/wishlists")
+    );
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+
+    // console.log("title in comp", title, newTitle);
+    let promise_arr = [];
+    wishlist.forEach((w) => {
+      const titleData = { title: newTitle.trim() };
+      promise_arr.push(dispatch(editWishlistThunk(title, titleData)));
+    });
+
+    Promise.all(promise_arr)
+      .then(() => setEditWishlistModal(false))
+      .then(() => dispatch(getOneWishlist(newTitle.trim())))
+      .then(() => history.push(`/users/wishlists/${newTitle.trim()}`));
+  };
 
   return (
     <>
@@ -69,7 +90,7 @@ function WishlistDetail() {
           </div>
           <div className="wd-bottom">
             <div className="wd-grid">
-              {wishlist.map((item) => (
+              {wishlist?.map((item) => (
                 <NavLink
                   className="wd-grid-card"
                   key={item.id}
@@ -187,7 +208,7 @@ function WishlistDetail() {
                 Cancel
               </button>
               <button
-                // onClick={handleSave}
+                onClick={handleSave}
                 className={`ewl-save-bt${
                   newTitle.length === 0 ? "-disable" : ""
                 }`}
@@ -238,6 +259,7 @@ function WishlistDetail() {
               </button>
               <button
                 // onClick={handleSave}
+                onClick={(e) => handleDelete(e, title)}
                 className={`ewl-save-bt${
                   newTitle.length === 0 ? "-disable" : ""
                 }`}
