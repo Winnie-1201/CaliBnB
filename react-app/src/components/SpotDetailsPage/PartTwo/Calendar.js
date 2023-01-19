@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "react-dates/initialize";
-import { DayPickerRangeController, isInclusivelyAfterDay } from "react-dates";
+import { useDispatch, useSelector } from "react-redux";
 import Moment from "moment";
+import { DayPickerRangeController, isInclusivelyAfterDay } from "react-dates";
 import { extendMoment } from "moment-range";
 import "./DatePicker.css";
-import { useDispatch, useSelector } from "react-redux";
 import { getSpotBookingsThunk } from "../../../store/bookings";
 
 function CalendarForm({
@@ -22,9 +22,8 @@ function CalendarForm({
   const bookings = useSelector((state) => state.bookings.spotBookings);
 
   const [focusedInput, setFocusedInput] = useState("startDate");
-  const [unvaliable, setUnvaliable] = useState([]);
+  // const [unvaliable, setUnvaliable] = useState([]);
 
-  // console.log("bookings", bookings);
   useEffect(() => {
     dispatch(getSpotBookingsThunk(spot.id));
   }, [dispatch]);
@@ -82,37 +81,6 @@ function CalendarForm({
       //   focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
       //   onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
     />
-    // <div className="flex calender-container w-100">
-    //   <div className="flex-column w-100">
-    //     <div className="cal-top flex">
-    //       <Calendar calendarType="US" minDetail="month" />
-    //       <Calendar calendarType="US" minDetail="month" />
-    //     </div>
-    //     <div className="cal-bottom flex center s-b">
-    //       <div className="cal-clear">
-    //         <button className="cal-clear-button">Clear dates</button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
-    // <div className="app">
-    //   <h1>React Calendar with Range</h1>
-    //   <div>
-    //     <Calendar onChange={setDate} value={date} selectRange={true} />
-    //   </div>
-    //   {date.length > 0 ? (
-    //     <p>
-    //       <span>Start:</span> {date[0].toDateString()}
-    //       &nbsp; to &nbsp;
-    //       <span>End:</span> {date[1].toDateString()}
-    //     </p>
-    //   ) : (
-    //     <p>
-    //       <span>Default selected date:</span> {date.toDateString()}
-    //     </p>
-    //   )}
-    // </div>
   );
 }
 

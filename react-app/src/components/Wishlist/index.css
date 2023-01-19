@@ -41,6 +41,7 @@
 
 .wl-li-link {
   width: 100%;
+  cursor: pointer;
 }
 
 .wl-li-top {

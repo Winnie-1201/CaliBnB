@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
@@ -15,7 +14,6 @@ function SpotCard() {
   const userSpots = Object.values(
     useSelector((state) => state.spots.ownerSpots)
   );
-  // const currUser = useSelector((state) => state.session.user);
 
   const [showDelSpotModal, setDelSpotModal] = useState(false);
   const [delId, setDelId] = useState();

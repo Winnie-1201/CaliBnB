@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
-import CreateSpot from "../../Calibnb/CreateSpot";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -12,6 +11,7 @@ function Header() {
   const history = useHistory();
 
   const [showMenu, setShowMenu] = useState(false);
+
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
 
@@ -106,14 +106,16 @@ function Header() {
                       className="text-hover flex center"
                       onClick={() => {
                         setSignupModal(true);
+                        // setLoginModal("signup");
                       }}
                     >
                       <div className="top-text">
                         <div
                           className="signup"
-                          onClick={() => {
-                            setSignupModal(true);
-                          }}
+                          // onClick={() => {
+                          //   setSignupModal(true);
+                          //   setLoginModal("signup");
+                          // }}
                         >
                           Sign up
                         </div>
@@ -123,14 +125,16 @@ function Header() {
                       className="text-hover flex center"
                       onClick={() => {
                         setLoginModal(true);
+                        // setLoginModal("login");
                       }}
                     >
                       <div className="top-text">
                         <div
                           className="login"
-                          onClick={() => {
-                            setLoginModal(true);
-                          }}
+                          // onClick={() => {
+                          //   setLoginModal(true);
+                          //   setLoginModal("login");
+                          // }}
                         >
                           Log in
                         </div>
@@ -153,6 +157,16 @@ function Header() {
                   </div>
                 </div>
               )}
+              {/* {loginModal === "login" && (
+                <Modal onClose={() => setLoginModal(false)}>
+                  <LoginForm setLoginModal={setLoginModal} />
+                </Modal>
+              )}
+              {signupModal === "signup" && (
+                <Modal onClose={() => setLoginModal(false)}>
+                  <SignupForm setLoginModal={setLoginModal} />
+                </Modal>
+              )} */}
               {loginModal && (
                 <Modal onClose={() => setLoginModal(false)}>
                   <LoginForm setLoginModal={setLoginModal} />
@@ -163,21 +177,6 @@ function Header() {
                   <SignupForm setSignupModal={setSignupModal} />
                 </Modal>
               )}
-              {/* {createSpotModal && (
-              <Modal
-                onClose={() => {
-                  setCreateSpotModal(false);
-                }}
-              >
-                {next ? (
-                  <NextStepForm next={next} setNext={setNext} data={data} />
-                ) : (
-                  <CreateSpot next={next} setNext={setNext} data={data} />
-        
-                )}
-              </Modal>
-            )} */}
-
               {showMenu && isLogin && <DropdownLogin />}
             </div>
           </div>

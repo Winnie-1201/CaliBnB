@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../Homepage/Header";
-import Footer from "../../Homepage/Footer";
-import "./index.css";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneWishlist } from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
+import Header from "../../Homepage/Header";
+import Footer from "../../Homepage/Footer";
 import { Modal } from "../../../context/Modal";
+import "./index.css";
 
 function WishlistDetail() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { title } = useParams();
   const wishlist = useSelector((state) => state.wishlists.singleWishlist);
 
   const [newTitle, setNewTitle] = useState(title);
   const [editWishlistModal, setEditWishlistModal] = useState(false);
-  // const [delWishlistModal, setDelWishlistModal] = useState(false)
 
-  const [errors, setErrors] = useState("");
-
+  const [errors, setErrors] = useState({});
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -27,17 +26,21 @@ function WishlistDetail() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!newTitle) setErrors("You need to enter the title for the wishlist.");
-    if (newTitle && newTitle.length > 50) setErrors("The title is too long.");
-  }, [errors]);
+    const errs = {};
+    if (newTitle.length === 0)
+      errs.noTitle = "You need to enter the title for the wishlist.";
+    if (newTitle.length > 50) errs.toLong = "The title is too long.";
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-  };
+    setErrors(errs);
+  }, [newTitle]);
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-  };
+  // const handleDelete = async (e) => {
+  //   e.preventDefault();
+  // };
+
+  // const handleSave = async (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <>
@@ -48,7 +51,10 @@ function WishlistDetail() {
           <div className="wd-top">
             <div className="flex center s-b">
               <button className="wd-go-back">
-                <i className="fa-solid fa-arrow-left" />
+                <i
+                  className="fa-solid fa-arrow-left"
+                  onClick={() => history.push("/users/wishlists")}
+                />
               </button>
               <button
                 className="wd-more"
@@ -161,7 +167,16 @@ function WishlistDetail() {
                 ></input>
               </div>
               <div className="pt-8">
-                <div className="wl-max-text">50 Characters maximum</div>
+                {/* {errors ? ( */}
+                {errors.noTitle && (
+                  <div className="wl-max-text red">* {errors.noTitle}</div>
+                )}
+                {errors.toLong && (
+                  <div className="wl-max-text red">* {errors.toLong}</div>
+                )}
+                {Object.values(errors).length === 0 && (
+                  <div className="wl-max-text">50 Characters maximum</div>
+                )}
               </div>
             </div>
             <div className="ewl-footer">
@@ -190,7 +205,7 @@ function WishlistDetail() {
               {/* onClick handle close modal and reopen the lst modal*/}
               <button
                 className="wl-x-bt"
-                onClick={() => setEditWishlistModal(false)}
+                onClick={() => setEditWishlistModal("edit")}
               >
                 <span className="wl-x-text">
                   <svg

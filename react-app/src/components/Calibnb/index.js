@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import { getOwnerSpotsThunk } from "../../store/spots";
 import Header from "../Homepage/Header";
 import LoadingBlock from "../LoadingBlock";
-import "./index.css";
 import SpotCard from "./SpotCard";
+import "./index.css";
 
 function Calibnb() {
   const dispatch = useDispatch();

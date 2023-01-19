@@ -24,11 +24,13 @@ function Root() {
   return (
     <Provider store={store}>
       <TagProvider>
+        {/* <WishlistProvider> */}
         <ModalProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
         </ModalProvider>
+        {/* </WishlistProvider> */}
       </TagProvider>
     </Provider>
   );

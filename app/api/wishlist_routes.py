@@ -20,22 +20,9 @@ def user_wishlist():
     wishlist_obj = {}
     
     for w in all_wishlist:
-        # print("----------")
-        # print("----------")
-        # print("---------- wishlists in backend", wishlist_obj, w.to_dict()['title'])
-        # print("----------")
-        # print("----------")
-        # print("----------")
-
         if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append(w.to_dict())
         else: wishlist_obj[w.to_dict()['title']] = [w.to_dict()]
     
-    # print("----------")
-    # print("----------")
-    # print("---------- wishlists in backend", wishlist_obj)
-    # print("----------")
-    # print("----------")
-    # print("----------")
 
     return jsonify(wishlist_obj)
     # return {'Wishlists': [w.to_dict() for w in wishlists]}

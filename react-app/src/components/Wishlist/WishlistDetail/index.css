@@ -176,6 +176,22 @@
   color: #ffffff;
 }
 
+.ewl-save-bt-disable {
+  cursor: not-allowed;
+  opacity: 1;
+  border: none;
+  background: #dddddd;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 14px 24px;
+  contain: paint;
+  /* width: 100%; */
+  line-height: 20px;
+}
 /* .wd-more {
   transition: all 0.5s ease-in;
 } */

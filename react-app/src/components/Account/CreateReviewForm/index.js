@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import {
-  getOneBookingThunk,
-  getUserBookingsThunk,
-} from "../../../store/bookings";
-import {
-  createReviewThunk,
-  editReviewThunk,
-  getUserReviewsThunk,
-} from "../../../store/reviews";
-import { getOneSpotThunk } from "../../../store/spots";
+import { getOneBookingThunk } from "../../../store/bookings";
+import { createReviewThunk } from "../../../store/reviews";
 import { dateTransfer } from "../../dateTransfer";
 import Header from "../../Homepage/Header";
 import "./index.css";
@@ -19,16 +11,7 @@ function ReviewForm({}) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const { spotId } = useParams();
   const { bookingId } = useParams();
-
-  //   const [content, setContent] = useState(review.content);
-  //   const [cleanliness, setCleanliness] = useState(review.cleanliness);
-  //   const [check_in, setCheckin] = useState(review.check_in);
-  //   const [communicatoin, setCommunication] = useState(review.communicatoin);
-  //   const [value, setValue] = useState(review.value);
-  //   const [location, setLocation] = useState(review.location);
-  //   const [accuracy, setAccuracy] = useState(review.accuracy);
 
   const [content, setContent] = useState("");
   const [cleanliness, setCleanliness] = useState();
@@ -52,8 +35,6 @@ function ReviewForm({}) {
 
   useEffect(() => {
     const newErrors = {};
-
-    // console.log("cleaness in use effect", cleanliness);
     if (!content)
       newErrors.noContent = "Please enter your review of the place.";
     if (!cleanliness)
@@ -104,20 +85,7 @@ function ReviewForm({}) {
         accuracy: ac,
       };
 
-      // if (type === "create") {
-      //   await dispatch(createReviewThunk(spotId, review)).then(() => {
-      //     setReviewModal(false);
-      //     history.push(`/users/profile`);
-      //   });
-      // } else if (type === "edit") {
-      //   await dispatch(editReviewThunk(review))
-      //     .then(() => dispatch(getUserReviewsThunk()))
-      //     .then(() => setReviewModal(false));
-      // } else {
-      // console.log("booking in create review", booking);
-      // console.log("spot id", booking.spotId);
       await dispatch(createReviewThunk(booking.spotId, review)).then(() => {
-        // setReviewModal(false);
         history.push(`/users/profile`);
       });
       // }
@@ -198,10 +166,6 @@ function ReviewForm({}) {
                     name="rate1"
                     value="5"
                     onChange={(e) => setCleanliness(e.target.value)}
-                    // onChange={(e) => {
-                    //   console.log("e.target.value", e.target.value, cleanliness);
-                    //   setCleanliness(e.target.value);
-                    // }}
                   />
                   <label htmlFor="cl-star5" className="fas fa-star"></label>
                   <input
@@ -211,9 +175,7 @@ function ReviewForm({}) {
                     value="4"
                     onChange={(e) => setCleanliness(e.target.value)}
                   />
-                  <label htmlFor="cl-star4" className="fas fa-star">
-                    {/* 4 stars */}
-                  </label>
+                  <label htmlFor="cl-star4" className="fas fa-star"></label>
                   <input
                     type="radio"
                     id="cl-star3"
