@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteWishlistThunk, getOneWishlist } from "../../../store/wishlists";
+import {
+  deleteWishlistThunk,
+  editWishlistThunk,
+  getAllWishlistThunk,
+  getOneWishlist,
+} from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
 import Header from "../../Homepage/Header";
 import Footer from "../../Homepage/Footer";
@@ -34,17 +39,25 @@ function WishlistDetail() {
     setErrors(errs);
   }, [newTitle]);
 
-  const handleDelete = async (e, title) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
 
-    await dispatch(deleteWishlistThunk(title)).then(() =>
+    const titleData = { title: newTitle };
+    await dispatch(deleteWishlistThunk(title, titleData)).then(() =>
       history.push("/users/wishlists")
     );
   };
 
-  // const handleSave = async (e) => {
-  //   e.preventDefault();
-  // };
+  const handleSave = async (e) => {
+    e.preventDefault();
+
+    // console.log("title in comp", title, newTitle);
+
+    await dispatch(editWishlistThunk(title, newTitle))
+      // .then(() => dispatch(getAllWishlistThunk()))
+      .then(() => setEditWishlistModal(false))
+      .then(() => history.push(`/users/wishlists`));
+  };
 
   return (
     <>
@@ -191,7 +204,7 @@ function WishlistDetail() {
                 Cancel
               </button>
               <button
-                // onClick={handleSave}
+                onClick={handleSave}
                 className={`ewl-save-bt${
                   newTitle.length === 0 ? "-disable" : ""
                 }`}

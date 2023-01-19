@@ -69,17 +69,19 @@ export const createWishlistThunk = (wishlist, spotId) => async (dispatch) => {
 };
 
 // maynot needed
-export const editWishlistThunk = (wishlist, wishlistId) => async (dispatch) => {
-  const response = await fetch(`/api/wishlists/${wishlistId}`, {
+export const editWishlistThunk = (oldTitle, titleData) => async (dispatch) => {
+  console.log("title in edit thunk", titleData);
+  const response = await fetch(`/api/wishlists/${oldTitle}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(wishlist),
+    body: JSON.stringify(titleData),
   });
 
   if (response.ok) {
     const wishlist = await response.json();
+    console.log("wishlist in edit thunk", wishlist);
     dispatch(editOne(wishlist));
     return wishlist;
   }
@@ -116,7 +118,7 @@ export default function wishlistReducer(state = initialState, action) {
       else newState.userWishlists[action.wishlist.title] = action.wishlist;
       return newState;
     case EDIT:
-      newState.userWishlists[action.wishlistId] = action.wishlist;
+      newState.userWishlists = action.wishlist;
       return newState;
     case DELETE:
       newState = { ...state };

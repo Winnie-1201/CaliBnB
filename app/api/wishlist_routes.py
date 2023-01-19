@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
-from app.models import db, Spot, Review, Booking, Experience, Wishlist
-from app.forms import SpotForm, ReviewForm, BookingForm, ExperienceForm, WishlistForm
+from app.models import db, Wishlist
+from app.forms import WishlistForm
 
 
 wishlist_routes = Blueprint('wishlists', __name__)
@@ -34,10 +34,8 @@ def create_wishlist():
 
     spotId = request.args.get("spotId")
    
-
     form = WishlistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
 
     if form.validate_on_submit:
         new_wishlist = Wishlist(title=form.data['title'], userId=current_user.id, spotId=spotId)
@@ -48,32 +46,58 @@ def create_wishlist():
         return new_wishlist.to_dict()
 
 
-@wishlist_routes.route('/<int:wishlistId>', methods=['PUT'])
+@wishlist_routes.route('/<string:oldTitle>', methods=['PUT'])
 @login_required
-def edit_wishlist(wishlistId):
+def edit_wishlist(oldTitle):
 
-    wishlist = Wishlist.query.get(wishlistId)
+    form = WishlistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-    if wishlist:
-        form = WishlistForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
+    wishlist = Wishlist.query.filter_by(title=oldTitle).all()
 
-        if wishlist.userId == current_user.id:
-            if form.validate_on_submit:
-                wishlist['title'] = form.data['title']
+    print('------------')
+    print('------------ in line 58', wishlist)
+    print('------------')
+    # if wishlist:
+    # print('------------')
+    # print('------------ in line 62')
+    # print('------------')
+    print('------------')
+    print('------------ in line 64')
+    print('------------')
+    # if wishlist.userId == current_user.id:
+    if form.validate_on_submit:
+        print('------------')
+        print('------------ in line 69')
+        print('------------')
+        for w in wishlist:
+            print("----------- ")
+            print("----------- w", w, w['title'])
+            print("----------- ")
+            print("----------- ")
+            w['title'] = form.data['title']
+        db.session.commit()
+        wishlist_obj = {}
+        for w in wishlist:
+            if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append(w.to_dict())
+            else: wishlist_obj[w.to_dict()['title']] = [w.to_dict()]
+        return jsonify(wishlist_obj)
+                # return wishlist.to_dict()
 
-                db.session.commit()
-
-                return wishlist.to_dict()
-
-            if form.errors:
-                return form.errors
+    if form.errors:
+        print('------------')
+        print('------------ in line 90', form.errors)
+        print('------------')
+        return form.errors
         
-        else:
-            return {'error': 'You do not have access.'}
+    # else:
+    #     return {'error': 'You do not have access.'}
 
-    else:
-        return {'error': 'The wishlist is not found.'}
+    # else:
+    #     print('------------')
+    #     print('------------ in line 99')
+    #     print('------------')
+    #     return {'error': 'The wishlist is not found.'}
 
 
 @wishlist_routes.route('/<string:title>', methods=['DELETE'])
