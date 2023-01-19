@@ -1,5 +1,5 @@
 .full-vh {
-  height: 46vh;
+  min-height: 100vh;
   max-width: 1120px;
   margin: 60px auto;
   padding: 0 40px;
