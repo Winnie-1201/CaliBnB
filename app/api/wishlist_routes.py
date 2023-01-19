@@ -53,6 +53,14 @@ def edit_wishlist(oldTitle):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     wishlist = Wishlist.query.filter_by(title=oldTitle).first()
+    # deme = Wishlist.query.get(6)
+    # print('----------')
+    # print('----------')
+    # print('----------title and oldtitle', oldTitle)
+    # print('---------- wishlist', wishlist, deme.title, oldTitle.strip(), len(deme.title), len(oldTitle), len(oldTitle.strip()))
+    # print('----------')
+
+
     if form.validate_on_submit:
         wishlist.title = form.data['title']
         db.session.commit()

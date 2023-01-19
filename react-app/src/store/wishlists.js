@@ -70,7 +70,7 @@ export const createWishlistThunk = (wishlist, spotId) => async (dispatch) => {
 
 // maynot needed
 export const editWishlistThunk = (oldTitle, titleData) => async (dispatch) => {
-  // console.log("title in edit thunk", titleData);
+  // console.log("title in edit thunk", oldTitle);
   const response = await fetch(`/api/wishlists/${oldTitle}`, {
     method: "PUT",
     headers: {
@@ -122,9 +122,7 @@ export default function wishlistReducer(state = initialState, action) {
       return newState;
     case DELETE:
       newState = { ...state };
-      console.log("new state in reducer", newState);
       delete newState.userWishlists[action.title];
-      console.log("new state in reducer after", newState);
 
       return newState;
     default:

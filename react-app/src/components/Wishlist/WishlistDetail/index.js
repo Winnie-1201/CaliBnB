@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteWishlistThunk,
   editWishlistThunk,
-  getAllWishlistThunk,
   getOneWishlist,
 } from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
@@ -54,18 +53,14 @@ function WishlistDetail() {
     // console.log("title in comp", title, newTitle);
     let promise_arr = [];
     wishlist.forEach((w) => {
-      const titleData = { title: newTitle };
+      const titleData = { title: newTitle.trim() };
       promise_arr.push(dispatch(editWishlistThunk(title, titleData)));
     });
 
-    console.log("wishlist in com", wishlist);
     Promise.all(promise_arr)
       .then(() => setEditWishlistModal(false))
-      .then(() => history.push(`/users/wishlists`));
-    // await dispatch(editWishlistThunk(title, newTitle))
-    //   // .then(() => dispatch(getAllWishlistThunk()))
-    //   .then(() => setEditWishlistModal(false))
-    //   .then(() => history.push(`/users/wishlists`));
+      .then(() => dispatch(getOneWishlist(newTitle.trim())))
+      .then(() => history.push(`/users/wishlists/${newTitle.trim()}`));
   };
 
   return (
