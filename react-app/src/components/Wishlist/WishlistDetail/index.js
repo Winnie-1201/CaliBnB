@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneWishlist } from "../../../store/wishlists";
+import { deleteWishlistThunk, getOneWishlist } from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
 import Header from "../../Homepage/Header";
 import Footer from "../../Homepage/Footer";
@@ -34,9 +34,13 @@ function WishlistDetail() {
     setErrors(errs);
   }, [newTitle]);
 
-  // const handleDelete = async (e) => {
-  //   e.preventDefault();
-  // };
+  const handleDelete = async (e, title) => {
+    e.preventDefault();
+
+    await dispatch(deleteWishlistThunk(title)).then(() =>
+      history.push("/users/wishlists")
+    );
+  };
 
   // const handleSave = async (e) => {
   //   e.preventDefault();
@@ -238,6 +242,7 @@ function WishlistDetail() {
               </button>
               <button
                 // onClick={handleSave}
+                onClick={(e) => handleDelete(e, title)}
                 className={`ewl-save-bt${
                   newTitle.length === 0 ? "-disable" : ""
                 }`}

@@ -76,17 +76,23 @@ def edit_wishlist(wishlistId):
         return {'error': 'The wishlist is not found.'}
 
 
-@wishlist_routes.route('/<int:wishlistId>', methods=['DELETE'])
+@wishlist_routes.route('/<string:title>', methods=['DELETE'])
 @login_required
-def delete_wishlist(wishlistId):
+def delete_wishlist(title):
 
-    wishlist = Wishlist.query.get(wishlistId)
+    # wishlist = Wishlist.query.get(wishlistId)
+    wishlist = Wishlist.query.filter_by(title=title).all()
 
+    # print("----------")
+    # print("---------- delete in backend", wishlist)
+    # print("----------")
+    # print("----------")
     if wishlist:
-        db.session.delete(wishlist)
+        for w in wishlist:
+            db.session.delete(w)
         db.session.commit()
 
-        return {'message', 'The wishlist has been deleted.'}
+        return {'message': 'The wishlist has been deleted.'}
     else:
         return {'error': 'The wishlist is not found.'}
 

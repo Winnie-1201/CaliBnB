@@ -25,9 +25,9 @@ const editOne = (wishlist, wishlistId) => ({
   wishlistId,
 });
 
-const deleteOne = (wishlistId) => ({
+const deleteOne = (title) => ({
   type: DELETE,
-  wishlistId,
+  title,
 });
 
 export const getAllWishlistThunk = () => async (dispatch) => {
@@ -85,14 +85,14 @@ export const editWishlistThunk = (wishlist, wishlistId) => async (dispatch) => {
   }
 };
 
-export const deleteWishlistThunk = (wishlistId) => async (dispatch) => {
-  const response = await fetch(`/api/wishlists/${wishlistId}`, {
+export const deleteWishlistThunk = (title) => async (dispatch) => {
+  const response = await fetch(`/api/wishlists/${title}`, {
     method: "DELETE",
   });
 
   if (response.ok) {
     // const data = await response.json()
-    dispatch(deleteOne(wishlistId));
+    dispatch(deleteOne(title));
     return response;
   }
 };
@@ -106,6 +106,7 @@ export default function wishlistReducer(state = initialState, action) {
       newState.userWishlists = action.wishlists;
       return newState;
     case ONE:
+      newState = { ...state };
       newState.singleWishlist = action.wishlist;
       return newState;
     case CREATE:
@@ -118,7 +119,11 @@ export default function wishlistReducer(state = initialState, action) {
       newState.userWishlists[action.wishlistId] = action.wishlist;
       return newState;
     case DELETE:
-      delete newState.userWishlists[action.wishlistId];
+      newState = { ...state };
+      console.log("new state in reducer", newState);
+      delete newState.userWishlists[action.title];
+      console.log("new state in reducer after", newState);
+
       return newState;
     default:
       return state;
