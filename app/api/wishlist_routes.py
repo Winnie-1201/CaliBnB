@@ -49,45 +49,24 @@ def create_wishlist():
 @wishlist_routes.route('/<string:oldTitle>', methods=['PUT'])
 @login_required
 def edit_wishlist(oldTitle):
-
     form = WishlistForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    wishlist = Wishlist.query.filter_by(title=oldTitle).all()
-
-    print('------------')
-    print('------------ in line 58', wishlist)
-    print('------------')
-    # if wishlist:
-    # print('------------')
-    # print('------------ in line 62')
-    # print('------------')
-    print('------------')
-    print('------------ in line 64')
-    print('------------')
-    # if wishlist.userId == current_user.id:
+    wishlist = Wishlist.query.filter_by(title=oldTitle).first()
     if form.validate_on_submit:
-        print('------------')
-        print('------------ in line 69')
-        print('------------')
-        for w in wishlist:
-            print("----------- ")
-            print("----------- w", w, w['title'])
-            print("----------- ")
-            print("----------- ")
-            w['title'] = form.data['title']
+        wishlist.title = form.data['title']
         db.session.commit()
-        wishlist_obj = {}
-        for w in wishlist:
-            if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append(w.to_dict())
-            else: wishlist_obj[w.to_dict()['title']] = [w.to_dict()]
-        return jsonify(wishlist_obj)
-                # return wishlist.to_dict()
+        return wishlist.to_dict()
+        # for w in wishlist:
+        #     w.title = form.data['title']
+        # db.session.commit()
+        # wishlist_obj = {}
+        # for w in wishlist:
+        #     if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append(w.to_dict())
+        #     else: wishlist_obj[w.to_dict()['title']] = [w.to_dict()]
+        # return jsonify(wishlist_obj)
 
     if form.errors:
-        print('------------')
-        print('------------ in line 90', form.errors)
-        print('------------')
         return form.errors
         
     # else:

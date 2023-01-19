@@ -52,11 +52,20 @@ function WishlistDetail() {
     e.preventDefault();
 
     // console.log("title in comp", title, newTitle);
+    let promise_arr = [];
+    wishlist.forEach((w) => {
+      const titleData = { title: newTitle };
+      promise_arr.push(dispatch(editWishlistThunk(title, titleData)));
+    });
 
-    await dispatch(editWishlistThunk(title, newTitle))
-      // .then(() => dispatch(getAllWishlistThunk()))
+    console.log("wishlist in com", wishlist);
+    Promise.all(promise_arr)
       .then(() => setEditWishlistModal(false))
       .then(() => history.push(`/users/wishlists`));
+    // await dispatch(editWishlistThunk(title, newTitle))
+    //   // .then(() => dispatch(getAllWishlistThunk()))
+    //   .then(() => setEditWishlistModal(false))
+    //   .then(() => history.push(`/users/wishlists`));
   };
 
   return (
@@ -86,7 +95,7 @@ function WishlistDetail() {
           </div>
           <div className="wd-bottom">
             <div className="wd-grid">
-              {wishlist.map((item) => (
+              {wishlist?.map((item) => (
                 <NavLink
                   className="wd-grid-card"
                   key={item.id}

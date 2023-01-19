@@ -70,7 +70,7 @@ export const createWishlistThunk = (wishlist, spotId) => async (dispatch) => {
 
 // maynot needed
 export const editWishlistThunk = (oldTitle, titleData) => async (dispatch) => {
-  console.log("title in edit thunk", titleData);
+  // console.log("title in edit thunk", titleData);
   const response = await fetch(`/api/wishlists/${oldTitle}`, {
     method: "PUT",
     headers: {
