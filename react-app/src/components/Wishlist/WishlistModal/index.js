@@ -7,19 +7,14 @@ import {
 } from "../../../store/wishlists";
 import "./index.css";
 
-function WishlistModal({ setWishlistModal, spotId }) {
+function WishlistModal({ spotId }) {
   const dispatch = useDispatch();
 
-  //   const [wishlist, setWishlist] = useState("");
-  const [wishlist, setWishlist] = useState("");
-  const [createNew, setCreateNew] = useState(false);
-  const [saveExist, setSaveExist] = useState(true);
+  const [setWishlistModal, wishlistModal] = useState(false);
   const [name, setName] = useState("");
-  const [createModal, setCreateWishlishModal] = useState(false);
 
   const [loaded, setLoaded] = useState(false);
   const [errors, setErrors] = useState({});
-  const [submit, setSubmit] = useState(false);
 
   const userWishlists = useSelector((state) => state.wishlists.userWishlists);
 
@@ -30,51 +25,52 @@ function WishlistModal({ setWishlistModal, spotId }) {
   useEffect(() => {
     const newErrors = {};
 
-    if (!wishlist)
-      newErrors.noWishilist = "Please enter the name of your new wishlist.";
+    if (name.length === 0)
+      newErrors.noWishlist = "Please enter the name of your new wishlist.";
+    if (name.length > 50) newErrors.toLong = "The title is too long.";
 
-    setSubmit(false);
+    // setSubmit(false);
     setErrors(newErrors);
-  }, [wishlist]);
-
-  // console.log(
-  //   "wishlist and its true",
-  //   userWishlists,
-  //   Object.values(userWishlists).length
-  // );
+  }, [name]);
 
   const handleSave = async (e) => {
     e.preventDefault();
 
-    const wishlist = { title: name };
+    console.log("errors here", errors);
+    if (Object.values(errors).length === 0) {
+      const wishlist = { title: name };
+      await dispatch(createWishlistThunk(wishlist, spotId))
+        .then(() => dispatch(getAllWishlistThunk()))
+        .then(() => {
+          setWishlistModal(false);
+        });
+    }
+  };
+
+  const handleSaveExist = async (e, title) => {
+    e.preventDefault();
+
+    const wishlist = { title: title };
     await dispatch(createWishlistThunk(wishlist, spotId))
       .then(() => dispatch(getAllWishlistThunk()))
-      .then(() => {
-        setCreateWishlishModal(false);
-        setWishlistModal(false);
-      });
+      .then(() => setWishlistModal(false));
   };
 
   const handleNext = (e) => {
     e.preventDefault();
-    setCreateWishlishModal(true);
-    // setWishlistModal(false);
+    setWishlistModal("create_new_wl");
   };
-  //   if (Object.values(userWishlists).length > 0) {
-  //     setSaveExist(false);
-  //     setCreateNew(true);
-  //   }
 
   let wishlistOption = [];
   if (userWishlists) {
-    for (let key in userWishlists) {
-      if (!wishlistOption.includes(userWishlists[key].title)) {
-        wishlistOption.push(userWishlists[key].title);
-      }
-    }
+    wishlistOption = Object.keys(userWishlists);
   }
+
+  // console.log("name and errors", name, errors, name.length);
+  // console.log("the value of wishlistModal", wishlistModal);
   // console.log("create modal open", createModal);
   // console.log("name", name, name.length);
+  // console.log("wishlist option", wishlistOption);
   //   console.log("save exist and create new", saveExist, createNew);
   return (
     loaded && (
@@ -107,6 +103,7 @@ function WishlistModal({ setWishlistModal, spotId }) {
               {/* onClick to handle create new wishlist */}
               <button
                 className="wl-block-bt"
+                // onClick={() => setWishlistModal("create_new_wl")}
                 onClick={handleNext}
                 // onClick={() => {
                 //   setCreateWishlishModal(true);
@@ -131,9 +128,14 @@ function WishlistModal({ setWishlistModal, spotId }) {
               </button>
             </div>
             {Object.values(userWishlists).length > 0 &&
-              Object.values(userWishlists).map((wishlist) => (
-                <div key={wishlist.id}>
-                  <button className="wl-block-bt" onClick={handleSave}>
+              wishlistOption.map((wishlist) => (
+                <div key={wishlist}>
+                  <button
+                    className="wl-block-bt"
+                    onClick={(e) => {
+                      handleSaveExist(e, wishlist);
+                    }}
+                  >
                     <div className="flex s-b center pt-2">
                       <div className="ptb-8 br-1 flex">
                         <div className="flex">
@@ -141,13 +143,17 @@ function WishlistModal({ setWishlistModal, spotId }) {
                             <div className="block-plus">
                               <img
                                 className="block-plus-img"
-                                src={wishlist.spot.images[0].url}
+                                src={
+                                  userWishlists[wishlist][0].spot.images[0].url
+                                }
                                 alt="wishlist image"
                               />
                             </div>
                           </div>
                           <div className="wl-block-right">
-                            <div className="wl-br-text">{wishlist.title}</div>
+                            <div className="wl-br-text">
+                              {userWishlists[wishlist][0].title}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -157,14 +163,14 @@ function WishlistModal({ setWishlistModal, spotId }) {
               ))}
           </div>
         </div>
-        {createModal && (
-          <Modal onClose={() => setCreateWishlishModal(false)}>
+        {wishlistModal === "create_new_wl" && (
+          <Modal onClose={() => setWishlistModal(false)}>
             <div className="wl-form">
               <div className="wl-x-cancel">
                 {/* onClick handle close modal and reopen the lst modal*/}
                 <button
                   className="wl-x-bt"
-                  onClick={() => setCreateWishlishModal(false)}
+                  onClick={() => setWishlistModal(false)}
                 >
                   <span className="wl-x-text">
                     <svg
@@ -195,7 +201,16 @@ function WishlistModal({ setWishlistModal, spotId }) {
                   ></input>
                 </div>
                 <div className="pt-8">
-                  <div className="wl-max-text">50 Characters maximum</div>
+                  {errors.noTitle && (
+                    <div className="wl-max-text red">* {errors.noTitle}</div>
+                  )}
+                  {errors.toLong && (
+                    <div className="wl-max-text red">* {errors.toLong}</div>
+                  )}
+                  {Object.values(errors).length === 0 && (
+                    <div className="wl-max-text">50 Characters maximum</div>
+                  )}
+                  {/* <div className="wl-max-text">50 Characters maximum</div> */}
                 </div>
               </div>
               <div className="wl-footer">

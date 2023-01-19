@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-// import { Calendar } from "react-calendar";
-import CalendarForm from "./Calendar";
 import moment from "moment";
-import "./index.css";
 import { useDispatch } from "react-redux";
-import { createBookingThunk } from "../../../store/bookings";
 import { useHistory } from "react-router-dom";
+import { createBookingThunk } from "../../../store/bookings";
+import CalendarForm from "./Calendar";
+import "./index.css";
 
 function PartTwo({ spot }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const reviews = spot.reviews;
-  // const images = spot.images;
   const avgs = spot.averages;
 
   const [start, setStartDate] = useState(moment());
@@ -23,7 +21,6 @@ function PartTwo({ spot }) {
   const [submit, setSubmit] = useState(false);
 
   useEffect(() => {
-    console.log("in use effect");
     let err = "";
     if (!startSelected || !endSelected)
       err = "Please select the dates for your stay.";
@@ -34,7 +31,6 @@ function PartTwo({ spot }) {
 
   const handleReserve = async () => {
     setSubmit(true);
-    // console.log("start to date in com", start.toDate());
     if (!error) {
       const booking = {
         start: start.toISOString().split("T")[0],
@@ -52,8 +48,6 @@ function PartTwo({ spot }) {
   const s_fee = Math.round((spot.service_fee / 100) * spot.price);
   const c_fee = Math.round((spot.clean_fee / 100) * spot.price);
 
-  // console.log("start and end type", start, start.format("MM/D/YYYY"));
-  // console.log("error in ", error, startSelected, !startSelected);
   return (
     <div className="max-width">
       <div className="flex">

@@ -1,18 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-// import { dateTransfer } from "../../dateTransfer";
 import "./index.css";
 
 function PartFive({ ownerSpots, owner }) {
-  //   console.log("onwerspots", ownerSpots);
   let review_length = 0;
   for (let key in ownerSpots) {
     review_length += ownerSpots[key].reviews;
   }
 
   const spotAvg = useSelector((state) => state.spots.singleSpot).averages.avg;
-
-  //   console.log("review", review_length);
 
   return (
     <div className="ptb-48">

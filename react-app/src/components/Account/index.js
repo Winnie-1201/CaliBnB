@@ -3,19 +3,16 @@ import "./index.css";
 import Header from "../Homepage/Header";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewsByYou from "./ReviewsByYou";
-import ReviewsToWrite from "./ReviewsToWrite";
-import { getUserBookingsThunk } from "../../store/bookings";
 import { getUserReviewsThunk } from "../../store/reviews";
 import LoadingBlock from "../LoadingBlock";
 
 function Account() {
-  // console.log("g/.oi ");
   const dispatch = useDispatch();
 
   const currUser = useSelector((state) => state.session.user);
 
-  const [openLeft, setOpenLeft] = useState(true);
-  const [openRight, setOpenRight] = useState(false);
+  // const [openLeft, setOpenLeft] = useState(true);
+  // const [openRight, setOpenRight] = useState(false);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -79,33 +76,20 @@ function Account() {
                     </div>
                     <div className="pcr-header">
                       <div
-                        // className="pcr-left-title"
-                        className={`pcr-left-title ${
-                          openLeft ? "selected" : ""
-                        }`}
-                        onClick={() => {
-                          setOpenLeft(true);
-                          setOpenRight(false);
-                        }}
+                        className="pcr-left-title selected"
+                        // className={`pcr-left-title ${
+                        //   openLeft ? "selected" : ""
+                        // }`}
+                        // onClick={() => {
+                        //   setOpenLeft(true);
+                        //   setOpenRight(false);
+                        // }}
                       >
                         Reviews by you
                       </div>
-                      {/* <div
-                        className={`pcr-right-title ${
-                          openRight ? "selected" : ""
-                        }`}
-                        onClick={() => {
-                          setOpenLeft(false);
-                          setOpenRight(true);
-                        }}
-                      >
-                        Reviews to write
-                      </div> */}
                     </div>
                     <div className="pc-show-left">
                       <ReviewsByYou />
-                      {/* {openLeft && <ReviewsByYou />} */}
-                      {/* {openRight && <ReviewsToWrite />} */}
                     </div>
                   </section>
                 </div>

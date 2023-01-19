@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTag } from "../../../context/tag";
 import "./index.css";
 
 function Banner() {
-  //   const [all, setAll] = useState(true);
-  //   const [camp, setCamp] = useState(false);
-  //   const [cabin, setCabin] = useState(false);
-  //   const [aview, setAview] = useState(false);
   const {
     all,
     setAll,
