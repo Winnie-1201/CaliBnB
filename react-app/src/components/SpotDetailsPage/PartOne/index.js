@@ -16,8 +16,9 @@ function PartOne({ spot, imgs }) {
 
   const userWishlists = useSelector((state) => state.wishlists.userWishlists);
   const currUser = useSelector((state) => state.session.user);
-  const saveList = currUser.saves.split(", ");
-  const save = saveList.includes(spot.id.toString());
+  // const saveList = currUser.saves.split(", ");
+  // const save = saveList.includes(spot.id.toString());
+
   // console.log(
   //   "type of save",
   //   save,
@@ -69,9 +70,21 @@ function PartOne({ spot, imgs }) {
   };
 
   let wishlistOption = [];
+  let save_list = {};
+  let save = false;
+
   if (userWishlists) {
     wishlistOption = Object.keys(userWishlists);
+    const wishLists = Object.values(userWishlists);
+    wishLists.forEach((wishlist) => {
+      wishlist.forEach((w) => {
+        save_list[w.id] = w.id;
+      });
+    });
+    save = save_list[spot.id] !== undefined;
   }
+
+  // console.log("wishlist save list", save_list);
 
   return (
     <>
@@ -126,10 +139,12 @@ function PartOne({ spot, imgs }) {
               <div className="flex flex-end">
                 <div>
                   <button
-                    className="save-button"
+                    className={`save${save ? "d" : ""}-button`}
                     onClick={() => {
-                      setWishlistModal("create_wl");
-                      setSpotId(spot.id);
+                      if (!save) {
+                        setWishlistModal("create_wl");
+                        setSpotId(spot.id);
+                      }
                     }}
                   >
                     <div className="flex center">
@@ -142,7 +157,7 @@ function PartOne({ spot, imgs }) {
                           <path d="m 16 28 c 7 -4.733 14 -10 14 -17 c 0 -1.792 -0.683 -3.583 -2.05 -4.95 c -1.367 -1.366 -3.158 -2.05 -4.95 -2.05 c -1.791 0 -3.583 0.684 -4.949 2.05 l -2.051 2.051 l -2.05 -2.051 c -1.367 -1.366 -3.158 -2.05 -4.95 -2.05 c -1.791 0 -3.583 0.684 -4.949 2.05 c -1.367 1.367 -2.051 3.158 -2.051 4.95 c 0 7 7 12.267 14 17 Z"></path>
                         </svg>
                       </span>
-                      Save
+                      Save{save ? "d" : ""}
                     </div>
                   </button>
                 </div>

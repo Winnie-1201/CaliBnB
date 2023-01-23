@@ -127,6 +127,18 @@ section {
   background: transparent;
   text-decoration: underline;
 }
+.saved-button {
+  /* cursor: pointer; */
+  cursor: not-allowed;
+  margin: 0px -8px;
+  text-align: center;
+  width: auto;
+  outline: none;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  text-decoration: underline;
+}
 
 .save-svg {
   height: 16px;
@@ -138,6 +150,7 @@ section {
 }
 
 .saved-svg {
+  cursor: not-allowed;
   height: 16px;
   width: 16px;
   overflow: visible;
