@@ -52,9 +52,9 @@ function WishlistDetail() {
 
     // console.log("title in comp", title, newTitle);
     let promise_arr = [];
-    wishlist.forEach((w) => {
+    Object.values(wishlist).forEach((w) => {
       const titleData = { title: newTitle.trim() };
-      promise_arr.push(dispatch(editWishlistThunk(title, titleData)));
+      promise_arr.push(dispatch(editWishlistThunk(w.id, titleData)));
     });
 
     Promise.all(promise_arr)
@@ -90,7 +90,7 @@ function WishlistDetail() {
           </div>
           <div className="wd-bottom">
             <div className="wd-grid">
-              {wishlist?.map((item) => (
+              {Object.values(wishlist)?.map((item) => (
                 <NavLink
                   className="wd-grid-card"
                   key={item.id}
