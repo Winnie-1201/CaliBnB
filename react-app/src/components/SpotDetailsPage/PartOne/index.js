@@ -16,6 +16,15 @@ function PartOne({ spot, imgs }) {
 
   const userWishlists = useSelector((state) => state.wishlists.userWishlists);
   const currUser = useSelector((state) => state.session.user);
+  const saveList = currUser.saves.split(", ");
+  const save = saveList.includes(spot.id.toString());
+  // console.log(
+  //   "type of save",
+  //   save,
+  //   saveList,
+  //   typeof saveList[0],
+  //   typeof spot.id.toString()
+  // );
 
   const [wishlistModal, setWishlistModal] = useState(false);
   const [spotId, setSpotId] = useState("");
@@ -127,7 +136,7 @@ function PartOne({ spot, imgs }) {
                       <span className="mr-8">
                         <svg
                           viewBox="0 0 32 32"
-                          className="save-svg"
+                          className={`save${save ? "d" : ""}-svg`}
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path d="m 16 28 c 7 -4.733 14 -10 14 -17 c 0 -1.792 -0.683 -3.583 -2.05 -4.95 c -1.367 -1.366 -3.158 -2.05 -4.95 -2.05 c -1.791 0 -3.583 0.684 -4.949 2.05 l -2.051 2.051 l -2.05 -2.051 c -1.367 -1.366 -3.158 -2.05 -4.95 -2.05 c -1.791 0 -3.583 0.684 -4.949 2.05 c -1.367 1.367 -2.051 3.158 -2.051 4.95 c 0 7 7 12.267 14 17 Z"></path>

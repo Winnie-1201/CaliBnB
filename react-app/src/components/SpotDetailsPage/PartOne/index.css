@@ -129,12 +129,22 @@ section {
 }
 
 .save-svg {
-  height: 15px;
-  width: 15px;
+  height: 16px;
+  width: 16px;
   overflow: visible;
   stroke-width: 2;
   fill: none;
   stroke: currentColor;
+}
+
+.saved-svg {
+  height: 16px;
+  width: 16px;
+  overflow: visible;
+  stroke-width: 2;
+  fill: none;
+  stroke: #ff385c;
+  fill: #ff385c;
 }
 
 .mr-8 {

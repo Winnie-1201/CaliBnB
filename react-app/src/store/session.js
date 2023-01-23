@@ -1,6 +1,8 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const SAVE = "wishlists/SAVE";
+const REMOVE = "wishlists/REMOVE";
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -11,7 +13,17 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+// export const saveWishlist = (spotId) => ({
+//   type: SAVE,
+//   payload: spotId,
+// });
+
+// export const removeWishlist = (spotId) => ({
+//   type: REMOVE,
+//   payload: spotId,
+// });
+
+const initialState = { user: null, save: {} };
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch("/api/auth/", {
@@ -101,11 +113,20 @@ export const signUp =
   };
 
 export default function reducer(state = initialState, action) {
+  let newState = { ...state };
   switch (action.type) {
     case SET_USER:
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    // case SAVE:
+    //   newState = { ...state };
+    //   newState.save[action.payload] = action.payload;
+    //   return newState;
+    // case REMOVE:
+    //   newState = { ...state };
+    //   delete newState[action.payload];
+    //   return newState;
     default:
       return state;
   }

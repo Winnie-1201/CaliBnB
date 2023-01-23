@@ -105,7 +105,11 @@ export default function wishlistReducer(state = initialState, action) {
   let newState = { userWishlists: {}, singleWishlist: null };
   switch (action.type) {
     case ALL:
+      // const userWishlists = {};
+      // console.log("all wishlist,", action.wishlists);
+      // action.wishlists.forEach((w) => (userWishlists[w.id] = w));
       newState.userWishlists = action.wishlists;
+      // newState.userWishlists = userWishlists;
       return newState;
     case ONE:
       newState = { ...state };

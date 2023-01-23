@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../context/Modal";
+import { saveWishlist } from "../../../store/session";
 import {
   createWishlistThunk,
   getAllWishlistThunk,
@@ -36,10 +37,11 @@ function WishlistModal({ spotId }) {
   const handleSave = async (e) => {
     e.preventDefault();
 
-    console.log("errors here", errors);
+    // console.log("errors here", errors);
     if (Object.values(errors).length === 0) {
       const wishlist = { title: name };
       await dispatch(createWishlistThunk(wishlist, spotId))
+        // .then(() => dispatch(saveWishlist(spotId)))
         .then(() => dispatch(getAllWishlistThunk()))
         .then(() => {
           setWishlistModal(false);
@@ -52,6 +54,7 @@ function WishlistModal({ spotId }) {
 
     const wishlist = { title: title };
     await dispatch(createWishlistThunk(wishlist, spotId))
+      // .then(() => dispatch(saveWishlist(spotId)))
       .then(() => dispatch(getAllWishlistThunk()))
       .then(() => setWishlistModal(false));
   };
