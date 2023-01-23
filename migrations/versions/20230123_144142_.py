@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4189b78d5c68
+Revision ID: 676f9f56f554
 Revises: 
-Create Date: 2023-01-23 14:10:28.353040
+Create Date: 2023-01-23 14:41:42.596050
 
 """
 from alembic import op
@@ -29,7 +29,7 @@ def upgrade():
     sa.Column('lastName', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('icon', sa.String(length=255), nullable=True),
-    sa.Column('saves', sa.String(length=255), nullable=True),
+    sa.Column('created', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.Column('hash_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),

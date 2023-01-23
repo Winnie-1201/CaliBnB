@@ -1,5 +1,6 @@
-from .db import db, environment, SCHEMA, add_prefix
+from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.sql import func
 from flask_login import UserMixin
 
 # user_saves = db.Table(
@@ -33,7 +34,9 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     icon = db.Column(db.String(255))
-    saves = db.Column(db.String(255))
+    created = db.Column(db.DateTime(
+        timezone=True), nullable=False, server_default=func.now())
+    # saves = db.Column(db.String(255))
     
     hash_password = db.Column(db.String(255), nullable=False)
 
@@ -66,6 +69,6 @@ class User(db.Model, UserMixin):
             "lastName": self.lastName,
             "email": self.email,
             "icon": self.icon,
-            "saves": self.saves
+            # "saves": self.saves
             # "created": self.created
         }
