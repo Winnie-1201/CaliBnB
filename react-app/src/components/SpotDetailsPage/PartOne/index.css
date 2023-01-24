@@ -27,9 +27,9 @@ section {
 }
 
 .top-1-text {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 500;
-  margin: 0;
+  margin: 0 0 8px 0;
   padding: 0;
 }
 
@@ -69,14 +69,14 @@ section {
 }
 
 .avg {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   color: rgb(34, 34, 34);
   text-overflow: ellipsis;
 }
 
 .review-count {
-  /* font-size: 14px; */
+  /* font-size: 18px; */
   padding-left: 4px;
   /* font-weight: 600; */
   text-decoration: underline;
@@ -86,7 +86,7 @@ section {
 .show-map {
   /* cursor: pointer; */
   cursor: not-allowed;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   position: relative;
   border-radius: 0;
@@ -106,7 +106,7 @@ section {
 
 .superhost {
   text-overflow: ellipsis;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 400;
   position: relative;
 }
@@ -116,8 +116,8 @@ section {
 }
 
 .save-button {
+  font-size: 18px;
   cursor: pointer;
-  /* cursor: not-allowed; */
   margin: 0px -8px;
   text-align: center;
   width: auto;
@@ -130,6 +130,7 @@ section {
 .saved-button {
   cursor: pointer;
   /* cursor: not-allowed; */
+  font-size: 18px;
   margin: 0px -8px;
   text-align: center;
   width: auto;

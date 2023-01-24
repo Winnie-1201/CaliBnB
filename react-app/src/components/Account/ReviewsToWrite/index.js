@@ -49,6 +49,7 @@ function ReviewsToWrite() {
                           e.currentTarget.src = "/default.JPG";
                         }}
                       />
+                      <p className="tp-img-text">Click to view more details</p>
                     </div>
                     <div className="grid-li-right">
                       <div>

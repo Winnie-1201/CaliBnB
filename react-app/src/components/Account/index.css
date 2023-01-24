@@ -76,13 +76,13 @@
 }
 
 .pc-email {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 800;
   line-height: 28px;
 }
 
 .pc-email-text {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 20px;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .pc-right-join {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 18px;
   color: rgb(113, 113, 113);
   margin-bottom: 8px;
@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 18px;
 }
 
@@ -150,7 +150,7 @@ review box
 
 .pcr-left-title,
 .pcr-right-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   color: #717171;
   padding: 10px 0;

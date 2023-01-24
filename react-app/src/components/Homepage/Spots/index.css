@@ -57,19 +57,19 @@
 }
 
 .font-16 {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
 }
 
 .location {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
 }
 
 .type {
   color: #717171;
-  margin-bottom: 3px;
+  margin-bottom: 8px;
 }
 
 .price-d {
