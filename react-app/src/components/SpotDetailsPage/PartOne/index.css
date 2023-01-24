@@ -128,8 +128,8 @@ section {
   text-decoration: underline;
 }
 .saved-button {
-  /* cursor: pointer; */
-  cursor: not-allowed;
+  cursor: pointer;
+  /* cursor: not-allowed; */
   margin: 0px -8px;
   text-align: center;
   width: auto;
@@ -150,7 +150,8 @@ section {
 }
 
 .saved-svg {
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
+  cursor: pointer;
   height: 16px;
   width: 16px;
   overflow: visible;

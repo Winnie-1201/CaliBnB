@@ -36,8 +36,8 @@ def user_wishlist():
     wishlist_obj = {}
     
     for w in all_wishlist:
-        if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append(w.to_dict())
-        else: wishlist_obj[w.to_dict()['title']] = [w.to_dict()]
+        if w.to_dict()['title'] in wishlist_obj: wishlist_obj[w.to_dict()['title']].append({w.to_dict()['spotId']: w.to_dict()})
+        else: wishlist_obj[w.to_dict()['title']] = [{w.to_dict()['spotId']: w.to_dict()}]
     
 
     return jsonify(wishlist_obj)
@@ -69,16 +69,23 @@ def delete_wishlist(title):
 
     # wishlist = Wishlist.query.get(wishlistId)
     wishlist = Wishlist.query.filter_by(title=title).all()
-
-    # print("----------")
-    # print("---------- delete in backend", wishlist)
-    # print("----------")
-    # print("----------")
     if wishlist:
         for w in wishlist:
             db.session.delete(w)
         db.session.commit()
 
+        return {'message': 'The wishlist has been deleted.'}
+    else:
+        return {'error': 'The wishlist is not found.'}
+
+@wishlist_routes.route('/<int:spotId>', methods=['DELETE'])
+@login_required
+def delete_one_wishlist(spotId):
+    wishlist = Wishlist.query.filter_by(spotId=spotId).first()
+
+    if wishlist:
+        db.session.delete(wishlist)
+        db.session.commit()
         return {'message': 'The wishlist has been deleted.'}
     else:
         return {'error': 'The wishlist is not found.'}

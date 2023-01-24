@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../context/Modal";
 import {
   createWishlistThunk,
+  deleteOneWishlistThunk,
   getAllWishlistThunk,
 } from "../../../store/wishlists";
 
@@ -44,6 +45,11 @@ function PartOne({ spot, imgs }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    // if (save) {
+    //   await dispatch(deleteOneWishlistThunk(spot.id)).then(() =>
+    //     getAllWishlistThunk()
+    //   );
+    // }
 
     const wishlist = { title: name };
     if (Object.values(errors).length === 0) {
@@ -52,6 +58,18 @@ function PartOne({ spot, imgs }) {
         .then(() => {
           setWishlistModal(false);
         });
+    }
+  };
+
+  const handleSaveButton = async (e) => {
+    e.preventDefault();
+    if (!save) {
+      setWishlistModal("create_wl");
+      setSpotId(spot.id);
+    } else {
+      await dispatch(deleteOneWishlistThunk(spot.id)).then(() =>
+        dispatch(getAllWishlistThunk())
+      );
     }
   };
 
@@ -75,17 +93,17 @@ function PartOne({ spot, imgs }) {
 
   if (userWishlists) {
     wishlistOption = Object.keys(userWishlists);
-    const wishLists = Object.values(userWishlists);
+    const wishLists = [].concat(...Object.values(userWishlists));
     wishLists.forEach((wishlist) => {
-      wishlist.forEach((w) => {
-        save_list[w.id] = w.id;
-      });
+      save_list[Object.keys(wishlist)[0]] = Object.keys(wishlist)[0];
     });
     save = save_list[spot.id] !== undefined;
   }
 
   // console.log("wishlist save list", save_list);
-
+  // console.log("save ", save);
+  // console.log("type of wishlish key", userWishlists["wishlist one"][0]["1"]);
+  // console.log("wishist option", wishlistOption);
   return (
     <>
       <div className="top-1 flex">
@@ -140,12 +158,17 @@ function PartOne({ spot, imgs }) {
                 <div>
                   <button
                     className={`save${save ? "d" : ""}-button`}
-                    onClick={() => {
-                      if (!save) {
-                        setWishlistModal("create_wl");
-                        setSpotId(spot.id);
-                      }
-                    }}
+                    onClick={handleSaveButton}
+                    //   async () => {
+                    //   if (!save) {
+                    //     setWishlistModal("create_wl");
+                    //     setSpotId(spot.id);
+                    //   } else {
+                    //     await dispatch(deleteOneWishlistThunk(spot.id)).then(
+                    //       () => getAllWishlistThunk()
+                    //     );
+                    //   }
+                    // }
                   >
                     <div className="flex center">
                       <span className="mr-8">
@@ -321,16 +344,24 @@ function PartOne({ spot, imgs }) {
                                 <img
                                   className="block-plus-img"
                                   src={
-                                    userWishlists[wishlist][0].spot.images[0]
-                                      .url
+                                    userWishlists[wishlist][0][
+                                      Object.keys(userWishlists[wishlist][0])[0]
+                                    ]?.spot.images[0].url
                                   }
+                                  onError={(e) => {
+                                    e.currentTarget.src = "/default.JPG";
+                                  }}
                                   alt="wishlist image"
                                 />
                               </div>
                             </div>
                             <div className="wl-block-right">
                               <div className="wl-br-text">
-                                {userWishlists[wishlist][0].title}
+                                {
+                                  userWishlists[wishlist][0][
+                                    Object.keys(userWishlists[wishlist][0])[0]
+                                  ]?.title
+                                }
                               </div>
                             </div>
                           </div>
