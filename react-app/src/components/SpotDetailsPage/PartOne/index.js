@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../context/Modal";
 import {
   createWishlistThunk,
+  deleteOneWishlistThunk,
   getAllWishlistThunk,
 } from "../../../store/wishlists";
 
@@ -16,6 +17,16 @@ function PartOne({ spot, imgs }) {
 
   const userWishlists = useSelector((state) => state.wishlists.userWishlists);
   const currUser = useSelector((state) => state.session.user);
+  // const saveList = currUser.saves.split(", ");
+  // const save = saveList.includes(spot.id.toString());
+
+  // console.log(
+  //   "type of save",
+  //   save,
+  //   saveList,
+  //   typeof saveList[0],
+  //   typeof spot.id.toString()
+  // );
 
   const [wishlistModal, setWishlistModal] = useState(false);
   const [spotId, setSpotId] = useState("");
@@ -34,6 +45,11 @@ function PartOne({ spot, imgs }) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    // if (save) {
+    //   await dispatch(deleteOneWishlistThunk(spot.id)).then(() =>
+    //     getAllWishlistThunk()
+    //   );
+    // }
 
     const wishlist = { title: name };
     if (Object.values(errors).length === 0) {
@@ -42,6 +58,18 @@ function PartOne({ spot, imgs }) {
         .then(() => {
           setWishlistModal(false);
         });
+    }
+  };
+
+  const handleSaveButton = async (e) => {
+    e.preventDefault();
+    if (!save) {
+      setWishlistModal("create_wl");
+      setSpotId(spot.id);
+    } else {
+      await dispatch(deleteOneWishlistThunk(spot.id)).then(() =>
+        dispatch(getAllWishlistThunk())
+      );
     }
   };
 
@@ -60,10 +88,22 @@ function PartOne({ spot, imgs }) {
   };
 
   let wishlistOption = [];
+  let save_list = {};
+  let save = false;
+
   if (userWishlists) {
     wishlistOption = Object.keys(userWishlists);
+    const wishLists = [].concat(...Object.values(userWishlists));
+    wishLists.forEach((wishlist) => {
+      save_list[Object.keys(wishlist)[0]] = Object.keys(wishlist)[0];
+    });
+    save = save_list[spot.id] !== undefined;
   }
 
+  // console.log("wishlist save list", save_list);
+  // console.log("save ", save);
+  // console.log("type of wishlish key", userWishlists["wishlist one"][0]["1"]);
+  // console.log("wishist option", wishlistOption);
   return (
     <>
       <div className="top-1 flex">
@@ -117,23 +157,30 @@ function PartOne({ spot, imgs }) {
               <div className="flex flex-end">
                 <div>
                   <button
-                    className="save-button"
-                    onClick={() => {
-                      setWishlistModal("create_wl");
-                      setSpotId(spot.id);
-                    }}
+                    className={`save${save ? "d" : ""}-button`}
+                    onClick={handleSaveButton}
+                    //   async () => {
+                    //   if (!save) {
+                    //     setWishlistModal("create_wl");
+                    //     setSpotId(spot.id);
+                    //   } else {
+                    //     await dispatch(deleteOneWishlistThunk(spot.id)).then(
+                    //       () => getAllWishlistThunk()
+                    //     );
+                    //   }
+                    // }
                   >
                     <div className="flex center">
                       <span className="mr-8">
                         <svg
                           viewBox="0 0 32 32"
-                          className="save-svg"
+                          className={`save${save ? "d" : ""}-svg`}
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path d="m 16 28 c 7 -4.733 14 -10 14 -17 c 0 -1.792 -0.683 -3.583 -2.05 -4.95 c -1.367 -1.366 -3.158 -2.05 -4.95 -2.05 c -1.791 0 -3.583 0.684 -4.949 2.05 l -2.051 2.051 l -2.05 -2.051 c -1.367 -1.366 -3.158 -2.05 -4.95 -2.05 c -1.791 0 -3.583 0.684 -4.949 2.05 c -1.367 1.367 -2.051 3.158 -2.051 4.95 c 0 7 7 12.267 14 17 Z"></path>
                         </svg>
                       </span>
-                      Save
+                      Save{save ? "d" : ""}
                     </div>
                   </button>
                 </div>
@@ -297,16 +344,24 @@ function PartOne({ spot, imgs }) {
                                 <img
                                   className="block-plus-img"
                                   src={
-                                    userWishlists[wishlist][0].spot.images[0]
-                                      .url
+                                    userWishlists[wishlist][0][
+                                      Object.keys(userWishlists[wishlist][0])[0]
+                                    ]?.spot.images[0].url
                                   }
+                                  onError={(e) => {
+                                    e.currentTarget.src = "/default.JPG";
+                                  }}
                                   alt="wishlist image"
                                 />
                               </div>
                             </div>
                             <div className="wl-block-right">
                               <div className="wl-br-text">
-                                {userWishlists[wishlist][0].title}
+                                {
+                                  userWishlists[wishlist][0][
+                                    Object.keys(userWishlists[wishlist][0])[0]
+                                  ]?.title
+                                }
                               </div>
                             </div>
                           </div>

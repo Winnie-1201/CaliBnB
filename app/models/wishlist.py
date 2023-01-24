@@ -33,6 +33,7 @@ class Wishlist(db.Model):
             "created": self.created,
             "updated": self.updated,
             "userId": self.userId,
+            "spotId": self.spotId,
             "spot": Spot.query.get(self.spotId).to_dict()
         }
 

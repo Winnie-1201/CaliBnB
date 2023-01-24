@@ -1,6 +1,26 @@
 from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.sql import func
 from flask_login import UserMixin
+
+# user_saves = db.Table(
+#     'user_saves'
+#     db.Model.metadata,
+#     db.Column('user_id', db.Integer, db.ForeignKey(add_prefix('users.id'), ondelete='cascade'), primary_key=True),
+#     db.Column('spot_id', db.Integer, db.ForeignKey(add_prefix('spots.id'), ondelete='cascade'), primary_key=True)
+# )
+
+# user_saves = db.Table(
+#     'user_saves',
+#     db.Model.metadata,
+#     db.Column('user_id', db.Integer, db.ForeignKey(
+#         add_prefix('users.id'), ondelete='cascade'), primary_key=True),
+#     db.Column('spot_id', db.Integer, db.ForeignKey(
+#         add_prefix('spots.id'), ondelete='cascade'), primary_key=True)
+# )
+
+# if environment == "production":
+#     user_saves.schema = SCHEMA
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"
@@ -14,12 +34,20 @@ class User(db.Model, UserMixin):
     lastName = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     icon = db.Column(db.String(255))
+    created = db.Column(db.DateTime(
+        timezone=True), nullable=False, server_default=func.now())
+    # saves = db.Column(db.String(255))
     
     hash_password = db.Column(db.String(255), nullable=False)
 
     reviews = db.relationship('Review', back_populates='user', cascade='all, delete')
     bookings = db.relationship('Booking', back_populates='user', cascade='all, delete')
     experiences = db.relationship('Experience', back_populates='user', cascade='all, delete')
+    # saves = db.relationship(
+    #     'Spot', 
+    #     secondary=user_saves,
+    #     back_populates="user_saves",
+    #     cascade='all, delete')
     
     @property
     def password(self):
@@ -41,5 +69,6 @@ class User(db.Model, UserMixin):
             "lastName": self.lastName,
             "email": self.email,
             "icon": self.icon,
+            # "saves": self.saves
             # "created": self.created
         }
