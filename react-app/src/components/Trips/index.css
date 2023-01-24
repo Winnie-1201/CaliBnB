@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
+  min-height: 100vh;
 }
 
 .tp-header-container {
@@ -66,7 +67,7 @@
 }
 .nout-text {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
   color: #717171;
 }
 .nout-link-box {
@@ -130,8 +131,9 @@
 }
 
 .grid-li-left {
-  width: 132px;
-  height: 92px;
+  cursor: pointer;
+  width: 156px;
+  height: 112px;
   overflow: hidden;
   position: relative;
   flex: 0 0 auto;
@@ -146,20 +148,44 @@
   border-radius: 8px;
 }
 
+.tp-img-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background: #717171; */
+  background: white;
+  color: #222222;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* transition effect. not necessary */
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.grid-li-left:hover .tp-img-text {
+  visibility: visible;
+  opacity: 1;
+}
+
 .tc-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 20px;
 }
 
 .tc-host,
 .tc-date {
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .tc-host-text,
 .tc-date-text {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 300;
   color: #717171;
 }

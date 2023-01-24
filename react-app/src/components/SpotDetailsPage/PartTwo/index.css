@@ -89,26 +89,26 @@
 
 .text-16 {
   font-weight: 500;
-  font-size: 15px;
+  font-size: 18px;
   margin-bottom: 4px;
 }
 
 .text-14 {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .bir {
   margin: 0;
   padding: 0;
   color: #ff385c;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .cover {
   margin: 0;
   padding: 0;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .mb-16 {
@@ -123,7 +123,7 @@
   font-weight: 600;
   border: none;
   text-decoration: underline;
-  font-size: 14px;
+  font-size: 18px;
   color: rgb(34, 34, 34);
 }
 
@@ -196,7 +196,7 @@
 }
 
 .default-style-booking {
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .other-text {
@@ -205,7 +205,7 @@
   padding: 0;
   margin: 8px 0 0;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
 }
 
@@ -214,7 +214,7 @@
 }
 .reserve-error {
   color: #ff385c;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 5px;
 }
 
@@ -229,12 +229,12 @@
 }
 
 .bbox-price {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .bbox-night {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   padding-left: 4px;
 }
@@ -254,7 +254,7 @@
 .bbox-avg {
   padding-left: 4px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .bbox-color {
@@ -302,7 +302,7 @@
   right: 12px;
   margin: 0;
   padding: 0;
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   font-weight: 800;
 }
@@ -315,7 +315,7 @@
   margin: 0px;
   padding: 26px 12px 10px;
   background-color: transparent;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 300;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -345,12 +345,12 @@
   color: white;
   padding: 14px 24px;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 18px;
   height: 48px;
 }
 
 .price-detail {
-  font-size: 14px;
+  font-size: 18px;
   padding-top: 0;
   color: #222222;
   font-weight: 400;

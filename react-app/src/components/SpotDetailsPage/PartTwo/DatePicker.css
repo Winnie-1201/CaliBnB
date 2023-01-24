@@ -167,7 +167,7 @@
   overflow: visible;
   padding: 0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
 }
 .DayPickerKeyboardShortcuts_buttonReset:active {
   outline: 0;
@@ -254,14 +254,14 @@
   text-align: left;
 }
 .DayPickerKeyboardShortcuts_title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   margin: 0;
 }
 .DayPickerKeyboardShortcuts_list {
   list-style: none;
   padding: 0;
-  font-size: 14px;
+  font-size: 18px;
 }
 .DayPickerKeyboardShortcuts_close {
   position: absolute;
@@ -285,7 +285,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   text-align: center;
   position: relative;
   /* border-top-right-radius: 4px;
@@ -406,7 +406,7 @@
   /* color: #cacccd; */
   background: rgb(255, 255, 255);
   color: rgb(176, 176, 176);
-  font-size: 14px;
+  font-size: 18px;
   border-radius: 100%;
   text-decoration: line-through;
 }
@@ -436,7 +436,7 @@
 }
 .CalendarMonth_caption {
   color: rgb(34, 34, 34);
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   padding-top: 22px;
   padding-bottom: 49px;
@@ -661,7 +661,7 @@
   margin: 1px 0;
   padding-left: 0;
   padding-right: 0;
-  font-size: 14px;
+  font-size: 18px;
 }
 .DayPicker_weekHeader_li {
   display: inline-block;
@@ -725,7 +725,7 @@
   border-radius: 0;
 }
 .DateInput_input__small {
-  font-size: 15px;
+  font-size: 18px;
   line-height: 18px;
   letter-spacing: 0.2px;
   padding: 7px 7px 5px;

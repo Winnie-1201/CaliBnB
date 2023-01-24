@@ -49,7 +49,7 @@
 }
 
 .pf-join-date {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 400;
   color: #717171;
 }
@@ -81,7 +81,7 @@
   margin-bottom: 12px;
   padding: 0 12px;
   list-style: none;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: normal;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .fs-16 {
-  font-size: 16px;
+  font-size: 18px;
   padding: 0;
   margin: 0;
 }

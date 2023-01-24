@@ -12,7 +12,7 @@
   border: none;
   color: rgb(34, 34, 34);
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
 } */
 
@@ -23,7 +23,7 @@
   padding: 8px;
   height: 30px;
   margin-top: 4px;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 8px;
   background-color: white;
   box-shadow: rgb(176 176 176) 0px 0px 0px 3px inset;
@@ -337,7 +337,7 @@
 .cs-pb-total-text {
   padding: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
 }
 .cs-button-container {
   padding: 20px;
@@ -367,7 +367,7 @@
     rgb(215, 4, 102) 100%
   );
   color: rgb(255, 255, 255);
-  font-size: 15px;
+  font-size: 18px;
   border-radius: 8px;
 }
 .disable-bt {
@@ -376,7 +376,7 @@
 }
 .error-cs-bt {
   color: #ff385c;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   text-align: left;
 }

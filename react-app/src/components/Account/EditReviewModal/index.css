@@ -19,7 +19,7 @@
 }
 .er-label,
 .er-content-label {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 800;
   color: #222222;
 }
@@ -45,7 +45,7 @@
   color: #222222;
   border: 1px solid #dddddd;
   padding: 10px;
-  font-size: 14px;
+  font-size: 18px;
   resize: none;
   border-radius: 8px;
   font-family: Inter;
@@ -69,7 +69,7 @@
     rgb(215, 4, 102) 100%
   );
   color: rgb(255, 255, 255);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   /* width: 100%; */
   min-height: 47px;
