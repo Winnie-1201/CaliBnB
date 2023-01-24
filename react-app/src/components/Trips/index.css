@@ -130,6 +130,7 @@
 }
 
 .grid-li-left {
+  cursor: pointer;
   width: 132px;
   height: 92px;
   overflow: hidden;
@@ -144,6 +145,30 @@
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.tp-img-text {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background: #717171; */
+  background: white;
+  color: #222222;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* transition effect. not necessary */
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.grid-li-left:hover .tp-img-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 .tc-text {

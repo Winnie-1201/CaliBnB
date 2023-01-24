@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserBookingsThunk } from "../../store/bookings";
+import { Modal } from "../../context/Modal";
+import { cancelBookingThunk, getUserBookingsThunk } from "../../store/bookings";
 import { getUserReviewsThunk } from "../../store/reviews";
 import ReviewsToWrite from "../Account/ReviewsToWrite";
 import { dateTransfer } from "../dateTransfer";
@@ -19,7 +20,8 @@ function TripsPage() {
   let uTrips = [];
   let pTrips = [];
   // let cTrips = [];
-
+  const [bookingId, setBookingId] = useState("");
+  const [cancel, setCancel] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   // console.log("trips in tripspage", trips);
@@ -29,6 +31,14 @@ function TripsPage() {
       .then(() => dispatch(getUserReviewsThunk()))
       .then(() => setLoaded(true));
   }, [dispatch]);
+
+  const handleCancel = async (e, id) => {
+    e.preventDefault();
+
+    await dispatch(cancelBookingThunk(id))
+      .then(() => dispatch(getUserBookingsThunk()))
+      .then(() => setCancel(false));
+  };
 
   if (loaded) {
     allTrips = Object.values(trips);
@@ -77,6 +87,9 @@ function TripsPage() {
                                     e.currentTarget.src = "/default.JPG";
                                   }}
                                 />
+                                <p className="tp-img-text">
+                                  Click to view more details
+                                </p>
                               </div>
                               <div className="grid-li-right">
                                 <div>
@@ -109,6 +122,17 @@ function TripsPage() {
                                       ? ", " + dateTransfer("year", trip.start)
                                       : dateTransfer("year", trip.start)}
                                   </span>
+                                </div>
+                                <div className="grid-li-review">
+                                  <button
+                                    className="rtr-review-bt"
+                                    onClick={() => {
+                                      setBookingId(trip.id);
+                                      setCancel(true);
+                                    }}
+                                  >
+                                    <span>Cancel booking</span>
+                                  </button>
                                 </div>
                               </div>
                             </div>
@@ -186,7 +210,12 @@ function TripsPage() {
                           {/* may change it to a link later */}
                           <div>
                             <div className="grid-li-flex">
-                              <div className="grid-li-left">
+                              <div
+                                className="grid-li-left"
+                                onClick={() =>
+                                  history.push(`/spots/${trip.id}`)
+                                }
+                              >
                                 <img
                                   className="tp-img"
                                   src={trip.spotInfo.images[0].url}
@@ -195,6 +224,9 @@ function TripsPage() {
                                     e.currentTarget.src = "/default.JPG";
                                   }}
                                 />
+                                <p className="tp-img-text">
+                                  Click to view more details
+                                </p>
                               </div>
                               <div className="grid-li-right">
                                 <div>
@@ -235,6 +267,34 @@ function TripsPage() {
             <div className="tp-ct-container">
               <ReviewsToWrite />
             </div>
+            {cancel && (
+              <Modal onClose={() => setCancel(false)}>
+                <form className="del-modal-box">
+                  <div className="flex-column">
+                    <div className="del-msg">
+                      <span>Are you sure you want to cancel the booking?</span>
+                    </div>
+                    <div className="del-bt-box">
+                      <button
+                        className="del-bt"
+                        onClick={() => {
+                          setBookingId("");
+                          setCancel(false);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="del-bt"
+                        onClick={(e) => handleCancel(e, bookingId)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </Modal>
+            )}
           </main>
         </>
       )}
