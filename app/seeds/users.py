@@ -4,6 +4,8 @@ def seed_users():
     for i in range(1, 16):
         demo = User(firstName=f"Demo{i}", lastName=f"User{i}", username=f"demouser{i}", email=f"demo{i}@aa.io", password="password", icon="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3")
         db.session.add(demo)
+    # user = User.query.get(4)
+    # user.saves = "1, 2, 3, 4, 5"
     db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
