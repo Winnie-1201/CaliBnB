@@ -177,7 +177,7 @@ function PartTwo({ spot }) {
             <div className="ptb-32">
               <section>
                 <div className="flex mb-16">
-                  <h2 className="bir">bir</h2>
+                  <h2 className="bir">Cir</h2>
                   <h2 className="cover">cover</h2>
                 </div>
                 <div className="mb-16">

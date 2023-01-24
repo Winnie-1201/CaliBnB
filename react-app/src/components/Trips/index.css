@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding-left: 40px;
   padding-right: 40px;
+  min-height: 100vh;
 }
 
 .tp-header-container {
@@ -66,7 +67,7 @@
 }
 .nout-text {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
   color: #717171;
 }
 .nout-link-box {
@@ -131,8 +132,8 @@
 
 .grid-li-left {
   cursor: pointer;
-  width: 132px;
-  height: 92px;
+  width: 156px;
+  height: 112px;
   overflow: hidden;
   position: relative;
   flex: 0 0 auto;
@@ -172,19 +173,19 @@
 }
 
 .tc-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 20px;
 }
 
 .tc-host,
 .tc-date {
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .tc-host-text,
 .tc-date-text {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 300;
   color: #717171;
 }

@@ -26,7 +26,7 @@
   height: 32px;
   text-align: center;
   text-decoration: none;
-  margin-top: 5px;
+  margin-top: 8px;
   padding: 4px 8px;
   border: none;
   background: linear-gradient(
@@ -36,7 +36,7 @@
     rgb(215, 4, 102) 100%
   );
   color: rgb(255, 255, 255);
-  font-size: 14px;
+  font-size: 18px;
   border-radius: 8px;
   /* width: 120px; */
 }

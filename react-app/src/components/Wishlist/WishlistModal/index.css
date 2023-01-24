@@ -52,7 +52,7 @@
   padding: 0 24px;
   border-bottom: 1px solid rgb(235, 235, 235);
   color: rgb(34, 34, 34);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
   font-weight: 800;
 }
@@ -78,7 +78,7 @@
 .wl-header-text {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 800;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .wl-br-text {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
   font-weight: 600;
 }
@@ -163,7 +163,7 @@
   border-radius: 8px;
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(176 176 176) 0px 0px 0px 1px inset;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 20;
 }
@@ -249,7 +249,7 @@
   margin: 40px 0;
 }
 .wl-or {
-  font-size: 14px;
+  font-size: 18px;
   width: 100%;
 }
 .wl-or::before {
@@ -274,7 +274,7 @@
 .wl-input-label {
   margin-bottom: 5px;
   padding: 8px 0;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 600;
 }
 .wl-input-box {
@@ -284,7 +284,7 @@
   border-radius: 8px;
   border: 2px solid #dddddd;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 18px;
 }
 .wl-input-box:hover,
 .wl-input-box:focus {
@@ -311,7 +311,7 @@
     rgb(215, 4, 102) 100%
   );
   color: rgb(255, 255, 255);
-  font-size: 15px;
+  font-size: 18px;
   border-radius: 8px;
 }
 .wl-select {
@@ -320,9 +320,9 @@
   border-radius: 6px;
   padding: 10px;
   margin-left: 20px;
-  font-size: 15px;
+  font-size: 18px;
 }
 .wl-option {
-  font-size: 15px;
+  font-size: 18px;
   background-color: white;
 } */

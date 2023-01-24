@@ -60,12 +60,12 @@
 .logo-text {
   color: #ff385c;
   font-weight: bolder;
-  font-size: 18px;
+  font-size: 26px;
 }
 
 .wh-30-32 {
-  width: 38px;
-  height: 38px;
+  width: 46px;
+  height: 46px;
 }
 
 .header-mid {
@@ -107,7 +107,7 @@
   border-bottom-left-radius: inherit;
   align-items: center;
   height: 48px;
-  font-family: inherit;
+  font-family: Inter;
   font-size: inherit;
   color: inherit;
   font-weight: inherit;
@@ -131,7 +131,7 @@
 .anyweek {
   align-items: center;
   height: 48px;
-  font-family: inherit;
+  font-family: Inter;
   font-size: inherit;
   color: inherit;
   font-weight: inherit;
@@ -265,10 +265,10 @@
 .top-text {
   /* margin: 10px 10px 0px 20px;
   padding: 10px 0 0 0;
-  font-size: 14px; */
+  font-size: 18px; */
   margin: 0px 10px 0px 20px;
   /* padding: 10px 0 0 0; */
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .signup {
