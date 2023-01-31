@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { dateTransfer } from "../../dateTransfer";
 import "./index.css";
 
 function PartFive({ ownerSpots, owner }) {
@@ -42,7 +43,8 @@ function PartFive({ ownerSpots, owner }) {
               <h2 className="pf-host-by">Hosted by {owner.firstName}</h2>
               <div className="pt-8">
                 <div className="pf-join-date">
-                  Joined in (need to update the model)
+                  Joined in {dateTransfer("month", owner.created)},{" "}
+                  {dateTransfer("year", owner.created)}
                 </div>
               </div>
             </div>
@@ -130,9 +132,11 @@ function PartFive({ ownerSpots, owner }) {
               {spotAvg >= 3.7 && (
                 <div className="mb-24">
                   <div className="mb-8">
-                    <h3 className="fs-16">{owner.firstName} is a Superhost</h3>
+                    <div className="fs-16 bold">
+                      {owner.firstName} is a Superhost
+                    </div>
                   </div>
-                  <span>
+                  <span className="super-text">
                     Superhosts are experienced, highly rated hosts who are
                     committed to providing great stays for guests.
                   </span>
@@ -148,10 +152,10 @@ function PartFive({ ownerSpots, owner }) {
                   Response time: <span>within an hour</span>
                 </li>
               </ul>
-              <div className="mt-32">
-                {/* change it to a link later */}
-                <div className="contact-button">Contact Host Button</div>
-              </div>
+              {/* <div className="mt-32"> */}
+              {/* change it to a link later */}
+              {/* <div className="contact-button">Contact Host Button</div>
+              </div> */}
             </div>
           </div>
         </section>

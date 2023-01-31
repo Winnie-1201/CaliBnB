@@ -120,3 +120,7 @@
   background: #ffffff;
   padding: 13px 23px;
 }
+
+.bold {
+  font-weight: bolder;
+}
