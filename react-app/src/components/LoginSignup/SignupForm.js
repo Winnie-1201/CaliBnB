@@ -39,8 +39,8 @@ function SignupForm({ setSignupModal }) {
     if (email && !email.split("").includes("@"))
       newErrors.validEmail = "Please provide a valid email.";
 
-    if (!firstName) newErrors.noFirst = "Please enter your first name.";
-    if (!lastName) newErrors.noLast = "Please enter your last name.";
+    if (!firstName) newErrors.firstName = "Please enter your first name.";
+    if (!lastName) newErrors.lastName = "Please enter your last name.";
     if (!username) newErrors.noUsername = "Please enter your username.";
     if (!email) newErrors.noEmail = "Please enter your email.";
     if (!password) newErrors.noPsw = "Please enter your password.";
@@ -61,17 +61,19 @@ function SignupForm({ setSignupModal }) {
     if (!data) {
       setSignupModal(false);
       history.push("/");
-    } else if (data.errors.length > 0) {
-      const errs = {};
-      for (let i in data.errors) {
-        const errName = data.errors[i].split(" : ")[0];
-        const errMsg = data.errors[i].split(" : ")[1];
-
-        errs[errName] = errMsg;
-      }
-      setErrors(errs);
     }
+    // else if (data.errors.length > 0) {
+    //   const errs = {};
+    //   for (let i in data.errors) {
+    //     const errName = data.errors[i].split(" : ")[0];
+    //     const errMsg = data.errors[i].split(" : ")[1];
+
+    //     errs[errName] = errMsg;
+    //   }
+    //   setErrors(errs);
+    // }
   };
+  // console.log("all errors", errors, submit);
 
   return (
     <div className="flex-column login-form">
@@ -102,8 +104,8 @@ function SignupForm({ setSignupModal }) {
               {errors.validFirstName && (
                 <p className="su-err-msg">{errors.validFirstName}</p>
               )}
-              {submit && errors.noFirst && (
-                <p className="su-err-msg">{errors.noFirst}</p>
+              {submit && errors.firstName && (
+                <p className="su-err-msg">{errors.firstName}</p>
               )}
             </div>
 
@@ -120,8 +122,8 @@ function SignupForm({ setSignupModal }) {
               {errors.validLastName && (
                 <p className="su-err-msg">{errors.validLastName}</p>
               )}
-              {submit && errors.noLast && (
-                <p className="su-err-msg">{errors.noLast}</p>
+              {submit && errors.lastName && (
+                <p className="su-err-msg">{errors.lastName}</p>
               )}
             </div>
 
