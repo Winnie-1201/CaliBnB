@@ -132,7 +132,10 @@ export default function wishlistReducer(state = initialState, action) {
     case ONE:
       newState = { ...state };
       const singleWishlist = {};
-      action.wishlist.forEach((w) => (singleWishlist[w.id] = w));
+      // console.log("one wishlist reducer", action.wishlist);
+      action.wishlist.forEach(
+        (w) => (singleWishlist[Object.values(w)[0].id] = Object.values(w)[0])
+      );
       // newState.singleWishlist = action.wishlist;
       // console.log("single wishlist in reducer", singleWishlist);
       newState.singleWishlist = singleWishlist;
@@ -147,6 +150,7 @@ export default function wishlistReducer(state = initialState, action) {
       newState = { ...state };
       // console.log("wishlist id", action.wishlist.id);
       // console.log("single wishlist", newState.singleWishlist);
+
       newState.singleWishlist[action.wishlist.id] = action.wishlist;
       // newState.userWishlists = action.wishlist;
       return newState;

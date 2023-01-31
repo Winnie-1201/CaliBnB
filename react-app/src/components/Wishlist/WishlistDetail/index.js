@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteWishlistThunk,
   editWishlistThunk,
+  getAllWishlistThunk,
   getOneWishlist,
 } from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
@@ -17,8 +18,8 @@ function WishlistDetail() {
   const history = useHistory();
 
   const { title } = useParams();
+  // const wishlist = useSelector((state) => state.wishlists.userWishlists[title]);
   const wishlist = useSelector((state) => state.wishlists.singleWishlist);
-
   const [newTitle, setNewTitle] = useState(title);
   const [editWishlistModal, setEditWishlistModal] = useState(false);
 
@@ -26,7 +27,9 @@ function WishlistDetail() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    // dispatch(getAllWishlistThunk())
     dispatch(getOneWishlist(title)).then(() => setLoaded(true));
+    // dispatch(getOneWishlist(title)).then(() => setLoaded(true));
   }, [dispatch]);
 
   useEffect(() => {
@@ -51,6 +54,7 @@ function WishlistDetail() {
     e.preventDefault();
 
     // console.log("title in comp", title, newTitle);
+
     let promise_arr = [];
     Object.values(wishlist).forEach((w) => {
       const titleData = { title: newTitle.trim() };
@@ -62,6 +66,8 @@ function WishlistDetail() {
       .then(() => dispatch(getOneWishlist(newTitle.trim())))
       .then(() => history.push(`/users/wishlists/${newTitle.trim()}`));
   };
+
+  // console.log("wishlist", singleWishlist);
 
   return (
     <>
@@ -90,11 +96,13 @@ function WishlistDetail() {
           </div>
           <div className="wd-bottom">
             <div className="wd-grid">
-              {Object.values(wishlist)?.map((item) => (
+              {Object.values(wishlist).map((item) => (
                 <NavLink
                   className="wd-grid-card"
                   key={item.id}
                   to={`/spots/${item.spot.id}`}
+                  // key={Object.values(item)[0].id}
+                  // to={`/spots/${Object.values(item)[0].spot.id}`}
                 >
                   <div className="grid-column">
                     <div className="flex one-spot">
@@ -102,6 +110,7 @@ function WishlistDetail() {
                         <img
                           className="wd-one-spot-img"
                           src={item.spot.images[0].url}
+                          // src={Object.values(item)[0].spot.images[0].url}
                           alt="spot"
                           onError={(e) => {
                             e.currentTarget.src = "/default.JPG";
@@ -110,7 +119,10 @@ function WishlistDetail() {
                       </div>
                       <div className="flex s-b plr-8 font-16">
                         <div className="flex-column left">
-                          <div className="location">{item.spot.city}</div>
+                          <div className="location">
+                            {item.spot.city}
+                            {/* {Object.values(item)[0].spot.city} */}
+                          </div>
                           <div className="type">{item.spot.type}</div>
                           <div className="date"></div>
                           <div className="price">

@@ -61,16 +61,17 @@ function SignupForm({ setSignupModal }) {
     if (!data) {
       setSignupModal(false);
       history.push("/");
-    } else if (data.errors.length > 0) {
-      const errs = {};
-      for (let i in data.errors) {
-        const errName = data.errors[i].split(" : ")[0];
-        const errMsg = data.errors[i].split(" : ")[1];
-
-        errs[errName] = errMsg;
-      }
-      setErrors(errs);
     }
+    // else if (data.errors.length > 0) {
+    //   const errs = {};
+    //   for (let i in data.errors) {
+    //     const errName = data.errors[i].split(" : ")[0];
+    //     const errMsg = data.errors[i].split(" : ")[1];
+
+    //     errs[errName] = errMsg;
+    //   }
+    //   setErrors(errs);
+    // }
   };
 
   return (

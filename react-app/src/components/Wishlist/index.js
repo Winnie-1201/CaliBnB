@@ -44,21 +44,30 @@ function Wishlist() {
                         <div className="wl-tl">
                           <img
                             className="wl-img"
-                            src={wishlists[title][0].spot.images[0].url}
+                            src={
+                              Object.values(wishlists[title][0])[0].spot
+                                .images[0].url
+                            }
                             alt="wishlist image"
                           />
                         </div>
                         <div className="wl-tr">
                           <img
                             className="wl-img"
-                            src={wishlists[title][0].spot.images[0].url}
+                            src={
+                              Object.values(wishlists[title][0])[0].spot
+                                .images[0].url
+                            }
                             alt="wishlist image"
                           />
                         </div>
                         <div className="wl-br">
                           <img
                             className="wl-img"
-                            src={wishlists[title][0].spot.images[0].url}
+                            src={
+                              Object.values(wishlists[title][0])[0].spot
+                                .images[0].url
+                            }
                             alt="wishlist image"
                           />
                         </div>

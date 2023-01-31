@@ -33,7 +33,6 @@ function SpotDetailsPage() {
       .then(() => dispatch(getSpotReivewsThunk(spotId)))
       .then(() => dispatch(getSpotBookingsThunk(spotId)))
       .then(() => dispatch(getImgsBySpotThunk(spotId)))
-      .then(() => dispatch(getAllWishlistThunk()))
       .then(() => setLoaded(true));
   }, [dispatch, spotId]);
 
