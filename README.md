@@ -31,6 +31,35 @@ Calibnb is an application that lets property owners in California rent out their
 ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 
+
+# Features
+
+## Homepage
+
+<img width="1322" alt="Screen Shot 2023-01-08 at 9 41 26 PM" src="https://user-images.githubusercontent.com/57519738/211246896-27b4517a-3668-4348-92f1-a9f4dc20c00d.png">
+
+## Sign in
+<img width="1311" alt="Screen Shot 2023-01-08 at 9 42 03 PM" src="https://user-images.githubusercontent.com/57519738/211246937-c2d1471b-86ac-431b-a3eb-af4aa5c1579a.png">
+
+## Sign up
+<img width="1312" alt="Screen Shot 2023-01-08 at 9 42 22 PM" src="https://user-images.githubusercontent.com/57519738/211246965-4f042390-898a-4398-bd27-1b37ed157260.png">
+
+## Create a spot
+<img width="1312" alt="Screen Shot 2023-01-08 at 9 43 33 PM" src="https://user-images.githubusercontent.com/57519738/211247080-ea32efcd-4068-408f-9b6a-ce9f7b0a8376.png">
+<img width="1312" alt="Screen Shot 2023-01-08 at 9 43 52 PM" src="https://user-images.githubusercontent.com/57519738/211247102-060ad19c-2941-447f-b547-90a576d1b4cb.png">
+
+## Book a place
+<img width="1324" alt="Screen Shot 2023-01-08 at 9 44 33 PM" src="https://user-images.githubusercontent.com/57519738/211247174-0b79f9c7-1e29-4c7d-aef2-83e36618bb30.png">
+
+## Write a review
+<img width="1315" alt="Screen Shot 2023-01-08 at 9 45 08 PM" src="https://user-images.githubusercontent.com/57519738/211247218-c72154a5-3277-450e-8679-d685d6071046.png">
+
+## Edit a review
+<img width="1302" alt="Screen Shot 2023-01-08 at 9 45 25 PM" src="https://user-images.githubusercontent.com/57519738/211247249-f44640d2-5c98-4c78-832d-61e7d4c9f2e3.png">
+
+## Delete a review
+<img width="1310" alt="Screen Shot 2023-01-08 at 9 45 39 PM" src="https://user-images.githubusercontent.com/57519738/211247272-80a2c3e5-a6fc-4ce4-8b00-babb6b00a745.png">
+
 # Getting started
 
 1. Clone this repository (only this branch)
@@ -70,36 +99,6 @@ Calibnb is an application that lets property owners in California rent out their
    ```
 
 7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-
-# Features
-
-## Homepage
-
-<img width="1322" alt="Screen Shot 2023-01-08 at 9 41 26 PM" src="https://user-images.githubusercontent.com/57519738/211246896-27b4517a-3668-4348-92f1-a9f4dc20c00d.png">
-
-## Sign in
-<img width="1311" alt="Screen Shot 2023-01-08 at 9 42 03 PM" src="https://user-images.githubusercontent.com/57519738/211246937-c2d1471b-86ac-431b-a3eb-af4aa5c1579a.png">
-
-## Sign up
-<img width="1312" alt="Screen Shot 2023-01-08 at 9 42 22 PM" src="https://user-images.githubusercontent.com/57519738/211246965-4f042390-898a-4398-bd27-1b37ed157260.png">
-
-## Create a spot
-<img width="1312" alt="Screen Shot 2023-01-08 at 9 43 33 PM" src="https://user-images.githubusercontent.com/57519738/211247080-ea32efcd-4068-408f-9b6a-ce9f7b0a8376.png">
-<img width="1312" alt="Screen Shot 2023-01-08 at 9 43 52 PM" src="https://user-images.githubusercontent.com/57519738/211247102-060ad19c-2941-447f-b547-90a576d1b4cb.png">
-
-## Book a place
-<img width="1324" alt="Screen Shot 2023-01-08 at 9 44 33 PM" src="https://user-images.githubusercontent.com/57519738/211247174-0b79f9c7-1e29-4c7d-aef2-83e36618bb30.png">
-
-## Write a review
-<img width="1315" alt="Screen Shot 2023-01-08 at 9 45 08 PM" src="https://user-images.githubusercontent.com/57519738/211247218-c72154a5-3277-450e-8679-d685d6071046.png">
-
-## Edit a review
-<img width="1302" alt="Screen Shot 2023-01-08 at 9 45 25 PM" src="https://user-images.githubusercontent.com/57519738/211247249-f44640d2-5c98-4c78-832d-61e7d4c9f2e3.png">
-
-## Delete a review
-<img width="1310" alt="Screen Shot 2023-01-08 at 9 45 39 PM" src="https://user-images.githubusercontent.com/57519738/211247272-80a2c3e5-a6fc-4ce4-8b00-babb6b00a745.png">
-
 
 ## Developer
 
