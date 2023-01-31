@@ -70,5 +70,5 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "icon": self.icon,
             # "saves": self.saves
-            # "created": self.created
+            "created": self.created
         }
