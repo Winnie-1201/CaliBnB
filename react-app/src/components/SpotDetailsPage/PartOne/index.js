@@ -6,6 +6,7 @@ import {
   deleteOneWishlistThunk,
   getAllWishlistThunk,
 } from "../../../store/wishlists";
+import LoginForm from "../../LoginSignup/LoginForm";
 
 import "./index.css";
 
@@ -32,6 +33,7 @@ function PartOne({ spot, imgs }) {
   const [spotId, setSpotId] = useState("");
   const [name, setName] = useState("");
   const [errors, setErrors] = useState({});
+  const [loginModal, setLoginModal] = useState(false);
 
   useEffect(() => {
     const newErrors = {};
@@ -63,13 +65,18 @@ function PartOne({ spot, imgs }) {
 
   const handleSaveButton = async (e) => {
     e.preventDefault();
-    if (!save) {
-      setWishlistModal("create_wl");
-      setSpotId(spot.id);
+
+    if (!currUser.error) {
+      if (!save) {
+        setWishlistModal("create_wl");
+        setSpotId(spot.id);
+      } else {
+        await dispatch(deleteOneWishlistThunk(spot.id)).then(() =>
+          dispatch(getAllWishlistThunk())
+        );
+      }
     } else {
-      await dispatch(deleteOneWishlistThunk(spot.id)).then(() =>
-        dispatch(getAllWishlistThunk())
-      );
+      setLoginModal(true);
     }
   };
 
@@ -100,6 +107,7 @@ function PartOne({ spot, imgs }) {
     save = save_list[spot.id] !== undefined;
   }
 
+  // console.log("curr user", currUser.error);
   // console.log("wishlist save list", save_list);
   // console.log("save ", save);
   // console.log("type of wishlish key", userWishlists["wishlist one"][0]["1"]);
@@ -433,6 +441,11 @@ function PartOne({ spot, imgs }) {
               </button>
             </div>
           </div>
+        </Modal>
+      )}
+      {loginModal && (
+        <Modal onClose={() => setLoginModal(false)}>
+          <LoginForm setLoginModal={setLoginModal} />
         </Modal>
       )}
     </>
