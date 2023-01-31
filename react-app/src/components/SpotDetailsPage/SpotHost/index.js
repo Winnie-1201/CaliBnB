@@ -132,9 +132,11 @@ function PartFive({ ownerSpots, owner }) {
               {spotAvg >= 3.7 && (
                 <div className="mb-24">
                   <div className="mb-8">
-                    <h3 className="fs-16">{owner.firstName} is a Superhost</h3>
+                    <div className="fs-16 bold">
+                      {owner.firstName} is a Superhost
+                    </div>
                   </div>
-                  <span>
+                  <span className="super-text">
                     Superhosts are experienced, highly rated hosts who are
                     committed to providing great stays for guests.
                   </span>

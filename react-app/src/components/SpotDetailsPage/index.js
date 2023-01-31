@@ -5,7 +5,7 @@ import { getOneSpotThunk } from "../../store/spots";
 import { getSpotReivewsThunk } from "../../store/reviews";
 import { getSpotBookingsThunk } from "../../store/bookings";
 import { getImgsBySpotThunk } from "../../store/images";
-import { getAllWishlistThunk } from "../../store/wishlists";
+// import { getAllWishlistThunk } from "../../store/wishlists";
 import Header from "../Homepage/Header";
 import PartOne from "./SpotBasic";
 import PartTwo from "./SpotCalendar";
