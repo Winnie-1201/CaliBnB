@@ -7,11 +7,11 @@ import { getSpotBookingsThunk } from "../../store/bookings";
 import { getImgsBySpotThunk } from "../../store/images";
 import { getAllWishlistThunk } from "../../store/wishlists";
 import Header from "../Homepage/Header";
-import PartOne from "./PartOne";
-import PartTwo from "./PartTwo";
-import PartThree from "./PartThree";
+import PartOne from "./SpotBasic";
+import PartTwo from "./SpotCalendar";
+import PartThree from "./SpotReviews";
 // import PartFour from "./PartFour";
-import PartFive from "./PartFive";
+import PartFive from "./SpotHost";
 import LoadingBlock from "../LoadingBlock";
 import "./index.css";
 

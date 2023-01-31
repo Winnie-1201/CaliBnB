@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { dateTransfer } from "../../dateTransfer";
 import "./index.css";
 
 function PartFive({ ownerSpots, owner }) {
@@ -42,7 +43,8 @@ function PartFive({ ownerSpots, owner }) {
               <h2 className="pf-host-by">Hosted by {owner.firstName}</h2>
               <div className="pt-8">
                 <div className="pf-join-date">
-                  Joined in (need to update the model)
+                  Joined in {dateTransfer("month", owner.created)},{" "}
+                  {dateTransfer("year", owner.created)}
                 </div>
               </div>
             </div>
@@ -148,10 +150,10 @@ function PartFive({ ownerSpots, owner }) {
                   Response time: <span>within an hour</span>
                 </li>
               </ul>
-              <div className="mt-32">
-                {/* change it to a link later */}
-                <div className="contact-button">Contact Host Button</div>
-              </div>
+              {/* <div className="mt-32"> */}
+              {/* change it to a link later */}
+              {/* <div className="contact-button">Contact Host Button</div>
+              </div> */}
             </div>
           </div>
         </section>
