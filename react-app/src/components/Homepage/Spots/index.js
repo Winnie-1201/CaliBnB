@@ -39,6 +39,7 @@ function AllSpots() {
               key={spot.id}
               to={`/spots/${spot.id}`}
               className="navlink-hp"
+              onClick={() => window.scrollTo(0, 0)}
             >
               <div className="grid-column">
                 <div className="flex one-spot">
@@ -72,7 +73,11 @@ function AllSpots() {
                             <path d="M 15.094 1.579 l -4.124 8.885 l -9.86 1.27 a 1 1 0 0 0 -0.542 1.736 l 7.293 6.565 l -1.965 9.852 a 1 1 0 0 0 1.483 1.061 L 16 25.951 l 8.625 4.997 a 1 1 0 0 0 1.482 -1.06 l -1.965 -9.853 l 7.293 -6.565 a 1 1 0 0 0 -0.541 -1.735 l -9.86 -1.271 l -4.127 -8.885 a 1 1 0 0 0 -1.814 0 Z"></path>
                           </svg>
                         </span>
-                        <span className="avg-rating">{spot.averages.avg}</span>
+                        <span className="avg-rating">
+                          {Number(spot.averages.avg) > 0
+                            ? spot.averages.avg.toFixed(1)
+                            : "New"}
+                        </span>
                       </div>
                     </div>
                   </div>

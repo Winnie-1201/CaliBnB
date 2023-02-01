@@ -55,6 +55,8 @@ function TripsPage() {
     }
   }
 
+  console.log("upcoming trips", uTrips);
+  console.log("past trips", pTrips);
   return (
     <>
       <Header />
@@ -78,7 +80,13 @@ function TripsPage() {
                           {/* may change it to a link later */}
                           <div>
                             <div className="grid-li-flex">
-                              <div className="grid-li-left">
+                              <div
+                                className="grid-li-left"
+                                onClick={() => {
+                                  history.push(`/spots/${trip.spotInfo.id}`);
+                                  window.scrollTo(0, 0);
+                                }}
+                              >
                                 <img
                                   className="tp-img"
                                   src={trip.spotInfo.images[0].url}
@@ -212,9 +220,10 @@ function TripsPage() {
                             <div className="grid-li-flex">
                               <div
                                 className="grid-li-left"
-                                onClick={() =>
-                                  history.push(`/spots/${trip.id}`)
-                                }
+                                onClick={() => {
+                                  history.push(`/spots/${trip.spotInfo.id}`);
+                                  window.scrollTo(0, 0);
+                                }}
                               >
                                 <img
                                   className="tp-img"

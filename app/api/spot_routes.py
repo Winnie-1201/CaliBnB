@@ -142,6 +142,10 @@ def add_images(spotId):
     spot = Spot.query.get(spotId)
 
     if "image" not in request.files:
+        print("---------")
+        print("--------- error in 146")
+        print("---------")
+        print("---------")
         return {'errors': 'image required'}, 400
 
     image = request.files['image']
@@ -155,15 +159,24 @@ def add_images(spotId):
 
     if not allowed_file(image.filename):
         # print("------in line 141")
+        print("---------")
+        print("--------- error in 163")
+        print("---------")
+        print("---------")
         return {'errors': 'file type is not permitted'}, 400
 
     # print("------in line 144")
     image.filename = get_unique_filename(image.filename)
-    # print("files name", image.filename)
+    print("files name", image.filename)
 
     upload = upload_file_to_s3(image)
-    # print("------in line 149", upload)
+    print("------in line 149", upload)
     if 'url' not in upload:
+
+        print("---------")
+        print("--------- error in 176", upload)
+        print("---------")
+        print("---------")
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
