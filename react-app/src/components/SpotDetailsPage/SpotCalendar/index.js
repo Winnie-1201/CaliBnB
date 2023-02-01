@@ -35,16 +35,19 @@ function PartTwo({ spot }) {
 
   const handleReserve = async () => {
     setSubmit(true);
+
+    console.log("curruser", !currUser.error, currUser, error);
     if (!error && !currUser.error) {
       const booking = {
         start: start.toISOString().split("T")[0],
         end: end.toISOString().split("T")[0],
       };
 
-      await dispatch(createBookingThunk(spot.id, booking)).then(() =>
-        history.push("/users/trips")
-      );
-    } else {
+      await dispatch(createBookingThunk(spot.id, booking)).then(() => {
+        history.push("/users/trips");
+        window.scrollTo(0, 0);
+      });
+    } else if (currUser.error) {
       setError("");
       setLoginModal(true);
     }
@@ -54,6 +57,11 @@ function PartTwo({ spot }) {
   if (start && end) stay = end.diff(start, "days");
   const s_fee = Math.round((spot.service_fee / 100) * spot.price);
   const c_fee = Math.round((spot.clean_fee / 100) * spot.price);
+
+  // console.log("after clear, start -----", start);
+  // console.log("after clear, end -----", end);
+  // console.log("after clear, startseleted -----", startSelected);
+  // console.log("after clear, end selected -----", endSelected);
 
   return (
     <>
@@ -252,11 +260,25 @@ function PartTwo({ spot }) {
                   <CalendarForm
                     start={start}
                     end={end}
+                    startSelected={startSelected}
+                    endSelected={endSelected}
                     setStartDate={setStartDate}
                     setEndDate={setEndDate}
                     setStartSelected={setStartSelected}
                     setEndSelected={setEndSelected}
                   />
+                </div>
+                <div
+                  className="flex w-100 fl-end center pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setStartDate(moment());
+                    setEndDate(moment());
+                    setStartSelected(false);
+                    setEndSelected(false);
+                  }}
+                >
+                  Clear
                 </div>
               </div>
             </div>
@@ -285,7 +307,9 @@ function PartTwo({ spot }) {
                                   <path d="M 15.094 1.579 l -4.124 8.885 l -9.86 1.27 a 1 1 0 0 0 -0.542 1.736 l 7.293 6.565 l -1.965 9.852 a 1 1 0 0 0 1.483 1.061 L 16 25.951 l 8.625 4.997 a 1 1 0 0 0 1.482 -1.06 l -1.965 -9.853 l 7.293 -6.565 a 1 1 0 0 0 -0.541 -1.735 l -9.86 -1.271 l -4.127 -8.885 a 1 1 0 0 0 -1.814 0 Z"></path>
                                 </svg>
                               </span>
-                              <span className="bbox-avg">{avgs?.avg} · </span>
+                              <span className="bbox-avg">
+                                {avgs?.avg > 0 ? avgs?.avg.toFixed(1) : "New"} ·{" "}
+                              </span>
                               <span className="review-count">
                                 <button className="show-review bbox-color">
                                   {" "}

@@ -101,6 +101,7 @@ function WishlistDetail() {
                   className="wd-grid-card"
                   key={item.id}
                   to={`/spots/${item.spot.id}`}
+                  onClick={() => window.scrollTo(0, 0)}
                   // key={Object.values(item)[0].id}
                   // to={`/spots/${Object.values(item)[0].spot.id}`}
                 >

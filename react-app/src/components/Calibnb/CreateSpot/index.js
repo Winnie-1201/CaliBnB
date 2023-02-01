@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Modal } from "../../../context/Modal";
 import { addImageThunk, createSpotThunk } from "../../../store/spots";
 import Header from "../../Homepage/Header";
 import "./index.css";
@@ -143,7 +144,7 @@ function CreateSpot() {
         await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
 
         let promise_arr = [];
-
+        console.log("img_coll", img_coll);
         img_coll.forEach((img) => {
           promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
         });
@@ -182,6 +183,7 @@ function CreateSpot() {
     Math.round((price * service_fee) / 100) +
     Math.round((price * clean_fee) / 100);
 
+  // console.log("img_coll", img_coll, images);
   return (
     <>
       <Header />
@@ -223,10 +225,10 @@ function CreateSpot() {
               <div className="cs-other-imgs flex">
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length > 0 ? (
+                    {images["1"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[0])}
+                        src={URL.createObjectURL(images["1"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -243,10 +245,11 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length > 5 ? (
+                    {/* {img_coll.length === 5 ? ( */}
+                    {images["5"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[4])}
+                        src={URL.createObjectURL(images["5"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -271,10 +274,10 @@ function CreateSpot() {
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length > 1 ? (
+                    {images["2"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[1])}
+                        src={URL.createObjectURL(images["2"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -291,10 +294,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 6 ? (
+                    {images["6"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[5])}
+                        src={URL.createObjectURL(images["6"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -313,10 +316,10 @@ function CreateSpot() {
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 3 ? (
+                    {images["3"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[2])}
+                        src={URL.createObjectURL(images["3"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -333,10 +336,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 7 ? (
+                    {images["7"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[6])}
+                        src={URL.createObjectURL(images["7"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -355,10 +358,10 @@ function CreateSpot() {
                 </div>
                 <div className="cs-imgs-block flex-column s-b">
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 4 ? (
+                    {images["4"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[3])}
+                        src={URL.createObjectURL(images["4"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -375,10 +378,10 @@ function CreateSpot() {
                     />
                   </div>
                   <div className="cs-imgs-one flex-column">
-                    {img_coll.length >= 8 ? (
+                    {images["8"] ? (
                       <img
                         // id="images-1"
-                        src={URL.createObjectURL(img_coll[7])}
+                        src={URL.createObjectURL(images["8"])}
                         alt="spot image"
                         className="image-uploaded"
                       />
@@ -409,7 +412,7 @@ function CreateSpot() {
                     <label className="cs-detail-label">Spot name</label>
                     <input
                       type="text"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
@@ -426,7 +429,7 @@ function CreateSpot() {
                     </label>
                     <input
                       type="text"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={type}
                       onChange={(e) => setType(e.target.value)}
                     />
@@ -445,7 +448,7 @@ function CreateSpot() {
                     <label className="cs-detail-label">Address</label>
                     <input
                       type="text"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
@@ -456,11 +459,11 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.longAddress}</div>
                     )}
                   </div>
-                  <div className="cs-dm-city flex-column w-20 mrb-40-20">
+                  <div className="cs-dm-city flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">City</label>
                     <input
                       type="text"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                     />
@@ -471,10 +474,10 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.longCity}</div>
                     )}
                   </div>
-                  <div className="cs-dm-state flex-column w-20 mrb-40-20">
+                  <div className="cs-dm-state flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">State</label>
                     <select
-                      className="p-6"
+                      className="p-6 minh-56 f-16"
                       value={state}
                       onChange={(e) => setState(e.target.value)}
                     >
@@ -487,10 +490,10 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.noState}</div>
                     )}
                   </div>
-                  <div className="cs-dm-country flex-column w-20 mrb-40-20">
+                  <div className="cs-dm-country flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">Country</label>
                     <select
-                      className="p-6"
+                      className="p-6 minh-56 f-16"
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
                     >
@@ -508,11 +511,11 @@ function CreateSpot() {
               </div>
               <div className="cs-detail-bottom">
                 <div className="cs-db-block">
-                  <div className="cs-db-guests flex-column w-20 mrb-40-20">
+                  <div className="cs-db-guests flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">Guests number</label>
                     <input
                       type="number"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       min="1"
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
@@ -527,11 +530,11 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.tooManyGuests}</div>
                     )}
                   </div>
-                  <div className="cs-db-beds flex-column w-20 mrb-40-20">
+                  <div className="cs-db-beds flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">Bed number</label>
                     <input
                       type="number"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       min="1"
                       value={beds}
                       onChange={(e) => setBeds(e.target.value)}
@@ -543,11 +546,11 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.invalidBeds}</div>
                     )}
                   </div>
-                  <div className="cs-db-bedroom flex-column w-20 mrb-40-20">
+                  <div className="cs-db-bedroom flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">Bedroom number</label>
                     <input
                       type="number"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       min="1"
                       value={bedroom}
                       onChange={(e) => setBedroom(e.target.value)}
@@ -559,11 +562,12 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.invalidBedroom}</div>
                     )}
                   </div>
-                  <div className="cs-db-bath flex-column w-20 mrb-40-20">
+                  <div className="cs-db-bath flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">Bath number</label>
                     <input
                       type="number"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
+                      min="1"
                       value={bath}
                       onChange={(e) => setBath(e.target.value)}
                     />
@@ -574,10 +578,10 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.invalidBath}</div>
                     )}
                   </div>
-                  <div className="cs-db-tags flex-column w-20 mrb-40-20">
+                  <div className="cs-db-tags flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">Tags</label>
                     <select
-                      className="p-6"
+                      className="p-6 minh-56 f-16"
                       value={tags}
                       onChange={(e) => setTags(e.target.value)}
                     >
@@ -603,14 +607,14 @@ function CreateSpot() {
             <div className="cs-price-box">
               <div className="cs-price-body flex-column">
                 <div className="cs-pb-top flex">
-                  <div className="cs-pb-price flex-column w-20 mrb-40-20">
+                  <div className="cs-pb-price flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">
                       Price per night ($)
                     </label>
                     <input
                       type="number"
                       min="1"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
                     />
@@ -621,7 +625,7 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.invalidPrice}</div>
                     )}
                   </div>
-                  <div className="cs-pb-service_fee flex-column w-20 mrb-40-20">
+                  <div className="cs-pb-service_fee flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">
                       service_fee fee (%)
                     </label>
@@ -629,7 +633,7 @@ function CreateSpot() {
                       type="number"
                       min="1"
                       max="100"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={service_fee}
                       onChange={(e) => setservice_fee(e.target.value)}
                     />
@@ -640,13 +644,13 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.invalidService}</div>
                     )}
                   </div>
-                  <div className="cs-pb-clean_fee flex-column w-20 mrb-40-20">
+                  <div className="cs-pb-clean_fee flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">clean_fee fee (%)</label>
                     <input
                       type="number"
                       min="1"
                       max="100"
-                      className="p-10"
+                      className="p-10 f-18 minh-56"
                       value={clean_fee}
                       onChange={(e) => setclean_fee(e.target.value)}
                     />
@@ -697,6 +701,14 @@ function CreateSpot() {
           </div>
         </div>
       </div>
+      {name && (
+        <Modal>
+          <div className="loading-create-spot">
+            <div className="spinner-red" id="spinner"></div>
+            <div className="spin-text">Creating your property...</div>
+          </div>
+        </Modal>
+      )}
     </>
   );
 }

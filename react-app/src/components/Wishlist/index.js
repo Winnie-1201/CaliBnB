@@ -38,7 +38,10 @@ function Wishlist() {
                     {/* make this alink later */}
                     <div
                       className="wl-li-link"
-                      onClick={() => history.push(`/users/wishlists/${title}`)}
+                      onClick={() => {
+                        history.push(`/users/wishlists/${title}`);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       <div className="wl-li-top">
                         <div className="wl-tl">
