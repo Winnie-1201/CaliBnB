@@ -14,6 +14,8 @@ function CalendarForm({
   setEndDate,
   setStartSelected,
   setEndSelected,
+  startSelected,
+  endSelected,
 }) {
   const dispatch = useDispatch();
   const moment = extendMoment(Moment);
@@ -29,21 +31,39 @@ function CalendarForm({
   }, [dispatch]);
 
   const isDayBlocked = (date) => {
+    // create a list for all booked dates
     let bookedDate = [];
-
-    // console.log("date in isdayblock", date);
 
     // if the start date selected before the most recent unavaliable date
     // the dates after that date should be unavaliable
     const bookingArr = Object.values(bookings);
+    // Find out the earlest booking date from now
+    let earlestBooking = moment(bookingArr[bookingArr.length - 1]?.start);
 
     bookingArr.forEach((b) => {
+      // If start date is selected, update the earlest date that is booked
+      if (startSelected && moment(b.start) > start) {
+        // console.log("b.start > start");
+        if (moment(b.start) < earlestBooking) earlestBooking = moment(b.start);
+      }
       const unvaliableRange = moment.range(b.start, b.end);
       bookedDate.push(unvaliableRange);
-      // console.log("bookedDate", unvaliableRange);
     });
-    // console.log("booked date in cal", bookedDate);
 
+    // if the selected start date is before the earlest booked date
+    // then unable the dates after the ealest booked date
+    if (startSelected && startSelected < earlestBooking) {
+      // If re-select start after end date selected
+      // and re-selected start date is before earlest booked date:
+      // need to remove selected end date
+      if (endSelected && moment(endSelected) > earlestBooking) {
+        setEndDate();
+        setEndSelected(false);
+      }
+      bookedDate.push(moment.range(earlestBooking));
+    }
+
+    // update the block dates for the function
     const blockedDates = bookedDate.find((dateRange) =>
       dateRange.contains(date)
     );
@@ -51,10 +71,10 @@ function CalendarForm({
   };
 
   const onDatesChange = (dates) => {
-    setStartDate(dates.startDate);
-    setEndDate(dates.endDate);
     setStartSelected(dates.startDate);
     setEndSelected(dates.endDate);
+    setStartDate(dates.startDate);
+    setEndDate(dates.endDate);
   };
 
   const onFocusChange = (focusedInput) => {
@@ -66,12 +86,13 @@ function CalendarForm({
       numberOfMonths={2}
       minimumNights={2}
       isOutsideRange={(day) => !isInclusivelyAfterDay(day, moment())}
+      isDayBlocked={isDayBlocked}
       onDatesChange={onDatesChange}
       onFocusChange={onFocusChange}
       focusedInput={focusedInput || "startDate"}
       startDate={start}
       endDate={end}
-      isDayBlocked={isDayBlocked}
+
       //   initialVisibleMonth={() => moment().add(2, "M")} // PropTypes.func or null,
       //   startDate={this.state.startDate} // momentPropTypes.momentObj or null,
       //   startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,

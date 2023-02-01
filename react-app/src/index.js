@@ -27,7 +27,7 @@ function Root() {
         {/* <WishlistProvider> */}
         <ModalProvider>
           <BrowserRouter>
-            <App />
+            <App window={window} />
           </BrowserRouter>
         </ModalProvider>
         {/* </WishlistProvider> */}

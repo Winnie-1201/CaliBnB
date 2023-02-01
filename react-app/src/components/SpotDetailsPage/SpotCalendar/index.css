@@ -373,3 +373,11 @@
 .fw-600 {
   font-weight: 600;
 }
+
+.fl-end {
+  justify-content: flex-end;
+}
+
+.pointer {
+  cursor: pointer;
+}

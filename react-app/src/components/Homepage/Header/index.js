@@ -37,6 +37,7 @@ function Header() {
 
   const handleHomepage = (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     history.push("/");
   };
 

@@ -28,6 +28,7 @@ function Banner() {
                 setCabin(false);
                 setAview(false);
                 setCamp(false);
+                window.scrollTo(0, 0);
               }}
             >
               <div className="flex-column center gap-8">
@@ -52,6 +53,7 @@ function Banner() {
                 setCabin(false);
                 setAview(false);
                 setCamp(true);
+                window.scrollTo(0, 0);
               }}
             >
               <div className="flex-column center gap-8">
@@ -76,6 +78,7 @@ function Banner() {
                 setCabin(true);
                 setAview(false);
                 setCamp(false);
+                window.scrollTo(0, 0);
               }}
             >
               <div className="flex-column center gap-8">
@@ -100,6 +103,7 @@ function Banner() {
                 setCabin(false);
                 setAview(true);
                 setCamp(false);
+                window.scrollTo(0, 0);
               }}
             >
               <div className="flex-column center gap-8">
