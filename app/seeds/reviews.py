@@ -79,6 +79,29 @@ reviews = [
         userId=7,
         spotId=3
     ),
+
+    Review(
+        content="Great stay! Would highly recommend especially if you’re getting together with family or friends for a relaxing gathering. My family and I are keeping this at the top of our list for future getaways. All the essentials are available and instructions are clear.",
+        cleanliness=5,
+        check_in=5,
+        communication=5,
+        value=3,
+        location=4,
+        accuracy=4,
+        userId=1,
+        spotId=2
+    ),
+    Review(
+        content="It is a beautiful place and great location but they need a new cleaning service and do some repairs.",
+        cleanliness=5,
+        check_in=5,
+        communication=5,
+        value=3,
+        location=4,
+        accuracy=4,
+        userId=1,
+        spotId=13
+    )
 ]
 
 def seed_reviews():

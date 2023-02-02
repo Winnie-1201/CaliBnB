@@ -701,7 +701,7 @@ function CreateSpot() {
           </div>
         </div>
       </div>
-      {name && (
+      {submit && (
         <Modal>
           <div className="loading-create-spot">
             <div className="spinner-red" id="spinner"></div>

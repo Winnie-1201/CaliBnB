@@ -19,6 +19,12 @@ function Wishlist() {
     dispatch(getAllWishlistThunk()).then(() => setLoaded(true));
   }, [dispatch]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push("/");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <Header />
@@ -83,7 +89,18 @@ function Wishlist() {
                 ))}
               </ul>
             ) : (
-              <div></div>
+              <div className="no-spots-container">
+                <div className="no-spots-text">
+                  There is nothing in your wishlist yet.
+                </div>
+                <div className="create-spot-text">
+                  Click{" "}
+                  <span className="click-to-create" onClick={handleClick}>
+                    here
+                  </span>{" "}
+                  to save some places in your wishlist!
+                </div>
+              </div>
             )}
           </div>
         </main>

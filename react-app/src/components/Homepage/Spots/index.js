@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useTag } from "../../../context/tag";
 import { getAllSpotThunk } from "../../../store/spots";
+import { cap } from "../../Helper/capitalize";
 import LoadingBlock from "../../LoadingBlock";
 import "./index.css";
 
@@ -55,8 +56,8 @@ function AllSpots() {
                   </div>
                   <div className="flex s-b plr-8 font-16">
                     <div className="flex-column left">
-                      <div className="location">{spot.city}</div>
-                      <div className="type">{spot.type}</div>
+                      <div className="location">{cap(spot.city)}</div>
+                      <div className="type">{cap(spot.type)}</div>
                       <div className="date"></div>
                       <div className="price">
                         <span className="price-d">${spot.price}</span> night
