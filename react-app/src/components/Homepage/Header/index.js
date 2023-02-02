@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Modal } from "../../../context/Modal";
+import { Modal, ShortModal } from "../../../context/Modal";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -169,9 +169,9 @@ function Header() {
                 </Modal>
               )} */}
               {loginModal && (
-                <Modal onClose={() => setLoginModal(false)}>
+                <ShortModal onClose={() => setLoginModal(false)}>
                   <LoginForm setLoginModal={setLoginModal} />
-                </Modal>
+                </ShortModal>
               )}
               {signupModal && (
                 <Modal onClose={() => setSignupModal(false)}>

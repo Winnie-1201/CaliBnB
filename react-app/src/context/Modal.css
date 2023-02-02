@@ -22,19 +22,26 @@
 
 #modal-content {
   position: relative;
-  /* display: flex;
-  flex-direction: column; */
+  box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
+  background-color: white;
+  width: 100%;
+  max-width: 568px;
+  height: 88vh;
+  margin: auto;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+#modal-content-short {
+  position: relative;
   box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
   background-color: white;
   width: 100%;
   max-width: 568px;
   height: fit-content;
   margin: auto;
-  /* height: 100%; */
-  /* max-height: 680px; */
   border-radius: 12px;
-  overflow: clip;
-  /* overflow-y: scroll; */
+  /* overflow: auto; */
 }
 
 /* #modal-content {

@@ -89,7 +89,7 @@ function LoginForm({ setLoginModal }) {
               className="p-14-24"
               type="submit"
               onClick={() => {
-                setEmail("demo4@aa.io");
+                setEmail("winnie@aa.io");
                 setPassword("password");
               }}
             >

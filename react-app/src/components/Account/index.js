@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReviewsByYou from "./ReviewsByYou";
 import { getUserReviewsThunk } from "../../store/reviews";
 import LoadingBlock from "../LoadingBlock";
+import { dateTransfer } from "../dateTransfer";
 
 function Account() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function Account() {
                       />
                     </div>
                     <div className="pc-icon-text">
-                      <div className="link-to-update">Update photo</div>
+                      {/* <div className="link-to-update">Update photo</div> */}
                     </div>
                   </div>
                   <div className="mb-16">
@@ -68,10 +69,13 @@ function Account() {
                             Hi, I'm {currUser.username}
                           </h1>
                         </div>
-                        <div className="pc-right-join">Joined in</div>
+                        <div className="pc-right-join">
+                          Joined in {dateTransfer("month", currUser.created)},{" "}
+                          {dateTransfer("year", currUser.created)}
+                        </div>
                       </div>
                       <div className="pc-edit-profile">
-                        <button className="pc-edit-button">Edit profile</button>
+                        {/* <button className="pc-edit-button">Edit profile</button> */}
                       </div>
                     </div>
                     <div className="pcr-header">

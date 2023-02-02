@@ -1,6 +1,7 @@
 .account-profile {
   margin: 0 auto;
   max-width: 1120px;
+  min-height: 100vh;
 }
 
 .profile-frame {
@@ -133,6 +134,7 @@
   font-weight: 550;
   text-align: inherit;
   outline: none;
+  font-size: 16px;
 }
 
 .mb-48 {

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "../../../context/Modal";
+import { Modal, ShortModal } from "../../../context/Modal";
 import {
   createWishlistThunk,
   deleteOneWishlistThunk,
   getAllWishlistThunk,
 } from "../../../store/wishlists";
+import { cap } from "../../Helper/capitalize";
 import LoginForm from "../../LoginSignup/LoginForm";
 
 import "./index.css";
@@ -159,7 +160,7 @@ function PartOne({ spot, imgs }) {
                 <span className="mt-4-flex">
                   <button className="show-map">
                     <span className="show-map-address">
-                      {spot.city}, {spot.state}, {spot.country}
+                      {cap(spot.city)}, {cap(spot.state)}, {cap(spot.country)}
                     </span>
                   </button>
                 </span>
@@ -276,7 +277,7 @@ function PartOne({ spot, imgs }) {
         <Modal onClose={}
       )} */}
       {wishlistModal === "create_wl" && !currUser.error && (
-        <Modal onClose={() => setWishlistModal(false)}>
+        <ShortModal onClose={() => setWishlistModal(false)}>
           {/* <WishlistModal
             setWishlistModal={setWishlistModal}
             spotId={spotId}
@@ -382,10 +383,10 @@ function PartOne({ spot, imgs }) {
                 ))}
             </div>
           </div>
-        </Modal>
+        </ShortModal>
       )}
       {wishlistModal === "create_new_wl" && (
-        <Modal onClose={() => setWishlistModal(false)}>
+        <ShortModal onClose={() => setWishlistModal(false)}>
           <div className="wl-form">
             <div className="wl-x-cancel">
               {/* onClick handle close modal and reopen the lst modal*/}
@@ -443,12 +444,12 @@ function PartOne({ spot, imgs }) {
               </button>
             </div>
           </div>
-        </Modal>
+        </ShortModal>
       )}
       {loginModal && (
-        <Modal onClose={() => setLoginModal(false)}>
+        <ShortModal onClose={() => setLoginModal(false)}>
           <LoginForm setLoginModal={setLoginModal} />
-        </Modal>
+        </ShortModal>
       )}
     </>
   );

@@ -23,8 +23,8 @@
 .h1-inherit {
   /* color: inherit;
   font-size: inherit; */
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 800;
   padding: 0;
   margin: 0;
 }
@@ -39,8 +39,8 @@
   text-align: right;
 }
 
-.p-24 {
-  padding: 24px;
+.p-10-24 {
+  padding: 10px 24px 24px 24px;
 }
 
 .login-body {
@@ -90,8 +90,8 @@
   outline: none;
   padding: 0;
   margin: 12px;
-  min-height: 1px;
-  font-size: 18px;
+  min-height: 36px;
+  font-size: 20px;
   background-color: white;
 }
 
@@ -114,9 +114,9 @@
     rgb(215, 4, 102) 100%
   );
   color: rgb(255, 255, 255);
-  font-size: 18px;
+  font-size: 20px;
   width: 100%;
-  min-height: 47px;
+  min-height: 60px;
   height: 100%;
   min-width: 200px;
   border-radius: 8px;
