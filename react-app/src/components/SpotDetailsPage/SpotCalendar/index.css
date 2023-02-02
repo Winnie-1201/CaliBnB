@@ -373,3 +373,19 @@
 .fw-600 {
   font-weight: 600;
 }
+
+.fl-end {
+  justify-content: flex-end;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.f-12 {
+  font-size: 14px;
+}
+
+.color-71 {
+  color: #717171;
+}

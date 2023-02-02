@@ -3,28 +3,28 @@ from app.models import db, Wishlist, environment, SCHEMA
 wishilists = [
     Wishlist(
         title="wishlist one",
-        userId=4,
-        spotId=1
+        userId=1,
+        spotId=11
     ),
     Wishlist(
         title="wishlist one",
-        userId=4,
-        spotId=2
+        userId=1,
+        spotId=12
     ),
     Wishlist(
         title="wishlist one",
-        userId=4,
-        spotId=3
+        userId=1,
+        spotId=13
     ),
     Wishlist(
         title="wishlist two",
-        userId=4,
-        spotId=4
+        userId=1,
+        spotId=14
     ),
     Wishlist(
         title="wishlist two",
-        userId=4,
-        spotId=5
+        userId=1,
+        spotId=15
     ),
 ]
 

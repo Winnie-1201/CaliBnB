@@ -88,11 +88,12 @@ function ReviewsByYou() {
                       </div>
                     </div>
                     <div className="rp-block-right">
-                      <div className="rp-owner-info">
+                      <div className="rp-owner-info flex s-b">
                         <span className="rp-owner-name">
-                          {review.spot.owner.firstName}
+                          Host by {review.spot.owner.firstName}
                         </span>
                         <span className="rp-date">
+                          You reviewed in{" "}
                           {dateTransfer("month", review.created) +
                             " " +
                             dateTransfer("year", review.created)}

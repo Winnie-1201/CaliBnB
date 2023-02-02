@@ -186,6 +186,7 @@
 .DayPickerKeyboardShortcuts_show__bottomRight {
   bottom: 0;
   right: 0;
+  visibility: hidden;
 }
 .DayPickerKeyboardShortcuts_show__bottomRight::before {
   border-top: 26px solid transparent;

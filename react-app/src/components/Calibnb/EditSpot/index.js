@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { Modal, ShortModal } from "../../../context/Modal";
 import { changeImgThunk, getImgsBySpotThunk } from "../../../store/images";
 import { addImageThunk, editSpotThunk } from "../../../store/spots";
 import Header from "../../Homepage/Header";
@@ -194,7 +195,10 @@ function EditSpot() {
         promiseArr.push(dispatch(addImageThunk(spotId, newImgs[key], false)));
       }
     }
-    Promise.all(promiseArr).then(() => history.push(`/spots/${spotId}`));
+    Promise.all(promiseArr).then(() => {
+      history.push(`/spots/${spotId}`);
+      window.scrollTo(0, 0);
+    });
   };
 
   const total =
@@ -223,7 +227,7 @@ function EditSpot() {
                 )}
               </div>
               <div className="cs-imgs-body flex">
-                <div className="flex-column s-b">
+                <div className="flex-column">
                   <div className="cs-preview-img-box">
                     <img
                       //   src={spot.preview_img}
@@ -263,7 +267,7 @@ function EditSpot() {
                                 : URL.createObjectURL(images[box])
                             }
                             alt="spot image"
-                            className="image-uploaded"
+                            className="image-uploaded-edit"
                           />
                           <input
                             type="file"
@@ -277,10 +281,10 @@ function EditSpot() {
                           {newImgs[box] ? (
                             <img
                               src={URL.createObjectURL(newImgs[box])}
-                              className="image-uploaded"
+                              className="image-uploaded-edit"
                             />
                           ) : (
-                            <div className="cs-imgs-one-box">
+                            <div className="cs-imgs-one-box-edit">
                               <i className="fa-solid fa-folder-plus" />
                             </div>
                           )}
@@ -543,6 +547,14 @@ function EditSpot() {
             </div>
           </div>
         </div>
+        {submit && (
+          <ShortModal>
+            <div className="loading-create-spot">
+              <div className="spinner-red" id="spinner"></div>
+              <div className="spin-text">Updating your property...</div>
+            </div>
+          </ShortModal>
+        )}
       </>
     )
   );

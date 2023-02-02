@@ -45,7 +45,7 @@ function SpotCard() {
             <span className="click-to-create" onClick={handleClick}>
               here
             </span>{" "}
-            to post your first spot! (might have more css on it later)
+            to host your first property!
           </div>
         </div>
       )}

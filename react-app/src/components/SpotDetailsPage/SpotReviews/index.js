@@ -21,7 +21,7 @@ function PartThree({ reviews, spot }) {
             </span>
             <span className="flex">
               <span className="rbox-review-count">
-                {spot.averages.avg}
+                {spot.averages.avg > 0 ? spot.averages.avg.toFixed(1) : "New"}
                 {" · "} {spot.reviews} {spot.reviews > 1 ? "reviews" : "review"}
               </span>
             </span>

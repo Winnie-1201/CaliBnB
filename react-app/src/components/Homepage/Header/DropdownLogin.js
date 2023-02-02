@@ -14,26 +14,31 @@ function DropdownLogin() {
     dispatch(logout());
 
     history.push("/");
+    window.scrollTo(0, 0);
   };
 
   const handleAccount = (e) => {
     e.preventDefault();
     history.push("/users/profile");
+    window.scrollTo(0, 0);
   };
 
   const handleCalibnb = (e) => {
     e.preventDefault();
     history.push("/users/calibnb");
+    window.scrollTo(0, 0);
   };
 
   const handleTrips = (e) => {
     e.preventDefault();
     history.push("/users/trips");
+    window.scrollTo(0, 0);
   };
 
   const handleWishlists = (e) => {
     e.preventDefault();
     history.push("/users/wishlists");
+    window.scrollTo(0, 0);
   };
 
   return (

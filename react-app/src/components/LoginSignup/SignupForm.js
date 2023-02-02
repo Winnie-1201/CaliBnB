@@ -84,7 +84,7 @@ function SignupForm({ setSignupModal }) {
         </div>
         <div className="header-right"></div>
       </div>
-      <div className="p-24 login-body">
+      <div className="p-10-24 login-body">
         <div className="mtb-8-24">
           <h3 className="mb-8">Welcome to Calibnb</h3>
         </div>

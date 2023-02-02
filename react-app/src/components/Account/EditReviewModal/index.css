@@ -25,14 +25,15 @@
 }
 .er-select {
   margin-right: 30px;
-  border-radius: 6px;
+  border-radius: 6px 6px 6px 10px;
   width: 50px;
-  height: 28px;
+  height: 32px;
   padding: 6px;
   cursor: pointer;
+  font-size: 16px;
 }
 .er-content-block {
-  min-height: 150px;
+  min-height: 280px;
   /* min-height: 200px; */
   height: 100%;
   overflow: hidden;
@@ -40,16 +41,18 @@
 .er-content-text {
   margin-top: 10px;
   height: 100%;
+  min-height: 236px;
   width: 100%;
   outline: none;
   color: #222222;
   border: 1px solid #dddddd;
   padding: 10px;
-  font-size: 18px;
+  font-size: 16px;
   resize: none;
   border-radius: 8px;
   font-family: Inter;
-  line-height: 20px;
+  line-height: 24px;
+  letter-spacing: 0.3px;
 }
 .er-content-text:focus {
   border-color: #222222;

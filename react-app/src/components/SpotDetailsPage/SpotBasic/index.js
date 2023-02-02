@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "../../../context/Modal";
+import { Modal, ShortModal } from "../../../context/Modal";
 import {
   createWishlistThunk,
   deleteOneWishlistThunk,
   getAllWishlistThunk,
 } from "../../../store/wishlists";
+import { cap } from "../../Helper/capitalize";
 import LoginForm from "../../LoginSignup/LoginForm";
 
 import "./index.css";
@@ -134,7 +135,9 @@ function PartOne({ spot, imgs }) {
                       <path d="M 15.094 1.579 l -4.124 8.885 l -9.86 1.27 a 1 1 0 0 0 -0.542 1.736 l 7.293 6.565 l -1.965 9.852 a 1 1 0 0 0 1.483 1.061 L 16 25.951 l 8.625 4.997 a 1 1 0 0 0 1.482 -1.06 l -1.965 -9.853 l 7.293 -6.565 a 1 1 0 0 0 -0.541 -1.735 l -9.86 -1.271 l -4.127 -8.885 a 1 1 0 0 0 -1.814 0 Z"></path>
                     </svg>
                   </span>
-                  <span className="avg">{avgs?.avg} · </span>
+                  <span className="avg">
+                    {avgs?.avg > 0 ? avgs?.avg.toFixed(1) : "New"} ·{" "}
+                  </span>
                   <span className="review-count">
                     <button className="show-review">
                       {" "}
@@ -157,7 +160,7 @@ function PartOne({ spot, imgs }) {
                 <span className="mt-4-flex">
                   <button className="show-map">
                     <span className="show-map-address">
-                      {spot.city}, {spot.state}, {spot.country}
+                      {cap(spot.city)}, {cap(spot.state)}, {cap(spot.country)}
                     </span>
                   </button>
                 </span>
@@ -274,7 +277,7 @@ function PartOne({ spot, imgs }) {
         <Modal onClose={}
       )} */}
       {wishlistModal === "create_wl" && !currUser.error && (
-        <Modal onClose={() => setWishlistModal(false)}>
+        <ShortModal onClose={() => setWishlistModal(false)}>
           {/* <WishlistModal
             setWishlistModal={setWishlistModal}
             spotId={spotId}
@@ -380,10 +383,10 @@ function PartOne({ spot, imgs }) {
                 ))}
             </div>
           </div>
-        </Modal>
+        </ShortModal>
       )}
       {wishlistModal === "create_new_wl" && (
-        <Modal onClose={() => setWishlistModal(false)}>
+        <ShortModal onClose={() => setWishlistModal(false)}>
           <div className="wl-form">
             <div className="wl-x-cancel">
               {/* onClick handle close modal and reopen the lst modal*/}
@@ -441,12 +444,12 @@ function PartOne({ spot, imgs }) {
               </button>
             </div>
           </div>
-        </Modal>
+        </ShortModal>
       )}
       {loginModal && (
-        <Modal onClose={() => setLoginModal(false)}>
+        <ShortModal onClose={() => setLoginModal(false)}>
           <LoginForm setLoginModal={setLoginModal} />
-        </Modal>
+        </ShortModal>
       )}
     </>
   );

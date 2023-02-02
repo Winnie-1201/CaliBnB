@@ -19,6 +19,12 @@ function Wishlist() {
     dispatch(getAllWishlistThunk()).then(() => setLoaded(true));
   }, [dispatch]);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    history.push("/");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <Header />
@@ -38,7 +44,10 @@ function Wishlist() {
                     {/* make this alink later */}
                     <div
                       className="wl-li-link"
-                      onClick={() => history.push(`/users/wishlists/${title}`)}
+                      onClick={() => {
+                        history.push(`/users/wishlists/${title}`);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       <div className="wl-li-top">
                         <div className="wl-tl">
@@ -80,7 +89,18 @@ function Wishlist() {
                 ))}
               </ul>
             ) : (
-              <div></div>
+              <div className="no-spots-container">
+                <div className="no-spots-text">
+                  There is nothing in your wishlist yet.
+                </div>
+                <div className="create-spot-text">
+                  Click{" "}
+                  <span className="click-to-create" onClick={handleClick}>
+                    here
+                  </span>{" "}
+                  to save some places in your wishlist!
+                </div>
+              </div>
             )}
           </div>
         </main>
