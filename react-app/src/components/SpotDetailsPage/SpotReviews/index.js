@@ -169,16 +169,16 @@ function PartThree({ reviews, spot }) {
                       </div>
                       <div className="r-icon">
                         {/* maybe change it to a button later */}
-                        <div className="br-50">
-                          <img
-                            className="r-img"
-                            src={r.user.icon}
-                            alt="reviewer"
-                            onError={(e) => {
-                              e.currentTarget.src = "/default.JPG";
-                            }}
-                          />
-                        </div>
+                        {/* <div className="br-50"> */}
+                        <img
+                          className="r-img"
+                          src={r.user.icon}
+                          alt="reviewer"
+                          onError={(e) => {
+                            e.currentTarget.src = "/default.JPG";
+                          }}
+                        />
+                        {/* </div> */}
                       </div>
                     </div>
                     <div className="r-text-bottom">

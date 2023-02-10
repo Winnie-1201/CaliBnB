@@ -8,7 +8,7 @@ function Footer() {
         <div className="flex s-b">
           <div className="footer-left">
             <div className="developer flex center">
-              <div className="developer-text">Develper </div>
+              <div className="developer-text">Developer </div>
               <div className="developer-text">Wanting Lu</div>
               <a
                 className="flex center mr-12 ml-8 cursor"
