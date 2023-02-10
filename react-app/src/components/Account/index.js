@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ReviewsByYou from "./ReviewsByYou";
 import { getUserReviewsThunk } from "../../store/reviews";
 import LoadingBlock from "../LoadingBlock";
-import { dateTransfer } from "../dateTransfer";
+import { dateTransfer } from "../Helper/dateTransfer";
 
 function Account() {
   const dispatch = useDispatch();

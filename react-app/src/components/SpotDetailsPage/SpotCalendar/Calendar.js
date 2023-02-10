@@ -24,12 +24,27 @@ function CalendarForm({
   const bookings = useSelector((state) => state.bookings.spotBookings);
 
   const [focusedInput, setFocusedInput] = useState("startDate");
+  // const [calNumber, setCalNumber] = useState();
   // const [unvaliable, setUnvaliable] = useState([]);
 
   useEffect(() => {
     dispatch(getSpotBookingsThunk(spot.id));
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   if (window.innerWidth < 1200) setCalNumber(1);
+  //   else setCalNumber(2);
+
+  //   const handleWindowSize = (e) => {
+  //     if (window.innerWidth < 1200) setCalNumber(1);
+  //     else setCalNumber(2);
+  //   };
+
+  //   window.addEventListener("resize", handleWindowSize);
+  //   return () => document.removeEventListener("resize", handleWindowSize);
+  // }, []);
+
+  // console.log("calendar number", calNumber);
   const isDayBlocked = (date) => {
     // create a list for all booked dates
     let bookedDate = [];

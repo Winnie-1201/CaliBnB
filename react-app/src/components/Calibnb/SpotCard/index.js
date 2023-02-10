@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
 import { getImgsBySpotThunk } from "../../../store/images";
 import { deleteSpotThunk, getOneSpotThunk } from "../../../store/spots";
-import { dateTransfer } from "../../dateTransfer";
+import { dateTransfer } from "../../Helper/dateTransfer";
 import "./index.css";
 
 function SpotCard() {
