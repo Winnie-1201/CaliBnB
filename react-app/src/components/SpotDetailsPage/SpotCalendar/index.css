@@ -32,8 +32,12 @@
 
 .mb-8-text {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 24px;
+  font-family: Helvetica Neue;
+  /* font-family: Cambria; */
   /* font-family: inherit; */
+  /* font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serifs; */
 }
 
 .ol {
@@ -49,9 +53,9 @@
   padding-left: 3px;
 }
 
-.wh-56 {
-  width: 56px;
-  height: 56px;
+.wh-76 {
+  width: 76px;
+  height: 76px;
 }
 
 .wh-100-img {
@@ -79,36 +83,44 @@
 }
 
 .mw-24 {
-  min-width: 24px;
+  min-width: 32px;
+  /* height: 32px;
+  width: 32px; */
 }
 
-.svg-spotdetail {
+/* .svg-spotdetail {
   width: 24px;
   height: 24px;
-}
+} */
 
-.text-16 {
+.text-19 {
   font-weight: 500;
-  font-size: 18px;
-  margin-bottom: 4px;
+  font-size: 19px;
+  margin-bottom: 8px;
 }
 
-.text-14 {
+.text-17 {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 17px;
+  color: #717171;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
 }
 
 .bir {
   margin: 0;
   padding: 0;
   color: #ff385c;
-  font-size: 28px;
+  font-size: 32px;
+  /* font-weight: bolder; */
 }
 
 .cover {
   margin: 0;
   padding: 0;
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .mb-16 {
@@ -140,13 +152,14 @@
 .block-header-h2 {
   margin: 0;
   padding: 0;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 450;
 }
 
 .ava-date {
   color: #717171;
   font-weight: 400;
+  font-size: 17px;
 }
 
 .mlr-0-left {
@@ -157,7 +170,7 @@
 
 .sticky {
   position: sticky;
-  top: 80px;
+  top: 130px;
   display: inline-block;
 }
 
@@ -229,8 +242,8 @@
 }
 
 .bbox-price {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 500;
 }
 
 .bbox-night {
@@ -253,7 +266,7 @@
 
 .bbox-avg {
   padding-left: 4px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 18px;
 }
 
@@ -275,9 +288,9 @@
   background-color: transparent;
   border-radius: 0;
   padding: 0;
-
   text-align: left;
   font-size: 100%;
+  cursor: pointer;
 }
 
 .bbox-calender-left {
@@ -308,7 +321,7 @@
 }
 
 .bbox-calender-date {
-  min-height: 56px;
+  min-height: 64px;
   width: 100%;
   border: none;
   outline: none;
@@ -320,6 +333,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .bb {
@@ -346,11 +361,11 @@
   padding: 14px 24px;
   border-radius: 8px;
   font-size: 18px;
-  height: 48px;
+  height: 56px;
 }
 
 .price-detail {
-  font-size: 18px;
+  font-size: 19px;
   padding-top: 0;
   color: #222222;
   font-weight: 400;
@@ -370,10 +385,6 @@
   border-top: 1px solid rgb(221, 221, 221);
 }
 
-.fw-600 {
-  font-weight: 600;
-}
-
 .fl-end {
   justify-content: flex-end;
 }
@@ -388,4 +399,91 @@
 
 .color-71 {
   color: #717171;
+}
+
+.cal-absolute {
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 6px 20px;
+  padding: 32px;
+  position: absolute;
+  top: -24px;
+  right: -32px;
+  width: 700px;
+  z-index: 10;
+  min-height: 560px;
+}
+
+.relative {
+  position: relative;
+}
+
+.cal-ab-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+}
+
+.cat-right {
+  display: flex;
+  min-width: 270px;
+  border-radius: 8px;
+  background-color: rgb(247, 247, 247);
+  box-shadow: rgb(176 176 176) 0px 0px 0px 1px inset;
+}
+
+.cat-stay-nights {
+  margin-bottom: 8px;
+}
+
+.cat-header-h2 {
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.cal-ab-bottom {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cat-clear {
+  padding-left: 34px;
+  padding-right: 34px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cat-clear-date {
+  border-radius: 8px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.cat-close {
+  margin-left: 16px;
+}
+
+.cat-close-bt {
+  border-radius: 8px;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  text-align: center;
+  background: #222222;
+  font-size: 18px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 18px;
+  min-width: 78px;
 }

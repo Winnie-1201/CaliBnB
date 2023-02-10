@@ -3,6 +3,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createBookingThunk } from "../../../store/bookings";
+import { cap } from "../../Helper/capitalize";
 import CalendarForm from "./Calendar";
 import "./index.css";
 import { Modal } from "../../../context/Modal";
@@ -20,6 +21,8 @@ function PartTwo({ spot }) {
   const [end, setEndDate] = useState(moment());
   const [startSelected, setStartSelected] = useState(false);
   const [endSelected, setEndSelected] = useState(false);
+  const [checkinInput, setCheckinInput] = useState(false);
+  const [checkoutInput, setCheckoutInput] = useState(false);
   const [error, setError] = useState("");
   const [submit, setSubmit] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
@@ -36,7 +39,7 @@ function PartTwo({ spot }) {
   const handleReserve = async () => {
     setSubmit(true);
 
-    console.log("curruser", !currUser.error, currUser, error);
+    // console.log("curruser", !currUser.error, currUser, error);
     if (!error && !currUser.error) {
       const booking = {
         start: start.toISOString().split("T")[0],
@@ -62,7 +65,7 @@ function PartTwo({ spot }) {
   // console.log("after clear, end -----", end);
   // console.log("after clear, startseleted -----", startSelected);
   // console.log("after clear, end selected -----", endSelected);
-
+  // console.log("heckin in cal", checkinInput);
   return (
     <>
       <div className="max-width">
@@ -75,7 +78,7 @@ function PartTwo({ spot }) {
                     <div className="flex-0-1">
                       <div className="mb-8-house">
                         <h2 className="mb-8-text">
-                          Hosted by {spot.owner.firstName}
+                          {cap(spot.tags)} hosted by {cap(spot.owner.firstName)}
                         </h2>
                       </div>
                       <ol className="ol">
@@ -115,7 +118,7 @@ function PartTwo({ spot }) {
                       </ol>
                     </div>
                     <div className="ml-16">
-                      <div className="wh-56">
+                      <div className="wh-76">
                         <div className="wh-100-img">
                           <img
                             className="img-size-host"
@@ -146,9 +149,9 @@ function PartTwo({ spot }) {
                       <path d="M 26 2 a 1 1 0 0 1 0.922 0.612 l 0.04 0.113 l 2 7 a 1 1 0 0 1 -0.847 1.269 L 28 11 h -3 v 5 h 6 v 2 h -2 v 13 h -2 l 0.001 -2.536 a 3.976 3.976 0 0 1 -1.73 0.527 L 25 29 H 7 a 3.982 3.982 0 0 1 -2 -0.535 V 31 H 3 V 18 H 1 v -2 h 5 v -4 a 1 1 0 0 1 0.883 -0.993 L 7 11 h 0.238 L 6.086 8.406 l 1.828 -0.812 L 9.427 11 H 12 a 1 1 0 0 1 0.993 0.883 L 13 12 v 4 h 10 v -5 h -3 a 1 1 0 0 1 -0.987 -1.162 l 0.025 -0.113 l 2 -7 a 1 1 0 0 1 0.842 -0.718 L 22 2 h 4 Z m 1 16 H 5 v 7 a 2 2 0 0 0 1.697 1.977 l 0.154 0.018 L 7 27 h 18 a 2 2 0 0 0 1.995 -1.85 L 27 25 v -7 Z m -16 -5 H 8 v 3 h 3 v -3 Z m 14.245 -9 h -2.491 l -1.429 5 h 5.349 l -1.429 -5 Z"></path>
                     </svg>
                   </div>
-                  <div className="ml-16">
-                    <div className="text-16">Dedicated workspace</div>
-                    <div className="text-14">
+                  <div className="ml-16 mb-10">
+                    <div className="text-19">Dedicated workspace</div>
+                    <div className="text-17">
                       A private room with wifi that's well-suited for working.
                     </div>
                   </div>
@@ -163,9 +166,9 @@ function PartTwo({ spot }) {
                       <path d="m 24.3334 1.66675 c 1.05437 0 1.91817 0.815871 1.99451 1.85074 l 0.0054857 0.149263 l -0.00065 24.666 l 3.00065 0.00075 v 2 h -26.6667 v -2 l 3 -0.00075 v -24.666 c 0 -1.05437 0.815873 -1.91817 1.85074 -1.99451 l 0.149263 -0.00548571 Z m -4.00065 2 h -12.666 l -0.00075 24.6663 l 12.6667 -0.00025 Z m 4.00065 0 h -2.00065 v 24.666 l 2.00025 0.00025 Z m -7.0001 11 c 0.736378 0 1.33333 0.596952 1.33333 1.33333 s -0.596952 1.33333 -1.33333 1.33333 s -1.33333 -0.596952 -1.33333 -1.33333 s 0.596952 -1.33333 1.33333 -1.33333 Z"></path>
                     </svg>
                   </div>
-                  <div className="ml-16">
-                    <div className="text-16">Self check-in</div>
-                    <div className="text-14">
+                  <div className="ml-16 mb-10">
+                    <div className="text-19">Self check-in</div>
+                    <div className="text-17">
                       Check yourself in with the lockbox.
                     </div>
                   </div>
@@ -181,10 +184,10 @@ function PartTwo({ spot }) {
                     </svg>
                   </div>
                   <div className="ml-16">
-                    <div className="text-16">
+                    <div className="text-19">
                       Free cancellation before "a specific date" (change later)
                     </div>
-                    <div className="text-14"></div>
+                    <div className="text-17"></div>
                   </div>
                 </div>
               </div>
@@ -241,6 +244,11 @@ function PartTwo({ spot }) {
                           end.format("MMM D, YYYY")}
                       </div>
                     )}
+                    {!startSelected && !endSelected && (
+                      <div className="ava-date">
+                        Add your travel dates for exact pricing
+                      </div>
+                    )}
                     {startSelected && !endSelected && (
                       <div className="ava-date">Minimum stay: 2 nights</div>
                     )}
@@ -256,7 +264,7 @@ function PartTwo({ spot }) {
                   </div> */}
                   </div>
                 </div>
-                <div className="flex w-100">
+                <div className="w-100">
                   <CalendarForm
                     start={start}
                     end={end}
@@ -320,9 +328,12 @@ function PartTwo({ spot }) {
                           </div>
                         </div>
                         <div className="bbox-mid">
-                          <div className="flex bb">
+                          <div className="flex bb relative">
                             {/* buttons for calender */}
-                            <button className="bbox-calender-button">
+                            <button
+                              className="bbox-calender-button "
+                              onClick={() => setCheckinInput(true)}
+                            >
                               <div className="bbox-calender-left">
                                 <div className="bbox-calender-text">
                                   Check-in
@@ -342,10 +353,105 @@ function PartTwo({ spot }) {
                                 </div>
                               </div>
                             </button>
+                            {checkinInput && (
+                              <div className="cal-absolute">
+                                <div className="cal-ab-top">
+                                  <div className="cat-left">
+                                    <div className="cat-stay-nights">
+                                      <h2 className="cat-header-h2">
+                                        {!startSelected || !endSelected
+                                          ? "Select dates"
+                                          : ""}
+                                      </h2>
+                                      {(!startSelected || !endSelected) && (
+                                        <div className="ava-date">
+                                          Minimum stay: 2 nights
+                                        </div>
+                                      )}
+                                      {stay > 0 && (
+                                        <h2 className="block-header-h2">
+                                          {stay} nights in {spot.city}
+                                        </h2>
+                                      )}
+                                    </div>
+                                    <div className="stay-dates pt-8">
+                                      {startSelected && endSelected && (
+                                        <div className="ava-date">
+                                          {start.format("MMM D, YYYY") +
+                                            " - " +
+                                            end.format("MMM D, YYYY")}
+                                        </div>
+                                      )}
+                                    </div>
+                                    {/* <div className="cat-left-top">
+                                      </div>
+                                      <div className="cat-left-bottom"></div> */}
+                                  </div>
+                                  <div className="cat-right">
+                                    <div className="bbox-calender-left">
+                                      <div className="bbox-calender-text">
+                                        Check-in
+                                      </div>
+                                      <div className="bbox-calender-date">
+                                        {startSelected
+                                          ? start.format("MM/D/YYYY")
+                                          : ""}
+                                      </div>
+                                    </div>
+                                    <div className="bbox-calender-right">
+                                      <div className="bbox-calender-text">
+                                        Check-out
+                                      </div>
+                                      <div className="bbox-calender-date">
+                                        {endSelected
+                                          ? end.format("MM/D/YYYY")
+                                          : ""}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="cal-ab-bottom">
+                                  <div>
+                                    <CalendarForm
+                                      start={start}
+                                      end={end}
+                                      startSelected={startSelected}
+                                      endSelected={endSelected}
+                                      setStartDate={setStartDate}
+                                      setEndDate={setEndDate}
+                                      setStartSelected={setStartSelected}
+                                      setEndSelected={setEndSelected}
+                                    />
+                                  </div>
+                                  <div className="cat-clear">
+                                    <button
+                                      className="cat-clear-date"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setStartDate(moment());
+                                        setEndDate(moment());
+                                        setStartSelected(false);
+                                        setEndSelected(false);
+                                      }}
+                                    >
+                                      Clear dates
+                                    </button>
+                                    <div className="cat-close">
+                                      <button
+                                        className="cat-close-bt"
+                                        onClick={() => setCheckinInput(false)}
+                                      >
+                                        Close
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                           </div>
                           {/* <div className="flex holder">
-                          guests dropdown holder
-                        </div> */}
+                            guests dropdown holder
+                          </div> */}
                         </div>
                         <button className="bbox-bottom" onClick={handleReserve}>
                           <span>Reserve</span>
@@ -386,10 +492,10 @@ function PartTwo({ spot }) {
                             </div>
                             <div className="mt-24 pt-24 border-top">
                               <div className="price-block">
-                                <span className="fw-600">
+                                <span className="fw-500">
                                   Total before taxes
                                 </span>
-                                <span>
+                                <span className="fw-500">
                                   ${" "}
                                   {spot.price * stay +
                                     s_fee * stay +

@@ -60,7 +60,7 @@
 
 .logo-text {
   color: #ff385c;
-  font-weight: bolder;
+  font-weight: 550;
   font-size: 26px;
 }
 
@@ -108,7 +108,7 @@
   border-bottom-left-radius: inherit;
   align-items: center;
   height: 48px;
-  font-family: Inter;
+  font-family: Helvetica Neue;
   font-size: inherit;
   color: inherit;
   font-weight: inherit;
@@ -132,7 +132,7 @@
 .anyweek {
   align-items: center;
   height: 48px;
-  font-family: Inter;
+  font-family: Helvetica Neue;
   font-size: inherit;
   color: inherit;
   font-weight: inherit;
@@ -274,4 +274,12 @@
 
 .signup {
   font-weight: 500;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fz-16 {
+  font-size: 16px;
 }

@@ -27,8 +27,8 @@ section {
 }
 
 .top-1-text {
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 30px;
+  font-weight: 450;
   margin: 0 0 8px 0;
   padding: 0;
 }
@@ -70,7 +70,7 @@ section {
 
 .avg {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: rgb(34, 34, 34);
   text-overflow: ellipsis;
 }
@@ -196,7 +196,7 @@ section {
 .image-container {
   max-height: calc(60vh - 64px);
   position: relative;
-  min-height: 450px;
+  min-height: 560px;
   /* aspect-ratio: 2/1; */
 }
 

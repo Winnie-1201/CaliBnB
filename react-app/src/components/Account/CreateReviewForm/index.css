@@ -136,7 +136,7 @@
   font-size: 18px;
   resize: none;
   border-radius: 8px;
-  font-family: Inter;
+  font-family: Helvetica Neue;
 }
 .cr-content-text:focus {
   border-color: #222222;

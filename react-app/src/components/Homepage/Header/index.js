@@ -86,7 +86,7 @@ function Header() {
             <div className="flex auto">
               {/* change it to a link later */}
               <div className="p-12 z-1" onClick={handleCalibnb}>
-                <div className="flex relative center z-1">
+                <div className="flex relative center z-1 fw-500 fz-16">
                   Calibnb your home
                 </div>
               </div>
