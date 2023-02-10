@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { dateTransfer } from "../../dateTransfer";
+import { dateTransfer } from "../../Helper/dateTransfer";
 import "./index.css";
 
 function ReviewsToWrite() {

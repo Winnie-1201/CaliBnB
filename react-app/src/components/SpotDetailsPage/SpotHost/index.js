@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { dateTransfer } from "../../dateTransfer";
+import { dateTransfer } from "../../Helper/dateTransfer";
 import "./index.css";
 
 function PartFive({ ownerSpots, owner }) {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Modal } from "../../../context/Modal";
 import { deleteReviewThunk, getUserReviewsThunk } from "../../../store/reviews";
-import { dateTransfer } from "../../dateTransfer";
+import { dateTransfer } from "../../Helper/dateTransfer";
 import EditReviewModal from "../EditReviewModal";
 import "./index.css";
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getOneBookingThunk } from "../../../store/bookings";
 import { createReviewThunk } from "../../../store/reviews";
-import { dateTransfer } from "../../dateTransfer";
+import { dateTransfer } from "../../Helper/dateTransfer";
 import Header from "../../Homepage/Header";
 import "./index.css";
 

@@ -5,7 +5,7 @@ import { Modal } from "../../context/Modal";
 import { cancelBookingThunk, getUserBookingsThunk } from "../../store/bookings";
 import { getUserReviewsThunk } from "../../store/reviews";
 import ReviewsToWrite from "../Account/ReviewsToWrite";
-import { dateTransfer } from "../dateTransfer";
+import { dateTransfer } from "../Helper/dateTransfer";
 import Header from "../Homepage/Header";
 import LoadingBlock from "../LoadingBlock";
 import "./index.css";

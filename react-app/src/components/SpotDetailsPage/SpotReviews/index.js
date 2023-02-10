@@ -1,5 +1,5 @@
 import React from "react";
-import { dateTransfer } from "../../dateTransfer";
+import { dateTransfer } from "../../Helper/dateTransfer";
 import "./index.css";
 
 function PartThree({ reviews, spot }) {
