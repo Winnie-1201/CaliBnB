@@ -10,7 +10,7 @@ import {
 import LoadingBlock from "../../LoadingBlock";
 import Header from "../../Homepage/Header";
 import Footer from "../../Homepage/Footer";
-import { Modal } from "../../../context/Modal";
+import { Modal, ShortModal, WlEditModal } from "../../../context/Modal";
 import "./index.css";
 
 function WishlistDetail() {
@@ -107,7 +107,7 @@ function WishlistDetail() {
                 >
                   <div className="grid-column">
                     <div className="flex one-spot">
-                      <div className="mb-12 wd-img-box">
+                      <div className="mb-16 wd-img-box">
                         <img
                           className="wd-one-spot-img"
                           src={item.spot.images[0].url}
@@ -143,7 +143,12 @@ function WishlistDetail() {
                               </svg>
                             </span>
                             <span className="avg-rating">
-                              {item.spot.averages.avg}
+                              {item.spot.averages.avg > 0
+                                ? item.spot.averages.avg
+                                : "New"}{" "}
+                              {item.spot.reviews > 0
+                                ? "(" + item.spot.reviews + ")"
+                                : ""}
                             </span>
                           </div>
                         </div>
@@ -157,7 +162,7 @@ function WishlistDetail() {
         </main>
       )}
       {editWishlistModal === "edit" && (
-        <Modal onClose={() => setEditWishlistModal(false)}>
+        <ShortModal onClose={() => setEditWishlistModal(false)}>
           <div className="wl-form">
             <div className="wl-x-cancel">
               {/* onClick handle close modal and reopen the lst modal*/}
@@ -230,10 +235,10 @@ function WishlistDetail() {
               </button>
             </div>
           </div>
-        </Modal>
+        </ShortModal>
       )}
       {editWishlistModal === "ed-del" && (
-        <Modal onClose={() => setEditWishlistModal(false)}>
+        <ShortModal onClose={() => setEditWishlistModal(false)}>
           <div className="ed-del-modal">
             <div className="wl-x-cancel">
               {/* onClick handle close modal and reopen the lst modal*/}
@@ -281,7 +286,7 @@ function WishlistDetail() {
               </button>
             </div>
           </div>
-        </Modal>
+        </ShortModal>
       )}
       <Footer />
     </>

@@ -39,9 +39,24 @@ export function ShortModal({ onClose, children }) {
 
   return ReactDOM.createPortal(
     <div id="modal">
-      <div id="modal-background" onClick={onClose} />
+      <div id="modal-background-short" onClick={onClose} />
       <div id="modal-content-short">{children}</div>
     </div>,
     modalNode
   );
 }
+
+// export function WlEditModal({ onClose, children }) {
+//   const modalNode = useContext(ModalContext);
+//   if (!modalNode) return null;
+
+//   return ReactDOM.createPortal(
+//     <div id="modal">
+//       <div id="modal-background-short" onClick={onClose} />
+//       <div id="modal-content-short" className="wl-transform-modal">
+//         {children}
+//       </div>
+//     </div>,
+//     modalNode
+//   );
+// }

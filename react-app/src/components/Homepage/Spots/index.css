@@ -62,27 +62,30 @@
 }
 
 .location {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  letter-spacing: 0.8px;
 }
 
 .type {
-  color: #9e9d9d;
-  margin-bottom: 8px;
+  color: #717171;
+  margin-bottom: 20px;
+  font-weight: 300;
 }
 
 .price-d {
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .hp-star-svg {
   display: block;
-  height: 12px;
-  width: 12px;
+  height: 15px;
+  width: 15px;
   fill: currentColor;
 }
 
 .avg-rating {
   margin-left: 3px;
+  letter-spacing: 0.8px;
 }
