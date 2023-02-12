@@ -204,7 +204,7 @@
 
 .ml-12 {
   margin-left: 12px;
-  color: #717171;
+  color: #9e9d9d;
   flex: 0 0 30px;
   overflow: hidden;
   position: relative;
@@ -212,7 +212,7 @@
 }
 
 .profile-icon {
-  color: #717171;
+  color: #9e9d9d;
   flex: 0 0 30px;
   height: 30px;
   width: 30px;

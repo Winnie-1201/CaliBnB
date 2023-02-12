@@ -17,7 +17,7 @@ function PartFive({ ownerSpots, owner }) {
         <section>
           <div className="flex center mb-24 jc-ini">
             <div className="mr-16">
-              <div className="wh-64">
+              <div className="wh-76">
                 {/* change it to a link later maybe */}
                 <div className="pf-host-icon">
                   <img
@@ -51,7 +51,7 @@ function PartFive({ ownerSpots, owner }) {
           </div>
           <div className="pf-host-detail">
             <div className="plr-16-left">
-              <div className="mb-8">
+              <div className="mb-16">
                 <ul className="pf-ul-style">
                   <li className="pf-li-style">
                     <div className="flex">
@@ -131,8 +131,8 @@ function PartFive({ ownerSpots, owner }) {
               </div>
               {spotAvg >= 3.7 && (
                 <div className="mb-24">
-                  <div className="mb-8">
-                    <div className="fs-16 bold">
+                  <div className="mb-10">
+                    <div className="fs-20">
                       {owner.firstName} is a Superhost
                     </div>
                   </div>
