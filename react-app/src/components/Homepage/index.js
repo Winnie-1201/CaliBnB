@@ -9,7 +9,7 @@ function Homepage() {
   return (
     <div className="homepage-container">
       <Header />
-      <div className="bannber-container">
+      <div className="banner-container">
         <Banner />
       </div>
       <div className="map-container grid"></div>

@@ -141,7 +141,7 @@
   word-wrap: break-word;
   font-size: 18px;
   font-weight: 300;
-  letter-spacing: 0.6px;
+  /* letter-spacing: 0.6px; */
 }
 
 .r-show-more {

@@ -52,7 +52,7 @@
   border-radius: 8px;
   font-family: Helvetica Neue;
   line-height: 24px;
-  letter-spacing: 0.3px;
+  /* letter-spacing: 0.3px; */
 }
 .er-content-text:focus {
   border-color: #222222;

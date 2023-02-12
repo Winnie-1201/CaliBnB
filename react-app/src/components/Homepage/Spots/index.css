@@ -65,7 +65,7 @@
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 6px;
-  letter-spacing: 0.8px;
+  /* letter-spacing: 0.8px; */
 }
 
 .type {
@@ -87,5 +87,5 @@
 
 .avg-rating {
   margin-left: 3px;
-  letter-spacing: 0.8px;
+  /* letter-spacing: 0.8px; */
 }

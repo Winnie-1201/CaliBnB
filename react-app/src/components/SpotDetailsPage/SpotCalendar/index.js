@@ -199,7 +199,7 @@ function PartTwo({ spot }) {
                     <h2 className="bir">Cir</h2>
                     <h2 className="cover">cover</h2>
                   </div>
-                  <div className="mb-16">
+                  <div className="mb-16 lh-26">
                     Every booking includes free protection from Host
                     cancellations, listing inaccuracies, and other issues like
                     trouble checking in.

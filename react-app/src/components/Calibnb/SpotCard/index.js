@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Modal } from "../../../context/Modal";
+import { Modal, ShortModal } from "../../../context/Modal";
 import { getImgsBySpotThunk } from "../../../store/images";
 import { deleteSpotThunk, getOneSpotThunk } from "../../../store/spots";
 import { dateTransfer } from "../../Helper/dateTransfer";
@@ -89,7 +89,7 @@ function SpotCard() {
       </div>
 
       {showDelSpotModal && (
-        <Modal onClose={() => setDelSpotModal(false)}>
+        <ShortModal onClose={() => setDelSpotModal(false)}>
           <form className="del-modal-box">
             <div className="flex-column">
               <div className="del-msg">
@@ -111,7 +111,7 @@ function SpotCard() {
               </div>
             </div>
           </form>
-        </Modal>
+        </ShortModal>
       )}
     </>
   );

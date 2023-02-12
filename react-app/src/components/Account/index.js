@@ -64,14 +64,13 @@ function Account() {
                   <section>
                     <div className="mb-48">
                       <div className="mb-8">
-                        <div className="pc-right-header mb-8">
+                        <div className="pc-right-header mb-16">
                           <h1 className="pc-right-h1">
                             Hi, I'm {currUser.username}
                           </h1>
                         </div>
                         <div className="pc-right-join">
-                          Joined in {dateTransfer("month", currUser.created)},{" "}
-                          {dateTransfer("year", currUser.created)}
+                          Joined in {dateTransfer("year", currUser.created)}
                         </div>
                       </div>
                       <div className="pc-edit-profile">

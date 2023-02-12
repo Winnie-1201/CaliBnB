@@ -77,9 +77,10 @@
 }
 
 .pc-email {
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 28px;
+  margin-bottom: 8px;
 }
 
 .pc-email-text {
@@ -94,9 +95,9 @@
 }
 
 .pc-right-header {
-  font-size: 26px;
+  font-size: 35px;
   line-height: 36px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .pc-right-h1 {
@@ -111,6 +112,7 @@
   line-height: 18px;
   color: rgb(113, 113, 113);
   margin-bottom: 8px;
+  font-weight: 400;
 }
 
 .pc-edit-profile {
@@ -152,9 +154,9 @@ review box
 
 .pcr-left-title,
 .pcr-right-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
-  color: #9e9d9d;
+  /* color: #9e9d9d; */
   padding: 10px 0;
   margin: 6px 20px 0 0px;
   border-radius: 8px;

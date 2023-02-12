@@ -33,13 +33,13 @@ function Calibnb() {
         <>
           <main className="calibnb-container">
             <div className="cc-header">
-              <h1 className="cc-header-h1">Spots hosted by you</h1>
+              <h1 className="cc-header-h1">Properties hosted by you</h1>
             </div>
             <section className="w-100">
               {Object.values(userSpots).length === 0 ? (
                 <div className="no-spots-container">
                   <div className="no-spots-text">
-                    You don't have any spot yet!
+                    You don't have any property posted yet!
                   </div>
                   <div className="create-spot-text">
                     Click{" "}

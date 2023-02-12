@@ -492,9 +492,7 @@ function EditSpot() {
                       )}
                     </div>
                     <div className="cs-pb-service_fee flex-column w-20 mrb-40-20">
-                      <label className="cs-detail-label">
-                        service_fee fee (%)
-                      </label>
+                      <label className="cs-detail-label">Service fee (%)</label>
                       <input
                         type="number"
                         step="0.01"
@@ -510,7 +508,7 @@ function EditSpot() {
                     </div>
                     <div className="cs-pb-clean_fee flex-column w-20 mrb-40-20">
                       <label className="cs-detail-label">
-                        clean_fee fee (%)
+                        Cleaning fee (%)
                       </label>
                       <input
                         type="number"
@@ -540,7 +538,16 @@ function EditSpot() {
               </div>
             </div>
 
-            <div className="cs-button-container">
+            <div className="cs-button-container-edit">
+              <button
+                className="cs-button"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  history.push("/users/calibnb");
+                }}
+              >
+                Cancel
+              </button>
               <button className="cs-button" onClick={handleUpdate}>
                 Update
               </button>

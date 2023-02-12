@@ -409,7 +409,7 @@ function CreateSpot() {
               <div className="cs-detail-top">
                 <div className="cs-dt-block">
                   <div className="cs-dt-name flex-column w-45 mrb-40-20">
-                    <label className="cs-detail-label">Spot name</label>
+                    <label className="cs-detail-label">* Spot name</label>
                     <input
                       type="text"
                       className="p-10 f-18 minh-56"
@@ -425,7 +425,7 @@ function CreateSpot() {
                   </div>
                   <div className="cs-dt-type flex-column w-35 mrb-40-20">
                     <label className="cs-detail-label">
-                      Spot type (i.e. Entire home)
+                      * Spot type (i.e. Entire home)
                     </label>
                     <input
                       type="text"
@@ -445,7 +445,7 @@ function CreateSpot() {
               <div className="cs-detail-mid">
                 <div className="cs-dm-block">
                   <div className="cs-dm-address flex-column w-60 mrb-40-20">
-                    <label className="cs-detail-label">Address</label>
+                    <label className="cs-detail-label">* Address</label>
                     <input
                       type="text"
                       className="p-10 f-18 minh-56"
@@ -460,7 +460,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-dm-city flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">City</label>
+                    <label className="cs-detail-label">* City</label>
                     <input
                       type="text"
                       className="p-10 f-18 minh-56"
@@ -475,7 +475,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-dm-state flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">State</label>
+                    <label className="cs-detail-label">* State</label>
                     <select
                       className="p-6 minh-56 f-16"
                       value={state}
@@ -491,7 +491,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-dm-country flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">Country</label>
+                    <label className="cs-detail-label">* Country</label>
                     <select
                       className="p-6 minh-56 f-16"
                       value={country}
@@ -512,7 +512,7 @@ function CreateSpot() {
               <div className="cs-detail-bottom">
                 <div className="cs-db-block">
                   <div className="cs-db-guests flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">Guests number</label>
+                    <label className="cs-detail-label">* Guests number</label>
                     <input
                       type="number"
                       className="p-10 f-18 minh-56"
@@ -531,7 +531,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-db-beds flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">Bed number</label>
+                    <label className="cs-detail-label">* Bed number</label>
                     <input
                       type="number"
                       className="p-10 f-18 minh-56"
@@ -547,7 +547,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-db-bedroom flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">Bedroom number</label>
+                    <label className="cs-detail-label">* Bedroom number</label>
                     <input
                       type="number"
                       className="p-10 f-18 minh-56"
@@ -563,7 +563,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-db-bath flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">Bath number</label>
+                    <label className="cs-detail-label">* Bath number</label>
                     <input
                       type="number"
                       className="p-10 f-18 minh-56"
@@ -579,7 +579,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-db-tags flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">Tags</label>
+                    <label className="cs-detail-label">* Tags</label>
                     <select
                       className="p-6 minh-56 f-16"
                       value={tags}
@@ -609,7 +609,7 @@ function CreateSpot() {
                 <div className="cs-pb-top flex">
                   <div className="cs-pb-price flex-column w-30 mrb-40-20">
                     <label className="cs-detail-label">
-                      Price per night ($)
+                      * Price per night ($)
                     </label>
                     <input
                       type="number"
@@ -626,9 +626,7 @@ function CreateSpot() {
                     )}
                   </div>
                   <div className="cs-pb-service_fee flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">
-                      service_fee fee (%)
-                    </label>
+                    <label className="cs-detail-label">* Service fee (%)</label>
                     <input
                       type="number"
                       min="1"
@@ -644,8 +642,10 @@ function CreateSpot() {
                       <div className="error-cs">* {errors.invalidService}</div>
                     )}
                   </div>
-                  <div className="cs-pb-clean_fee flex-column w-30 mrb-40-20">
-                    <label className="cs-detail-label">clean_fee fee (%)</label>
+                  <div className="cs-pb-clean_fee flex-column w-40 mrb-40-20">
+                    <label className="cs-detail-label">
+                      * Cleanning fee (%)
+                    </label>
                     <input
                       type="number"
                       min="1"

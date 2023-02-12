@@ -11,5 +11,9 @@ body {
   color: #222;
   background-color: #fff;
   margin: 0;
-  letter-spacing: 0.4px;
+  /* letter-spacing: 0.8px; */
+}
+
+#root {
+  letter-spacing: 0.8px;
 }
