@@ -462,9 +462,9 @@ function PartTwo({ spot }) {
                       ) : (
                         <ul className="flex-column other-text">
                           <li className="mt-8">You won't be charged yet</li>
-                          <li className="mt-8 f-12 color-71">
+                          {/* <li className="mt-8 f-12 color-71">
                             Please scroll down to select the dates.
-                          </li>
+                          </li> */}
                           {/* {error && submit ? (
                         <li className="reserve-error">* {error}</li>
                       ) : ( */}
