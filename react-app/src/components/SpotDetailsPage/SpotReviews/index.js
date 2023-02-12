@@ -9,7 +9,7 @@ function PartThree({ reviews, spot }) {
     <div className="flex bb">
       <div className="ptb-48 w-100">
         <section>
-          <div className="mb-32 flex center">
+          <div className="mb-36 flex center">
             <span className="mr-8 ">
               <svg
                 viewBox="0 0 32 32"
@@ -27,12 +27,12 @@ function PartThree({ reviews, spot }) {
             </span>
           </div>
           <div className="rate-container">
-            <div className="mb-24">
+            <div className="mb-26">
               <div className="rate-bar-container">
-                <div className="plr-8 rating-block relative">
-                  <div className="mb-16">
+                <div className="rating-block relative">
+                  <div className="mb-20">
                     <div className="flex center s-b w-100">
-                      <div>Cleanliness</div>
+                      <div className="f-20">Cleanliness</div>
                       <div className="flex w-50 center">
                         <div className="rating-bar">
                           <span
@@ -49,10 +49,10 @@ function PartThree({ reviews, spot }) {
                     </div>
                   </div>
                 </div>
-                <div className="plr-8 rating-block relative">
-                  <div className="mb-16">
+                <div className="rating-block relative">
+                  <div className="mb-20">
                     <div className="flex center s-b w-100">
-                      <div>Accuracy</div>
+                      <div className="f-20">Accuracy</div>
                       <div className="flex w-50 center">
                         <div className="rating-bar">
                           <span
@@ -69,10 +69,10 @@ function PartThree({ reviews, spot }) {
                     </div>
                   </div>
                 </div>
-                <div className="plr-8 rating-block relative">
-                  <div className="mb-16">
+                <div className="rating-block relative">
+                  <div className="mb-20">
                     <div className="flex center s-b w-100">
-                      <div>Communication</div>
+                      <div className="f-20">Communication</div>
                       <div className="flex w-50 center">
                         <div className="rating-bar">
                           <span
@@ -89,10 +89,10 @@ function PartThree({ reviews, spot }) {
                     </div>
                   </div>
                 </div>
-                <div className="plr-8 rating-block relative">
-                  <div className="mb-16">
+                <div className="rating-block relative">
+                  <div className="mb-20">
                     <div className="flex center s-b w-100">
-                      <div>Location</div>
+                      <div className="f-20">Location</div>
                       <div className="flex w-50 center">
                         <div className="rating-bar">
                           <span
@@ -109,10 +109,10 @@ function PartThree({ reviews, spot }) {
                     </div>
                   </div>
                 </div>
-                <div className="plr-8 rating-block relative">
-                  <div className="mb-16">
+                <div className="rating-block relative">
+                  <div className="mb-20">
                     <div className="flex center s-b w-100">
-                      <div>Check-in</div>
+                      <div className="f-20">Check-in</div>
                       <div className="flex w-50 center">
                         <div className="rating-bar">
                           <span
@@ -129,10 +129,10 @@ function PartThree({ reviews, spot }) {
                     </div>
                   </div>
                 </div>
-                <div className="plr-8 rating-block relative">
-                  <div className="mb-16">
+                <div className="rating-block relative">
+                  <div className="mb-20">
                     <div className="flex center s-b w-100">
-                      <div>Value</div>
+                      <div className="f-20">Value</div>
                       <div className="flex w-50 center">
                         <div className="rating-bar">
                           <span
@@ -158,7 +158,7 @@ function PartThree({ reviews, spot }) {
                 <div className="review-content-block" key={r.id}>
                   <div className="content-text-container">
                     <div className="r-text-top">
-                      <div className="r-ml-12">
+                      <div className="r-ml-16">
                         <h3 className="r-name">{r.user.username}</h3>
                         <div className="flex">
                           <div className="r-date">

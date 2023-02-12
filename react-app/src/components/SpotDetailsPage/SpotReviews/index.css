@@ -2,8 +2,8 @@
   padding: 48px 0;
 }
 
-.mb-32 {
-  margin-bottom: 32px;
+.mb-36 {
+  margin-bottom: 36px;
 }
 
 .rbox-star {
@@ -13,12 +13,20 @@
 }
 
 .rbox-review-count {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 500;
 }
 
-.plr-8 {
-  padding: 0 8px;
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.f-20 {
+  font-size: 20px;
+}
+
+.mb-26 {
+  margin-bottom: 26px;
 }
 
 .rating-block {
@@ -98,19 +106,19 @@
   font-weight: 500;
 }
 
-.r-ml-12 {
-  margin-left: 12px;
+.r-ml-16 {
+  margin-left: 16px;
 }
 
 .r-date {
-  font-size: 18px;
-  font-weight: 300;
-  color: #717171;
+  font-size: 16px;
+  font-weight: 400;
+  color: #9e9d9d;
 }
 
 .r-icon {
-  height: 40px;
-  width: 40px;
+  height: 46px;
+  width: 46px;
 }
 
 .br-50 {
@@ -129,13 +137,11 @@
 .r-text-container {
   overflow: scroll;
   text-overflow: ellipsis;
-  line-height: 24px;
+  line-height: 28px;
   word-wrap: break-word;
-  /* max-height: 72px; */
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
-  /* -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical; */
+  letter-spacing: 0.6px;
 }
 
 .r-show-more {

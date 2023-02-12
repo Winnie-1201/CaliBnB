@@ -462,9 +462,9 @@ function PartTwo({ spot }) {
                       ) : (
                         <ul className="flex-column other-text">
                           <li className="mt-8">You won't be charged yet</li>
-                          <li className="mt-8 f-12 color-71">
+                          {/* <li className="mt-8 f-12 color-71">
                             Please scroll down to select the dates.
-                          </li>
+                          </li> */}
                           {/* {error && submit ? (
                         <li className="reserve-error">* {error}</li>
                       ) : ( */}
@@ -483,7 +483,7 @@ function PartTwo({ spot }) {
                               </div>
                               <div className="price-block pt-16">
                                 <span>Cleaning fee</span>
-                                <span>$ {c_fee * stay}</span>
+                                <span>$ {c_fee}</span>
                               </div>
                               <div className="price-block pt-16">
                                 <span>Service fee</span>
@@ -496,10 +496,7 @@ function PartTwo({ spot }) {
                                   Total before taxes
                                 </span>
                                 <span className="fw-500">
-                                  ${" "}
-                                  {spot.price * stay +
-                                    s_fee * stay +
-                                    c_fee * stay}
+                                  $ {spot.price * stay + s_fee * stay + c_fee}
                                 </span>
                               </div>
                             </div>
