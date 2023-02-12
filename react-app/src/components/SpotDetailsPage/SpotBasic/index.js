@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal, ShortModal } from "../../../context/Modal";
+import { LoginModal, Modal, ShortModal } from "../../../context/Modal";
 import {
   createWishlistThunk,
   deleteOneWishlistThunk,
@@ -447,9 +447,9 @@ function PartOne({ spot, imgs }) {
         </ShortModal>
       )}
       {loginModal && (
-        <ShortModal onClose={() => setLoginModal(false)}>
+        <LoginModal onClose={() => setLoginModal(false)}>
           <LoginForm setLoginModal={setLoginModal} />
-        </ShortModal>
+        </LoginModal>
       )}
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/session";
 import "./LoginForm.css";
@@ -12,6 +12,46 @@ function LoginForm({ setLoginModal }) {
 
   const getEmail = (e) => setEmail(e.target.value);
   const getPassword = (e) => setPassword(e.target.value);
+
+  // const button = document.querySelector(".button-hover-effect");
+  // button.addEventListener("mousemove", (e) => {
+  //   const rect = button.getBoundingClientRect();
+  //   const x = ((e.clientX - rect.left) * 100) / button.clientWidth;
+  //   const y = ((e.clientY - rect.top) * 100) / button.clientHeight;
+  //   button.style.setProperty("--mouse-x", x);
+  //   button.style.setProperty("--mouse-y", y);
+  // });
+  useEffect(() => {
+    const button = document.querySelector(".login-hover-effect");
+    button.addEventListener("mousemove", (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) * 100) / button.clientWidth;
+      const y = ((e.clientY - rect.top) * 100) / button.clientHeight;
+      button.style.setProperty("--mouse-x", x);
+      button.style.setProperty("--mouse-y", y);
+
+      button.addEventListener("mouseleave", (e) => {
+        button.style.setProperty("--mouse-x", 0);
+        button.style.setProperty("--mouse-y", 0);
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    const button = document.querySelector(".demo-hover-effect");
+    button.addEventListener("mousemove", (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) * 100) / button.clientWidth;
+      const y = ((e.clientY - rect.top) * 100) / button.clientHeight;
+      button.style.setProperty("--mouse-x", x);
+      button.style.setProperty("--mouse-y", y);
+
+      button.addEventListener("mouseleave", (e) => {
+        button.style.setProperty("--mouse-x", 0);
+        button.style.setProperty("--mouse-y", 0);
+      });
+    });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,13 +120,13 @@ function LoginForm({ setLoginModal }) {
             </ul>
           )}
           <div className="mtb-16-24">
-            <button className="p-14-24" type="submit">
+            <button className="p-14-24 login-hover-effect" type="submit">
               <span>Log in</span>
             </button>
           </div>
           <div className="mtb-16-24">
             <button
-              className="p-14-24"
+              className="p-14-24 demo-hover-effect"
               type="submit"
               onClick={() => {
                 setEmail("winnie@aa.io");

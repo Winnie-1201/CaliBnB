@@ -3,14 +3,14 @@
  
 } */
 
-.login-header {
-  min-height: 64px;
+.signup-header {
+  min-height: 78px;
   flex: 0 0 auto;
   padding: 0 24px;
   border-bottom: 1px solid rgb(235, 235, 235);
   color: rgb(34, 34, 34);
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 500;
 }
 
 .mlr-16 {
@@ -21,10 +21,11 @@
 }
 
 .h1-inherit {
-  /* color: inherit;
-  font-size: inherit; */
-  font-size: 20px;
-  font-weight: 800;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  /* font-size: 20px;
+  font-weight: 800; */
   padding: 0;
   margin: 0;
 }
@@ -96,11 +97,11 @@
 }
 
 .mtb-16-24 {
-  margin-top: 20px;
+  margin-top: 36px;
   margin-bottom: 24px;
 }
 
-.p-14-24 {
+/* .p-14-24 {
   cursor: pointer;
   margin: 0;
   text-align: center;
@@ -120,6 +121,24 @@
   height: 100%;
   min-width: 200px;
   border-radius: 8px;
+} */
+
+.signup-hover-effect {
+  background-position: calc((100 - var(--mouse-x, 0)) * 1%)
+    calc((100 - var(--mouse-y, 0)) * 1%);
+  --mouse-x: 50;
+  --mouse-y: 50;
+  background-size: 200% 200%;
+  transition: opacity 1.25s;
+  background-image: radial-gradient(
+    circle at center,
+    #ff385c 0%,
+    #e61e4d 27.5%,
+    #e31c5f 40%,
+    #d70466 57.5%,
+    #bd1e59 75%,
+    #bd1e59 100%
+  );
 }
 
 .mtb-16 {

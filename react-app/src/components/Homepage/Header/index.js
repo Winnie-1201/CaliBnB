@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Modal, ShortModal } from "../../../context/Modal";
+import {
+  LoginModal,
+  Modal,
+  ShortModal,
+  SingupModal,
+} from "../../../context/Modal";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -169,14 +174,14 @@ function Header() {
                 </Modal>
               )} */}
               {loginModal && (
-                <ShortModal onClose={() => setLoginModal(false)}>
+                <LoginModal onClose={() => setLoginModal(false)}>
                   <LoginForm setLoginModal={setLoginModal} />
-                </ShortModal>
+                </LoginModal>
               )}
               {signupModal && (
-                <Modal onClose={() => setSignupModal(false)}>
+                <SingupModal onClose={() => setSignupModal(false)}>
                   <SignupForm setSignupModal={setSignupModal} />
-                </Modal>
+                </SingupModal>
               )}
               {showMenu && isLogin && <DropdownLogin />}
             </div>

@@ -348,7 +348,7 @@
 }
 
 .bbox-bottom {
-  background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+  /* background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%); */
   cursor: pointer;
   display: inline-block;
   margin: 0px;
@@ -362,6 +362,24 @@
   border-radius: 8px;
   font-size: 18px;
   height: 56px;
+}
+
+.button-hover-effect {
+  background-position: calc((100 - var(--mouse-x, 0)) * 1%)
+    calc((100 - var(--mouse-y, 0)) * 1%);
+  --mouse-x: 50;
+  --mouse-y: 50;
+  background-size: 200% 200%;
+  transition: opacity 1.25s;
+  background-image: radial-gradient(
+    circle at center,
+    #ff385c 0%,
+    #e61e4d 27.5%,
+    #e31c5f 40%,
+    #d70466 57.5%,
+    #bd1e59 75%,
+    #bd1e59 100%
+  );
 }
 
 .price-detail {

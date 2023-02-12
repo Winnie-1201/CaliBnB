@@ -36,6 +36,17 @@ function PartTwo({ spot }) {
     setError(err);
   }, [startSelected, endSelected]);
 
+  useEffect(() => {
+    const button = document.querySelector(".button-hover-effect");
+    button.addEventListener("mousemove", (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) * 100) / button.clientWidth;
+      const y = ((e.clientY - rect.top) * 100) / button.clientHeight;
+      button.style.setProperty("--mouse-x", x);
+      button.style.setProperty("--mouse-y", y);
+    });
+  }, []);
+
   const handleReserve = async () => {
     setSubmit(true);
 
@@ -453,7 +464,11 @@ function PartTwo({ spot }) {
                             guests dropdown holder
                           </div> */}
                         </div>
-                        <button className="bbox-bottom" onClick={handleReserve}>
+
+                        <button
+                          className="bbox-bottom button-hover-effect"
+                          onClick={handleReserve}
+                        >
                           <span>Reserve</span>
                         </button>
                       </div>
