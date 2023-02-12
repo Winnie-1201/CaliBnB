@@ -20,6 +20,15 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+#modal-background-short {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
 #modal-content {
   position: relative;
   box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
@@ -44,7 +53,7 @@
   /* overflow: auto; */
 }
 
-/* #modal-content {
+/* .wl-transform-modal {
   opacity: 1;
   animation: show 0.5s;
   transform: scale(1);
