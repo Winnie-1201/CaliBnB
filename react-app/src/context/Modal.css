@@ -26,7 +26,15 @@
   right: 0;
   left: 0;
   bottom: 0;
-  /* background-color: rgba(0, 0, 0, 0.5); */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#modal-background-wishlist {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 #modal-content {
@@ -35,7 +43,19 @@
   background-color: white;
   width: 100%;
   max-width: 568px;
-  height: 88vh;
+  height: fit-content;
+  margin: auto;
+  border-radius: 12px;
+  overflow: auto;
+}
+
+#modal-content-login {
+  position: relative;
+  box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
+  background-color: white;
+  width: 100%;
+  max-width: 614px;
+  height: fit-content;
   margin: auto;
   border-radius: 12px;
   overflow: auto;
@@ -51,6 +71,18 @@
   margin: auto;
   border-radius: 12px;
   /* overflow: auto; */
+}
+
+#modal-content-signup {
+  position: relative;
+  box-shadow: rgb(0 0 0 / 28%) 0px 8px 28px;
+  background-color: white;
+  width: 100%;
+  max-width: 680px;
+  height: 80vh;
+  margin: auto;
+  border-radius: 12px;
+  overflow: auto;
 }
 
 /* .wl-transform-modal {

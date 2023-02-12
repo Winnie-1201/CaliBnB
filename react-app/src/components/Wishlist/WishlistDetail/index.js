@@ -10,7 +10,12 @@ import {
 import LoadingBlock from "../../LoadingBlock";
 import Header from "../../Homepage/Header";
 import Footer from "../../Homepage/Footer";
-import { Modal, ShortModal, WlEditModal } from "../../../context/Modal";
+import {
+  Modal,
+  ShortModal,
+  WishlistModal,
+  WlEditModal,
+} from "../../../context/Modal";
 import "./index.css";
 
 function WishlistDetail() {
@@ -162,7 +167,7 @@ function WishlistDetail() {
         </main>
       )}
       {editWishlistModal === "edit" && (
-        <ShortModal onClose={() => setEditWishlistModal(false)}>
+        <WishlistModal onClose={() => setEditWishlistModal(false)}>
           <div className="wl-form">
             <div className="wl-x-cancel">
               {/* onClick handle close modal and reopen the lst modal*/}
@@ -235,10 +240,10 @@ function WishlistDetail() {
               </button>
             </div>
           </div>
-        </ShortModal>
+        </WishlistModal>
       )}
       {editWishlistModal === "ed-del" && (
-        <ShortModal onClose={() => setEditWishlistModal(false)}>
+        <WishlistModal onClose={() => setEditWishlistModal(false)}>
           <div className="ed-del-modal">
             <div className="wl-x-cancel">
               {/* onClick handle close modal and reopen the lst modal*/}
@@ -286,7 +291,7 @@ function WishlistDetail() {
               </button>
             </div>
           </div>
-        </ShortModal>
+        </WishlistModal>
       )}
       <Footer />
     </>

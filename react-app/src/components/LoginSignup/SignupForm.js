@@ -23,6 +23,21 @@ function SignupForm({ setSignupModal }) {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    const button = document.querySelector(".signup-hover-effect");
+    button.addEventListener("mousemove", (e) => {
+      const rect = button.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) * 100) / button.clientWidth;
+      const y = ((e.clientY - rect.top) * 100) / button.clientHeight;
+      button.style.setProperty("--mouse-x", x);
+      button.style.setProperty("--mouse-y", y);
+    });
+    button.addEventListener("mouseleave", (e) => {
+      button.style.setProperty("--mouse-x", 0);
+      button.style.setProperty("--mouse-y", 0);
+    });
+  }, []);
+
+  useEffect(() => {
     const newErrors = {};
 
     if (firstName && checkValidName(firstName))
@@ -77,7 +92,7 @@ function SignupForm({ setSignupModal }) {
   return (
     <div className="flex-column login-form">
       <div className="x"></div>
-      <div className="login-header flex s-b center">
+      <div className="signup-header flex s-b center">
         <div className="header-left"></div>
         <div className="mlr-16">
           <h1 className="h1-inherit">Sign up</h1>
@@ -204,7 +219,7 @@ function SignupForm({ setSignupModal }) {
               )}
             </div>
             <div className="mtb-16-24">
-              <button type="submit" className="p-14-24">
+              <button type="submit" className="p-14-24 signup-hover-effect">
                 <span>Sign Up</span>
               </button>
             </div>
