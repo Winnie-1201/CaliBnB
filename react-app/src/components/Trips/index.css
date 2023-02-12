@@ -13,8 +13,8 @@
 .tp-header-h1 {
   padding: 0;
   margin: 0;
-  font-size: 32px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 500;
 }
 
 .tp-ut-container {
@@ -22,7 +22,8 @@
 }
 
 .tp-no-ut {
-  padding: 24px 0;
+  padding-top: 16px;
+  padding-bottom: 24px;
 }
 
 .grid-no-ut {
@@ -61,14 +62,19 @@
 }
 
 .nout-text-bold {
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 24px;
   color: #222222;
 }
+
+#root {
+  letter-spacing: 0.8px;
+}
+
 .nout-text {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 18px;
-  color: #9e9d9d;
+  color: #717171;
 }
 .nout-link-box {
   margin-top: 16px;
@@ -82,10 +88,15 @@
   /* border-color: black; */
   border-radius: 8px;
   border: 1px solid #9e9d9d;
-  padding: 14px 24px;
-  color: white;
+  padding: 16px 24px;
+  color: #222222;
   width: 100%;
-  background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%);
+  /* min-height: 64px; */
+  /* background: linear-gradient(to right, #e61e4d 0%, #e31c5f 50%, #d70466 100%); */
+}
+
+.nout-link:hover {
+  background: rgb(250, 250, 250);
 }
 
 .nout-right {
@@ -107,8 +118,8 @@
 
 .tp-ut-header-h2 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 900;
+  font-size: 26px;
+  font-weight: 500;
 }
 
 .grid-ul {
@@ -127,13 +138,14 @@
 .grid-li-flex {
   display: flex;
   align-items: center;
-  padding: 12px 0;
+  padding-top: 12px;
+  padding-bottom: 26px;
 }
 
 .grid-li-left {
   cursor: pointer;
-  width: 156px;
-  height: 112px;
+  width: 200px;
+  height: 140px;
   overflow: hidden;
   position: relative;
   flex: 0 0 auto;
@@ -173,8 +185,8 @@
 }
 
 .tc-text {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
   line-height: 20px;
 }
 
@@ -185,7 +197,11 @@
 
 .tc-host-text,
 .tc-date-text {
-  font-size: 18px;
-  font-weight: 300;
-  color: #9e9d9d;
+  font-size: 16px;
+  font-weight: 400;
+  color: #717171;
+}
+
+.grid-li-review {
+  margin-top: 16px;
 }
