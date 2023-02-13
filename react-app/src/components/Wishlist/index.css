@@ -1,5 +1,5 @@
 .wl-container {
-  max-width: 1120px;
+  max-width: 1560px;
   padding: 0 40px;
   margin: 36px auto;
   min-height: 100vh;
@@ -104,4 +104,11 @@
   line-height: 26px;
   font-weight: 500;
   margin-bottom: 5px;
+}
+
+@media screen and (min-width: 1440px) {
+  .wl-container {
+    padding: 0 80px;
+    margin: 36px auto;
+  }
 }

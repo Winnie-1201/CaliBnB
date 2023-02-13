@@ -1,5 +1,5 @@
 .wd-container {
-  max-width: 1120px;
+  max-width: 1560px;
   padding: 0 40px;
   margin: 0 auto;
   min-height: 100vh;
@@ -257,4 +257,11 @@
   overflow-y: auto;
   outline: none;
   font-size: 18px;
+}
+
+@media screen and (min-width: 1440px) {
+  .wd-container {
+    padding: 0 80px;
+    /* margin: 46px auto; */
+  }
 }

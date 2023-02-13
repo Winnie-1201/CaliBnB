@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "./store/session";
-import { getAllSpotThunk } from "./store/spots";
+// import { getAllSpotThunk } from "./store/spots";
 import Homepage from "./components/Homepage";
 import SpotDetalsPage from "./components/SpotDetailsPage";
 import CreateSpot from "./components/Calibnb/CreateSpot";
@@ -12,11 +12,11 @@ import EditSpot from "./components/Calibnb/EditSpot";
 import TripsPage from "./components/Trips";
 import ReviewForm from "./components/Account/CreateReviewForm";
 import Footer from "./components/Homepage/Footer";
-import LoadingBlock from "./components/LoadingBlock";
-import Header from "./components/Homepage/Header";
-import Banner from "./components/Homepage/Banner";
+// import LoadingBlock from "./components/LoadingBlock";
+// import Header from "./components/Homepage/Header";
+// import Banner from "./components/Homepage/Banner";
 import Wishlist from "./components/Wishlist";
-import WishlistModal from "./components/Wishlist/WishlistModal";
+// import WishlistModal from "./components/Wishlist/WishlistModal";
 import WishlistDetail from "./components/Wishlist/WishlistDetail";
 
 function App() {

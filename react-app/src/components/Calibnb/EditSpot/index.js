@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { Modal, ShortModal } from "../../../context/Modal";
+import { ShortModal } from "../../../context/Modal";
 import { changeImgThunk, getImgsBySpotThunk } from "../../../store/images";
 import { addImageThunk, editSpotThunk } from "../../../store/spots";
 import Header from "../../Homepage/Header";
@@ -255,20 +255,25 @@ function EditSpot() {
                 {/* <div className="cs-other-imgs flex"> */}
                 <div className="cs-imgs-grid">
                   {boxes.map((box) => (
-                    <div className="cs-grid-one flex-column" key={`a${box}`}>
+                    <div
+                      className="cs-grid-one flex-column fc-align"
+                      key={`a${box}`}
+                    >
                       {images[box] ? (
                         <>
-                          <img
-                            // id="images-1"
-                            id={`img-uploaded-${box}`}
-                            src={
-                              images[box].url
-                                ? images[box].url
-                                : URL.createObjectURL(images[box])
-                            }
-                            alt="spot image"
-                            className="image-uploaded-edit"
-                          />
+                          <div className="wh-200">
+                            <img
+                              // id="images-1"
+                              id={`img-uploaded-${box}`}
+                              src={
+                                images[box].url
+                                  ? images[box].url
+                                  : URL.createObjectURL(images[box])
+                              }
+                              alt="spot image"
+                              className="image-uploaded-edit"
+                            />
+                          </div>
                           <input
                             type="file"
                             accept="image/*"
@@ -279,10 +284,12 @@ function EditSpot() {
                       ) : (
                         <>
                           {newImgs[box] ? (
-                            <img
-                              src={URL.createObjectURL(newImgs[box])}
-                              className="image-uploaded-edit"
-                            />
+                            <div className="wh-200">
+                              <img
+                                src={URL.createObjectURL(newImgs[box])}
+                                className="image-uploaded-edit"
+                              />
+                            </div>
                           ) : (
                             <div className="cs-imgs-one-box-edit">
                               <i className="fa-solid fa-folder-plus" />

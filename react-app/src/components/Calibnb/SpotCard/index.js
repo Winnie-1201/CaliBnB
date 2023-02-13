@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Modal, ShortModal } from "../../../context/Modal";
+import { ShortModal } from "../../../context/Modal";
 import { getImgsBySpotThunk } from "../../../store/images";
 import { deleteSpotThunk, getOneSpotThunk } from "../../../store/spots";
 import { dateTransfer } from "../../Helper/dateTransfer";

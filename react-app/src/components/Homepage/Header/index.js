@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  LoginModal,
-  Modal,
-  ShortModal,
-  SingupModal,
-} from "../../../context/Modal";
+import { LoginModal, SingupModal } from "../../../context/Modal";
 import LoginForm from "../../LoginSignup/LoginForm";
 import SignupForm from "../../LoginSignup/SignupForm";
 import DropdownLogin from "./DropdownLogin";
@@ -54,7 +49,7 @@ function Header() {
 
   return (
     <div className="header-container">
-      <div className="flex center relative s-b z-1 plr-40 header">
+      <div className="flex center relative s-b z-1 header">
         <div className="header-left">
           <div
             className="inline-flex center relative z-1 redirect"

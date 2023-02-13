@@ -20,7 +20,6 @@ function ReviewForm({}) {
   const [value, setValue] = useState();
   const [location, setLocation] = useState();
   const [accuracy, setAccuracy] = useState();
-
   const [loaded, setLoaded] = useState(false);
 
   const [submit, setSubmit] = useState(false);
@@ -66,7 +65,6 @@ function ReviewForm({}) {
 
     setSubmit(true);
     // review needs to be an object
-    // console.log("not error", Object.values(errors).length);
     if (Object.values(errors).length === 0) {
       const cl = parseInt(cleanliness);
       const ch = parseInt(check_in);
@@ -85,6 +83,7 @@ function ReviewForm({}) {
         accuracy: ac,
       };
 
+      // create the spot in database and redirect
       await dispatch(createReviewThunk(booking.spotId, review)).then(() => {
         history.push(`/users/profile`);
       });
@@ -92,6 +91,7 @@ function ReviewForm({}) {
     }
   };
 
+  // get the spot info after dispatch
   if (loaded) {
     spot = booking.spot;
   }

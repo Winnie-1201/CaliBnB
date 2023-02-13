@@ -143,16 +143,13 @@ function CreateSpot() {
       if (newSpot) {
         await dispatch(addImageThunk(newSpot.id, preview_img, true)); // [promise fullfilled]
 
+        // use promise_arr to store the promise
         let promise_arr = [];
-        console.log("img_coll", img_coll);
         img_coll.forEach((img) => {
           promise_arr.push(dispatch(addImageThunk(newSpot.id, img, false)));
         });
 
-        // const submitBt = document.getElementsByClassName("cs-button");
-        // // submitBt.className = "cs-submited-loading"
-        // submitBt.innerHTML = "<div className='spinner' id='spinner'></div>";
-
+        // after all promises are fullfilled, then rediret
         Promise.all(promise_arr).then(() =>
           history.push(`/spots/${newSpot.id}`)
         );
@@ -183,7 +180,6 @@ function CreateSpot() {
     Math.round((price * service_fee) / 100) +
     Math.round((price * clean_fee) / 100);
 
-  // console.log("img_coll", img_coll, images);
   return (
     <>
       <Header />
