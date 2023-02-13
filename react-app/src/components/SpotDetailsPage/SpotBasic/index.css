@@ -1,5 +1,5 @@
 .top-1 {
-  /* max-width: 1120px; */
+  /* max-width: 1560px; */
   width: 100%;
   padding: 24px 0px 0 0;
 }
@@ -23,7 +23,7 @@ section {
 
 .mb-4 {
   margin-bottom: 4px;
-  max-width: 1120px;
+  max-width: 1560px;
 }
 
 .top-1-text {
@@ -167,7 +167,7 @@ section {
 }
 
 .top-2 {
-  max-width: 1120px;
+  max-width: 1560px;
 }
 
 .top-2::before,
@@ -177,7 +177,7 @@ section {
 }
 
 .m-auto {
-  max-width: 1120px;
+  max-width: 1560px;
   margin-left: auto;
   margin-right: auto;
   height: 100%;

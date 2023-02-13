@@ -1,8 +1,8 @@
 .tp-container {
-  max-width: 1120px;
+  max-width: 1560px;
   margin: 0 auto;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 60px;
+  padding-right: 60px;
   min-height: 100vh;
 }
 
@@ -200,4 +200,11 @@
 
 .grid-li-review {
   margin-top: 16px;
+}
+
+@media screen and (min-width: 1440px) {
+  .tp-container {
+    padding: 0 80px;
+    /* margin: 0 auto; */
+  }
 }

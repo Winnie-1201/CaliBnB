@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../context/Modal";
-import { saveWishlist } from "../../../store/session";
+// import { saveWishlist } from "../../../store/session";
 import {
   createWishlistThunk,
   getAllWishlistThunk,

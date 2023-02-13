@@ -4,18 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteWishlistThunk,
   editWishlistThunk,
-  getAllWishlistThunk,
   getOneWishlist,
 } from "../../../store/wishlists";
 import LoadingBlock from "../../LoadingBlock";
 import Header from "../../Homepage/Header";
 import Footer from "../../Homepage/Footer";
-import {
-  Modal,
-  ShortModal,
-  WishlistModal,
-  WlEditModal,
-} from "../../../context/Modal";
+import { WishlistModal } from "../../../context/Modal";
 import "./index.css";
 
 function WishlistDetail() {
