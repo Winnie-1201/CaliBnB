@@ -18,6 +18,8 @@ import Footer from "./components/Homepage/Footer";
 import Wishlist from "./components/Wishlist";
 // import WishlistModal from "./components/Wishlist/WishlistModal";
 import WishlistDetail from "./components/Wishlist/WishlistDetail";
+import Loading from "./components/Homepage/Loading";
+import SpotLoading from "./components/SpotDetailsPage/SpotLoading";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,6 +40,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/test">
+          <SpotLoading />
+        </Route>
         <Route path="/users/wishlists/:title" exact={true}>
           <WishlistDetail />
         </Route>

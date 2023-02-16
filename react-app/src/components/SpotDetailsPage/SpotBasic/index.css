@@ -196,7 +196,7 @@ section {
 .image-container {
   max-height: calc(60vh - 64px);
   position: relative;
-  min-height: 560px;
+  min-height: 670px;
   /* aspect-ratio: 2/1; */
 }
 

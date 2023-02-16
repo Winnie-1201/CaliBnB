@@ -6,6 +6,7 @@ import { useTag } from "../../../context/tag";
 import { getAllSpotThunk } from "../../../store/spots";
 import { cap } from "../../Helper/capitalize";
 import LoadingBlock from "../../LoadingBlock";
+import Loading from "../Loading";
 import "./index.css";
 
 function AllSpots() {
@@ -24,7 +25,7 @@ function AllSpots() {
     spots = Object.values(spots);
   }
 
-  if (!loaded) return <LoadingBlock />;
+  if (!loaded) return <Loading />;
 
   return (
     loaded && (
