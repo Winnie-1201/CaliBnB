@@ -14,6 +14,7 @@ import PartThree from "./SpotReviews";
 import PartFive from "./SpotHost";
 import LoadingBlock from "../LoadingBlock";
 import "./index.css";
+import SpotLoading from "./SpotLoading";
 
 function SpotDetailsPage() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function SpotDetailsPage() {
   return (
     <>
       <Header />
-      {!isLoaded && <LoadingBlock />}
+      {!isLoaded && <SpotLoading />}
       {isLoaded && (
         <main className="site-content">
           <PartOne spot={spotDetail} imgs={images} />
